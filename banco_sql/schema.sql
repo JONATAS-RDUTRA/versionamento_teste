@@ -2,12 +2,12 @@
 -- PostgreSQL database dump
 --
 
-\restrict AkFSw66RwXUKUVdE3HSQsZa6RogN3ZpeYzHb8LxjfGFgM0ddknrdzie2kAwEj58
+\restrict L9PenfDYaFMOQ4y2OmRG16NgsHzDgh2bLd05bWz24DOMcM2dfRgqKNXbNi52gmN
 
 -- Dumped from database version 16.13 (Ubuntu 16.13-1.pgdg24.04+1)
 -- Dumped by pg_dump version 16.13 (Ubuntu 16.13-1.pgdg24.04+1)
 
--- Started on 2026-05-28 09:04:27 -04
+-- Started on 2026-05-28 13:32:55 -04
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -25508,9 +25508,9 @@ begin
 
     new.consumo_medio_mensal = (select get_cmm_filial(new.filial,new.idproduto,current_date));  
    
-   -- Análise Filial Retira DRP 
-    new.desvio_padrao_cons_ret = coalesce(get_stddev_consumo_retira(new.filial,new.idproduto,current_date), 0);  
-    new.cmm_filial_retira = coalesce(get_cmm_filial_retira(new.filial,new.idproduto,current_date), 0);
+--    Análise Filial Retira DRP 
+--    new.desvio_padrao_cons_ret = coalesce(get_stddev_consumo_retira(new.filial,new.idproduto,current_date), 0);  
+--    new.cmm_filial_retira = coalesce(get_cmm_filial_retira(new.filial,new.idproduto,current_date), 0);
 
 
 
@@ -43519,11 +43519,11 @@ ALTER TABLE ONLY public.wkf_compras_controle_grupos
     ADD CONSTRAINT wkf_compras_itens_wkf_compras_controle_grupos_fk FOREIGN KEY (id_wkf_item) REFERENCES public.wkf_compras_itens(id);
 
 
--- Completed on 2026-05-28 09:04:27 -04
+-- Completed on 2026-05-28 13:32:56 -04
 
 --
 -- PostgreSQL database dump complete
 --
 
-\unrestrict AkFSw66RwXUKUVdE3HSQsZa6RogN3ZpeYzHb8LxjfGFgM0ddknrdzie2kAwEj58
+\unrestrict L9PenfDYaFMOQ4y2OmRG16NgsHzDgh2bLd05bWz24DOMcM2dfRgqKNXbNi52gmN
 
