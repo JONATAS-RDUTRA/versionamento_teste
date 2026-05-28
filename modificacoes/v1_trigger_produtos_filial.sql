@@ -1,5 +1,3 @@
--- DROP FUNCTION public.trigger_produtos_filial();
-
 CREATE OR REPLACE FUNCTION public.trigger_produtos_filial()
  RETURNS trigger
  LANGUAGE plpgsql
@@ -52,6 +50,8 @@ begin
       NEW.idproduto,
       NEW.filial
    );
+
+
 
 --	 Estoque Transferencia DRP
 	new.estoque_transito_drp = coalesce((
@@ -859,4 +859,4 @@ EXCEPTION WHEN OTHERS THEN
    v_ctx_erro;
 END;
 $function$
-;
+
