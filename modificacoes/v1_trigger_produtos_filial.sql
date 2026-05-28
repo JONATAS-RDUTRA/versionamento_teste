@@ -23,7 +23,6 @@ DECLARE
     v_ctx_erro text;
 BEGIN
     v_ctx_base := format('ERRO | trigger=%s | tabela=%s | operacao=%s | produto=%s | filial=%s', TG_NAME, TG_TABLE_NAME, TG_OP, NEW.idproduto, NEW.filial);
-    RAISE NOTICE 'PRODUTOS: %', NEW.idproduto;
     --	 Estoque Transferencia DRP
     NEW.estoque_transito_drp = coalesce((
         SELECT
