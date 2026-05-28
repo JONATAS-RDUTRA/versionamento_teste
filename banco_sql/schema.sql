@@ -2,10 +2,12 @@
 -- PostgreSQL database dump
 --
 
-\restrict 2y76Envf5c5dbKovIOqIoUhShYxwNywF13IIH59yywbNRPUb2n5wtnauWcBo3Ul
+\restrict liJo1g5hQ7jke6nLrCQHruwlk4IPN1bQaJdXtvExsVk4W4nFw0rxXYI98FqNIc0
 
 -- Dumped from database version 16.13 (Ubuntu 16.13-1.pgdg24.04+1)
 -- Dumped by pg_dump version 16.13 (Ubuntu 16.13-1.pgdg24.04+1)
+
+-- Started on 2026-05-28 15:44:23 -04
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -19,6 +21,7 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
+-- TOC entry 2 (class 3079 OID 53685)
 -- Name: pg_stat_statements; Type: EXTENSION; Schema: -; Owner: -
 --
 
@@ -26,6 +29,16 @@ CREATE EXTENSION IF NOT EXISTS pg_stat_statements WITH SCHEMA public;
 
 
 --
+-- TOC entry 6300 (class 0 OID 0)
+-- Dependencies: 2
+-- Name: EXTENSION pg_stat_statements; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION pg_stat_statements IS 'track execution statistics of all SQL statements executed';
+
+
+--
+-- TOC entry 3 (class 3079 OID 53716)
 -- Name: tablefunc; Type: EXTENSION; Schema: -; Owner: -
 --
 
@@ -33,7 +46,17 @@ CREATE EXTENSION IF NOT EXISTS tablefunc WITH SCHEMA public;
 
 
 --
--- Name: suavizacao_exponencial_type; Type: TYPE; Schema: public; Owner: -
+-- TOC entry 6301 (class 0 OID 0)
+-- Dependencies: 3
+-- Name: EXTENSION tablefunc; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION tablefunc IS 'functions that manipulate whole tables, including crosstab';
+
+
+--
+-- TOC entry 1464 (class 1247 OID 53739)
+-- Name: suavizacao_exponencial_type; Type: TYPE; Schema: public; Owner: systock
 --
 
 CREATE TYPE public.suavizacao_exponencial_type AS (
@@ -43,8 +66,11 @@ CREATE TYPE public.suavizacao_exponencial_type AS (
 );
 
 
+ALTER TYPE public.suavizacao_exponencial_type OWNER TO systock;
+
 --
--- Name: amplitude_transito_atual(character varying); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 635 (class 1255 OID 53740)
+-- Name: amplitude_transito_atual(character varying); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.amplitude_transito_atual(idprod character varying) RETURNS numeric
@@ -84,8 +110,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.amplitude_transito_atual(idprod character varying) OWNER TO systock;
+
 --
--- Name: amplitude_transito_atual_filial(numeric, character varying); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 636 (class 1255 OID 53741)
+-- Name: amplitude_transito_atual_filial(numeric, character varying); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.amplitude_transito_atual_filial(p_filial numeric, idprod character varying) RETURNS numeric
@@ -118,8 +147,11 @@ begin
 end;$$;
 
 
+ALTER FUNCTION public.amplitude_transito_atual_filial(p_filial numeric, idprod character varying) OWNER TO systock;
+
 --
--- Name: atualizar_prismas(numeric); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 637 (class 1255 OID 53742)
+-- Name: atualizar_prismas(numeric); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.atualizar_prismas(flag_geral numeric DEFAULT 1) RETURNS void
@@ -172,8 +204,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.atualizar_prismas(flag_geral numeric) OWNER TO systock;
+
 --
--- Name: atualizar_prismas_filiais(numeric); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 638 (class 1255 OID 53743)
+-- Name: atualizar_prismas_filiais(numeric); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.atualizar_prismas_filiais(flag_geral numeric DEFAULT 1) RETURNS void
@@ -234,8 +269,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.atualizar_prismas_filiais(flag_geral numeric) OWNER TO systock;
+
 --
--- Name: classificacao_financeira(); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 639 (class 1255 OID 53744)
+-- Name: classificacao_financeira(); Type: FUNCTION; Schema: public; Owner: postgres
 --
 
 CREATE FUNCTION public.classificacao_financeira() RETURNS numeric
@@ -257,8 +295,11 @@ END;
 $$;
 
 
+ALTER FUNCTION public.classificacao_financeira() OWNER TO postgres;
+
 --
--- Name: classificar_produtos(); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 640 (class 1255 OID 53745)
+-- Name: classificar_produtos(); Type: FUNCTION; Schema: public; Owner: postgres
 --
 
 CREATE FUNCTION public.classificar_produtos() RETURNS numeric
@@ -280,8 +321,11 @@ END;
 $$;
 
 
+ALTER FUNCTION public.classificar_produtos() OWNER TO postgres;
+
 --
--- Name: datediff(character varying, timestamp without time zone, timestamp without time zone); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 641 (class 1255 OID 53746)
+-- Name: datediff(character varying, timestamp without time zone, timestamp without time zone); Type: FUNCTION; Schema: public; Owner: postgres
 --
 
 CREATE FUNCTION public.datediff(units character varying, start_t timestamp without time zone, end_t timestamp without time zone) RETURNS integer
@@ -337,8 +381,11 @@ CREATE FUNCTION public.datediff(units character varying, start_t timestamp witho
    $$;
 
 
+ALTER FUNCTION public.datediff(units character varying, start_t timestamp without time zone, end_t timestamp without time zone) OWNER TO postgres;
+
 --
--- Name: fc_get_produtos_multifiliais_por_fornecedor(integer); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 642 (class 1255 OID 53747)
+-- Name: fc_get_produtos_multifiliais_por_fornecedor(integer); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.fc_get_produtos_multifiliais_por_fornecedor(p_id_fornecedor integer) RETURNS TABLE(id_grupo integer, idfornecedor integer, idcomprador integer, iddepartamento integer, idfamilia_produto text, tipo text, nivel_servico text, status text, filial integer, idproduto text, descricao_produto text, unidade_compra text, estoque numeric, status_suprimento_sku text, peso_compras integer, tempo_gatilho integer, estoque_maximo numeric, sugestao_drp numeric, sugestao numeric)
@@ -427,8 +474,11 @@ CREATE FUNCTION public.fc_get_produtos_multifiliais_por_fornecedor(p_id_forneced
 	$$;
 
 
+ALTER FUNCTION public.fc_get_produtos_multifiliais_por_fornecedor(p_id_fornecedor integer) OWNER TO systock;
+
 --
--- Name: first_day(date); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 643 (class 1255 OID 53748)
+-- Name: first_day(date); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.first_day(dataref date) RETURNS date
@@ -444,8 +494,11 @@ begin
 $_$;
 
 
+ALTER FUNCTION public.first_day(dataref date) OWNER TO systock;
+
 --
--- Name: first_day_trimestre(date); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 644 (class 1255 OID 53749)
+-- Name: first_day_trimestre(date); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.first_day_trimestre(dataref date) RETURNS date
@@ -469,8 +522,11 @@ begin
 $$;
 
 
+ALTER FUNCTION public.first_day_trimestre(dataref date) OWNER TO systock;
+
 --
--- Name: gatilho_similares(); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 645 (class 1255 OID 53750)
+-- Name: gatilho_similares(); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.gatilho_similares() RETURNS trigger
@@ -579,8 +635,11 @@ end
 $$;
 
 
+ALTER FUNCTION public.gatilho_similares() OWNER TO systock;
+
 --
--- Name: gatilho_similares_filial(); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 646 (class 1255 OID 53751)
+-- Name: gatilho_similares_filial(); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.gatilho_similares_filial() RETURNS trigger
@@ -749,8 +808,11 @@ end
 $$;
 
 
+ALTER FUNCTION public.gatilho_similares_filial() OWNER TO systock;
+
 --
--- Name: gerar_carga_prismas(date, date); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 647 (class 1255 OID 53752)
+-- Name: gerar_carga_prismas(date, date); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.gerar_carga_prismas(dataini date, datafim date) RETURNS void
@@ -773,8 +835,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.gerar_carga_prismas(dataini date, datafim date) OWNER TO systock;
+
 --
--- Name: gerar_gatilho_compras_grupo(); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 648 (class 1255 OID 53753)
+-- Name: gerar_gatilho_compras_grupo(); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.gerar_gatilho_compras_grupo() RETURNS void
@@ -937,8 +1002,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.gerar_gatilho_compras_grupo() OWNER TO systock;
+
 --
--- Name: gerar_lote_embalagem(numeric, numeric); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 649 (class 1255 OID 53754)
+-- Name: gerar_lote_embalagem(numeric, numeric); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.gerar_lote_embalagem(lote numeric, lote_minimo numeric) RETURNS numeric
@@ -978,8 +1046,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.gerar_lote_embalagem(lote numeric, lote_minimo numeric) OWNER TO systock;
+
 --
--- Name: gerar_lote_embalagem_dist(numeric, numeric); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 650 (class 1255 OID 53755)
+-- Name: gerar_lote_embalagem_dist(numeric, numeric); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.gerar_lote_embalagem_dist(lote numeric, lote_minimo numeric) RETURNS numeric
@@ -1010,8 +1081,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.gerar_lote_embalagem_dist(lote numeric, lote_minimo numeric) OWNER TO systock;
+
 --
--- Name: gerar_prisma_diario(date, date); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 651 (class 1255 OID 53756)
+-- Name: gerar_prisma_diario(date, date); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.gerar_prisma_diario(dataini date, datafim date) RETURNS void
@@ -1034,8 +1108,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.gerar_prisma_diario(dataini date, datafim date) OWNER TO systock;
+
 --
--- Name: gerar_prisma_diario_filial(date, date); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 652 (class 1255 OID 53757)
+-- Name: gerar_prisma_diario_filial(date, date); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.gerar_prisma_diario_filial(dataini date, datafim date) RETURNS void
@@ -1058,8 +1135,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.gerar_prisma_diario_filial(dataini date, datafim date) OWNER TO systock;
+
 --
--- Name: gerar_prismas_filiais(numeric, date); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 653 (class 1255 OID 53758)
+-- Name: gerar_prismas_filiais(numeric, date); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.gerar_prismas_filiais(p_filial numeric, dataref date DEFAULT ('now'::text)::date) RETURNS TABLE(produto character varying, arvore text)
@@ -1169,8 +1249,11 @@ begin
 end;$$;
 
 
+ALTER FUNCTION public.gerar_prismas_filiais(p_filial numeric, dataref date) OWNER TO systock;
+
 --
--- Name: gerar_prismas_filiais_3(numeric, date); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 654 (class 1255 OID 53759)
+-- Name: gerar_prismas_filiais_3(numeric, date); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.gerar_prismas_filiais_3(p_filial numeric, dataref date DEFAULT ('now'::text)::date) RETURNS TABLE(produto character varying, arvore text)
@@ -1255,8 +1338,11 @@ begin
 end;$$;
 
 
+ALTER FUNCTION public.gerar_prismas_filiais_3(p_filial numeric, dataref date) OWNER TO systock;
+
 --
--- Name: gerar_prismas_rentabilidade_filiais(integer); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 655 (class 1255 OID 53760)
+-- Name: gerar_prismas_rentabilidade_filiais(integer); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.gerar_prismas_rentabilidade_filiais(p_filial integer) RETURNS TABLE(idproduto character varying, classificacao_rentabilidade character varying)
@@ -1295,8 +1381,11 @@ CREATE FUNCTION public.gerar_prismas_rentabilidade_filiais(p_filial integer) RET
 $$;
 
 
+ALTER FUNCTION public.gerar_prismas_rentabilidade_filiais(p_filial integer) OWNER TO systock;
+
 --
--- Name: gerar_saldos_diario(integer, date, date, numeric); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 656 (class 1255 OID 53761)
+-- Name: gerar_saldos_diario(integer, date, date, numeric); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.gerar_saldos_diario(p_filial integer, dataini date, datafim date, mov numeric DEFAULT 0) RETURNS character varying
@@ -1687,8 +1776,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.gerar_saldos_diario(p_filial integer, dataini date, datafim date, mov numeric) OWNER TO systock;
+
 --
--- Name: gerar_saldos_diario_filial(date, date, numeric); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 657 (class 1255 OID 53763)
+-- Name: gerar_saldos_diario_filial(date, date, numeric); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.gerar_saldos_diario_filial(dataini date, datafim date, mov numeric DEFAULT 0) RETURNS character varying
@@ -2074,8 +2166,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.gerar_saldos_diario_filial(dataini date, datafim date, mov numeric) OWNER TO systock;
+
 --
--- Name: gerar_saldos_diario_filial_prod(bigint, character varying, date, date); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 658 (class 1255 OID 53765)
+-- Name: gerar_saldos_diario_filial_prod(bigint, character varying, date, date); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.gerar_saldos_diario_filial_prod(p_filial bigint, p_prod character varying, dataini date DEFAULT ('now'::text)::date, datafim date DEFAULT ('now'::text)::date) RETURNS character varying
@@ -2155,8 +2250,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.gerar_saldos_diario_filial_prod(p_filial bigint, p_prod character varying, dataini date, datafim date) OWNER TO systock;
+
 --
--- Name: gerar_saldos_diario_prod(character varying, date, date); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 659 (class 1255 OID 53766)
+-- Name: gerar_saldos_diario_prod(character varying, date, date); Type: FUNCTION; Schema: public; Owner: postgres
 --
 
 CREATE FUNCTION public.gerar_saldos_diario_prod(produto character varying, dataini date, datafim date) RETURNS void
@@ -2211,8 +2309,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.gerar_saldos_diario_prod(produto character varying, dataini date, datafim date) OWNER TO postgres;
+
 --
--- Name: gerar_status_mensal(numeric, numeric); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 660 (class 1255 OID 53767)
+-- Name: gerar_status_mensal(numeric, numeric); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.gerar_status_mensal(p_ano numeric, p_mes numeric) RETURNS character varying
@@ -2385,8 +2486,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.gerar_status_mensal(p_ano numeric, p_mes numeric) OWNER TO systock;
+
 --
--- Name: gerar_status_mensal_filial(numeric, numeric); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 661 (class 1255 OID 53768)
+-- Name: gerar_status_mensal_filial(numeric, numeric); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.gerar_status_mensal_filial(p_ano numeric, p_mes numeric) RETURNS character varying
@@ -2657,8 +2761,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.gerar_status_mensal_filial(p_ano numeric, p_mes numeric) OWNER TO systock;
+
 --
--- Name: gerar_tabela_relatorio_sugestao_compras(text, integer[], integer[], integer[]); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 662 (class 1255 OID 53770)
+-- Name: gerar_tabela_relatorio_sugestao_compras(text, integer[], integer[], integer[]); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.gerar_tabela_relatorio_sugestao_compras(grupo_id text, fornecedor_id integer[] DEFAULT NULL::integer[], comprador_id integer[] DEFAULT NULL::integer[], segmento_id integer[] DEFAULT NULL::integer[]) RETURNS TABLE(id_grupo text, idfornecedor text, razao_social text, idproduto text, descricao_produto text, unidade_compra text, lote_minimo text, estoque text, compra_transito text, media_tres_meses text, media_seis_meses text, media_doze_meses text, qtde_ultima_compra text, data_ultima_compra text, sugestao_compra text)
@@ -2726,8 +2833,11 @@ END;
 $$;
 
 
+ALTER FUNCTION public.gerar_tabela_relatorio_sugestao_compras(grupo_id text, fornecedor_id integer[], comprador_id integer[], segmento_id integer[]) OWNER TO systock;
+
 --
--- Name: get123(character varying); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 663 (class 1255 OID 53771)
+-- Name: get123(character varying); Type: FUNCTION; Schema: public; Owner: postgres
 --
 
 CREATE FUNCTION public.get123(idprod character varying) RETURNS character varying
@@ -2746,8 +2856,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.get123(idprod character varying) OWNER TO postgres;
+
 --
--- Name: get123_filial(bigint, character varying); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 664 (class 1255 OID 53772)
+-- Name: get123_filial(bigint, character varying); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.get123_filial(p_filial bigint, idprod character varying) RETURNS character varying
@@ -2766,8 +2879,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.get123_filial(p_filial bigint, idprod character varying) OWNER TO systock;
+
 --
--- Name: get_arvore_decisao_grupo(numeric, character varying); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 665 (class 1255 OID 53773)
+-- Name: get_arvore_decisao_grupo(numeric, character varying); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.get_arvore_decisao_grupo(p_grupo numeric, idprod character varying) RETURNS character varying
@@ -2791,8 +2907,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.get_arvore_decisao_grupo(p_grupo numeric, idprod character varying) OWNER TO systock;
+
 --
--- Name: get_calculo_dimensoes_estoque(character varying, character varying, date); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 666 (class 1255 OID 53774)
+-- Name: get_calculo_dimensoes_estoque(character varying, character varying, date); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.get_calculo_dimensoes_estoque(idprod character varying, arv_decisao character varying, dataref date DEFAULT ('now'::text)::date) RETURNS TABLE(estoque_seguranca numeric, estoque numeric, ponto_pedido numeric, estoque_maximo numeric, consumo_medio numeric, sugestao numeric)
@@ -2926,8 +3045,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.get_calculo_dimensoes_estoque(idprod character varying, arv_decisao character varying, dataref date) OWNER TO systock;
+
 --
--- Name: get_calculo_dimensoes_estoque_filial(numeric, character varying, character varying, date); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 667 (class 1255 OID 53775)
+-- Name: get_calculo_dimensoes_estoque_filial(numeric, character varying, character varying, date); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.get_calculo_dimensoes_estoque_filial(p_filial numeric, idprod character varying, arv_decisao character varying, dataref date DEFAULT ('now'::text)::date) RETURNS TABLE(estoque_seguranca numeric, estoque numeric, ponto_pedido numeric, estoque_maximo numeric, consumo_medio numeric, sugestao numeric)
@@ -3189,8 +3311,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.get_calculo_dimensoes_estoque_filial(p_filial numeric, idprod character varying, arv_decisao character varying, dataref date) OWNER TO systock;
+
 --
--- Name: get_calculo_parametros_estoque(numeric, character varying, character varying, date); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 668 (class 1255 OID 53776)
+-- Name: get_calculo_parametros_estoque(numeric, character varying, character varying, date); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.get_calculo_parametros_estoque(p_filial numeric, idprod character varying, arv_decisao character varying, dataref date DEFAULT ('now'::text)::date) RETURNS TABLE(estoque_seguranca numeric, estoque numeric, ponto_pedido numeric, estoque_maximo numeric, consumo_medio numeric, std_consumo_medio numeric, sugestao numeric, fes numeric, nivel_servico character varying)
@@ -3318,8 +3443,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.get_calculo_parametros_estoque(p_filial numeric, idprod character varying, arv_decisao character varying, dataref date) OWNER TO systock;
+
 --
--- Name: get_cmm_filial(numeric, character varying, date); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 669 (class 1255 OID 53777)
+-- Name: get_cmm_filial(numeric, character varying, date); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.get_cmm_filial(p_idfilial numeric, p_idproduto character varying, p_data_referencia date DEFAULT ('now'::text)::date) RETURNS numeric
@@ -3380,8 +3508,11 @@ CREATE FUNCTION public.get_cmm_filial(p_idfilial numeric, p_idproduto character 
     END; $$;
 
 
+ALTER FUNCTION public.get_cmm_filial(p_idfilial numeric, p_idproduto character varying, p_data_referencia date) OWNER TO systock;
+
 --
--- Name: get_cmm_filial_media_aritmetica_simples(integer, character varying, integer, date); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 670 (class 1255 OID 53778)
+-- Name: get_cmm_filial_media_aritmetica_simples(integer, character varying, integer, date); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.get_cmm_filial_media_aritmetica_simples(p_idfilial integer, p_idproduto character varying, qtde_meses integer, p_data_referencia date DEFAULT ('now'::text)::date) RETURNS numeric
@@ -3403,8 +3534,11 @@ CREATE FUNCTION public.get_cmm_filial_media_aritmetica_simples(p_idfilial intege
     END; $$;
 
 
+ALTER FUNCTION public.get_cmm_filial_media_aritmetica_simples(p_idfilial integer, p_idproduto character varying, qtde_meses integer, p_data_referencia date) OWNER TO systock;
+
 --
--- Name: get_cmm_filial_media_geometrica(integer, character varying, date); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 671 (class 1255 OID 53779)
+-- Name: get_cmm_filial_media_geometrica(integer, character varying, date); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.get_cmm_filial_media_geometrica(p_idfilial integer, p_idproduto character varying, p_data_referencia date DEFAULT ('now'::text)::date) RETURNS numeric
@@ -3440,8 +3574,11 @@ CREATE FUNCTION public.get_cmm_filial_media_geometrica(p_idfilial integer, p_idp
     END; $$;
 
 
+ALTER FUNCTION public.get_cmm_filial_media_geometrica(p_idfilial integer, p_idproduto character varying, p_data_referencia date) OWNER TO systock;
+
 --
--- Name: get_cmm_filial_media_movel_ponderada(integer, character varying, date); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 672 (class 1255 OID 53780)
+-- Name: get_cmm_filial_media_movel_ponderada(integer, character varying, date); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.get_cmm_filial_media_movel_ponderada(p_idfilial integer, p_idproduto character varying, p_data_referencia date DEFAULT ('now'::text)::date) RETURNS numeric
@@ -3482,8 +3619,11 @@ CREATE FUNCTION public.get_cmm_filial_media_movel_ponderada(p_idfilial integer, 
     END; $$;
 
 
+ALTER FUNCTION public.get_cmm_filial_media_movel_ponderada(p_idfilial integer, p_idproduto character varying, p_data_referencia date) OWNER TO systock;
+
 --
--- Name: get_cmm_filial_media_sazonal(integer, character varying, date); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 834 (class 1255 OID 84591)
+-- Name: get_cmm_filial_media_sazonal(integer, character varying, date); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.get_cmm_filial_media_sazonal(p_idfilial integer, p_idproduto character varying, p_data_referencia date DEFAULT ('now'::text)::date) RETURNS numeric
@@ -3533,8 +3673,11 @@ CREATE FUNCTION public.get_cmm_filial_media_sazonal(p_idfilial integer, p_idprod
     END; $$;
 
 
+ALTER FUNCTION public.get_cmm_filial_media_sazonal(p_idfilial integer, p_idproduto character varying, p_data_referencia date) OWNER TO systock;
+
 --
--- Name: get_cmm_filial_mediana(integer, character varying, date); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 673 (class 1255 OID 53782)
+-- Name: get_cmm_filial_mediana(integer, character varying, date); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.get_cmm_filial_mediana(p_idfilial integer, p_idproduto character varying, p_data_referencia date DEFAULT ('now'::text)::date) RETURNS numeric
@@ -3557,8 +3700,11 @@ CREATE FUNCTION public.get_cmm_filial_mediana(p_idfilial integer, p_idproduto ch
     END; $$;
 
 
+ALTER FUNCTION public.get_cmm_filial_mediana(p_idfilial integer, p_idproduto character varying, p_data_referencia date) OWNER TO systock;
+
 --
--- Name: get_cmm_filial_padrao_systock(numeric, character varying, date); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 674 (class 1255 OID 53783)
+-- Name: get_cmm_filial_padrao_systock(numeric, character varying, date); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.get_cmm_filial_padrao_systock(p_filial numeric, idprod character varying, dataref date DEFAULT ('now'::text)::date) RETURNS numeric
@@ -3893,8 +4039,11 @@ end;
  $$;
 
 
+ALTER FUNCTION public.get_cmm_filial_padrao_systock(p_filial numeric, idprod character varying, dataref date) OWNER TO systock;
+
 --
--- Name: get_cmm_filial_suavizacao_exponencial(integer, character varying, date); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 675 (class 1255 OID 53785)
+-- Name: get_cmm_filial_suavizacao_exponencial(integer, character varying, date); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.get_cmm_filial_suavizacao_exponencial(p_idfilial integer, p_idproduto character varying, p_data_referencia date DEFAULT ('now'::text)::date) RETURNS numeric
@@ -3910,8 +4059,11 @@ CREATE FUNCTION public.get_cmm_filial_suavizacao_exponencial(p_idfilial integer,
     END; $$;
 
 
+ALTER FUNCTION public.get_cmm_filial_suavizacao_exponencial(p_idfilial integer, p_idproduto character varying, p_data_referencia date) OWNER TO systock;
+
 --
--- Name: get_cmm_heranca_filial(numeric, character varying, date); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 676 (class 1255 OID 53786)
+-- Name: get_cmm_heranca_filial(numeric, character varying, date); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.get_cmm_heranca_filial(p_filial numeric, idprod character varying, dataref date DEFAULT ('now'::text)::date) RETURNS numeric
@@ -4138,8 +4290,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.get_cmm_heranca_filial(p_filial numeric, idprod character varying, dataref date) OWNER TO systock;
+
 --
--- Name: get_cmm_heranca_produto_combinado(integer, character varying, integer); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 831 (class 1255 OID 84241)
+-- Name: get_cmm_heranca_produto_combinado(integer, character varying, integer); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.get_cmm_heranca_produto_combinado(p_idgrupo integer, p_idproduto_combinado character varying, p_filial integer DEFAULT 0) RETURNS numeric
@@ -4176,8 +4331,11 @@ CREATE FUNCTION public.get_cmm_heranca_produto_combinado(p_idgrupo integer, p_id
     END; $$;
 
 
+ALTER FUNCTION public.get_cmm_heranca_produto_combinado(p_idgrupo integer, p_idproduto_combinado character varying, p_filial integer) OWNER TO systock;
+
 --
--- Name: get_cobertura_compras_curva(integer, character varying); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 677 (class 1255 OID 53787)
+-- Name: get_cobertura_compras_curva(integer, character varying); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.get_cobertura_compras_curva(p_filial integer, p_produto character varying) RETURNS bigint
@@ -4220,8 +4378,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.get_cobertura_compras_curva(p_filial integer, p_produto character varying) OWNER TO systock;
+
 --
--- Name: get_cobertura_esseg(integer, character varying); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 678 (class 1255 OID 53788)
+-- Name: get_cobertura_esseg(integer, character varying); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.get_cobertura_esseg(p_filial integer, p_produto character varying) RETURNS double precision
@@ -4291,8 +4452,11 @@ CREATE FUNCTION public.get_cobertura_esseg(p_filial integer, p_produto character
     $$;
 
 
+ALTER FUNCTION public.get_cobertura_esseg(p_filial integer, p_produto character varying) OWNER TO systock;
+
 --
--- Name: get_compra_faturada_filial(numeric, character varying); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 679 (class 1255 OID 53789)
+-- Name: get_compra_faturada_filial(numeric, character varying); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.get_compra_faturada_filial(filial_id numeric, produto_id character varying) RETURNS numeric
@@ -4320,8 +4484,11 @@ CREATE FUNCTION public.get_compra_faturada_filial(filial_id numeric, produto_id 
     $$;
 
 
+ALTER FUNCTION public.get_compra_faturada_filial(filial_id numeric, produto_id character varying) OWNER TO systock;
+
 --
--- Name: get_compra_faturada_grupo(numeric, character varying); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 680 (class 1255 OID 53790)
+-- Name: get_compra_faturada_grupo(numeric, character varying); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.get_compra_faturada_grupo(grupo_id numeric, produto_id character varying) RETURNS numeric
@@ -4353,8 +4520,11 @@ CREATE FUNCTION public.get_compra_faturada_grupo(grupo_id numeric, produto_id ch
     $$;
 
 
+ALTER FUNCTION public.get_compra_faturada_grupo(grupo_id numeric, produto_id character varying) OWNER TO systock;
+
 --
--- Name: get_consumo_diario(character varying, date); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 681 (class 1255 OID 53791)
+-- Name: get_consumo_diario(character varying, date); Type: FUNCTION; Schema: public; Owner: postgres
 --
 
 CREATE FUNCTION public.get_consumo_diario(idprod character varying, data_venda date) RETURNS numeric
@@ -4397,8 +4567,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.get_consumo_diario(idprod character varying, data_venda date) OWNER TO postgres;
+
 --
--- Name: get_consumo_diario_filial(numeric, character varying, date); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 682 (class 1255 OID 53792)
+-- Name: get_consumo_diario_filial(numeric, character varying, date); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.get_consumo_diario_filial(p_filial numeric, idprod character varying, data_venda date) RETURNS numeric
@@ -4450,8 +4623,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.get_consumo_diario_filial(p_filial numeric, idprod character varying, data_venda date) OWNER TO systock;
+
 --
--- Name: get_devolucao_diaria_filial(numeric, character varying, date); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 683 (class 1255 OID 53793)
+-- Name: get_devolucao_diaria_filial(numeric, character varying, date); Type: FUNCTION; Schema: public; Owner: postgres
 --
 
 CREATE FUNCTION public.get_devolucao_diaria_filial(p_filial numeric, idprod character varying, data_venda date) RETURNS numeric
@@ -4475,8 +4651,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.get_devolucao_diaria_filial(p_filial numeric, idprod character varying, data_venda date) OWNER TO postgres;
+
 --
--- Name: get_eficiencia_comprador(numeric, bigint); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 684 (class 1255 OID 53794)
+-- Name: get_eficiencia_comprador(numeric, bigint); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.get_eficiencia_comprador(id numeric, p_grupo bigint DEFAULT 1) RETURNS numeric
@@ -4522,8 +4701,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.get_eficiencia_comprador(id numeric, p_grupo bigint) OWNER TO systock;
+
 --
--- Name: get_eficiencia_comprador_(numeric, integer); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 685 (class 1255 OID 53795)
+-- Name: get_eficiencia_comprador_(numeric, integer); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.get_eficiencia_comprador_(id numeric, periodo integer DEFAULT 30) RETURNS numeric
@@ -4557,8 +4739,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.get_eficiencia_comprador_(id numeric, periodo integer) OWNER TO systock;
+
 --
--- Name: get_eficiencia_comprador_mensal(numeric, numeric, numeric); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 686 (class 1255 OID 53796)
+-- Name: get_eficiencia_comprador_mensal(numeric, numeric, numeric); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.get_eficiencia_comprador_mensal(id numeric, p_ano numeric, p_mes numeric) RETURNS numeric
@@ -4594,8 +4779,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.get_eficiencia_comprador_mensal(id numeric, p_ano numeric, p_mes numeric) OWNER TO systock;
+
 --
--- Name: get_entradas(character varying, date); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 687 (class 1255 OID 53797)
+-- Name: get_entradas(character varying, date); Type: FUNCTION; Schema: public; Owner: postgres
 --
 
 CREATE FUNCTION public.get_entradas(idprod character varying, data_ent date) RETURNS numeric
@@ -4616,8 +4804,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.get_entradas(idprod character varying, data_ent date) OWNER TO postgres;
+
 --
--- Name: get_entradas_filial(numeric, character varying, date); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 688 (class 1255 OID 53798)
+-- Name: get_entradas_filial(numeric, character varying, date); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.get_entradas_filial(p_filial numeric, idprod character varying, data_ent date) RETURNS numeric
@@ -4651,8 +4842,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.get_entradas_filial(p_filial numeric, idprod character varying, data_ent date) OWNER TO systock;
+
 --
--- Name: get_estoque_diario(character varying, date); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 689 (class 1255 OID 53799)
+-- Name: get_estoque_diario(character varying, date); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.get_estoque_diario(idprod character varying, data_venda date) RETURNS numeric
@@ -4671,8 +4865,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.get_estoque_diario(idprod character varying, data_venda date) OWNER TO systock;
+
 --
--- Name: get_estoque_diario_filial(numeric, character varying, date); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 690 (class 1255 OID 53800)
+-- Name: get_estoque_diario_filial(numeric, character varying, date); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.get_estoque_diario_filial(p_filial numeric, idprod character varying, data_venda date) RETURNS numeric
@@ -4709,8 +4906,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.get_estoque_diario_filial(p_filial numeric, idprod character varying, data_venda date) OWNER TO systock;
+
 --
--- Name: get_estoque_futuro_tempo_ressuprimento_produto(integer, integer, character varying); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 691 (class 1255 OID 53801)
+-- Name: get_estoque_futuro_tempo_ressuprimento_produto(integer, integer, character varying); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.get_estoque_futuro_tempo_ressuprimento_produto(p_idgrupo integer, p_filial integer, p_idproduto character varying) RETURNS numeric
@@ -4818,8 +5018,11 @@ CREATE FUNCTION public.get_estoque_futuro_tempo_ressuprimento_produto(p_idgrupo 
     $$;
 
 
+ALTER FUNCTION public.get_estoque_futuro_tempo_ressuprimento_produto(p_idgrupo integer, p_filial integer, p_idproduto character varying) OWNER TO systock;
+
 --
--- Name: get_estoque_futuro_tempo_ressuprimento_produto_categoria_mp_pa(integer, integer, date); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 830 (class 1255 OID 84228)
+-- Name: get_estoque_futuro_tempo_ressuprimento_produto_categoria_mp_pa(integer, integer, date); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.get_estoque_futuro_tempo_ressuprimento_produto_categoria_mp_pa(p_idgrupo integer, p_categoria integer, p_data date DEFAULT NULL::date) RETURNS numeric
@@ -4913,8 +5116,11 @@ CREATE FUNCTION public.get_estoque_futuro_tempo_ressuprimento_produto_categoria_
     END; $$;
 
 
+ALTER FUNCTION public.get_estoque_futuro_tempo_ressuprimento_produto_categoria_mp_pa(p_idgrupo integer, p_categoria integer, p_data date) OWNER TO systock;
+
 --
--- Name: get_estoque_grupo(numeric, character varying); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 692 (class 1255 OID 53802)
+-- Name: get_estoque_grupo(numeric, character varying); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.get_estoque_grupo(p_grupo numeric, idprod character varying) RETURNS numeric
@@ -4933,8 +5139,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.get_estoque_grupo(p_grupo numeric, idprod character varying) OWNER TO systock;
+
 --
--- Name: get_estoque_medio(numeric, numeric, character varying); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 693 (class 1255 OID 53803)
+-- Name: get_estoque_medio(numeric, numeric, character varying); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.get_estoque_medio(p_ano numeric, p_mes numeric, produto character varying) RETURNS numeric
@@ -4974,8 +5183,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.get_estoque_medio(p_ano numeric, p_mes numeric, produto character varying) OWNER TO systock;
+
 --
--- Name: get_estoque_medio_grupo(numeric, numeric, numeric, character varying); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 694 (class 1255 OID 53804)
+-- Name: get_estoque_medio_grupo(numeric, numeric, numeric, character varying); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.get_estoque_medio_grupo(p_grupo numeric, p_ano numeric, p_mes numeric, produto character varying) RETURNS numeric
@@ -5015,8 +5227,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.get_estoque_medio_grupo(p_grupo numeric, p_ano numeric, p_mes numeric, produto character varying) OWNER TO systock;
+
 --
--- Name: get_estoque_medio_grupo_filial(numeric, numeric, numeric, numeric, character varying); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 695 (class 1255 OID 53805)
+-- Name: get_estoque_medio_grupo_filial(numeric, numeric, numeric, numeric, character varying); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.get_estoque_medio_grupo_filial(p_grupo numeric, p_filial numeric, p_ano numeric, p_mes numeric, produto character varying) RETURNS numeric
@@ -5056,8 +5271,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.get_estoque_medio_grupo_filial(p_grupo numeric, p_filial numeric, p_ano numeric, p_mes numeric, produto character varying) OWNER TO systock;
+
 --
--- Name: get_estoque_produto_filial_em_analise_de_lote(integer, character varying); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 696 (class 1255 OID 53806)
+-- Name: get_estoque_produto_filial_em_analise_de_lote(integer, character varying); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.get_estoque_produto_filial_em_analise_de_lote(p_filial integer, p_produto character varying) RETURNS numeric
@@ -5080,8 +5298,11 @@ CREATE FUNCTION public.get_estoque_produto_filial_em_analise_de_lote(p_filial in
     end; $$;
 
 
+ALTER FUNCTION public.get_estoque_produto_filial_em_analise_de_lote(p_filial integer, p_produto character varying) OWNER TO systock;
+
 --
--- Name: get_estoque_similar_produto_combinado(integer, integer, character varying); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 832 (class 1255 OID 84257)
+-- Name: get_estoque_similar_produto_combinado(integer, integer, character varying); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.get_estoque_similar_produto_combinado(p_idgrupo integer, p_filial integer, p_idproduto character varying) RETURNS numeric
@@ -5113,8 +5334,11 @@ CREATE FUNCTION public.get_estoque_similar_produto_combinado(p_idgrupo integer, 
     $$;
 
 
+ALTER FUNCTION public.get_estoque_similar_produto_combinado(p_idgrupo integer, p_filial integer, p_idproduto character varying) OWNER TO systock;
+
 --
--- Name: get_forecast(character varying, numeric); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 697 (class 1255 OID 53807)
+-- Name: get_forecast(character varying, numeric); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.get_forecast(idprod character varying, tempo_dias numeric) RETURNS numeric
@@ -5142,8 +5366,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.get_forecast(idprod character varying, tempo_dias numeric) OWNER TO systock;
+
 --
--- Name: get_forecast_filial(numeric, character varying, numeric); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 698 (class 1255 OID 53808)
+-- Name: get_forecast_filial(numeric, character varying, numeric); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.get_forecast_filial(p_filial numeric, idprod character varying, tempo_dias numeric) RETURNS numeric
@@ -5193,8 +5420,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.get_forecast_filial(p_filial numeric, idprod character varying, tempo_dias numeric) OWNER TO systock;
+
 --
--- Name: get_forecast_grupo(numeric, character varying, numeric); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 699 (class 1255 OID 53809)
+-- Name: get_forecast_grupo(numeric, character varying, numeric); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.get_forecast_grupo(p_grupo numeric, idprod character varying, tempo_dias numeric) RETURNS numeric
@@ -5242,8 +5472,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.get_forecast_grupo(p_grupo numeric, idprod character varying, tempo_dias numeric) OWNER TO systock;
+
 --
--- Name: get_freq_ruptura(character varying, integer, integer); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 700 (class 1255 OID 53810)
+-- Name: get_freq_ruptura(character varying, integer, integer); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.get_freq_ruptura(idprod character varying, p_ano integer, p_mes integer) RETURNS numeric
@@ -5282,8 +5515,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.get_freq_ruptura(idprod character varying, p_ano integer, p_mes integer) OWNER TO systock;
+
 --
--- Name: get_idcomprador_carteira_comprador(integer, character varying); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 701 (class 1255 OID 53811)
+-- Name: get_idcomprador_carteira_comprador(integer, character varying); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.get_idcomprador_carteira_comprador(p_filial integer, p_produto character varying) RETURNS bigint
@@ -5311,8 +5547,11 @@ CREATE FUNCTION public.get_idcomprador_carteira_comprador(p_filial integer, p_pr
     end; $$;
 
 
+ALTER FUNCTION public.get_idcomprador_carteira_comprador(p_filial integer, p_produto character varying) OWNER TO systock;
+
 --
--- Name: get_preco_medio_venda_filial(numeric, character varying, date); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 702 (class 1255 OID 53812)
+-- Name: get_preco_medio_venda_filial(numeric, character varying, date); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.get_preco_medio_venda_filial(p_filial numeric, idprod character varying, dataref date DEFAULT ('now'::text)::date) RETURNS numeric
@@ -5357,8 +5596,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.get_preco_medio_venda_filial(p_filial numeric, idprod character varying, dataref date) OWNER TO systock;
+
 --
--- Name: get_prismas_analise(character varying, date); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 703 (class 1255 OID 53813)
+-- Name: get_prismas_analise(character varying, date); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.get_prismas_analise(produto character varying, dataref date DEFAULT ('now'::text)::date) RETURNS character varying
@@ -5449,8 +5691,11 @@ end;
  $$;
 
 
+ALTER FUNCTION public.get_prismas_analise(produto character varying, dataref date) OWNER TO systock;
+
 --
--- Name: get_prismas_analise_filial(numeric, character varying, date); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 704 (class 1255 OID 53814)
+-- Name: get_prismas_analise_filial(numeric, character varying, date); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.get_prismas_analise_filial(codfilial numeric, produto character varying, dataref date DEFAULT ('now'::text)::date) RETURNS character varying
@@ -5550,8 +5795,11 @@ from
 end;$$;
 
 
+ALTER FUNCTION public.get_prismas_analise_filial(codfilial numeric, produto character varying, dataref date) OWNER TO systock;
+
 --
--- Name: get_prismas_analise_teste(character varying, date); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 705 (class 1255 OID 53815)
+-- Name: get_prismas_analise_teste(character varying, date); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.get_prismas_analise_teste(produto character varying, dataref date DEFAULT ('now'::text)::date) RETURNS character varying
@@ -5622,8 +5870,11 @@ end;
  $$;
 
 
+ALTER FUNCTION public.get_prismas_analise_teste(produto character varying, dataref date) OWNER TO systock;
+
 --
--- Name: get_quantidade_meses_movimentacoes_ultimo_semestre(bigint, bigint, character varying); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 706 (class 1255 OID 53816)
+-- Name: get_quantidade_meses_movimentacoes_ultimo_semestre(bigint, bigint, character varying); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.get_quantidade_meses_movimentacoes_ultimo_semestre(p_grupo bigint, p_filial bigint, p_produto character varying) RETURNS integer
@@ -5668,8 +5919,11 @@ CREATE FUNCTION public.get_quantidade_meses_movimentacoes_ultimo_semestre(p_grup
     END; $$;
 
 
+ALTER FUNCTION public.get_quantidade_meses_movimentacoes_ultimo_semestre(p_grupo bigint, p_filial bigint, p_produto character varying) OWNER TO systock;
+
 --
--- Name: get_stat_produto(numeric, character varying, numeric); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 707 (class 1255 OID 53817)
+-- Name: get_stat_produto(numeric, character varying, numeric); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.get_stat_produto(p_filial numeric, idprod character varying, tempo_dias numeric DEFAULT 30) RETURNS TABLE(t_q1 numeric, t_q3 numeric, t_iqr numeric, t_limite_inferior numeric, t_limite_superior numeric)
@@ -5736,8 +5990,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.get_stat_produto(p_filial numeric, idprod character varying, tempo_dias numeric) OWNER TO systock;
+
 --
--- Name: get_stddev_consumo(numeric, character varying, date); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 708 (class 1255 OID 53818)
+-- Name: get_stddev_consumo(numeric, character varying, date); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.get_stddev_consumo(p_filial numeric, p_produto character varying, p_dataref date DEFAULT ('now'::text)::date) RETURNS numeric
@@ -5854,8 +6111,11 @@ begin
 end;$$;
 
 
+ALTER FUNCTION public.get_stddev_consumo(p_filial numeric, p_produto character varying, p_dataref date) OWNER TO systock;
+
 --
--- Name: get_stddev_heranca_consumo(numeric, character varying, date); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 709 (class 1255 OID 53819)
+-- Name: get_stddev_heranca_consumo(numeric, character varying, date); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.get_stddev_heranca_consumo(p_filial numeric, p_produto character varying, p_dataref date DEFAULT ('now'::text)::date) RETURNS numeric
@@ -5888,8 +6148,11 @@ begin
 end;$$;
 
 
+ALTER FUNCTION public.get_stddev_heranca_consumo(p_filial numeric, p_produto character varying, p_dataref date) OWNER TO systock;
+
 --
--- Name: get_stddev_ressup_filial(numeric, character varying); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 710 (class 1255 OID 53820)
+-- Name: get_stddev_ressup_filial(numeric, character varying); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.get_stddev_ressup_filial(p_filial numeric, idprod character varying) RETURNS double precision
@@ -5970,8 +6233,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.get_stddev_ressup_filial(p_filial numeric, idprod character varying) OWNER TO systock;
+
 --
--- Name: get_suavizacao_exponencial_coeficiente(integer, character varying, numeric, date); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 711 (class 1255 OID 53821)
+-- Name: get_suavizacao_exponencial_coeficiente(integer, character varying, numeric, date); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.get_suavizacao_exponencial_coeficiente(p_idfilial integer, p_idproduto character varying, p_coeficiente numeric, p_data_referencia date DEFAULT CURRENT_DATE) RETURNS double precision[]
@@ -6010,8 +6276,11 @@ CREATE FUNCTION public.get_suavizacao_exponencial_coeficiente(p_idfilial integer
     END; $$;
 
 
+ALTER FUNCTION public.get_suavizacao_exponencial_coeficiente(p_idfilial integer, p_idproduto character varying, p_coeficiente numeric, p_data_referencia date) OWNER TO systock;
+
 --
--- Name: get_suavizacao_exponencial_filial(integer, character varying, date); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 712 (class 1255 OID 53822)
+-- Name: get_suavizacao_exponencial_filial(integer, character varying, date); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.get_suavizacao_exponencial_filial(p_idfilial integer, p_idproduto character varying, p_data_referencia date DEFAULT ('now'::text)::date) RETURNS public.suavizacao_exponencial_type
@@ -6050,8 +6319,11 @@ CREATE FUNCTION public.get_suavizacao_exponencial_filial(p_idfilial integer, p_i
     END; $$;
 
 
+ALTER FUNCTION public.get_suavizacao_exponencial_filial(p_idfilial integer, p_idproduto character varying, p_data_referencia date) OWNER TO systock;
+
 --
--- Name: get_temp_ressup_filial(numeric, character varying); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 713 (class 1255 OID 53823)
+-- Name: get_temp_ressup_filial(numeric, character varying); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.get_temp_ressup_filial(p_filial numeric, idprod character varying) RETURNS double precision
@@ -6131,8 +6403,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.get_temp_ressup_filial(p_filial numeric, idprod character varying) OWNER TO systock;
+
 --
--- Name: get_tma_filial(numeric, character varying, date); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 714 (class 1255 OID 53824)
+-- Name: get_tma_filial(numeric, character varying, date); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.get_tma_filial(p_filial numeric, idprod character varying, dataref date DEFAULT ('now'::text)::date) RETURNS numeric
@@ -6167,8 +6442,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.get_tma_filial(p_filial numeric, idprod character varying, dataref date) OWNER TO systock;
+
 --
--- Name: get_tmr_filial(numeric, character varying); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 715 (class 1255 OID 53825)
+-- Name: get_tmr_filial(numeric, character varying); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.get_tmr_filial(p_filial numeric, idprod character varying) RETURNS numeric
@@ -6198,8 +6476,11 @@ CREATE FUNCTION public.get_tmr_filial(p_filial numeric, idprod character varying
     $$;
 
 
+ALTER FUNCTION public.get_tmr_filial(p_filial numeric, idprod character varying) OWNER TO systock;
+
 --
--- Name: getclassfinanceira(numeric); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 716 (class 1255 OID 53826)
+-- Name: getclassfinanceira(numeric); Type: FUNCTION; Schema: public; Owner: postgres
 --
 
 CREATE FUNCTION public.getclassfinanceira(percentual numeric) RETURNS character varying
@@ -6222,8 +6503,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.getclassfinanceira(percentual numeric) OWNER TO postgres;
+
 --
--- Name: getcompra_transito(character varying); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 717 (class 1255 OID 53827)
+-- Name: getcompra_transito(character varying); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.getcompra_transito(idprod character varying) RETURNS numeric
@@ -6249,8 +6533,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.getcompra_transito(idprod character varying) OWNER TO systock;
+
 --
--- Name: getcompra_transito_filial(numeric, character varying); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 718 (class 1255 OID 53828)
+-- Name: getcompra_transito_filial(numeric, character varying); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.getcompra_transito_filial(p_filial numeric, idprod character varying) RETURNS numeric
@@ -6276,8 +6563,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.getcompra_transito_filial(p_filial numeric, idprod character varying) OWNER TO systock;
+
 --
--- Name: getcompra_transito_grupo(numeric, character varying); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 719 (class 1255 OID 53829)
+-- Name: getcompra_transito_grupo(numeric, character varying); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.getcompra_transito_grupo(p_grupo numeric, idprod character varying) RETURNS numeric
@@ -6321,8 +6611,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.getcompra_transito_grupo(p_grupo numeric, idprod character varying) OWNER TO systock;
+
 --
--- Name: getcompra_transito_periodo(character varying, date); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 720 (class 1255 OID 53830)
+-- Name: getcompra_transito_periodo(character varying, date); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.getcompra_transito_periodo(idprod character varying, dataref date DEFAULT ('now'::text)::date) RETURNS numeric
@@ -6368,8 +6661,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.getcompra_transito_periodo(idprod character varying, dataref date) OWNER TO systock;
+
 --
--- Name: getcompra_transito_periodo_filial(numeric, character varying, date); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 721 (class 1255 OID 53831)
+-- Name: getcompra_transito_periodo_filial(numeric, character varying, date); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.getcompra_transito_periodo_filial(p_filial numeric, idprod character varying, dataref date DEFAULT ('now'::text)::date) RETURNS numeric
@@ -6419,8 +6715,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.getcompra_transito_periodo_filial(p_filial numeric, idprod character varying, dataref date) OWNER TO systock;
+
 --
--- Name: getcompra_transito_periodo_grupo(numeric, character varying, date); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 722 (class 1255 OID 53832)
+-- Name: getcompra_transito_periodo_grupo(numeric, character varying, date); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.getcompra_transito_periodo_grupo(p_grupo numeric, idprod character varying, dataref date DEFAULT ('now'::text)::date) RETURNS numeric
@@ -6466,8 +6765,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.getcompra_transito_periodo_grupo(p_grupo numeric, idprod character varying, dataref date) OWNER TO systock;
+
 --
--- Name: getconsumo_provisionado(character varying, numeric); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 723 (class 1255 OID 53833)
+-- Name: getconsumo_provisionado(character varying, numeric); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.getconsumo_provisionado(idprod character varying, qtde_dias numeric) RETURNS numeric
@@ -6507,8 +6809,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.getconsumo_provisionado(idprod character varying, qtde_dias numeric) OWNER TO systock;
+
 --
--- Name: getconsumo_provisionado_filial(numeric, character varying, numeric); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 724 (class 1255 OID 53834)
+-- Name: getconsumo_provisionado_filial(numeric, character varying, numeric); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.getconsumo_provisionado_filial(p_filial numeric, idprod character varying, qtde_dias numeric) RETURNS numeric
@@ -6580,8 +6885,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.getconsumo_provisionado_filial(p_filial numeric, idprod character varying, qtde_dias numeric) OWNER TO systock;
+
 --
--- Name: getconsumo_transito(character varying); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 725 (class 1255 OID 53835)
+-- Name: getconsumo_transito(character varying); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.getconsumo_transito(idprod character varying) RETURNS numeric
@@ -6650,8 +6958,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.getconsumo_transito(idprod character varying) OWNER TO systock;
+
 --
--- Name: getconsumo_transito_filial(numeric, character varying); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 726 (class 1255 OID 53836)
+-- Name: getconsumo_transito_filial(numeric, character varying); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.getconsumo_transito_filial(p_filial numeric, idprod character varying) RETURNS numeric
@@ -6781,8 +7092,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.getconsumo_transito_filial(p_filial numeric, idprod character varying) OWNER TO systock;
+
 --
--- Name: getconsumo_transito_grupo(numeric, character varying); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 727 (class 1255 OID 53837)
+-- Name: getconsumo_transito_grupo(numeric, character varying); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.getconsumo_transito_grupo(p_grupo numeric, idprod character varying) RETURNS numeric
@@ -6902,8 +7216,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.getconsumo_transito_grupo(p_grupo numeric, idprod character varying) OWNER TO systock;
+
 --
--- Name: getconsumo_transito_grupo_2(numeric, character varying); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 728 (class 1255 OID 53838)
+-- Name: getconsumo_transito_grupo_2(numeric, character varying); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.getconsumo_transito_grupo_2(p_grupo numeric, idprod character varying) RETURNS numeric
@@ -6938,8 +7255,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.getconsumo_transito_grupo_2(p_grupo numeric, idprod character varying) OWNER TO systock;
+
 --
--- Name: getconsumo_transito_grupo_entre_pedidos(numeric, character varying); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 729 (class 1255 OID 53839)
+-- Name: getconsumo_transito_grupo_entre_pedidos(numeric, character varying); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.getconsumo_transito_grupo_entre_pedidos(p_grupo numeric, idprod character varying) RETURNS numeric
@@ -7060,8 +7380,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.getconsumo_transito_grupo_entre_pedidos(p_grupo numeric, idprod character varying) OWNER TO systock;
+
 --
--- Name: getconsumo_transito_grupo_filial_2(integer, integer, character varying); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 730 (class 1255 OID 53840)
+-- Name: getconsumo_transito_grupo_filial_2(integer, integer, character varying); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.getconsumo_transito_grupo_filial_2(p_grupo integer, p_filial integer, idprod character varying) RETURNS numeric
@@ -7080,8 +7403,11 @@ begin
 end; $$;
 
 
+ALTER FUNCTION public.getconsumo_transito_grupo_filial_2(p_grupo integer, p_filial integer, idprod character varying) OWNER TO systock;
+
 --
--- Name: getconsumo_transito_grupo_filial_entre_pedidos(integer, integer, character varying); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 731 (class 1255 OID 53841)
+-- Name: getconsumo_transito_grupo_filial_entre_pedidos(integer, integer, character varying); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.getconsumo_transito_grupo_filial_entre_pedidos(p_grupo integer, p_filial integer, idprod character varying) RETURNS numeric
@@ -7144,8 +7470,11 @@ from (
 end; $$;
 
 
+ALTER FUNCTION public.getconsumo_transito_grupo_filial_entre_pedidos(p_grupo integer, p_filial integer, idprod character varying) OWNER TO systock;
+
 --
--- Name: getconsumo_transito_grupo_filial_new(integer, integer, character varying); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 732 (class 1255 OID 53842)
+-- Name: getconsumo_transito_grupo_filial_new(integer, integer, character varying); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.getconsumo_transito_grupo_filial_new(p_grupo integer, p_filial integer, idprod character varying) RETURNS numeric
@@ -7200,8 +7529,11 @@ begin
 end; $$;
 
 
+ALTER FUNCTION public.getconsumo_transito_grupo_filial_new(p_grupo integer, p_filial integer, idprod character varying) OWNER TO systock;
+
 --
--- Name: getconsumo_transito_grupo_new(numeric, character varying); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 733 (class 1255 OID 53843)
+-- Name: getconsumo_transito_grupo_new(numeric, character varying); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.getconsumo_transito_grupo_new(p_grupo numeric, idprod character varying) RETURNS numeric
@@ -7311,8 +7643,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.getconsumo_transito_grupo_new(p_grupo numeric, idprod character varying) OWNER TO systock;
+
 --
--- Name: getconsumo_transito_old(character varying); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 734 (class 1255 OID 53844)
+-- Name: getconsumo_transito_old(character varying); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.getconsumo_transito_old(idprod character varying) RETURNS numeric
@@ -7352,8 +7687,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.getconsumo_transito_old(idprod character varying) OWNER TO systock;
+
 --
--- Name: getconsumo_transito_projetado(character varying, numeric); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 735 (class 1255 OID 53845)
+-- Name: getconsumo_transito_projetado(character varying, numeric); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.getconsumo_transito_projetado(idprod character varying, nd numeric DEFAULT 0) RETURNS numeric
@@ -7423,8 +7761,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.getconsumo_transito_projetado(idprod character varying, nd numeric) OWNER TO systock;
+
 --
--- Name: getconsumo_transito_projetado_filial(numeric, character varying, numeric); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 736 (class 1255 OID 53846)
+-- Name: getconsumo_transito_projetado_filial(numeric, character varying, numeric); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.getconsumo_transito_projetado_filial(p_filial numeric, idprod character varying, nd numeric DEFAULT 0) RETURNS numeric
@@ -7556,8 +7897,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.getconsumo_transito_projetado_filial(p_filial numeric, idprod character varying, nd numeric) OWNER TO systock;
+
 --
--- Name: getconsumomediomensal(character varying, date); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 737 (class 1255 OID 53847)
+-- Name: getconsumomediomensal(character varying, date); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.getconsumomediomensal(idprod character varying, dataref date DEFAULT ('now'::text)::date) RETURNS numeric
@@ -7656,8 +8000,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.getconsumomediomensal(idprod character varying, dataref date) OWNER TO systock;
+
 --
--- Name: getdesviopadrao(character varying); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 738 (class 1255 OID 53848)
+-- Name: getdesviopadrao(character varying); Type: FUNCTION; Schema: public; Owner: postgres
 --
 
 CREATE FUNCTION public.getdesviopadrao(idprod character varying) RETURNS double precision
@@ -7677,8 +8024,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.getdesviopadrao(idprod character varying) OWNER TO postgres;
+
 --
--- Name: getdesviopadraoconsumo(character varying, date); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 739 (class 1255 OID 53849)
+-- Name: getdesviopadraoconsumo(character varying, date); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.getdesviopadraoconsumo(idprod character varying, dataref date DEFAULT ('now'::text)::date) RETURNS numeric
@@ -7732,8 +8082,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.getdesviopadraoconsumo(idprod character varying, dataref date) OWNER TO systock;
+
 --
--- Name: getfes(character varying); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 740 (class 1255 OID 53850)
+-- Name: getfes(character varying); Type: FUNCTION; Schema: public; Owner: postgres
 --
 
 CREATE FUNCTION public.getfes(classes character varying) RETURNS numeric
@@ -7755,8 +8108,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.getfes(classes character varying) OWNER TO postgres;
+
 --
--- Name: getlotemedioqr(character varying); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 741 (class 1255 OID 53851)
+-- Name: getlotemedioqr(character varying); Type: FUNCTION; Schema: public; Owner: postgres
 --
 
 CREATE FUNCTION public.getlotemedioqr(idprod character varying) RETURNS numeric
@@ -7791,8 +8147,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.getlotemedioqr(idprod character varying) OWNER TO postgres;
+
 --
--- Name: getmanterestoque(character varying); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 742 (class 1255 OID 53852)
+-- Name: getmanterestoque(character varying); Type: FUNCTION; Schema: public; Owner: postgres
 --
 
 CREATE FUNCTION public.getmanterestoque(classes character varying) RETURNS character varying
@@ -7814,8 +8173,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.getmanterestoque(classes character varying) OWNER TO postgres;
+
 --
--- Name: getnivelservico(character varying); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 743 (class 1255 OID 53853)
+-- Name: getnivelservico(character varying); Type: FUNCTION; Schema: public; Owner: postgres
 --
 
 CREATE FUNCTION public.getnivelservico(classes character varying) RETURNS character varying
@@ -7837,8 +8199,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.getnivelservico(classes character varying) OWNER TO postgres;
+
 --
--- Name: getpesocompras(character varying, numeric); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 744 (class 1255 OID 53854)
+-- Name: getpesocompras(character varying, numeric); Type: FUNCTION; Schema: public; Owner: postgres
 --
 
 CREATE FUNCTION public.getpesocompras(classes character varying, class_comprabilidade numeric) RETURNS numeric
@@ -7861,8 +8226,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.getpesocompras(classes character varying, class_comprabilidade numeric) OWNER TO postgres;
+
 --
--- Name: getpqr(character varying); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 745 (class 1255 OID 53855)
+-- Name: getpqr(character varying); Type: FUNCTION; Schema: public; Owner: postgres
 --
 
 CREATE FUNCTION public.getpqr(idprod character varying) RETURNS character varying
@@ -7904,8 +8272,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.getpqr(idprod character varying) OWNER TO postgres;
+
 --
--- Name: getpqr_dinamico(character varying, date); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 746 (class 1255 OID 53856)
+-- Name: getpqr_dinamico(character varying, date); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.getpqr_dinamico(idprod character varying, dataref date DEFAULT ('now'::text)::date) RETURNS character varying
@@ -7942,8 +8313,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.getpqr_dinamico(idprod character varying, dataref date) OWNER TO systock;
+
 --
--- Name: getsaldohorizontefuturo(character varying); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 747 (class 1255 OID 53857)
+-- Name: getsaldohorizontefuturo(character varying); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.getsaldohorizontefuturo(idprod character varying) RETURNS numeric
@@ -7971,8 +8345,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.getsaldohorizontefuturo(idprod character varying) OWNER TO systock;
+
 --
--- Name: getsaldohorizontefuturo_projetado(character varying); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 748 (class 1255 OID 53858)
+-- Name: getsaldohorizontefuturo_projetado(character varying); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.getsaldohorizontefuturo_projetado(idprod character varying) RETURNS numeric
@@ -8000,8 +8377,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.getsaldohorizontefuturo_projetado(idprod character varying) OWNER TO systock;
+
 --
--- Name: getsaldohorizontefuturo_projetado_filial(numeric, character varying, numeric); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 749 (class 1255 OID 53859)
+-- Name: getsaldohorizontefuturo_projetado_filial(numeric, character varying, numeric); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.getsaldohorizontefuturo_projetado_filial(p_filial numeric, idprod character varying, p_grupo numeric) RETURNS numeric
@@ -8049,8 +8429,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.getsaldohorizontefuturo_projetado_filial(p_filial numeric, idprod character varying, p_grupo numeric) OWNER TO systock;
+
 --
--- Name: getsaldohorizontefuturo_projetado_grupo(numeric, character varying, numeric); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 750 (class 1255 OID 53860)
+-- Name: getsaldohorizontefuturo_projetado_grupo(numeric, character varying, numeric); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.getsaldohorizontefuturo_projetado_grupo(p_filial numeric, idprod character varying, p_grupo numeric) RETURNS numeric
@@ -8110,8 +8493,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.getsaldohorizontefuturo_projetado_grupo(p_filial numeric, idprod character varying, p_grupo numeric) OWNER TO systock;
+
 --
--- Name: gettemporessuprimento(character varying); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 751 (class 1255 OID 53861)
+-- Name: gettemporessuprimento(character varying); Type: FUNCTION; Schema: public; Owner: postgres
 --
 
 CREATE FUNCTION public.gettemporessuprimento(idprod character varying) RETURNS double precision
@@ -8137,8 +8523,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.gettemporessuprimento(idprod character varying) OWNER TO postgres;
+
 --
--- Name: gettma(character varying, date); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 752 (class 1255 OID 53862)
+-- Name: gettma(character varying, date); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.gettma(idprod character varying, dataref date DEFAULT ('now'::text)::date) RETURNS numeric
@@ -8173,8 +8562,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.gettma(idprod character varying, dataref date) OWNER TO systock;
+
 --
--- Name: gettmr(character varying); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 753 (class 1255 OID 53863)
+-- Name: gettmr(character varying); Type: FUNCTION; Schema: public; Owner: postgres
 --
 
 CREATE FUNCTION public.gettmr(idprod character varying) RETURNS numeric
@@ -8212,8 +8604,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.gettmr(idprod character varying) OWNER TO postgres;
+
 --
--- Name: getzyx_comercio(character varying); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 754 (class 1255 OID 53864)
+-- Name: getzyx_comercio(character varying); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.getzyx_comercio(idprod character varying) RETURNS character varying
@@ -8239,8 +8634,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.getzyx_comercio(idprod character varying) OWNER TO systock;
+
 --
--- Name: last_day(date); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 755 (class 1255 OID 53865)
+-- Name: last_day(date); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.last_day(dataref date) RETURNS date
@@ -8256,8 +8654,11 @@ begin
 $_$;
 
 
+ALTER FUNCTION public.last_day(dataref date) OWNER TO systock;
+
 --
--- Name: media_compra_cliente(character varying, bigint, integer); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 756 (class 1255 OID 53866)
+-- Name: media_compra_cliente(character varying, bigint, integer); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.media_compra_cliente(idproduto_param character varying, idgrupo_param bigint, filial_param integer DEFAULT NULL::integer) RETURNS numeric
@@ -8281,8 +8682,11 @@ CREATE FUNCTION public.media_compra_cliente(idproduto_param character varying, i
     $$;
 
 
+ALTER FUNCTION public.media_compra_cliente(idproduto_param character varying, idgrupo_param bigint, filial_param integer) OWNER TO systock;
+
 --
--- Name: namemonth(integer); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 757 (class 1255 OID 53867)
+-- Name: namemonth(integer); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.namemonth(integer) RETURNS character varying
@@ -8306,8 +8710,11 @@ end
 $_$;
 
 
+ALTER FUNCTION public.namemonth(integer) OWNER TO systock;
+
 --
--- Name: oportunidade_vendas(character varying, date, date); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 758 (class 1255 OID 53868)
+-- Name: oportunidade_vendas(character varying, date, date); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.oportunidade_vendas(produto character varying, dataini date, datafim date) RETURNS TABLE(op_idproduto character varying, op_descricao_produto character varying, op_ano integer, op_trimestre integer, op_mes integer, op_media_trimestre numeric, op_media_diaria_trimestre numeric, op_media_trimestre_ant numeric, op_media_diaria_trimestre_ant numeric, op_media_anual_corrida numeric, op_media_diaria_anual numeric, op_total_saida_trimestre numeric, op_cof_variacao numeric, op_valor_unitario numeric, op_ganho numeric, op_perda numeric, op_total_perda_mensal numeric, op_idfamilia_produto integer, op_descricao_familia_produto character varying)
@@ -8345,8 +8752,11 @@ end;
  $$;
 
 
+ALTER FUNCTION public.oportunidade_vendas(produto character varying, dataini date, datafim date) OWNER TO systock;
+
 --
--- Name: processar_analise_abc(numeric, numeric, numeric); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 759 (class 1255 OID 53869)
+-- Name: processar_analise_abc(numeric, numeric, numeric); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.processar_analise_abc(p_filial numeric, p_fornecedor numeric DEFAULT 0, p_departamento numeric DEFAULT 0) RETURNS character varying
@@ -8556,8 +8966,11 @@ end
 $$;
 
 
+ALTER FUNCTION public.processar_analise_abc(p_filial numeric, p_fornecedor numeric, p_departamento numeric) OWNER TO systock;
+
 --
--- Name: processar_analise_abc_grupo(numeric, numeric, numeric); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 760 (class 1255 OID 53871)
+-- Name: processar_analise_abc_grupo(numeric, numeric, numeric); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.processar_analise_abc_grupo(p_grupo numeric, p_fornecedor numeric DEFAULT 0, p_departamento numeric DEFAULT 0) RETURNS character varying
@@ -8777,8 +9190,11 @@ end
 $$;
 
 
+ALTER FUNCTION public.processar_analise_abc_grupo(p_grupo numeric, p_fornecedor numeric, p_departamento numeric) OWNER TO systock;
+
 --
--- Name: processar_analise_diagnostico_estoque_filial(); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 761 (class 1255 OID 53873)
+-- Name: processar_analise_diagnostico_estoque_filial(); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.processar_analise_diagnostico_estoque_filial() RETURNS void
@@ -9519,8 +9935,11 @@ END;
 $$;
 
 
+ALTER FUNCTION public.processar_analise_diagnostico_estoque_filial() OWNER TO systock;
+
 --
--- Name: processar_analise_diagnostico_estoque_grupo(integer); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 762 (class 1255 OID 53875)
+-- Name: processar_analise_diagnostico_estoque_grupo(integer); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.processar_analise_diagnostico_estoque_grupo(f_id_grupo integer DEFAULT 0) RETURNS void
@@ -10283,8 +10702,11 @@ END;
 $$;
 
 
+ALTER FUNCTION public.processar_analise_diagnostico_estoque_grupo(f_id_grupo integer) OWNER TO systock;
+
 --
--- Name: processar_analise_diagnostico_estoque_grupo_data(date); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 763 (class 1255 OID 53877)
+-- Name: processar_analise_diagnostico_estoque_grupo_data(date); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.processar_analise_diagnostico_estoque_grupo_data(p_data date) RETURNS void
@@ -11012,8 +11434,11 @@ END;
 $$;
 
 
+ALTER FUNCTION public.processar_analise_diagnostico_estoque_grupo_data(p_data date) OWNER TO systock;
+
 --
--- Name: processar_analise_diagnostico_estoque_grupo_diario(); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 764 (class 1255 OID 53879)
+-- Name: processar_analise_diagnostico_estoque_grupo_diario(); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.processar_analise_diagnostico_estoque_grupo_diario() RETURNS void
@@ -11306,8 +11731,11 @@ END;
 $$;
 
 
+ALTER FUNCTION public.processar_analise_diagnostico_estoque_grupo_diario() OWNER TO systock;
+
 --
--- Name: processar_analise_movimentacoes_produtos_filial(date, text); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 765 (class 1255 OID 53881)
+-- Name: processar_analise_movimentacoes_produtos_filial(date, text); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.processar_analise_movimentacoes_produtos_filial(data_inicial date DEFAULT CURRENT_DATE, filtro_sql text DEFAULT ''::text) RETURNS void
@@ -11505,8 +11933,11 @@ CREATE FUNCTION public.processar_analise_movimentacoes_produtos_filial(data_inic
     $_$;
 
 
+ALTER FUNCTION public.processar_analise_movimentacoes_produtos_filial(data_inicial date, filtro_sql text) OWNER TO systock;
+
 --
--- Name: processar_analise_percepcao_compras_grupos(date); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 766 (class 1255 OID 53883)
+-- Name: processar_analise_percepcao_compras_grupos(date); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.processar_analise_percepcao_compras_grupos(data_inicial date DEFAULT CURRENT_DATE) RETURNS void
@@ -11928,8 +12359,11 @@ CREATE FUNCTION public.processar_analise_percepcao_compras_grupos(data_inicial d
     $$;
 
 
+ALTER FUNCTION public.processar_analise_percepcao_compras_grupos(data_inicial date) OWNER TO systock;
+
 --
--- Name: processar_analise_produtos_comprador_grupo(); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 767 (class 1255 OID 53885)
+-- Name: processar_analise_produtos_comprador_grupo(); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.processar_analise_produtos_comprador_grupo() RETURNS void
@@ -12149,8 +12583,11 @@ BEGIN
 END $$;
 
 
+ALTER FUNCTION public.processar_analise_produtos_comprador_grupo() OWNER TO systock;
+
 --
--- Name: processar_analise_rupturas_produtos_filial(date); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 768 (class 1255 OID 53887)
+-- Name: processar_analise_rupturas_produtos_filial(date); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.processar_analise_rupturas_produtos_filial(data_inicial date DEFAULT CURRENT_DATE) RETURNS void
@@ -12363,8 +12800,11 @@ CREATE FUNCTION public.processar_analise_rupturas_produtos_filial(data_inicial d
     $$;
 
 
+ALTER FUNCTION public.processar_analise_rupturas_produtos_filial(data_inicial date) OWNER TO systock;
+
 --
--- Name: processar_analise_statistica(); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 769 (class 1255 OID 53889)
+-- Name: processar_analise_statistica(); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.processar_analise_statistica() RETURNS void
@@ -12449,8 +12889,11 @@ CREATE FUNCTION public.processar_analise_statistica() RETURNS void
     $$;
 
 
+ALTER FUNCTION public.processar_analise_statistica() OWNER TO systock;
+
 --
--- Name: processar_baixa_pedidos_systock(); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 770 (class 1255 OID 53890)
+-- Name: processar_baixa_pedidos_systock(); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.processar_baixa_pedidos_systock() RETURNS void
@@ -12503,8 +12946,11 @@ end
 $$;
 
 
+ALTER FUNCTION public.processar_baixa_pedidos_systock() OWNER TO systock;
+
 --
--- Name: processar_compra_mp(); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 771 (class 1255 OID 53891)
+-- Name: processar_compra_mp(); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.processar_compra_mp() RETURNS void
@@ -12582,8 +13028,11 @@ end
 $$;
 
 
+ALTER FUNCTION public.processar_compra_mp() OWNER TO systock;
+
 --
--- Name: processar_fechamento_eventos(); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 772 (class 1255 OID 53892)
+-- Name: processar_fechamento_eventos(); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.processar_fechamento_eventos() RETURNS void
@@ -12648,8 +13097,11 @@ end
 $$;
 
 
+ALTER FUNCTION public.processar_fechamento_eventos() OWNER TO systock;
+
 --
--- Name: processar_filtros_produto(integer, boolean); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 773 (class 1255 OID 53893)
+-- Name: processar_filtros_produto(integer, boolean); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.processar_filtros_produto(p_forn integer DEFAULT 0, p_filial boolean DEFAULT false) RETURNS void
@@ -12868,8 +13320,11 @@ CREATE FUNCTION public.processar_filtros_produto(p_forn integer DEFAULT 0, p_fil
     $$;
 
 
+ALTER FUNCTION public.processar_filtros_produto(p_forn integer, p_filial boolean) OWNER TO systock;
+
 --
--- Name: processar_forecast(bigint); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 774 (class 1255 OID 53895)
+-- Name: processar_forecast(bigint); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.processar_forecast(p_fornecedor bigint DEFAULT 0) RETURNS void
@@ -13253,8 +13708,11 @@ end
 $$;
 
 
+ALTER FUNCTION public.processar_forecast(p_fornecedor bigint) OWNER TO systock;
+
 --
--- Name: processar_forecast_categoria(bigint); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 775 (class 1255 OID 53897)
+-- Name: processar_forecast_categoria(bigint); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.processar_forecast_categoria(p_idcategoria bigint DEFAULT 0) RETURNS void
@@ -13357,8 +13815,11 @@ end
 $$;
 
 
+ALTER FUNCTION public.processar_forecast_categoria(p_idcategoria bigint) OWNER TO systock;
+
 --
--- Name: processar_forecast_filial(bigint); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 776 (class 1255 OID 53898)
+-- Name: processar_forecast_filial(bigint); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.processar_forecast_filial(p_fornecedor bigint DEFAULT 0) RETURNS void
@@ -13755,8 +14216,11 @@ end
 $$;
 
 
+ALTER FUNCTION public.processar_forecast_filial(p_fornecedor bigint) OWNER TO systock;
+
 --
--- Name: processar_historico_compras(integer); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 777 (class 1255 OID 53900)
+-- Name: processar_historico_compras(integer); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.processar_historico_compras(prazo integer DEFAULT 30) RETURNS void
@@ -13824,8 +14288,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.processar_historico_compras(prazo integer) OWNER TO systock;
+
 --
--- Name: processar_historico_compras_saldos(integer); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 778 (class 1255 OID 53901)
+-- Name: processar_historico_compras_saldos(integer); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.processar_historico_compras_saldos(prazo integer DEFAULT 30) RETURNS void
@@ -13883,8 +14350,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.processar_historico_compras_saldos(prazo integer) OWNER TO systock;
+
 --
--- Name: processar_historico_compras_saldos_filial(integer); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 779 (class 1255 OID 53902)
+-- Name: processar_historico_compras_saldos_filial(integer); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.processar_historico_compras_saldos_filial(prazo integer DEFAULT 30) RETURNS void
@@ -13992,8 +14462,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.processar_historico_compras_saldos_filial(prazo integer) OWNER TO systock;
+
 --
--- Name: processar_historico_compras_saldos_filial_data(date); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 780 (class 1255 OID 53903)
+-- Name: processar_historico_compras_saldos_filial_data(date); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.processar_historico_compras_saldos_filial_data(p_data date) RETURNS void
@@ -14101,8 +14574,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.processar_historico_compras_saldos_filial_data(p_data date) OWNER TO systock;
+
 --
--- Name: processar_historico_compras_saldos_filial_prod(numeric, character varying, date, date); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 781 (class 1255 OID 53904)
+-- Name: processar_historico_compras_saldos_filial_prod(numeric, character varying, date, date); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.processar_historico_compras_saldos_filial_prod(p_filial numeric, p_produto character varying, p_dataini date, p_datafim date) RETURNS void
@@ -14164,8 +14640,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.processar_historico_compras_saldos_filial_prod(p_filial numeric, p_produto character varying, p_dataini date, p_datafim date) OWNER TO systock;
+
 --
--- Name: processar_indicadores(integer); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 782 (class 1255 OID 53905)
+-- Name: processar_indicadores(integer); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.processar_indicadores(qtd_meses integer DEFAULT 13) RETURNS void
@@ -14210,8 +14689,11 @@ BEGIN
 END; $$;
 
 
+ALTER FUNCTION public.processar_indicadores(qtd_meses integer) OWNER TO systock;
+
 --
--- Name: processar_prismas_filiais(date); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 783 (class 1255 OID 53906)
+-- Name: processar_prismas_filiais(date); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.processar_prismas_filiais(p_dataref date DEFAULT ('now'::text)::date) RETURNS void
@@ -14268,8 +14750,11 @@ begin
 end;$$;
 
 
+ALTER FUNCTION public.processar_prismas_filiais(p_dataref date) OWNER TO systock;
+
 --
--- Name: processar_prismas_grupo(date); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 784 (class 1255 OID 53907)
+-- Name: processar_prismas_grupo(date); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.processar_prismas_grupo(p_dataref date DEFAULT ('now'::text)::date) RETURNS void
@@ -14315,8 +14800,11 @@ begin
 end;$$;
 
 
+ALTER FUNCTION public.processar_prismas_grupo(p_dataref date) OWNER TO systock;
+
 --
--- Name: processar_produtos_combinados_compras_filial(character varying); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 785 (class 1255 OID 53908)
+-- Name: processar_produtos_combinados_compras_filial(character varying); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.processar_produtos_combinados_compras_filial(f_id_produto_combinado character varying DEFAULT NULL::character varying) RETURNS void
@@ -14910,8 +15398,11 @@ CREATE FUNCTION public.processar_produtos_combinados_compras_filial(f_id_produto
     END $$;
 
 
+ALTER FUNCTION public.processar_produtos_combinados_compras_filial(f_id_produto_combinado character varying) OWNER TO systock;
+
 --
--- Name: processar_produtos_combinados_compras_grupo(character varying); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 786 (class 1255 OID 53910)
+-- Name: processar_produtos_combinados_compras_grupo(character varying); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.processar_produtos_combinados_compras_grupo(f_id_produto_combinado character varying DEFAULT NULL::character varying) RETURNS void
@@ -15483,8 +15974,11 @@ CREATE FUNCTION public.processar_produtos_combinados_compras_grupo(f_id_produto_
     END $$;
 
 
+ALTER FUNCTION public.processar_produtos_combinados_compras_grupo(f_id_produto_combinado character varying) OWNER TO systock;
+
 --
--- Name: processar_produtos_combinados_forecast_filial(character varying); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 787 (class 1255 OID 53912)
+-- Name: processar_produtos_combinados_forecast_filial(character varying); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.processar_produtos_combinados_forecast_filial(f_id_produto_combinado character varying DEFAULT NULL::character varying) RETURNS void
@@ -15588,8 +16082,11 @@ CREATE FUNCTION public.processar_produtos_combinados_forecast_filial(f_id_produt
     END $$;
 
 
+ALTER FUNCTION public.processar_produtos_combinados_forecast_filial(f_id_produto_combinado character varying) OWNER TO systock;
+
 --
--- Name: processar_produtos_combinados_forecast_grupo(character varying); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 788 (class 1255 OID 53913)
+-- Name: processar_produtos_combinados_forecast_grupo(character varying); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.processar_produtos_combinados_forecast_grupo(f_id_produto_combinado character varying DEFAULT NULL::character varying) RETURNS void
@@ -15682,8 +16179,11 @@ CREATE FUNCTION public.processar_produtos_combinados_forecast_grupo(f_id_produto
     END $$;
 
 
+ALTER FUNCTION public.processar_produtos_combinados_forecast_grupo(f_id_produto_combinado character varying) OWNER TO systock;
+
 --
--- Name: processar_produtos_combinados_transito_filial(character varying); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 789 (class 1255 OID 53914)
+-- Name: processar_produtos_combinados_transito_filial(character varying); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.processar_produtos_combinados_transito_filial(f_id_produto_combinado character varying DEFAULT NULL::character varying) RETURNS void
@@ -15856,8 +16356,11 @@ CREATE FUNCTION public.processar_produtos_combinados_transito_filial(f_id_produt
     end $$;
 
 
+ALTER FUNCTION public.processar_produtos_combinados_transito_filial(f_id_produto_combinado character varying) OWNER TO systock;
+
 --
--- Name: processar_produtos_combinados_transito_grupo(character varying); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 790 (class 1255 OID 53916)
+-- Name: processar_produtos_combinados_transito_grupo(character varying); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.processar_produtos_combinados_transito_grupo(f_id_produto_combinado character varying DEFAULT NULL::character varying) RETURNS void
@@ -16662,8 +17165,11 @@ CREATE FUNCTION public.processar_produtos_combinados_transito_grupo(f_id_produto
     end $$;
 
 
+ALTER FUNCTION public.processar_produtos_combinados_transito_grupo(f_id_produto_combinado character varying) OWNER TO systock;
+
 --
--- Name: processar_produtos_comprador(); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 791 (class 1255 OID 53918)
+-- Name: processar_produtos_comprador(); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.processar_produtos_comprador() RETURNS void
@@ -16998,8 +17504,11 @@ CREATE FUNCTION public.processar_produtos_comprador() RETURNS void
 $$;
 
 
+ALTER FUNCTION public.processar_produtos_comprador() OWNER TO systock;
+
 --
--- Name: processar_produtos_compras_categorias(integer, character varying, character varying); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 792 (class 1255 OID 53920)
+-- Name: processar_produtos_compras_categorias(integer, character varying, character varying); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.processar_produtos_compras_categorias(filtro_id_grupo integer DEFAULT 0, filtro_id_departamento character varying DEFAULT '0'::character varying, filtro_id_categoria character varying DEFAULT '0'::character varying) RETURNS void
@@ -17352,8 +17861,11 @@ END;
 $$;
 
 
+ALTER FUNCTION public.processar_produtos_compras_categorias(filtro_id_grupo integer, filtro_id_departamento character varying, filtro_id_categoria character varying) OWNER TO systock;
+
 --
--- Name: processar_produtos_compras_categorias_mp_pa(integer, integer); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 793 (class 1255 OID 53922)
+-- Name: processar_produtos_compras_categorias_mp_pa(integer, integer); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.processar_produtos_compras_categorias_mp_pa(f_grupo integer DEFAULT 0, f_categoria integer DEFAULT 0) RETURNS void
@@ -17803,8 +18315,11 @@ END;
 $$;
 
 
+ALTER FUNCTION public.processar_produtos_compras_categorias_mp_pa(f_grupo integer, f_categoria integer) OWNER TO systock;
+
 --
--- Name: processar_produtos_compras_filial(integer, bigint); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 794 (class 1255 OID 53924)
+-- Name: processar_produtos_compras_filial(integer, bigint); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.processar_produtos_compras_filial(filtro_filial integer DEFAULT 0, filtro_id_fornecedor bigint DEFAULT 0) RETURNS void
@@ -18241,8 +18756,11 @@ END;
 $$;
 
 
+ALTER FUNCTION public.processar_produtos_compras_filial(filtro_filial integer, filtro_id_fornecedor bigint) OWNER TO systock;
+
 --
--- Name: processar_produtos_compras_grupo(integer, bigint); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 795 (class 1255 OID 53926)
+-- Name: processar_produtos_compras_grupo(integer, bigint); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.processar_produtos_compras_grupo(filtro_id_grupo integer DEFAULT 0, filtro_id_fornecedor bigint DEFAULT 0) RETURNS void
@@ -18735,8 +19253,11 @@ END;
 $$;
 
 
+ALTER FUNCTION public.processar_produtos_compras_grupo(filtro_id_grupo integer, filtro_id_fornecedor bigint) OWNER TO systock;
+
 --
--- Name: processar_produtos_forecast_categoria(integer, character varying, character varying); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 796 (class 1255 OID 53928)
+-- Name: processar_produtos_forecast_categoria(integer, character varying, character varying); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.processar_produtos_forecast_categoria(p_grupo integer DEFAULT 0, p_departamento character varying DEFAULT '0'::character varying, p_idcategoria character varying DEFAULT '0'::character varying) RETURNS void
@@ -18880,8 +19401,11 @@ end
 $$;
 
 
+ALTER FUNCTION public.processar_produtos_forecast_categoria(p_grupo integer, p_departamento character varying, p_idcategoria character varying) OWNER TO systock;
+
 --
--- Name: processar_produtos_transito(bigint); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 797 (class 1255 OID 53929)
+-- Name: processar_produtos_transito(bigint); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.processar_produtos_transito(p_fornecedor bigint DEFAULT 0) RETURNS void
@@ -20631,8 +21155,11 @@ end
 $$;
 
 
+ALTER FUNCTION public.processar_produtos_transito(p_fornecedor bigint) OWNER TO systock;
+
 --
--- Name: processar_produtos_transito_categoria(integer, character varying, character varying); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 798 (class 1255 OID 53931)
+-- Name: processar_produtos_transito_categoria(integer, character varying, character varying); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.processar_produtos_transito_categoria(p_grupo integer DEFAULT 0, p_departamento character varying DEFAULT '0'::character varying, p_idcategoria character varying DEFAULT '0'::character varying) RETURNS void
@@ -21453,8 +21980,11 @@ end
 $$;
 
 
+ALTER FUNCTION public.processar_produtos_transito_categoria(p_grupo integer, p_departamento character varying, p_idcategoria character varying) OWNER TO systock;
+
 --
--- Name: processar_produtos_transito_filial(bigint); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 799 (class 1255 OID 53933)
+-- Name: processar_produtos_transito_filial(bigint); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.processar_produtos_transito_filial(p_fornecedor bigint DEFAULT 0) RETURNS void
@@ -22338,8 +22868,11 @@ end
 $$;
 
 
+ALTER FUNCTION public.processar_produtos_transito_filial(p_fornecedor bigint) OWNER TO systock;
+
 --
--- Name: processar_rentabilidade(integer); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 800 (class 1255 OID 53935)
+-- Name: processar_rentabilidade(integer); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.processar_rentabilidade(p_periodo integer DEFAULT 180) RETURNS void
@@ -22360,8 +22893,11 @@ end
 $$;
 
 
+ALTER FUNCTION public.processar_rentabilidade(p_periodo integer) OWNER TO systock;
+
 --
--- Name: processar_rentabilidade_fornecedor(integer, integer); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 801 (class 1255 OID 53936)
+-- Name: processar_rentabilidade_fornecedor(integer, integer); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.processar_rentabilidade_fornecedor(p_forn integer, p_periodo integer DEFAULT 180) RETURNS void
@@ -22452,8 +22988,11 @@ end
 $$;
 
 
+ALTER FUNCTION public.processar_rentabilidade_fornecedor(p_forn integer, p_periodo integer) OWNER TO systock;
+
 --
--- Name: processar_saldos(date, date); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 802 (class 1255 OID 53937)
+-- Name: processar_saldos(date, date); Type: FUNCTION; Schema: public; Owner: postgres
 --
 
 CREATE FUNCTION public.processar_saldos(dataini date, datafim date) RETURNS void
@@ -22485,8 +23024,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.processar_saldos(dataini date, datafim date) OWNER TO postgres;
+
 --
--- Name: processar_saldos_filial(date, date); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 803 (class 1255 OID 53938)
+-- Name: processar_saldos_filial(date, date); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.processar_saldos_filial(dataini date, datafim date) RETURNS void
@@ -22524,8 +23066,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.processar_saldos_filial(dataini date, datafim date) OWNER TO systock;
+
 --
--- Name: processar_saldos_produto(character varying, date, date); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 804 (class 1255 OID 53939)
+-- Name: processar_saldos_produto(character varying, date, date); Type: FUNCTION; Schema: public; Owner: postgres
 --
 
 CREATE FUNCTION public.processar_saldos_produto(produto character varying, dataini date, datafim date) RETURNS void
@@ -22557,8 +23102,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.processar_saldos_produto(produto character varying, dataini date, datafim date) OWNER TO postgres;
+
 --
--- Name: processar_sazonalidade(); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 805 (class 1255 OID 53940)
+-- Name: processar_sazonalidade(); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.processar_sazonalidade() RETURNS void
@@ -22772,8 +23320,11 @@ for rec_prod in (select id_grupo ,idproduto from vw_grupo_compras_produtos_mt  w
 $$;
 
 
+ALTER FUNCTION public.processar_sazonalidade() OWNER TO systock;
+
 --
--- Name: processar_similares_filial(); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 806 (class 1255 OID 53941)
+-- Name: processar_similares_filial(); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.processar_similares_filial() RETURNS void
@@ -22867,8 +23418,11 @@ end
   $$;
 
 
+ALTER FUNCTION public.processar_similares_filial() OWNER TO systock;
+
 --
--- Name: processar_status_produto(date); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 807 (class 1255 OID 53942)
+-- Name: processar_status_produto(date); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.processar_status_produto(p_dataref date DEFAULT (('now'::text)::date - 1)) RETURNS void
@@ -23188,8 +23742,11 @@ end
   $$;
 
 
+ALTER FUNCTION public.processar_status_produto(p_dataref date) OWNER TO systock;
+
 --
--- Name: processar_tempo_cobertura_compras(); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 808 (class 1255 OID 53944)
+-- Name: processar_tempo_cobertura_compras(); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.processar_tempo_cobertura_compras() RETURNS void
@@ -23248,8 +23805,11 @@ CREATE FUNCTION public.processar_tempo_cobertura_compras() RETURNS void
             $$;
 
 
+ALTER FUNCTION public.processar_tempo_cobertura_compras() OWNER TO systock;
+
 --
--- Name: processar_totais(); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 809 (class 1255 OID 53945)
+-- Name: processar_totais(); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.processar_totais() RETURNS void
@@ -23713,8 +24273,11 @@ end
 $$;
 
 
+ALTER FUNCTION public.processar_totais() OWNER TO systock;
+
 --
--- Name: set_media_diaria_vendas_trimestral(character varying, date); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 810 (class 1255 OID 53947)
+-- Name: set_media_diaria_vendas_trimestral(character varying, date); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.set_media_diaria_vendas_trimestral(idprod character varying, data_venda date) RETURNS void
@@ -23942,8 +24505,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.set_media_diaria_vendas_trimestral(idprod character varying, data_venda date) OWNER TO systock;
+
 --
--- Name: set_media_diaria_vendas_trimestral_filial(numeric, character varying, date); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 811 (class 1255 OID 53949)
+-- Name: set_media_diaria_vendas_trimestral_filial(numeric, character varying, date); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.set_media_diaria_vendas_trimestral_filial(p_filial numeric, idprod character varying, data_venda date) RETURNS void
@@ -24103,8 +24669,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.set_media_diaria_vendas_trimestral_filial(p_filial numeric, idprod character varying, data_venda date) OWNER TO systock;
+
 --
--- Name: totais_dashboard_adicionar_produtos_combinados(character varying, integer, integer, integer); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 812 (class 1255 OID 53950)
+-- Name: totais_dashboard_adicionar_produtos_combinados(character varying, integer, integer, integer); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.totais_dashboard_adicionar_produtos_combinados(p_tipo character varying, p_id_grupo integer, p_id_parametro integer, p_adicional_fornecedor integer DEFAULT NULL::integer) RETURNS integer
@@ -24129,8 +24698,11 @@ CREATE FUNCTION public.totais_dashboard_adicionar_produtos_combinados(p_tipo cha
             $$;
 
 
+ALTER FUNCTION public.totais_dashboard_adicionar_produtos_combinados(p_tipo character varying, p_id_grupo integer, p_id_parametro integer, p_adicional_fornecedor integer) OWNER TO systock;
+
 --
--- Name: totais_dashboard_adicionar_produtos_combinados(character varying, integer, bigint, bigint); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 829 (class 1255 OID 84201)
+-- Name: totais_dashboard_adicionar_produtos_combinados(character varying, integer, bigint, bigint); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.totais_dashboard_adicionar_produtos_combinados(p_tipo character varying, p_id_grupo integer, p_id_parametro bigint, p_adicional_fornecedor bigint DEFAULT NULL::bigint) RETURNS integer
@@ -24155,8 +24727,11 @@ CREATE FUNCTION public.totais_dashboard_adicionar_produtos_combinados(p_tipo cha
     $$;
 
 
+ALTER FUNCTION public.totais_dashboard_adicionar_produtos_combinados(p_tipo character varying, p_id_grupo integer, p_id_parametro bigint, p_adicional_fornecedor bigint) OWNER TO systock;
+
 --
--- Name: totais_dashboard_remover_produtos(character varying, integer, integer, integer); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 813 (class 1255 OID 53951)
+-- Name: totais_dashboard_remover_produtos(character varying, integer, integer, integer); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.totais_dashboard_remover_produtos(p_tipo character varying, p_id_grupo integer, p_id_parametro integer, p_adicional_fornecedor integer DEFAULT NULL::integer) RETURNS integer
@@ -24186,8 +24761,11 @@ CREATE FUNCTION public.totais_dashboard_remover_produtos(p_tipo character varyin
             $$;
 
 
+ALTER FUNCTION public.totais_dashboard_remover_produtos(p_tipo character varying, p_id_grupo integer, p_id_parametro integer, p_adicional_fornecedor integer) OWNER TO systock;
+
 --
--- Name: totais_dashboard_remover_produtos(character varying, integer, bigint, bigint); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 828 (class 1255 OID 84200)
+-- Name: totais_dashboard_remover_produtos(character varying, integer, bigint, bigint); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.totais_dashboard_remover_produtos(p_tipo character varying, p_id_grupo integer, p_id_parametro bigint, p_adicional_fornecedor bigint DEFAULT NULL::bigint) RETURNS integer
@@ -24217,8 +24795,11 @@ CREATE FUNCTION public.totais_dashboard_remover_produtos(p_tipo character varyin
     $$;
 
 
+ALTER FUNCTION public.totais_dashboard_remover_produtos(p_tipo character varying, p_id_grupo integer, p_id_parametro bigint, p_adicional_fornecedor bigint) OWNER TO systock;
+
 --
--- Name: trg_zerar_quantidade_consumos(); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 833 (class 1255 OID 84267)
+-- Name: trg_zerar_quantidade_consumos(); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.trg_zerar_quantidade_consumos() RETURNS trigger
@@ -24244,8 +24825,11 @@ CREATE FUNCTION public.trg_zerar_quantidade_consumos() RETURNS trigger
             $$;
 
 
+ALTER FUNCTION public.trg_zerar_quantidade_consumos() OWNER TO systock;
+
 --
--- Name: trigger_consumos_desconsiderados(); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 814 (class 1255 OID 53952)
+-- Name: trigger_consumos_desconsiderados(); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.trigger_consumos_desconsiderados() RETURNS trigger
@@ -24267,8 +24851,11 @@ CREATE FUNCTION public.trigger_consumos_desconsiderados() RETURNS trigger
     $$;
 
 
+ALTER FUNCTION public.trigger_consumos_desconsiderados() OWNER TO systock;
+
 --
--- Name: trigger_log_pedidos_compras_itens(); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 815 (class 1255 OID 53953)
+-- Name: trigger_log_pedidos_compras_itens(); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.trigger_log_pedidos_compras_itens() RETURNS trigger
@@ -24373,8 +24960,11 @@ END
 $$;
 
 
+ALTER FUNCTION public.trigger_log_pedidos_compras_itens() OWNER TO systock;
+
 --
--- Name: trigger_media_vendas(); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 816 (class 1255 OID 53954)
+-- Name: trigger_media_vendas(); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.trigger_media_vendas() RETURNS trigger
@@ -24459,8 +25049,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.trigger_media_vendas() OWNER TO systock;
+
 --
--- Name: trigger_preco_medio_venda(); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 817 (class 1255 OID 53955)
+-- Name: trigger_preco_medio_venda(); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.trigger_preco_medio_venda() RETURNS trigger
@@ -24488,8 +25081,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.trigger_preco_medio_venda() OWNER TO systock;
+
 --
--- Name: trigger_produtos(); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 818 (class 1255 OID 53956)
+-- Name: trigger_produtos(); Type: FUNCTION; Schema: public; Owner: postgres
 --
 
 CREATE FUNCTION public.trigger_produtos() RETURNS trigger
@@ -24761,8 +25357,11 @@ end
 $$;
 
 
+ALTER FUNCTION public.trigger_produtos() OWNER TO postgres;
+
 --
--- Name: trigger_produtos_filial(); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 819 (class 1255 OID 53959)
+-- Name: trigger_produtos_filial(); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.trigger_produtos_filial() RETURNS trigger
@@ -24816,6 +25415,8 @@ begin
       NEW.idproduto,
       NEW.filial
    );
+
+raise notice 'Produto: %' ,new.idproduto;
 
 --	 Estoque Transferencia DRP
 	new.estoque_transito_drp = coalesce((
@@ -25625,8 +26226,11 @@ END;
 $$;
 
 
+ALTER FUNCTION public.trigger_produtos_filial() OWNER TO systock;
+
 --
--- Name: trigger_requisicao_pendentes(); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 820 (class 1255 OID 53961)
+-- Name: trigger_requisicao_pendentes(); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.trigger_requisicao_pendentes() RETURNS trigger
@@ -25661,8 +26265,11 @@ end
 $$;
 
 
+ALTER FUNCTION public.trigger_requisicao_pendentes() OWNER TO systock;
+
 --
--- Name: trigger_seq_itens_pedido_compra(); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 821 (class 1255 OID 53962)
+-- Name: trigger_seq_itens_pedido_compra(); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.trigger_seq_itens_pedido_compra() RETURNS trigger
@@ -25688,8 +26295,11 @@ end;
  $$;
 
 
+ALTER FUNCTION public.trigger_seq_itens_pedido_compra() OWNER TO systock;
+
 --
--- Name: trigger_sugestao_produtos_mp(); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 822 (class 1255 OID 53963)
+-- Name: trigger_sugestao_produtos_mp(); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.trigger_sugestao_produtos_mp() RETURNS trigger
@@ -25708,8 +26318,11 @@ end
 $$;
 
 
+ALTER FUNCTION public.trigger_sugestao_produtos_mp() OWNER TO systock;
+
 --
--- Name: update_cotacao_transacao_updated_at(); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 835 (class 1255 OID 84608)
+-- Name: update_cotacao_transacao_updated_at(); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.update_cotacao_transacao_updated_at() RETURNS trigger
@@ -25722,8 +26335,11 @@ CREATE FUNCTION public.update_cotacao_transacao_updated_at() RETURNS trigger
             $$;
 
 
+ALTER FUNCTION public.update_cotacao_transacao_updated_at() OWNER TO systock;
+
 --
--- Name: valida_oportunidade_venda(character varying, numeric, numeric, numeric); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 823 (class 1255 OID 53964)
+-- Name: valida_oportunidade_venda(character varying, numeric, numeric, numeric); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.valida_oportunidade_venda(idprod character varying, p_ano numeric, p_mes numeric, p_cod_trimestre numeric) RETURNS numeric
@@ -25771,8 +26387,11 @@ end;
 $$;
 
 
+ALTER FUNCTION public.valida_oportunidade_venda(idprod character varying, p_ano numeric, p_mes numeric, p_cod_trimestre numeric) OWNER TO systock;
+
 --
--- Name: verificar_cobertura_personalizada_produto_filial(integer, character varying); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 824 (class 1255 OID 53965)
+-- Name: verificar_cobertura_personalizada_produto_filial(integer, character varying); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.verificar_cobertura_personalizada_produto_filial(p_filial integer, p_idproduto character varying) RETURNS boolean
@@ -25815,8 +26434,11 @@ END
 $$;
 
 
+ALTER FUNCTION public.verificar_cobertura_personalizada_produto_filial(p_filial integer, p_idproduto character varying) OWNER TO systock;
+
 --
--- Name: verificar_cobertura_personalizada_produto_grupo(integer, character varying); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 825 (class 1255 OID 53966)
+-- Name: verificar_cobertura_personalizada_produto_grupo(integer, character varying); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.verificar_cobertura_personalizada_produto_grupo(p_idgrupo integer, p_idproduto character varying) RETURNS boolean
@@ -25861,8 +26483,11 @@ END
 $$;
 
 
+ALTER FUNCTION public.verificar_cobertura_personalizada_produto_grupo(p_idgrupo integer, p_idproduto character varying) OWNER TO systock;
+
 --
--- Name: verificar_sazonalidade_periodo(integer, character varying, text, text); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 826 (class 1255 OID 53967)
+-- Name: verificar_sazonalidade_periodo(integer, character varying, text, text); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.verificar_sazonalidade_periodo(param_filial integer, param_idproduto character varying, param_periodo_inicial text, param_periodo_final text) RETURNS numeric
@@ -25924,8 +26549,11 @@ CREATE FUNCTION public.verificar_sazonalidade_periodo(param_filial integer, para
 $$;
 
 
+ALTER FUNCTION public.verificar_sazonalidade_periodo(param_filial integer, param_idproduto character varying, param_periodo_inicial text, param_periodo_final text) OWNER TO systock;
+
 --
--- Name: verificar_sazonalidade_produto(character varying); Type: FUNCTION; Schema: public; Owner: -
+-- TOC entry 827 (class 1255 OID 53968)
+-- Name: verificar_sazonalidade_produto(character varying); Type: FUNCTION; Schema: public; Owner: systock
 --
 
 CREATE FUNCTION public.verificar_sazonalidade_produto(param_idproduto character varying) RETURNS boolean
@@ -25977,12 +26605,15 @@ CREATE FUNCTION public.verificar_sazonalidade_produto(param_idproduto character 
     $$;
 
 
+ALTER FUNCTION public.verificar_sazonalidade_produto(param_idproduto character varying) OWNER TO systock;
+
 SET default_tablespace = '';
 
 SET default_table_access_method = heap;
 
 --
--- Name: activity_log; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 223 (class 1259 OID 53969)
+-- Name: activity_log; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.activity_log (
@@ -26001,8 +26632,11 @@ CREATE TABLE public.activity_log (
 WITH (autovacuum_vacuum_scale_factor='11.36767');
 
 
+ALTER TABLE public.activity_log OWNER TO systock;
+
 --
--- Name: activity_log_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 224 (class 1259 OID 53975)
+-- Name: activity_log_id_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.activity_log_id_seq
@@ -26013,15 +26647,20 @@ CREATE SEQUENCE public.activity_log_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.activity_log_id_seq OWNER TO systock;
+
 --
--- Name: activity_log_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6302 (class 0 OID 0)
+-- Dependencies: 224
+-- Name: activity_log_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.activity_log_id_seq OWNED BY public.activity_log.id;
 
 
 --
--- Name: analise_balanceamento; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 225 (class 1259 OID 53976)
+-- Name: analise_balanceamento; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.analise_balanceamento (
@@ -26059,8 +26698,11 @@ CREATE TABLE public.analise_balanceamento (
 );
 
 
+ALTER TABLE public.analise_balanceamento OWNER TO postgres;
+
 --
--- Name: analise_diagnostico_estoque_filial; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 226 (class 1259 OID 53983)
+-- Name: analise_diagnostico_estoque_filial; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.analise_diagnostico_estoque_filial (
@@ -26151,8 +26793,11 @@ CREATE TABLE public.analise_diagnostico_estoque_filial (
 );
 
 
+ALTER TABLE public.analise_diagnostico_estoque_filial OWNER TO systock;
+
 --
--- Name: analise_diagnostico_estoque_grupo; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 227 (class 1259 OID 53991)
+-- Name: analise_diagnostico_estoque_grupo; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.analise_diagnostico_estoque_grupo (
@@ -26244,8 +26889,11 @@ CREATE TABLE public.analise_diagnostico_estoque_grupo (
 );
 
 
+ALTER TABLE public.analise_diagnostico_estoque_grupo OWNER TO systock;
+
 --
--- Name: analise_diagnostico_estoque_grupo_diario; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 228 (class 1259 OID 53999)
+-- Name: analise_diagnostico_estoque_grupo_diario; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.analise_diagnostico_estoque_grupo_diario (
@@ -26336,8 +26984,11 @@ CREATE TABLE public.analise_diagnostico_estoque_grupo_diario (
 );
 
 
+ALTER TABLE public.analise_diagnostico_estoque_grupo_diario OWNER TO systock;
+
 --
--- Name: comprador; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 229 (class 1259 OID 54006)
+-- Name: comprador; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.comprador (
@@ -26348,8 +26999,11 @@ CREATE TABLE public.comprador (
 );
 
 
+ALTER TABLE public.comprador OWNER TO systock;
+
 --
--- Name: consumos; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 230 (class 1259 OID 54009)
+-- Name: consumos; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.consumos (
@@ -26378,8 +27032,146 @@ CREATE TABLE public.consumos (
 WITH (autovacuum_vacuum_scale_factor='0.48357');
 
 
+ALTER TABLE public.consumos OWNER TO postgres;
+
 --
--- Name: entrada_mercadorias; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 6303 (class 0 OID 0)
+-- Dependencies: 230
+-- Name: COLUMN consumos.idconsumo; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN public.consumos.idconsumo IS 'Número da venda';
+
+
+--
+-- TOC entry 6304 (class 0 OID 0)
+-- Dependencies: 230
+-- Name: COLUMN consumos.emissao; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN public.consumos.emissao IS 'Emissão da venda';
+
+
+--
+-- TOC entry 6305 (class 0 OID 0)
+-- Dependencies: 230
+-- Name: COLUMN consumos.horariomov; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN public.consumos.horariomov IS 'Horário da venda';
+
+
+--
+-- TOC entry 6306 (class 0 OID 0)
+-- Dependencies: 230
+-- Name: COLUMN consumos.idproduto; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN public.consumos.idproduto IS 'Produto';
+
+
+--
+-- TOC entry 6307 (class 0 OID 0)
+-- Dependencies: 230
+-- Name: COLUMN consumos.qtde; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN public.consumos.qtde IS 'Quantidade';
+
+
+--
+-- TOC entry 6308 (class 0 OID 0)
+-- Dependencies: 230
+-- Name: COLUMN consumos.status; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN public.consumos.status IS 'Verifica se está fora de linha ou ativo';
+
+
+--
+-- TOC entry 6309 (class 0 OID 0)
+-- Dependencies: 230
+-- Name: COLUMN consumos.valor_unit; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN public.consumos.valor_unit IS 'Valor da venda';
+
+
+--
+-- TOC entry 6310 (class 0 OID 0)
+-- Dependencies: 230
+-- Name: COLUMN consumos.filial; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN public.consumos.filial IS 'Filial da venda';
+
+
+--
+-- TOC entry 6311 (class 0 OID 0)
+-- Dependencies: 230
+-- Name: COLUMN consumos.unidade_medida; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN public.consumos.unidade_medida IS 'Embalagem';
+
+
+--
+-- TOC entry 6312 (class 0 OID 0)
+-- Dependencies: 230
+-- Name: COLUMN consumos.cod_vendedor; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN public.consumos.cod_vendedor IS 'Código do vendedor';
+
+
+--
+-- TOC entry 6313 (class 0 OID 0)
+-- Dependencies: 230
+-- Name: COLUMN consumos.nome_vendedor; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN public.consumos.nome_vendedor IS 'Nome do vendedor';
+
+
+--
+-- TOC entry 6314 (class 0 OID 0)
+-- Dependencies: 230
+-- Name: COLUMN consumos.cod_cliente; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN public.consumos.cod_cliente IS 'Código do Cliente';
+
+
+--
+-- TOC entry 6315 (class 0 OID 0)
+-- Dependencies: 230
+-- Name: COLUMN consumos.nome_cliente; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN public.consumos.nome_cliente IS 'Nome do cliente';
+
+
+--
+-- TOC entry 6316 (class 0 OID 0)
+-- Dependencies: 230
+-- Name: COLUMN consumos.perc_lucro; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN public.consumos.perc_lucro IS 'Percentual de Lucro';
+
+
+--
+-- TOC entry 6317 (class 0 OID 0)
+-- Dependencies: 230
+-- Name: COLUMN consumos.vlr_lucro; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN public.consumos.vlr_lucro IS 'Valor do Lucro';
+
+
+--
+-- TOC entry 231 (class 1259 OID 54019)
+-- Name: entrada_mercadorias; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.entrada_mercadorias (
@@ -26400,8 +27192,92 @@ CREATE TABLE public.entrada_mercadorias (
 );
 
 
+ALTER TABLE public.entrada_mercadorias OWNER TO postgres;
+
 --
--- Name: familia_produtos_idfamilia_produto_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 6318 (class 0 OID 0)
+-- Dependencies: 231
+-- Name: COLUMN entrada_mercadorias.ordem_compra; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN public.entrada_mercadorias.ordem_compra IS 'Número da Entrada';
+
+
+--
+-- TOC entry 6319 (class 0 OID 0)
+-- Dependencies: 231
+-- Name: COLUMN entrada_mercadorias.data_entrada; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN public.entrada_mercadorias.data_entrada IS 'Data da entrada';
+
+
+--
+-- TOC entry 6320 (class 0 OID 0)
+-- Dependencies: 231
+-- Name: COLUMN entrada_mercadorias.nro_nfe; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN public.entrada_mercadorias.nro_nfe IS 'Número da Nota';
+
+
+--
+-- TOC entry 6321 (class 0 OID 0)
+-- Dependencies: 231
+-- Name: COLUMN entrada_mercadorias.idproduto; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN public.entrada_mercadorias.idproduto IS 'Produto';
+
+
+--
+-- TOC entry 6322 (class 0 OID 0)
+-- Dependencies: 231
+-- Name: COLUMN entrada_mercadorias.descricao_produto; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN public.entrada_mercadorias.descricao_produto IS 'Nome do Porduto';
+
+
+--
+-- TOC entry 6323 (class 0 OID 0)
+-- Dependencies: 231
+-- Name: COLUMN entrada_mercadorias.qtde; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN public.entrada_mercadorias.qtde IS 'Quantidade';
+
+
+--
+-- TOC entry 6324 (class 0 OID 0)
+-- Dependencies: 231
+-- Name: COLUMN entrada_mercadorias.unidade_medida; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN public.entrada_mercadorias.unidade_medida IS 'Embalagem';
+
+
+--
+-- TOC entry 6325 (class 0 OID 0)
+-- Dependencies: 231
+-- Name: COLUMN entrada_mercadorias.idfilial; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN public.entrada_mercadorias.idfilial IS 'Filial da Entrada';
+
+
+--
+-- TOC entry 6326 (class 0 OID 0)
+-- Dependencies: 231
+-- Name: COLUMN entrada_mercadorias.montante; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN public.entrada_mercadorias.montante IS 'Valor total da nota';
+
+
+--
+-- TOC entry 232 (class 1259 OID 54028)
+-- Name: familia_produtos_idfamilia_produto_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.familia_produtos_idfamilia_produto_seq
@@ -26412,8 +27288,11 @@ CREATE SEQUENCE public.familia_produtos_idfamilia_produto_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.familia_produtos_idfamilia_produto_seq OWNER TO postgres;
+
 --
--- Name: familia_produtos; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 233 (class 1259 OID 54029)
+-- Name: familia_produtos; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.familia_produtos (
@@ -26423,8 +27302,11 @@ CREATE TABLE public.familia_produtos (
 );
 
 
+ALTER TABLE public.familia_produtos OWNER TO postgres;
+
 --
--- Name: fornecedor; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 234 (class 1259 OID 54034)
+-- Name: fornecedor; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.fornecedor (
@@ -26460,8 +27342,56 @@ CREATE TABLE public.fornecedor (
 );
 
 
+ALTER TABLE public.fornecedor OWNER TO systock;
+
 --
--- Name: grupo_filial; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 6327 (class 0 OID 0)
+-- Dependencies: 234
+-- Name: COLUMN fornecedor.id; Type: COMMENT; Schema: public; Owner: systock
+--
+
+COMMENT ON COLUMN public.fornecedor.id IS 'Código do Fornecedor';
+
+
+--
+-- TOC entry 6328 (class 0 OID 0)
+-- Dependencies: 234
+-- Name: COLUMN fornecedor.razao_social; Type: COMMENT; Schema: public; Owner: systock
+--
+
+COMMENT ON COLUMN public.fornecedor.razao_social IS 'Nome do Fornecedor';
+
+
+--
+-- TOC entry 6329 (class 0 OID 0)
+-- Dependencies: 234
+-- Name: COLUMN fornecedor.idcomprador; Type: COMMENT; Schema: public; Owner: systock
+--
+
+COMMENT ON COLUMN public.fornecedor.idcomprador IS 'Código do Comprador no Fornecedor';
+
+
+--
+-- TOC entry 6330 (class 0 OID 0)
+-- Dependencies: 234
+-- Name: COLUMN fornecedor.tipo_litragem; Type: COMMENT; Schema: public; Owner: systock
+--
+
+COMMENT ON COLUMN public.fornecedor.tipo_litragem IS 'Duas possibilidades: LT(Litro) ou GL(Galão)';
+
+
+--
+-- TOC entry 6331 (class 0 OID 0)
+-- Dependencies: 234
+-- Name: COLUMN fornecedor.status_tempo_esseg; Type: COMMENT; Schema: public; Owner: systock
+--
+
+COMMENT ON COLUMN public.fornecedor.status_tempo_esseg IS '1 - CURVAS 2 - DEPARTAMENTO/SEGMENTO 3 - FORNECEDOR 4 - PRODUTO';
+
+
+--
+-- TOC entry 235 (class 1259 OID 54057)
+-- Name: grupo_filial; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.grupo_filial (
@@ -26488,8 +27418,29 @@ CREATE TABLE public.grupo_filial (
 );
 
 
+ALTER TABLE public.grupo_filial OWNER TO systock;
+
 --
--- Name: nivel_servico_idnivel_servico_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 6332 (class 0 OID 0)
+-- Dependencies: 235
+-- Name: COLUMN grupo_filial.cobertura_drp; Type: COMMENT; Schema: public; Owner: systock
+--
+
+COMMENT ON COLUMN public.grupo_filial.cobertura_drp IS 'Quantidade de dias de cobertura de estoque drp';
+
+
+--
+-- TOC entry 6333 (class 0 OID 0)
+-- Dependencies: 235
+-- Name: COLUMN grupo_filial.tempo_ressuprimento_drp; Type: COMMENT; Schema: public; Owner: systock
+--
+
+COMMENT ON COLUMN public.grupo_filial.tempo_ressuprimento_drp IS 'Quantidade de dias para o ressuprimento DRP';
+
+
+--
+-- TOC entry 236 (class 1259 OID 54075)
+-- Name: nivel_servico_idnivel_servico_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.nivel_servico_idnivel_servico_seq
@@ -26500,8 +27451,11 @@ CREATE SEQUENCE public.nivel_servico_idnivel_servico_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.nivel_servico_idnivel_servico_seq OWNER TO postgres;
+
 --
--- Name: nivel_servico; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 237 (class 1259 OID 54076)
+-- Name: nivel_servico; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.nivel_servico (
@@ -26514,8 +27468,11 @@ CREATE TABLE public.nivel_servico (
 );
 
 
+ALTER TABLE public.nivel_servico OWNER TO postgres;
+
 --
--- Name: produtos_filial; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 238 (class 1259 OID 54082)
+-- Name: produtos_filial; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.produtos_filial (
@@ -26676,8 +27633,380 @@ CREATE TABLE public.produtos_filial (
 WITH (autovacuum_vacuum_scale_factor='0.58039');
 
 
+ALTER TABLE public.produtos_filial OWNER TO systock;
+
 --
--- Name: saldo_filiais; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 6334 (class 0 OID 0)
+-- Dependencies: 238
+-- Name: COLUMN produtos_filial.filial; Type: COMMENT; Schema: public; Owner: systock
+--
+
+COMMENT ON COLUMN public.produtos_filial.filial IS 'Filial do produto';
+
+
+--
+-- TOC entry 6335 (class 0 OID 0)
+-- Dependencies: 238
+-- Name: COLUMN produtos_filial.idproduto; Type: COMMENT; Schema: public; Owner: systock
+--
+
+COMMENT ON COLUMN public.produtos_filial.idproduto IS 'Produto';
+
+
+--
+-- TOC entry 6336 (class 0 OID 0)
+-- Dependencies: 238
+-- Name: COLUMN produtos_filial.cod_produto; Type: COMMENT; Schema: public; Owner: systock
+--
+
+COMMENT ON COLUMN public.produtos_filial.cod_produto IS 'Código  fornecedor  do produto';
+
+
+--
+-- TOC entry 6337 (class 0 OID 0)
+-- Dependencies: 238
+-- Name: COLUMN produtos_filial.descricao_produto; Type: COMMENT; Schema: public; Owner: systock
+--
+
+COMMENT ON COLUMN public.produtos_filial.descricao_produto IS 'Nome do produto';
+
+
+--
+-- TOC entry 6338 (class 0 OID 0)
+-- Dependencies: 238
+-- Name: COLUMN produtos_filial.idfamilia_produto; Type: COMMENT; Schema: public; Owner: systock
+--
+
+COMMENT ON COLUMN public.produtos_filial.idfamilia_produto IS 'Departamemto do produto';
+
+
+--
+-- TOC entry 6339 (class 0 OID 0)
+-- Dependencies: 238
+-- Name: COLUMN produtos_filial.valor_unitario; Type: COMMENT; Schema: public; Owner: systock
+--
+
+COMMENT ON COLUMN public.produtos_filial.valor_unitario IS 'Valor de venda do produto';
+
+
+--
+-- TOC entry 6340 (class 0 OID 0)
+-- Dependencies: 238
+-- Name: COLUMN produtos_filial.consumo_medio_mensal; Type: COMMENT; Schema: public; Owner: systock
+--
+
+COMMENT ON COLUMN public.produtos_filial.consumo_medio_mensal IS 'CMV';
+
+
+--
+-- TOC entry 6341 (class 0 OID 0)
+-- Dependencies: 238
+-- Name: COLUMN produtos_filial.estoque_seguranca; Type: COMMENT; Schema: public; Owner: systock
+--
+
+COMMENT ON COLUMN public.produtos_filial.estoque_seguranca IS 'ESEG';
+
+
+--
+-- TOC entry 6342 (class 0 OID 0)
+-- Dependencies: 238
+-- Name: COLUMN produtos_filial.ponto_pedido; Type: COMMENT; Schema: public; Owner: systock
+--
+
+COMMENT ON COLUMN public.produtos_filial.ponto_pedido IS 'PP';
+
+
+--
+-- TOC entry 6343 (class 0 OID 0)
+-- Dependencies: 238
+-- Name: COLUMN produtos_filial.estoque_maximo; Type: COMMENT; Schema: public; Owner: systock
+--
+
+COMMENT ON COLUMN public.produtos_filial.estoque_maximo IS 'EMAX';
+
+
+--
+-- TOC entry 6344 (class 0 OID 0)
+-- Dependencies: 238
+-- Name: COLUMN produtos_filial.data_ultima_riquisicao; Type: COMMENT; Schema: public; Owner: systock
+--
+
+COMMENT ON COLUMN public.produtos_filial.data_ultima_riquisicao IS 'Data do último pedido de compra';
+
+
+--
+-- TOC entry 6345 (class 0 OID 0)
+-- Dependencies: 238
+-- Name: COLUMN produtos_filial.ultimo_pedido_compra; Type: COMMENT; Schema: public; Owner: systock
+--
+
+COMMENT ON COLUMN public.produtos_filial.ultimo_pedido_compra IS 'Número do último pedido de compra';
+
+
+--
+-- TOC entry 6346 (class 0 OID 0)
+-- Dependencies: 238
+-- Name: COLUMN produtos_filial.data_ultima_compra; Type: COMMENT; Schema: public; Owner: systock
+--
+
+COMMENT ON COLUMN public.produtos_filial.data_ultima_compra IS 'Data da última compra';
+
+
+--
+-- TOC entry 6347 (class 0 OID 0)
+-- Dependencies: 238
+-- Name: COLUMN produtos_filial.custo_unitario; Type: COMMENT; Schema: public; Owner: systock
+--
+
+COMMENT ON COLUMN public.produtos_filial.custo_unitario IS 'Custo do produto';
+
+
+--
+-- TOC entry 6348 (class 0 OID 0)
+-- Dependencies: 238
+-- Name: COLUMN produtos_filial.ressuprimento_manual; Type: COMMENT; Schema: public; Owner: systock
+--
+
+COMMENT ON COLUMN public.produtos_filial.ressuprimento_manual IS 'Sim ou Não na tela de detalhamento';
+
+
+--
+-- TOC entry 6349 (class 0 OID 0)
+-- Dependencies: 238
+-- Name: COLUMN produtos_filial.ressuprimento_manual_dias; Type: COMMENT; Schema: public; Owner: systock
+--
+
+COMMENT ON COLUMN public.produtos_filial.ressuprimento_manual_dias IS 'Pode defnir na tela de detalhamento';
+
+
+--
+-- TOC entry 6350 (class 0 OID 0)
+-- Dependencies: 238
+-- Name: COLUMN produtos_filial.idcomprador; Type: COMMENT; Schema: public; Owner: systock
+--
+
+COMMENT ON COLUMN public.produtos_filial.idcomprador IS 'Código do Comprador';
+
+
+--
+-- TOC entry 6351 (class 0 OID 0)
+-- Dependencies: 238
+-- Name: COLUMN produtos_filial.idfornecedor; Type: COMMENT; Schema: public; Owner: systock
+--
+
+COMMENT ON COLUMN public.produtos_filial.idfornecedor IS 'Código do Fornecedor';
+
+
+--
+-- TOC entry 6352 (class 0 OID 0)
+-- Dependencies: 238
+-- Name: COLUMN produtos_filial.revenda; Type: COMMENT; Schema: public; Owner: systock
+--
+
+COMMENT ON COLUMN public.produtos_filial.revenda IS 'Verifica se está ativo para venda';
+
+
+--
+-- TOC entry 6353 (class 0 OID 0)
+-- Dependencies: 238
+-- Name: COLUMN produtos_filial.status; Type: COMMENT; Schema: public; Owner: systock
+--
+
+COMMENT ON COLUMN public.produtos_filial.status IS 'Verifica se está fora de linha ou ativo';
+
+
+--
+-- TOC entry 6354 (class 0 OID 0)
+-- Dependencies: 238
+-- Name: COLUMN produtos_filial.preco_compra; Type: COMMENT; Schema: public; Owner: systock
+--
+
+COMMENT ON COLUMN public.produtos_filial.preco_compra IS 'Preço de Compra do produto';
+
+
+--
+-- TOC entry 6355 (class 0 OID 0)
+-- Dependencies: 238
+-- Name: COLUMN produtos_filial.importado; Type: COMMENT; Schema: public; Owner: systock
+--
+
+COMMENT ON COLUMN public.produtos_filial.importado IS 'Verifica se o produto é Importado ou não';
+
+
+--
+-- TOC entry 6356 (class 0 OID 0)
+-- Dependencies: 238
+-- Name: COLUMN produtos_filial.marca; Type: COMMENT; Schema: public; Owner: systock
+--
+
+COMMENT ON COLUMN public.produtos_filial.marca IS 'Marca do produto';
+
+
+--
+-- TOC entry 6357 (class 0 OID 0)
+-- Dependencies: 238
+-- Name: COLUMN produtos_filial.grupo_compra; Type: COMMENT; Schema: public; Owner: systock
+--
+
+COMMENT ON COLUMN public.produtos_filial.grupo_compra IS 'Grupo de compra do produto';
+
+
+--
+-- TOC entry 6358 (class 0 OID 0)
+-- Dependencies: 238
+-- Name: COLUMN produtos_filial.flag_sob_encomenda; Type: COMMENT; Schema: public; Owner: systock
+--
+
+COMMENT ON COLUMN public.produtos_filial.flag_sob_encomenda IS 'Verifica se o produto é sob encomenda';
+
+
+--
+-- TOC entry 6359 (class 0 OID 0)
+-- Dependencies: 238
+-- Name: COLUMN produtos_filial.idcategoria; Type: COMMENT; Schema: public; Owner: systock
+--
+
+COMMENT ON COLUMN public.produtos_filial.idcategoria IS 'Código Categoria do Porduto';
+
+
+--
+-- TOC entry 6360 (class 0 OID 0)
+-- Dependencies: 238
+-- Name: COLUMN produtos_filial.iddepartamento; Type: COMMENT; Schema: public; Owner: systock
+--
+
+COMMENT ON COLUMN public.produtos_filial.iddepartamento IS 'Departamento do produto';
+
+
+--
+-- TOC entry 6361 (class 0 OID 0)
+-- Dependencies: 238
+-- Name: COLUMN produtos_filial.estoque_minimo; Type: COMMENT; Schema: public; Owner: systock
+--
+
+COMMENT ON COLUMN public.produtos_filial.estoque_minimo IS 'Estoque Estético';
+
+
+--
+-- TOC entry 6362 (class 0 OID 0)
+-- Dependencies: 238
+-- Name: COLUMN produtos_filial.idsecao; Type: COMMENT; Schema: public; Owner: systock
+--
+
+COMMENT ON COLUMN public.produtos_filial.idsecao IS 'Código de Seção do produto';
+
+
+--
+-- TOC entry 6363 (class 0 OID 0)
+-- Dependencies: 238
+-- Name: COLUMN produtos_filial.litragem; Type: COMMENT; Schema: public; Owner: systock
+--
+
+COMMENT ON COLUMN public.produtos_filial.litragem IS 'LITRAGEM DO ITEM';
+
+
+--
+-- TOC entry 6364 (class 0 OID 0)
+-- Dependencies: 238
+-- Name: COLUMN produtos_filial.idlinhaprod; Type: COMMENT; Schema: public; Owner: systock
+--
+
+COMMENT ON COLUMN public.produtos_filial.idlinhaprod IS 'ID LINHA DO PRODUTO';
+
+
+--
+-- TOC entry 6365 (class 0 OID 0)
+-- Dependencies: 238
+-- Name: COLUMN produtos_filial.status_tempo_esseg; Type: COMMENT; Schema: public; Owner: systock
+--
+
+COMMENT ON COLUMN public.produtos_filial.status_tempo_esseg IS '1 - CURVAS 2 - DEPARTAMENTO/SEGMENTO 3 - FORNECEDOR 4 - PRODUTO';
+
+
+--
+-- TOC entry 6366 (class 0 OID 0)
+-- Dependencies: 238
+-- Name: COLUMN produtos_filial.estoque_pendente; Type: COMMENT; Schema: public; Owner: systock
+--
+
+COMMENT ON COLUMN public.produtos_filial.estoque_pendente IS 'Saldo de venda futura';
+
+
+--
+-- TOC entry 6367 (class 0 OID 0)
+-- Dependencies: 238
+-- Name: COLUMN produtos_filial.moeda; Type: COMMENT; Schema: public; Owner: systock
+--
+
+COMMENT ON COLUMN public.produtos_filial.moeda IS 'R - Real , D - Dolar , UE - Euro, ST - Sem Tabela';
+
+
+--
+-- TOC entry 6368 (class 0 OID 0)
+-- Dependencies: 238
+-- Name: COLUMN produtos_filial.idmarca; Type: COMMENT; Schema: public; Owner: systock
+--
+
+COMMENT ON COLUMN public.produtos_filial.idmarca IS 'Marca do produto';
+
+
+--
+-- TOC entry 6369 (class 0 OID 0)
+-- Dependencies: 238
+-- Name: COLUMN produtos_filial.numero_original; Type: COMMENT; Schema: public; Owner: systock
+--
+
+COMMENT ON COLUMN public.produtos_filial.numero_original IS 'Número Original do produto - Winthor';
+
+
+--
+-- TOC entry 6370 (class 0 OID 0)
+-- Dependencies: 238
+-- Name: COLUMN produtos_filial.status_produto; Type: COMMENT; Schema: public; Owner: systock
+--
+
+COMMENT ON COLUMN public.produtos_filial.status_produto IS 'CARACTERISTICAS DO PRODUTO';
+
+
+--
+-- TOC entry 6371 (class 0 OID 0)
+-- Dependencies: 238
+-- Name: COLUMN produtos_filial.cod_comercial; Type: COMMENT; Schema: public; Owner: systock
+--
+
+COMMENT ON COLUMN public.produtos_filial.cod_comercial IS 'REFERENCIA COMERCIAL DO PRODUTO';
+
+
+--
+-- TOC entry 6372 (class 0 OID 0)
+-- Dependencies: 238
+-- Name: COLUMN produtos_filial.multiplo_distribuicao; Type: COMMENT; Schema: public; Owner: systock
+--
+
+COMMENT ON COLUMN public.produtos_filial.multiplo_distribuicao IS 'MULTIPLO DE DISTRIBUICAO DA MERCADORIA';
+
+
+--
+-- TOC entry 6373 (class 0 OID 0)
+-- Dependencies: 238
+-- Name: COLUMN produtos_filial.estoque_recebimento; Type: COMMENT; Schema: public; Owner: systock
+--
+
+COMMENT ON COLUMN public.produtos_filial.estoque_recebimento IS 'ESTOQUE EM RECEBIMENTO NA LOGISTICA';
+
+
+--
+-- TOC entry 6374 (class 0 OID 0)
+-- Dependencies: 238
+-- Name: COLUMN produtos_filial.data_ult_entrada_transf; Type: COMMENT; Schema: public; Owner: systock
+--
+
+COMMENT ON COLUMN public.produtos_filial.data_ult_entrada_transf IS 'DATA DA ULTIMA ENTRADA DE TRANSFERENCIA';
+
+
+--
+-- TOC entry 239 (class 1259 OID 54145)
+-- Name: saldo_filiais; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.saldo_filiais (
@@ -26714,8 +28043,11 @@ CREATE TABLE public.saldo_filiais (
 WITH (autovacuum_vacuum_scale_factor='0.01753');
 
 
+ALTER TABLE public.saldo_filiais OWNER TO systock;
+
 --
--- Name: analise_financeira; Type: MATERIALIZED VIEW; Schema: public; Owner: -
+-- TOC entry 240 (class 1259 OID 54161)
+-- Name: analise_financeira; Type: MATERIALIZED VIEW; Schema: public; Owner: systock
 --
 
 CREATE MATERIALIZED VIEW public.analise_financeira AS
@@ -26841,8 +28173,11 @@ CREATE MATERIALIZED VIEW public.analise_financeira AS
   WITH NO DATA;
 
 
+ALTER MATERIALIZED VIEW public.analise_financeira OWNER TO systock;
+
 --
--- Name: requisicoes; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 241 (class 1259 OID 54168)
+-- Name: requisicoes; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.requisicoes (
@@ -26879,8 +28214,173 @@ CREATE TABLE public.requisicoes (
 );
 
 
+ALTER TABLE public.requisicoes OWNER TO postgres;
+
 --
--- Name: vw_grupo_compras_produtos; Type: VIEW; Schema: public; Owner: -
+-- TOC entry 6375 (class 0 OID 0)
+-- Dependencies: 241
+-- Name: COLUMN requisicoes.id_solicitacao; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN public.requisicoes.id_solicitacao IS 'Número do pedido - Winthor';
+
+
+--
+-- TOC entry 6376 (class 0 OID 0)
+-- Dependencies: 241
+-- Name: COLUMN requisicoes.data_solicitacao; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN public.requisicoes.data_solicitacao IS 'Data do pedido';
+
+
+--
+-- TOC entry 6377 (class 0 OID 0)
+-- Dependencies: 241
+-- Name: COLUMN requisicoes.idproduto; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN public.requisicoes.idproduto IS 'Produto';
+
+
+--
+-- TOC entry 6378 (class 0 OID 0)
+-- Dependencies: 241
+-- Name: COLUMN requisicoes.descricao_produto; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN public.requisicoes.descricao_produto IS 'Nome do produto';
+
+
+--
+-- TOC entry 6379 (class 0 OID 0)
+-- Dependencies: 241
+-- Name: COLUMN requisicoes.unidade_medida; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN public.requisicoes.unidade_medida IS 'Embalagem';
+
+
+--
+-- TOC entry 6380 (class 0 OID 0)
+-- Dependencies: 241
+-- Name: COLUMN requisicoes.ordem_compra; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN public.requisicoes.ordem_compra IS 'Número do pedido';
+
+
+--
+-- TOC entry 6381 (class 0 OID 0)
+-- Dependencies: 241
+-- Name: COLUMN requisicoes.idfilial; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN public.requisicoes.idfilial IS 'Filial do Pedido';
+
+
+--
+-- TOC entry 6382 (class 0 OID 0)
+-- Dependencies: 241
+-- Name: COLUMN requisicoes.data_previsao; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN public.requisicoes.data_previsao IS 'Previsão de Faturamento/Entrada';
+
+
+--
+-- TOC entry 6383 (class 0 OID 0)
+-- Dependencies: 241
+-- Name: COLUMN requisicoes.data_faturamento; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN public.requisicoes.data_faturamento IS 'Data de faturamento';
+
+
+--
+-- TOC entry 6384 (class 0 OID 0)
+-- Dependencies: 241
+-- Name: COLUMN requisicoes.data_entrega; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN public.requisicoes.data_entrega IS 'Data da entrada';
+
+
+--
+-- TOC entry 6385 (class 0 OID 0)
+-- Dependencies: 241
+-- Name: COLUMN requisicoes.qtde_entregue; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN public.requisicoes.qtde_entregue IS 'Quantidade entregue';
+
+
+--
+-- TOC entry 6386 (class 0 OID 0)
+-- Dependencies: 241
+-- Name: COLUMN requisicoes.qtde_pendente; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN public.requisicoes.qtde_pendente IS 'Quantidade pendente para entregar';
+
+
+--
+-- TOC entry 6387 (class 0 OID 0)
+-- Dependencies: 241
+-- Name: COLUMN requisicoes.pcompra; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN public.requisicoes.pcompra IS 'Preço do pedido';
+
+
+--
+-- TOC entry 6388 (class 0 OID 0)
+-- Dependencies: 241
+-- Name: COLUMN requisicoes.pcompraant; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN public.requisicoes.pcompraant IS 'Preço de compra anterior';
+
+
+--
+-- TOC entry 6389 (class 0 OID 0)
+-- Dependencies: 241
+-- Name: COLUMN requisicoes.entrada_bonificada; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN public.requisicoes.entrada_bonificada IS 'Quando for entrada bonificada';
+
+
+--
+-- TOC entry 6390 (class 0 OID 0)
+-- Dependencies: 241
+-- Name: COLUMN requisicoes.moeda; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN public.requisicoes.moeda IS 'R - Real, D - Dolar, UE - Euro, ST - Sem Tabela';
+
+
+--
+-- TOC entry 6391 (class 0 OID 0)
+-- Dependencies: 241
+-- Name: COLUMN requisicoes.idfornecedor; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN public.requisicoes.idfornecedor IS 'Fornecedor do Pedido';
+
+
+--
+-- TOC entry 6392 (class 0 OID 0)
+-- Dependencies: 241
+-- Name: COLUMN requisicoes.pcompra_total; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN public.requisicoes.pcompra_total IS 'Preço total do pedido - Winthor';
+
+
+--
+-- TOC entry 242 (class 1259 OID 54185)
+-- Name: vw_grupo_compras_produtos; Type: VIEW; Schema: public; Owner: systock
 --
 
 CREATE VIEW public.vw_grupo_compras_produtos AS
@@ -27067,8 +28567,11 @@ CREATE VIEW public.vw_grupo_compras_produtos AS
   WHERE ((revenda)::text = 'S'::text);
 
 
+ALTER VIEW public.vw_grupo_compras_produtos OWNER TO systock;
+
 --
--- Name: analise_financeira_grupo; Type: MATERIALIZED VIEW; Schema: public; Owner: -
+-- TOC entry 243 (class 1259 OID 54190)
+-- Name: analise_financeira_grupo; Type: MATERIALIZED VIEW; Schema: public; Owner: systock
 --
 
 CREATE MATERIALIZED VIEW public.analise_financeira_grupo AS
@@ -27168,8 +28671,11 @@ CREATE MATERIALIZED VIEW public.analise_financeira_grupo AS
   WITH NO DATA;
 
 
+ALTER MATERIALIZED VIEW public.analise_financeira_grupo OWNER TO systock;
+
 --
--- Name: departamentos_iddepartamento_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 244 (class 1259 OID 54197)
+-- Name: departamentos_iddepartamento_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.departamentos_iddepartamento_seq
@@ -27180,8 +28686,11 @@ CREATE SEQUENCE public.departamentos_iddepartamento_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.departamentos_iddepartamento_seq OWNER TO postgres;
+
 --
--- Name: departamentos; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 245 (class 1259 OID 54198)
+-- Name: departamentos; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.departamentos (
@@ -27194,8 +28703,11 @@ CREATE TABLE public.departamentos (
 );
 
 
+ALTER TABLE public.departamentos OWNER TO postgres;
+
 --
--- Name: analise_mercadorias_forecast_grupo; Type: MATERIALIZED VIEW; Schema: public; Owner: -
+-- TOC entry 246 (class 1259 OID 54205)
+-- Name: analise_mercadorias_forecast_grupo; Type: MATERIALIZED VIEW; Schema: public; Owner: systock
 --
 
 CREATE MATERIALIZED VIEW public.analise_mercadorias_forecast_grupo AS
@@ -27278,8 +28790,11 @@ CREATE MATERIALIZED VIEW public.analise_mercadorias_forecast_grupo AS
   WITH NO DATA;
 
 
+ALTER MATERIALIZED VIEW public.analise_mercadorias_forecast_grupo OWNER TO systock;
+
 --
--- Name: vw_grupo_compras_produtos_filial; Type: VIEW; Schema: public; Owner: -
+-- TOC entry 247 (class 1259 OID 54212)
+-- Name: vw_grupo_compras_produtos_filial; Type: VIEW; Schema: public; Owner: systock
 --
 
 CREATE VIEW public.vw_grupo_compras_produtos_filial AS
@@ -27452,8 +28967,11 @@ CREATE VIEW public.vw_grupo_compras_produtos_filial AS
                   ORDER BY (p.idproduto)::numeric, g.id_grupo, p.filial) a) lote;
 
 
+ALTER VIEW public.vw_grupo_compras_produtos_filial OWNER TO systock;
+
 --
--- Name: analise_mercadorias_forecast_grupo_filial; Type: MATERIALIZED VIEW; Schema: public; Owner: -
+-- TOC entry 248 (class 1259 OID 54217)
+-- Name: analise_mercadorias_forecast_grupo_filial; Type: MATERIALIZED VIEW; Schema: public; Owner: systock
 --
 
 CREATE MATERIALIZED VIEW public.analise_mercadorias_forecast_grupo_filial AS
@@ -27539,8 +29057,11 @@ CREATE MATERIALIZED VIEW public.analise_mercadorias_forecast_grupo_filial AS
   WITH NO DATA;
 
 
+ALTER MATERIALIZED VIEW public.analise_mercadorias_forecast_grupo_filial OWNER TO systock;
+
 --
--- Name: analise_mercadorias_transito_grupo; Type: MATERIALIZED VIEW; Schema: public; Owner: -
+-- TOC entry 249 (class 1259 OID 54224)
+-- Name: analise_mercadorias_transito_grupo; Type: MATERIALIZED VIEW; Schema: public; Owner: systock
 --
 
 CREATE MATERIALIZED VIEW public.analise_mercadorias_transito_grupo AS
@@ -27692,8 +29213,11 @@ END AS "case"
   WITH NO DATA;
 
 
+ALTER MATERIALIZED VIEW public.analise_mercadorias_transito_grupo OWNER TO systock;
+
 --
--- Name: analise_mercadorias_transito_grupo_filial; Type: MATERIALIZED VIEW; Schema: public; Owner: -
+-- TOC entry 250 (class 1259 OID 54231)
+-- Name: analise_mercadorias_transito_grupo_filial; Type: MATERIALIZED VIEW; Schema: public; Owner: systock
 --
 
 CREATE MATERIALIZED VIEW public.analise_mercadorias_transito_grupo_filial AS
@@ -27847,8 +29371,11 @@ END AS "case"
   WITH NO DATA;
 
 
+ALTER MATERIALIZED VIEW public.analise_mercadorias_transito_grupo_filial OWNER TO systock;
+
 --
--- Name: categorias_mp_pa; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 251 (class 1259 OID 54238)
+-- Name: categorias_mp_pa; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.categorias_mp_pa (
@@ -27863,8 +29390,11 @@ CREATE TABLE public.categorias_mp_pa (
 );
 
 
+ALTER TABLE public.categorias_mp_pa OWNER TO systock;
+
 --
--- Name: produtos_categoria_mp_pa; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 252 (class 1259 OID 54247)
+-- Name: produtos_categoria_mp_pa; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.produtos_categoria_mp_pa (
@@ -27874,8 +29404,11 @@ CREATE TABLE public.produtos_categoria_mp_pa (
 );
 
 
+ALTER TABLE public.produtos_categoria_mp_pa OWNER TO systock;
+
 --
--- Name: produtos_compras_grupo; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 253 (class 1259 OID 54250)
+-- Name: produtos_compras_grupo; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.produtos_compras_grupo (
@@ -27955,8 +29488,20 @@ CREATE TABLE public.produtos_compras_grupo (
 );
 
 
+ALTER TABLE public.produtos_compras_grupo OWNER TO systock;
+
 --
--- Name: analise_movimentacoes_categoria_mp_pa; Type: MATERIALIZED VIEW; Schema: public; Owner: -
+-- TOC entry 6393 (class 0 OID 0)
+-- Dependencies: 253
+-- Name: COLUMN produtos_compras_grupo.estoque_pendente; Type: COMMENT; Schema: public; Owner: systock
+--
+
+COMMENT ON COLUMN public.produtos_compras_grupo.estoque_pendente IS 'Saldo de venda futura';
+
+
+--
+-- TOC entry 254 (class 1259 OID 54263)
+-- Name: analise_movimentacoes_categoria_mp_pa; Type: MATERIALIZED VIEW; Schema: public; Owner: systock
 --
 
 CREATE MATERIALIZED VIEW public.analise_movimentacoes_categoria_mp_pa AS
@@ -28020,8 +29565,11 @@ UNION ALL
   WITH NO DATA;
 
 
+ALTER MATERIALIZED VIEW public.analise_movimentacoes_categoria_mp_pa OWNER TO systock;
+
 --
--- Name: analise_movimentacoes_departamentos_grupos; Type: MATERIALIZED VIEW; Schema: public; Owner: -
+-- TOC entry 255 (class 1259 OID 54270)
+-- Name: analise_movimentacoes_departamentos_grupos; Type: MATERIALIZED VIEW; Schema: public; Owner: systock
 --
 
 CREATE MATERIALIZED VIEW public.analise_movimentacoes_departamentos_grupos AS
@@ -28078,8 +29626,11 @@ UNION ALL
   WITH NO DATA;
 
 
+ALTER MATERIALIZED VIEW public.analise_movimentacoes_departamentos_grupos OWNER TO systock;
+
 --
--- Name: analise_movimentacoes_grupos; Type: MATERIALIZED VIEW; Schema: public; Owner: -
+-- TOC entry 256 (class 1259 OID 54277)
+-- Name: analise_movimentacoes_grupos; Type: MATERIALIZED VIEW; Schema: public; Owner: systock
 --
 
 CREATE MATERIALIZED VIEW public.analise_movimentacoes_grupos AS
@@ -28127,8 +29678,11 @@ UNION ALL
   WITH NO DATA;
 
 
+ALTER MATERIALIZED VIEW public.analise_movimentacoes_grupos OWNER TO systock;
+
 --
--- Name: analise_movimentacoes_grupos_filial; Type: MATERIALIZED VIEW; Schema: public; Owner: -
+-- TOC entry 257 (class 1259 OID 54284)
+-- Name: analise_movimentacoes_grupos_filial; Type: MATERIALIZED VIEW; Schema: public; Owner: systock
 --
 
 CREATE MATERIALIZED VIEW public.analise_movimentacoes_grupos_filial AS
@@ -28179,8 +29733,11 @@ UNION ALL
   WITH NO DATA;
 
 
+ALTER MATERIALIZED VIEW public.analise_movimentacoes_grupos_filial OWNER TO systock;
+
 --
--- Name: analise_movimentacoes_grupos_fornecedor_comprador; Type: MATERIALIZED VIEW; Schema: public; Owner: -
+-- TOC entry 553 (class 1259 OID 84275)
+-- Name: analise_movimentacoes_grupos_fornecedor_comprador; Type: MATERIALIZED VIEW; Schema: public; Owner: systock
 --
 
 CREATE MATERIALIZED VIEW public.analise_movimentacoes_grupos_fornecedor_comprador AS
@@ -28231,8 +29788,11 @@ UNION ALL
   WITH NO DATA;
 
 
+ALTER MATERIALIZED VIEW public.analise_movimentacoes_grupos_fornecedor_comprador OWNER TO systock;
+
 --
--- Name: analise_movimentacoes_produtos_filial; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 258 (class 1259 OID 54291)
+-- Name: analise_movimentacoes_produtos_filial; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.analise_movimentacoes_produtos_filial (
@@ -28250,8 +29810,11 @@ CREATE TABLE public.analise_movimentacoes_produtos_filial (
 );
 
 
+ALTER TABLE public.analise_movimentacoes_produtos_filial OWNER TO systock;
+
 --
--- Name: analise_oportunidade_vendas_grupo; Type: MATERIALIZED VIEW; Schema: public; Owner: -
+-- TOC entry 259 (class 1259 OID 54296)
+-- Name: analise_oportunidade_vendas_grupo; Type: MATERIALIZED VIEW; Schema: public; Owner: systock
 --
 
 CREATE MATERIALIZED VIEW public.analise_oportunidade_vendas_grupo AS
@@ -28332,8 +29895,11 @@ CREATE MATERIALIZED VIEW public.analise_oportunidade_vendas_grupo AS
   WITH NO DATA;
 
 
+ALTER MATERIALIZED VIEW public.analise_oportunidade_vendas_grupo OWNER TO systock;
+
 --
--- Name: analise_percepcao_compras_grupos; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 260 (class 1259 OID 54303)
+-- Name: analise_percepcao_compras_grupos; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.analise_percepcao_compras_grupos (
@@ -28369,8 +29935,11 @@ CREATE TABLE public.analise_percepcao_compras_grupos (
 );
 
 
+ALTER TABLE public.analise_percepcao_compras_grupos OWNER TO systock;
+
 --
--- Name: analise_percepcao_compras_grupos_tmp; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 261 (class 1259 OID 54310)
+-- Name: analise_percepcao_compras_grupos_tmp; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.analise_percepcao_compras_grupos_tmp (
@@ -28403,8 +29972,11 @@ CREATE TABLE public.analise_percepcao_compras_grupos_tmp (
 );
 
 
+ALTER TABLE public.analise_percepcao_compras_grupos_tmp OWNER TO systock;
+
 --
--- Name: analise_produtos_abc; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 262 (class 1259 OID 54315)
+-- Name: analise_produtos_abc; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.analise_produtos_abc (
@@ -28439,8 +30011,11 @@ CREATE TABLE public.analise_produtos_abc (
 );
 
 
+ALTER TABLE public.analise_produtos_abc OWNER TO systock;
+
 --
--- Name: analise_produtos_comprador; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 263 (class 1259 OID 54334)
+-- Name: analise_produtos_comprador; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.analise_produtos_comprador (
@@ -28466,8 +30041,11 @@ CREATE TABLE public.analise_produtos_comprador (
 );
 
 
+ALTER TABLE public.analise_produtos_comprador OWNER TO systock;
+
 --
--- Name: analise_produtos_comprador_grupo; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 264 (class 1259 OID 54339)
+-- Name: analise_produtos_comprador_grupo; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.analise_produtos_comprador_grupo (
@@ -28496,8 +30074,11 @@ CREATE TABLE public.analise_produtos_comprador_grupo (
 );
 
 
+ALTER TABLE public.analise_produtos_comprador_grupo OWNER TO systock;
+
 --
--- Name: vw_produtos_tempo_ressuprimento; Type: VIEW; Schema: public; Owner: -
+-- TOC entry 265 (class 1259 OID 54360)
+-- Name: vw_produtos_tempo_ressuprimento; Type: VIEW; Schema: public; Owner: systock
 --
 
 CREATE VIEW public.vw_produtos_tempo_ressuprimento AS
@@ -28522,8 +30103,11 @@ CREATE VIEW public.vw_produtos_tempo_ressuprimento AS
   GROUP BY filial, idproduto;
 
 
+ALTER VIEW public.vw_produtos_tempo_ressuprimento OWNER TO systock;
+
 --
--- Name: vw_requisicoes; Type: VIEW; Schema: public; Owner: -
+-- TOC entry 266 (class 1259 OID 54365)
+-- Name: vw_requisicoes; Type: VIEW; Schema: public; Owner: systock
 --
 
 CREATE VIEW public.vw_requisicoes AS
@@ -28568,8 +30152,11 @@ CREATE VIEW public.vw_requisicoes AS
   ORDER BY requisicoes.id_solicitacao, requisicoes.data_solicitacao;
 
 
+ALTER VIEW public.vw_requisicoes OWNER TO systock;
+
 --
--- Name: analise_requisicoes; Type: MATERIALIZED VIEW; Schema: public; Owner: -
+-- TOC entry 267 (class 1259 OID 54370)
+-- Name: analise_requisicoes; Type: MATERIALIZED VIEW; Schema: public; Owner: systock
 --
 
 CREATE MATERIALIZED VIEW public.analise_requisicoes AS
@@ -28603,8 +30190,11 @@ CREATE MATERIALIZED VIEW public.analise_requisicoes AS
   WITH NO DATA;
 
 
+ALTER MATERIALIZED VIEW public.analise_requisicoes OWNER TO systock;
+
 --
--- Name: analise_rupturas_produtos_filial; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 268 (class 1259 OID 54377)
+-- Name: analise_rupturas_produtos_filial; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.analise_rupturas_produtos_filial (
@@ -28626,8 +30216,11 @@ CREATE TABLE public.analise_rupturas_produtos_filial (
 );
 
 
+ALTER TABLE public.analise_rupturas_produtos_filial OWNER TO systock;
+
 --
--- Name: analise_statistica_produtos; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 269 (class 1259 OID 54382)
+-- Name: analise_statistica_produtos; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.analise_statistica_produtos (
@@ -28641,8 +30234,11 @@ CREATE TABLE public.analise_statistica_produtos (
 );
 
 
+ALTER TABLE public.analise_statistica_produtos OWNER TO systock;
+
 --
--- Name: analise_status_mensal; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 270 (class 1259 OID 54385)
+-- Name: analise_status_mensal; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.analise_status_mensal (
@@ -28666,8 +30262,11 @@ CREATE TABLE public.analise_status_mensal (
 );
 
 
+ALTER TABLE public.analise_status_mensal OWNER TO systock;
+
 --
--- Name: analise_status_mensal_filial; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 271 (class 1259 OID 54391)
+-- Name: analise_status_mensal_filial; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.analise_status_mensal_filial (
@@ -28696,8 +30295,11 @@ CREATE TABLE public.analise_status_mensal_filial (
 );
 
 
+ALTER TABLE public.analise_status_mensal_filial OWNER TO systock;
+
 --
--- Name: analise_status_mensal_filial_analitica; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 272 (class 1259 OID 54399)
+-- Name: analise_status_mensal_filial_analitica; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.analise_status_mensal_filial_analitica (
@@ -28729,8 +30331,11 @@ CREATE TABLE public.analise_status_mensal_filial_analitica (
 WITH (autovacuum_vacuum_scale_factor='0.41936');
 
 
+ALTER TABLE public.analise_status_mensal_filial_analitica OWNER TO systock;
+
 --
--- Name: aplicativos_idaplicativo_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 273 (class 1259 OID 54404)
+-- Name: aplicativos_idaplicativo_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.aplicativos_idaplicativo_seq
@@ -28741,8 +30346,11 @@ CREATE SEQUENCE public.aplicativos_idaplicativo_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.aplicativos_idaplicativo_seq OWNER TO postgres;
+
 --
--- Name: aplicativos; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 274 (class 1259 OID 54405)
+-- Name: aplicativos; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.aplicativos (
@@ -28755,8 +30363,11 @@ CREATE TABLE public.aplicativos (
 );
 
 
+ALTER TABLE public.aplicativos OWNER TO postgres;
+
 --
--- Name: aplicativos_perfil; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 275 (class 1259 OID 54411)
+-- Name: aplicativos_perfil; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.aplicativos_perfil (
@@ -28769,8 +30380,11 @@ CREATE TABLE public.aplicativos_perfil (
 );
 
 
+ALTER TABLE public.aplicativos_perfil OWNER TO postgres;
+
 --
--- Name: aplicativos_sistemas; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 276 (class 1259 OID 54418)
+-- Name: aplicativos_sistemas; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.aplicativos_sistemas (
@@ -28779,8 +30393,11 @@ CREATE TABLE public.aplicativos_sistemas (
 );
 
 
+ALTER TABLE public.aplicativos_sistemas OWNER TO systock;
+
 --
--- Name: area_responsavel_idarea_responsavel_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 277 (class 1259 OID 54421)
+-- Name: area_responsavel_idarea_responsavel_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.area_responsavel_idarea_responsavel_seq
@@ -28791,8 +30408,11 @@ CREATE SEQUENCE public.area_responsavel_idarea_responsavel_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.area_responsavel_idarea_responsavel_seq OWNER TO postgres;
+
 --
--- Name: area_responsavel; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 278 (class 1259 OID 54422)
+-- Name: area_responsavel; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.area_responsavel (
@@ -28802,8 +30422,11 @@ CREATE TABLE public.area_responsavel (
 );
 
 
+ALTER TABLE public.area_responsavel OWNER TO postgres;
+
 --
--- Name: arvore_decisao_idarvore_decisao_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 279 (class 1259 OID 54426)
+-- Name: arvore_decisao_idarvore_decisao_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.arvore_decisao_idarvore_decisao_seq
@@ -28814,8 +30437,11 @@ CREATE SEQUENCE public.arvore_decisao_idarvore_decisao_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.arvore_decisao_idarvore_decisao_seq OWNER TO postgres;
+
 --
--- Name: arvore_decisao; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 280 (class 1259 OID 54427)
+-- Name: arvore_decisao; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.arvore_decisao (
@@ -28826,8 +30452,11 @@ CREATE TABLE public.arvore_decisao (
 );
 
 
+ALTER TABLE public.arvore_decisao OWNER TO postgres;
+
 --
--- Name: avaria_produtos; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 548 (class 1259 OID 84209)
+-- Name: avaria_produtos; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.avaria_produtos (
@@ -28843,8 +30472,11 @@ CREATE TABLE public.avaria_produtos (
 );
 
 
+ALTER TABLE public.avaria_produtos OWNER TO systock;
+
 --
--- Name: capa_listas_preco; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 281 (class 1259 OID 54431)
+-- Name: capa_listas_preco; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.capa_listas_preco (
@@ -28857,8 +30489,11 @@ CREATE TABLE public.capa_listas_preco (
 );
 
 
+ALTER TABLE public.capa_listas_preco OWNER TO systock;
+
 --
--- Name: capa_listas_preco_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 282 (class 1259 OID 54435)
+-- Name: capa_listas_preco_id_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.capa_listas_preco_id_seq
@@ -28870,15 +30505,20 @@ CREATE SEQUENCE public.capa_listas_preco_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.capa_listas_preco_id_seq OWNER TO systock;
+
 --
--- Name: capa_listas_preco_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6394 (class 0 OID 0)
+-- Dependencies: 282
+-- Name: capa_listas_preco_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.capa_listas_preco_id_seq OWNED BY public.capa_listas_preco.id;
 
 
 --
--- Name: categorias; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 283 (class 1259 OID 54436)
+-- Name: categorias; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.categorias (
@@ -28889,8 +30529,11 @@ CREATE TABLE public.categorias (
 );
 
 
+ALTER TABLE public.categorias OWNER TO systock;
+
 --
--- Name: categorias_distribuicao_filial; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 284 (class 1259 OID 54439)
+-- Name: categorias_distribuicao_filial; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.categorias_distribuicao_filial (
@@ -28901,8 +30544,11 @@ CREATE TABLE public.categorias_distribuicao_filial (
 );
 
 
+ALTER TABLE public.categorias_distribuicao_filial OWNER TO systock;
+
 --
--- Name: categorias_distribuicao_filial_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 285 (class 1259 OID 54443)
+-- Name: categorias_distribuicao_filial_id_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.categorias_distribuicao_filial_id_seq
@@ -28914,15 +30560,20 @@ CREATE SEQUENCE public.categorias_distribuicao_filial_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.categorias_distribuicao_filial_id_seq OWNER TO systock;
+
 --
--- Name: categorias_distribuicao_filial_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6395 (class 0 OID 0)
+-- Dependencies: 285
+-- Name: categorias_distribuicao_filial_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.categorias_distribuicao_filial_id_seq OWNED BY public.categorias_distribuicao_filial.id;
 
 
 --
--- Name: categorias_idcategoria_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 286 (class 1259 OID 54444)
+-- Name: categorias_idcategoria_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.categorias_idcategoria_seq
@@ -28934,15 +30585,20 @@ CREATE SEQUENCE public.categorias_idcategoria_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.categorias_idcategoria_seq OWNER TO systock;
+
 --
--- Name: categorias_idcategoria_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6396 (class 0 OID 0)
+-- Dependencies: 286
+-- Name: categorias_idcategoria_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.categorias_idcategoria_seq OWNED BY public.categorias.idcategoria;
 
 
 --
--- Name: categorias_mp_pa_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 287 (class 1259 OID 54445)
+-- Name: categorias_mp_pa_id_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.categorias_mp_pa_id_seq
@@ -28954,15 +30610,20 @@ CREATE SEQUENCE public.categorias_mp_pa_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.categorias_mp_pa_id_seq OWNER TO systock;
+
 --
--- Name: categorias_mp_pa_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6397 (class 0 OID 0)
+-- Dependencies: 287
+-- Name: categorias_mp_pa_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.categorias_mp_pa_id_seq OWNED BY public.categorias_mp_pa.id;
 
 
 --
--- Name: centro_custos_idcentro_custo_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 288 (class 1259 OID 54446)
+-- Name: centro_custos_idcentro_custo_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.centro_custos_idcentro_custo_seq
@@ -28973,8 +30634,11 @@ CREATE SEQUENCE public.centro_custos_idcentro_custo_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.centro_custos_idcentro_custo_seq OWNER TO postgres;
+
 --
--- Name: centro_custos; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 289 (class 1259 OID 54447)
+-- Name: centro_custos; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.centro_custos (
@@ -28985,8 +30649,11 @@ CREATE TABLE public.centro_custos (
 );
 
 
+ALTER TABLE public.centro_custos OWNER TO postgres;
+
 --
--- Name: cfg_produto_distribuicao; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 290 (class 1259 OID 54451)
+-- Name: cfg_produto_distribuicao; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.cfg_produto_distribuicao (
@@ -29003,8 +30670,11 @@ CREATE TABLE public.cfg_produto_distribuicao (
 );
 
 
+ALTER TABLE public.cfg_produto_distribuicao OWNER TO systock;
+
 --
--- Name: cfgsystem; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 291 (class 1259 OID 54455)
+-- Name: cfgsystem; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.cfgsystem (
@@ -29119,8 +30789,38 @@ CREATE TABLE public.cfgsystem (
 );
 
 
+ALTER TABLE public.cfgsystem OWNER TO systock;
+
 --
--- Name: cfgsystem_atualizacoes; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 6398 (class 0 OID 0)
+-- Dependencies: 291
+-- Name: COLUMN cfgsystem.tipo_drp; Type: COMMENT; Schema: public; Owner: systock
+--
+
+COMMENT ON COLUMN public.cfgsystem.tipo_drp IS '1 - Esseg, 2 - Cmm, 3 - Cmm ou porcentagem(Cmm para loja e 5% do cmm quando por filial CD), 4 - Estoque estetico, 5 - Quem for maior entre o esseg e estoque estetico';
+
+
+--
+-- TOC entry 6399 (class 0 OID 0)
+-- Dependencies: 291
+-- Name: COLUMN cfgsystem.ativar_mix_produto; Type: COMMENT; Schema: public; Owner: systock
+--
+
+COMMENT ON COLUMN public.cfgsystem.ativar_mix_produto IS 'S - na tela de multifilial só será exibido produto nas filiais contidas na tebal cfg_produto_distribuicao, N - na tela de multifilial será exibido todas as filiais';
+
+
+--
+-- TOC entry 6400 (class 0 OID 0)
+-- Dependencies: 291
+-- Name: COLUMN cfgsystem.tipo_de_calculo; Type: COMMENT; Schema: public; Owner: systock
+--
+
+COMMENT ON COLUMN public.cfgsystem.tipo_de_calculo IS '1 - SYTOCK, 2 - WERMON(QUEIROZ)';
+
+
+--
+-- TOC entry 292 (class 1259 OID 54524)
+-- Name: cfgsystem_atualizacoes; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.cfgsystem_atualizacoes (
@@ -29135,8 +30835,11 @@ CREATE TABLE public.cfgsystem_atualizacoes (
 );
 
 
+ALTER TABLE public.cfgsystem_atualizacoes OWNER TO systock;
+
 --
--- Name: cfgsystem_atualizacoes_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 293 (class 1259 OID 54529)
+-- Name: cfgsystem_atualizacoes_id_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.cfgsystem_atualizacoes_id_seq
@@ -29147,15 +30850,20 @@ CREATE SEQUENCE public.cfgsystem_atualizacoes_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.cfgsystem_atualizacoes_id_seq OWNER TO systock;
+
 --
--- Name: cfgsystem_atualizacoes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6401 (class 0 OID 0)
+-- Dependencies: 293
+-- Name: cfgsystem_atualizacoes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.cfgsystem_atualizacoes_id_seq OWNED BY public.cfgsystem_atualizacoes.id;
 
 
 --
--- Name: cfgsystem_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 294 (class 1259 OID 54530)
+-- Name: cfgsystem_id_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.cfgsystem_id_seq
@@ -29166,15 +30874,20 @@ CREATE SEQUENCE public.cfgsystem_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.cfgsystem_id_seq OWNER TO systock;
+
 --
--- Name: cfgsystem_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6402 (class 0 OID 0)
+-- Dependencies: 294
+-- Name: cfgsystem_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.cfgsystem_id_seq OWNED BY public.cfgsystem.id;
 
 
 --
--- Name: colaboradores_idcolaborador_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 295 (class 1259 OID 54531)
+-- Name: colaboradores_idcolaborador_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.colaboradores_idcolaborador_seq
@@ -29185,8 +30898,11 @@ CREATE SEQUENCE public.colaboradores_idcolaborador_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.colaboradores_idcolaborador_seq OWNER TO postgres;
+
 --
--- Name: colaboradores; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 296 (class 1259 OID 54532)
+-- Name: colaboradores; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.colaboradores (
@@ -29197,8 +30913,11 @@ CREATE TABLE public.colaboradores (
 );
 
 
+ALTER TABLE public.colaboradores OWNER TO postgres;
+
 --
--- Name: compra_transito; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 297 (class 1259 OID 54536)
+-- Name: compra_transito; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.compra_transito (
@@ -29206,8 +30925,11 @@ CREATE TABLE public.compra_transito (
 );
 
 
+ALTER TABLE public.compra_transito OWNER TO systock;
+
 --
--- Name: compradores; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 298 (class 1259 OID 54539)
+-- Name: compradores; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.compradores (
@@ -29225,8 +30947,11 @@ CREATE TABLE public.compradores (
 );
 
 
+ALTER TABLE public.compradores OWNER TO systock;
+
 --
--- Name: condicao_pagto; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 299 (class 1259 OID 54544)
+-- Name: condicao_pagto; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.condicao_pagto (
@@ -29235,8 +30960,11 @@ CREATE TABLE public.condicao_pagto (
 );
 
 
+ALTER TABLE public.condicao_pagto OWNER TO systock;
+
 --
--- Name: config_notificacao_email; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 300 (class 1259 OID 54547)
+-- Name: config_notificacao_email; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.config_notificacao_email (
@@ -29250,8 +30978,11 @@ CREATE TABLE public.config_notificacao_email (
 );
 
 
+ALTER TABLE public.config_notificacao_email OWNER TO systock;
+
 --
--- Name: consumos_desconsiderados; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 301 (class 1259 OID 54551)
+-- Name: consumos_desconsiderados; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.consumos_desconsiderados (
@@ -29268,8 +30999,11 @@ CREATE TABLE public.consumos_desconsiderados (
 );
 
 
+ALTER TABLE public.consumos_desconsiderados OWNER TO systock;
+
 --
--- Name: cortes; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 302 (class 1259 OID 54554)
+-- Name: cortes; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.cortes (
@@ -29280,8 +31014,11 @@ CREATE TABLE public.cortes (
 );
 
 
+ALTER TABLE public.cortes OWNER TO systock;
+
 --
--- Name: cotacao_config; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 564 (class 1259 OID 84348)
+-- Name: cotacao_config; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.cotacao_config (
@@ -29293,8 +31030,11 @@ CREATE TABLE public.cotacao_config (
 );
 
 
+ALTER TABLE public.cotacao_config OWNER TO systock;
+
 --
--- Name: cotacao_config_cotacao_config_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 563 (class 1259 OID 84347)
+-- Name: cotacao_config_cotacao_config_id_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.cotacao_config_cotacao_config_id_seq
@@ -29306,15 +31046,20 @@ CREATE SEQUENCE public.cotacao_config_cotacao_config_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.cotacao_config_cotacao_config_id_seq OWNER TO systock;
+
 --
--- Name: cotacao_config_cotacao_config_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6403 (class 0 OID 0)
+-- Dependencies: 563
+-- Name: cotacao_config_cotacao_config_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.cotacao_config_cotacao_config_id_seq OWNED BY public.cotacao_config.cotacao_config_id;
 
 
 --
--- Name: cotacao_decisao; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 588 (class 1259 OID 84566)
+-- Name: cotacao_decisao; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.cotacao_decisao (
@@ -29323,8 +31068,11 @@ CREATE TABLE public.cotacao_decisao (
 );
 
 
+ALTER TABLE public.cotacao_decisao OWNER TO systock;
+
 --
--- Name: cotacao_decisao_cotacao_decisao_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 587 (class 1259 OID 84565)
+-- Name: cotacao_decisao_cotacao_decisao_id_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.cotacao_decisao_cotacao_decisao_id_seq
@@ -29336,15 +31084,20 @@ CREATE SEQUENCE public.cotacao_decisao_cotacao_decisao_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.cotacao_decisao_cotacao_decisao_id_seq OWNER TO systock;
+
 --
--- Name: cotacao_decisao_cotacao_decisao_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6404 (class 0 OID 0)
+-- Dependencies: 587
+-- Name: cotacao_decisao_cotacao_decisao_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.cotacao_decisao_cotacao_decisao_id_seq OWNED BY public.cotacao_decisao.cotacao_decisao_id;
 
 
 --
--- Name: cotacao_fornecedores; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 574 (class 1259 OID 84415)
+-- Name: cotacao_fornecedores; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.cotacao_fornecedores (
@@ -29354,8 +31107,11 @@ CREATE TABLE public.cotacao_fornecedores (
 );
 
 
+ALTER TABLE public.cotacao_fornecedores OWNER TO systock;
+
 --
--- Name: cotacao_fornecedores_cotacao_fornecedores_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 573 (class 1259 OID 84414)
+-- Name: cotacao_fornecedores_cotacao_fornecedores_id_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.cotacao_fornecedores_cotacao_fornecedores_id_seq
@@ -29367,15 +31123,20 @@ CREATE SEQUENCE public.cotacao_fornecedores_cotacao_fornecedores_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.cotacao_fornecedores_cotacao_fornecedores_id_seq OWNER TO systock;
+
 --
--- Name: cotacao_fornecedores_cotacao_fornecedores_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6405 (class 0 OID 0)
+-- Dependencies: 573
+-- Name: cotacao_fornecedores_cotacao_fornecedores_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.cotacao_fornecedores_cotacao_fornecedores_id_seq OWNED BY public.cotacao_fornecedores.cotacao_fornecedores_id;
 
 
 --
--- Name: cotacao_fornecedores_participantes; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 601 (class 1259 OID 84644)
+-- Name: cotacao_fornecedores_participantes; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.cotacao_fornecedores_participantes (
@@ -29399,8 +31160,11 @@ CREATE TABLE public.cotacao_fornecedores_participantes (
 );
 
 
+ALTER TABLE public.cotacao_fornecedores_participantes OWNER TO systock;
+
 --
--- Name: cotacao_fornecedores_particip_cotacao_fornecedores_particip_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 600 (class 1259 OID 84643)
+-- Name: cotacao_fornecedores_particip_cotacao_fornecedores_particip_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.cotacao_fornecedores_particip_cotacao_fornecedores_particip_seq
@@ -29412,15 +31176,20 @@ CREATE SEQUENCE public.cotacao_fornecedores_particip_cotacao_fornecedores_partic
     CACHE 1;
 
 
+ALTER SEQUENCE public.cotacao_fornecedores_particip_cotacao_fornecedores_particip_seq OWNER TO systock;
+
 --
--- Name: cotacao_fornecedores_particip_cotacao_fornecedores_particip_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6406 (class 0 OID 0)
+-- Dependencies: 600
+-- Name: cotacao_fornecedores_particip_cotacao_fornecedores_particip_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.cotacao_fornecedores_particip_cotacao_fornecedores_particip_seq OWNED BY public.cotacao_fornecedores_participantes.cotacao_fornecedores_participantes_id;
 
 
 --
--- Name: cotacao_integracao_erp; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 594 (class 1259 OID 84600)
+-- Name: cotacao_integracao_erp; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.cotacao_integracao_erp (
@@ -29429,8 +31198,11 @@ CREATE TABLE public.cotacao_integracao_erp (
 );
 
 
+ALTER TABLE public.cotacao_integracao_erp OWNER TO systock;
+
 --
--- Name: cotacao_integracao_erp_cotacao_integracao_erp_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 593 (class 1259 OID 84599)
+-- Name: cotacao_integracao_erp_cotacao_integracao_erp_id_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.cotacao_integracao_erp_cotacao_integracao_erp_id_seq
@@ -29442,15 +31214,20 @@ CREATE SEQUENCE public.cotacao_integracao_erp_cotacao_integracao_erp_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.cotacao_integracao_erp_cotacao_integracao_erp_id_seq OWNER TO systock;
+
 --
--- Name: cotacao_integracao_erp_cotacao_integracao_erp_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6407 (class 0 OID 0)
+-- Dependencies: 593
+-- Name: cotacao_integracao_erp_cotacao_integracao_erp_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.cotacao_integracao_erp_cotacao_integracao_erp_id_seq OWNED BY public.cotacao_integracao_erp.cotacao_integracao_erp_id;
 
 
 --
--- Name: cotacao_local_recebimento; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 566 (class 1259 OID 84360)
+-- Name: cotacao_local_recebimento; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.cotacao_local_recebimento (
@@ -29464,8 +31241,11 @@ CREATE TABLE public.cotacao_local_recebimento (
 );
 
 
+ALTER TABLE public.cotacao_local_recebimento OWNER TO systock;
+
 --
--- Name: cotacao_local_recebimento_cotacao_local_recebimento_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 565 (class 1259 OID 84359)
+-- Name: cotacao_local_recebimento_cotacao_local_recebimento_id_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.cotacao_local_recebimento_cotacao_local_recebimento_id_seq
@@ -29477,15 +31257,20 @@ CREATE SEQUENCE public.cotacao_local_recebimento_cotacao_local_recebimento_id_se
     CACHE 1;
 
 
+ALTER SEQUENCE public.cotacao_local_recebimento_cotacao_local_recebimento_id_seq OWNER TO systock;
+
 --
--- Name: cotacao_local_recebimento_cotacao_local_recebimento_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6408 (class 0 OID 0)
+-- Dependencies: 565
+-- Name: cotacao_local_recebimento_cotacao_local_recebimento_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.cotacao_local_recebimento_cotacao_local_recebimento_id_seq OWNED BY public.cotacao_local_recebimento.cotacao_local_recebimento_id;
 
 
 --
--- Name: cotacao_local_recebimento_dias; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 580 (class 1259 OID 84495)
+-- Name: cotacao_local_recebimento_dias; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.cotacao_local_recebimento_dias (
@@ -29495,8 +31280,11 @@ CREATE TABLE public.cotacao_local_recebimento_dias (
 );
 
 
+ALTER TABLE public.cotacao_local_recebimento_dias OWNER TO systock;
+
 --
--- Name: cotacao_local_recebimento_dia_cotacao_local_recebimento_dia_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 579 (class 1259 OID 84494)
+-- Name: cotacao_local_recebimento_dia_cotacao_local_recebimento_dia_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.cotacao_local_recebimento_dia_cotacao_local_recebimento_dia_seq
@@ -29508,15 +31296,20 @@ CREATE SEQUENCE public.cotacao_local_recebimento_dia_cotacao_local_recebimento_d
     CACHE 1;
 
 
+ALTER SEQUENCE public.cotacao_local_recebimento_dia_cotacao_local_recebimento_dia_seq OWNER TO systock;
+
 --
--- Name: cotacao_local_recebimento_dia_cotacao_local_recebimento_dia_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6409 (class 0 OID 0)
+-- Dependencies: 579
+-- Name: cotacao_local_recebimento_dia_cotacao_local_recebimento_dia_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.cotacao_local_recebimento_dia_cotacao_local_recebimento_dia_seq OWNED BY public.cotacao_local_recebimento_dias.cotacao_local_recebimento_dias_id;
 
 
 --
--- Name: cotacao_mensageria; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 596 (class 1259 OID 84612)
+-- Name: cotacao_mensageria; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.cotacao_mensageria (
@@ -29527,8 +31320,11 @@ CREATE TABLE public.cotacao_mensageria (
 );
 
 
+ALTER TABLE public.cotacao_mensageria OWNER TO systock;
+
 --
--- Name: cotacao_mensageria_cotacao_mensageria_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 595 (class 1259 OID 84611)
+-- Name: cotacao_mensageria_cotacao_mensageria_id_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.cotacao_mensageria_cotacao_mensageria_id_seq
@@ -29540,15 +31336,20 @@ CREATE SEQUENCE public.cotacao_mensageria_cotacao_mensageria_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.cotacao_mensageria_cotacao_mensageria_id_seq OWNER TO systock;
+
 --
--- Name: cotacao_mensageria_cotacao_mensageria_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6410 (class 0 OID 0)
+-- Dependencies: 595
+-- Name: cotacao_mensageria_cotacao_mensageria_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.cotacao_mensageria_cotacao_mensageria_id_seq OWNED BY public.cotacao_mensageria.cotacao_mensageria_id;
 
 
 --
--- Name: cotacao_notificacoes; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 578 (class 1259 OID 84463)
+-- Name: cotacao_notificacoes; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.cotacao_notificacoes (
@@ -29573,8 +31374,11 @@ CREATE TABLE public.cotacao_notificacoes (
 );
 
 
+ALTER TABLE public.cotacao_notificacoes OWNER TO systock;
+
 --
--- Name: cotacao_notificacoes_cotacao_notificacao_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 577 (class 1259 OID 84462)
+-- Name: cotacao_notificacoes_cotacao_notificacao_id_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.cotacao_notificacoes_cotacao_notificacao_id_seq
@@ -29586,15 +31390,20 @@ CREATE SEQUENCE public.cotacao_notificacoes_cotacao_notificacao_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.cotacao_notificacoes_cotacao_notificacao_id_seq OWNER TO systock;
+
 --
--- Name: cotacao_notificacoes_cotacao_notificacao_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6411 (class 0 OID 0)
+-- Dependencies: 577
+-- Name: cotacao_notificacoes_cotacao_notificacao_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.cotacao_notificacoes_cotacao_notificacao_id_seq OWNED BY public.cotacao_notificacoes.cotacao_notificacao_id;
 
 
 --
--- Name: cotacao_participacao_fornecedor; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 592 (class 1259 OID 84593)
+-- Name: cotacao_participacao_fornecedor; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.cotacao_participacao_fornecedor (
@@ -29603,8 +31412,11 @@ CREATE TABLE public.cotacao_participacao_fornecedor (
 );
 
 
+ALTER TABLE public.cotacao_participacao_fornecedor OWNER TO systock;
+
 --
--- Name: cotacao_participacao_forneced_cotacao_participacao_forneced_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 591 (class 1259 OID 84592)
+-- Name: cotacao_participacao_forneced_cotacao_participacao_forneced_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.cotacao_participacao_forneced_cotacao_participacao_forneced_seq
@@ -29616,15 +31428,20 @@ CREATE SEQUENCE public.cotacao_participacao_forneced_cotacao_participacao_fornec
     CACHE 1;
 
 
+ALTER SEQUENCE public.cotacao_participacao_forneced_cotacao_participacao_forneced_seq OWNER TO systock;
+
 --
--- Name: cotacao_participacao_forneced_cotacao_participacao_forneced_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6412 (class 0 OID 0)
+-- Dependencies: 591
+-- Name: cotacao_participacao_forneced_cotacao_participacao_forneced_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.cotacao_participacao_forneced_cotacao_participacao_forneced_seq OWNED BY public.cotacao_participacao_fornecedor.cotacao_participacao_fornecedor_id;
 
 
 --
--- Name: cotacao_pedidos; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 562 (class 1259 OID 84336)
+-- Name: cotacao_pedidos; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.cotacao_pedidos (
@@ -29634,8 +31451,11 @@ CREATE TABLE public.cotacao_pedidos (
 );
 
 
+ALTER TABLE public.cotacao_pedidos OWNER TO systock;
+
 --
--- Name: cotacao_pedidos_cotacao_pedidos_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 561 (class 1259 OID 84335)
+-- Name: cotacao_pedidos_cotacao_pedidos_id_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.cotacao_pedidos_cotacao_pedidos_id_seq
@@ -29647,15 +31467,20 @@ CREATE SEQUENCE public.cotacao_pedidos_cotacao_pedidos_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.cotacao_pedidos_cotacao_pedidos_id_seq OWNER TO systock;
+
 --
--- Name: cotacao_pedidos_cotacao_pedidos_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6413 (class 0 OID 0)
+-- Dependencies: 561
+-- Name: cotacao_pedidos_cotacao_pedidos_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.cotacao_pedidos_cotacao_pedidos_id_seq OWNED BY public.cotacao_pedidos.cotacao_pedidos_id;
 
 
 --
--- Name: cotacao_produtos; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 568 (class 1259 OID 84377)
+-- Name: cotacao_produtos; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.cotacao_produtos (
@@ -29676,8 +31501,11 @@ CREATE TABLE public.cotacao_produtos (
 );
 
 
+ALTER TABLE public.cotacao_produtos OWNER TO systock;
+
 --
--- Name: cotacao_produtos_cotacao_produtos_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 567 (class 1259 OID 84376)
+-- Name: cotacao_produtos_cotacao_produtos_id_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.cotacao_produtos_cotacao_produtos_id_seq
@@ -29689,15 +31517,20 @@ CREATE SEQUENCE public.cotacao_produtos_cotacao_produtos_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.cotacao_produtos_cotacao_produtos_id_seq OWNER TO systock;
+
 --
--- Name: cotacao_produtos_cotacao_produtos_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6414 (class 0 OID 0)
+-- Dependencies: 567
+-- Name: cotacao_produtos_cotacao_produtos_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.cotacao_produtos_cotacao_produtos_id_seq OWNED BY public.cotacao_produtos.cotacao_produtos_id;
 
 
 --
--- Name: cotacao_representante_fornecedor; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 576 (class 1259 OID 84432)
+-- Name: cotacao_representante_fornecedor; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.cotacao_representante_fornecedor (
@@ -29710,8 +31543,11 @@ CREATE TABLE public.cotacao_representante_fornecedor (
 );
 
 
+ALTER TABLE public.cotacao_representante_fornecedor OWNER TO systock;
+
 --
--- Name: cotacao_representante_fornece_cotacao_representante_fornece_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 575 (class 1259 OID 84431)
+-- Name: cotacao_representante_fornece_cotacao_representante_fornece_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.cotacao_representante_fornece_cotacao_representante_fornece_seq
@@ -29723,15 +31559,20 @@ CREATE SEQUENCE public.cotacao_representante_fornece_cotacao_representante_forne
     CACHE 1;
 
 
+ALTER SEQUENCE public.cotacao_representante_fornece_cotacao_representante_fornece_seq OWNER TO systock;
+
 --
--- Name: cotacao_representante_fornece_cotacao_representante_fornece_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6415 (class 0 OID 0)
+-- Dependencies: 575
+-- Name: cotacao_representante_fornece_cotacao_representante_fornece_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.cotacao_representante_fornece_cotacao_representante_fornece_seq OWNED BY public.cotacao_representante_fornecedor.cotacao_representante_fornecedor_id;
 
 
 --
--- Name: cotacao_representante_participacao; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 582 (class 1259 OID 84515)
+-- Name: cotacao_representante_participacao; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.cotacao_representante_participacao (
@@ -29742,8 +31583,11 @@ CREATE TABLE public.cotacao_representante_participacao (
 );
 
 
+ALTER TABLE public.cotacao_representante_participacao OWNER TO systock;
+
 --
--- Name: cotacao_representante_partici_cotacao_representante_partici_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 581 (class 1259 OID 84514)
+-- Name: cotacao_representante_partici_cotacao_representante_partici_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.cotacao_representante_partici_cotacao_representante_partici_seq
@@ -29755,15 +31599,20 @@ CREATE SEQUENCE public.cotacao_representante_partici_cotacao_representante_parti
     CACHE 1;
 
 
+ALTER SEQUENCE public.cotacao_representante_partici_cotacao_representante_partici_seq OWNER TO systock;
+
 --
--- Name: cotacao_representante_partici_cotacao_representante_partici_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6416 (class 0 OID 0)
+-- Dependencies: 581
+-- Name: cotacao_representante_partici_cotacao_representante_partici_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.cotacao_representante_partici_cotacao_representante_partici_seq OWNED BY public.cotacao_representante_participacao.cotacao_representante_participacao_id;
 
 
 --
--- Name: cotacao_responsavel; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 572 (class 1259 OID 84398)
+-- Name: cotacao_responsavel; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.cotacao_responsavel (
@@ -29774,8 +31623,11 @@ CREATE TABLE public.cotacao_responsavel (
 );
 
 
+ALTER TABLE public.cotacao_responsavel OWNER TO systock;
+
 --
--- Name: cotacao_responsavel_cotacao_responsavel_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 571 (class 1259 OID 84397)
+-- Name: cotacao_responsavel_cotacao_responsavel_id_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.cotacao_responsavel_cotacao_responsavel_id_seq
@@ -29787,15 +31639,20 @@ CREATE SEQUENCE public.cotacao_responsavel_cotacao_responsavel_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.cotacao_responsavel_cotacao_responsavel_id_seq OWNER TO systock;
+
 --
--- Name: cotacao_responsavel_cotacao_responsavel_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6417 (class 0 OID 0)
+-- Dependencies: 571
+-- Name: cotacao_responsavel_cotacao_responsavel_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.cotacao_responsavel_cotacao_responsavel_id_seq OWNED BY public.cotacao_responsavel.cotacao_responsavel_id;
 
 
 --
--- Name: cotacao_seguidores; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 570 (class 1259 OID 84389)
+-- Name: cotacao_seguidores; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.cotacao_seguidores (
@@ -29806,8 +31663,11 @@ CREATE TABLE public.cotacao_seguidores (
 );
 
 
+ALTER TABLE public.cotacao_seguidores OWNER TO systock;
+
 --
--- Name: cotacao_seguidores_cotacao_seguidores_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 569 (class 1259 OID 84388)
+-- Name: cotacao_seguidores_cotacao_seguidores_id_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.cotacao_seguidores_cotacao_seguidores_id_seq
@@ -29819,15 +31679,20 @@ CREATE SEQUENCE public.cotacao_seguidores_cotacao_seguidores_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.cotacao_seguidores_cotacao_seguidores_id_seq OWNER TO systock;
+
 --
--- Name: cotacao_seguidores_cotacao_seguidores_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6418 (class 0 OID 0)
+-- Dependencies: 569
+-- Name: cotacao_seguidores_cotacao_seguidores_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.cotacao_seguidores_cotacao_seguidores_id_seq OWNED BY public.cotacao_seguidores.cotacao_seguidores_id;
 
 
 --
--- Name: cotacao_seguidores_favoritos; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 584 (class 1259 OID 84541)
+-- Name: cotacao_seguidores_favoritos; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.cotacao_seguidores_favoritos (
@@ -29836,8 +31701,11 @@ CREATE TABLE public.cotacao_seguidores_favoritos (
 );
 
 
+ALTER TABLE public.cotacao_seguidores_favoritos OWNER TO systock;
+
 --
--- Name: cotacao_seguidores_favoritos_cotacao_seguidores_favoritos_i_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 583 (class 1259 OID 84540)
+-- Name: cotacao_seguidores_favoritos_cotacao_seguidores_favoritos_i_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.cotacao_seguidores_favoritos_cotacao_seguidores_favoritos_i_seq
@@ -29849,15 +31717,20 @@ CREATE SEQUENCE public.cotacao_seguidores_favoritos_cotacao_seguidores_favoritos
     CACHE 1;
 
 
+ALTER SEQUENCE public.cotacao_seguidores_favoritos_cotacao_seguidores_favoritos_i_seq OWNER TO systock;
+
 --
--- Name: cotacao_seguidores_favoritos_cotacao_seguidores_favoritos_i_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6419 (class 0 OID 0)
+-- Dependencies: 583
+-- Name: cotacao_seguidores_favoritos_cotacao_seguidores_favoritos_i_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.cotacao_seguidores_favoritos_cotacao_seguidores_favoritos_i_seq OWNED BY public.cotacao_seguidores_favoritos.cotacao_seguidores_favoritos_id;
 
 
 --
--- Name: cotacao_situacao_pedidos; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 590 (class 1259 OID 84578)
+-- Name: cotacao_situacao_pedidos; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.cotacao_situacao_pedidos (
@@ -29866,8 +31739,11 @@ CREATE TABLE public.cotacao_situacao_pedidos (
 );
 
 
+ALTER TABLE public.cotacao_situacao_pedidos OWNER TO systock;
+
 --
--- Name: cotacao_situacao_pedidos_cotacao_situacao_pedidos_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 589 (class 1259 OID 84577)
+-- Name: cotacao_situacao_pedidos_cotacao_situacao_pedidos_id_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.cotacao_situacao_pedidos_cotacao_situacao_pedidos_id_seq
@@ -29879,15 +31755,20 @@ CREATE SEQUENCE public.cotacao_situacao_pedidos_cotacao_situacao_pedidos_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.cotacao_situacao_pedidos_cotacao_situacao_pedidos_id_seq OWNER TO systock;
+
 --
--- Name: cotacao_situacao_pedidos_cotacao_situacao_pedidos_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6420 (class 0 OID 0)
+-- Dependencies: 589
+-- Name: cotacao_situacao_pedidos_cotacao_situacao_pedidos_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.cotacao_situacao_pedidos_cotacao_situacao_pedidos_id_seq OWNED BY public.cotacao_situacao_pedidos.cotacao_situacao_pedidos_id;
 
 
 --
--- Name: cotacao_status; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 586 (class 1259 OID 84554)
+-- Name: cotacao_status; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.cotacao_status (
@@ -29896,8 +31777,11 @@ CREATE TABLE public.cotacao_status (
 );
 
 
+ALTER TABLE public.cotacao_status OWNER TO systock;
+
 --
--- Name: cotacao_status_cotacao_status_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 585 (class 1259 OID 84553)
+-- Name: cotacao_status_cotacao_status_id_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.cotacao_status_cotacao_status_id_seq
@@ -29909,15 +31793,20 @@ CREATE SEQUENCE public.cotacao_status_cotacao_status_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.cotacao_status_cotacao_status_id_seq OWNER TO systock;
+
 --
--- Name: cotacao_status_cotacao_status_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6421 (class 0 OID 0)
+-- Dependencies: 585
+-- Name: cotacao_status_cotacao_status_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.cotacao_status_cotacao_status_id_seq OWNED BY public.cotacao_status.cotacao_status_id;
 
 
 --
--- Name: cotacao_transacao; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 560 (class 1259 OID 84323)
+-- Name: cotacao_transacao; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.cotacao_transacao (
@@ -29934,8 +31823,11 @@ CREATE TABLE public.cotacao_transacao (
 );
 
 
+ALTER TABLE public.cotacao_transacao OWNER TO systock;
+
 --
--- Name: cotacao_transacao_cotacao_transacao_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 559 (class 1259 OID 84322)
+-- Name: cotacao_transacao_cotacao_transacao_id_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.cotacao_transacao_cotacao_transacao_id_seq
@@ -29947,15 +31839,20 @@ CREATE SEQUENCE public.cotacao_transacao_cotacao_transacao_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.cotacao_transacao_cotacao_transacao_id_seq OWNER TO systock;
+
 --
--- Name: cotacao_transacao_cotacao_transacao_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6422 (class 0 OID 0)
+-- Dependencies: 559
+-- Name: cotacao_transacao_cotacao_transacao_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.cotacao_transacao_cotacao_transacao_id_seq OWNED BY public.cotacao_transacao.cotacao_transacao_id;
 
 
 --
--- Name: cotacoes_compra; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 303 (class 1259 OID 54558)
+-- Name: cotacoes_compra; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.cotacoes_compra (
@@ -29968,8 +31865,11 @@ CREATE TABLE public.cotacoes_compra (
 );
 
 
+ALTER TABLE public.cotacoes_compra OWNER TO systock;
+
 --
--- Name: dataref; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 304 (class 1259 OID 54563)
+-- Name: dataref; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.dataref (
@@ -29977,8 +31877,11 @@ CREATE TABLE public.dataref (
 );
 
 
+ALTER TABLE public.dataref OWNER TO systock;
+
 --
--- Name: depositos_iddeposito_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 305 (class 1259 OID 54566)
+-- Name: depositos_iddeposito_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.depositos_iddeposito_seq
@@ -29989,8 +31892,11 @@ CREATE SEQUENCE public.depositos_iddeposito_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.depositos_iddeposito_seq OWNER TO postgres;
+
 --
--- Name: depositos; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 306 (class 1259 OID 54567)
+-- Name: depositos; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.depositos (
@@ -30000,8 +31906,11 @@ CREATE TABLE public.depositos (
 );
 
 
+ALTER TABLE public.depositos OWNER TO postgres;
+
 --
--- Name: diagnostico_clientes_emails; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 307 (class 1259 OID 54571)
+-- Name: diagnostico_clientes_emails; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.diagnostico_clientes_emails (
@@ -30010,8 +31919,11 @@ CREATE TABLE public.diagnostico_clientes_emails (
 );
 
 
+ALTER TABLE public.diagnostico_clientes_emails OWNER TO systock;
+
 --
--- Name: diagnostico_clientes_emails_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 308 (class 1259 OID 54574)
+-- Name: diagnostico_clientes_emails_id_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.diagnostico_clientes_emails_id_seq
@@ -30023,15 +31935,20 @@ CREATE SEQUENCE public.diagnostico_clientes_emails_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.diagnostico_clientes_emails_id_seq OWNER TO systock;
+
 --
--- Name: diagnostico_clientes_emails_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6423 (class 0 OID 0)
+-- Dependencies: 308
+-- Name: diagnostico_clientes_emails_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.diagnostico_clientes_emails_id_seq OWNED BY public.diagnostico_clientes_emails.id;
 
 
 --
--- Name: dias_semana; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 558 (class 1259 OID 84317)
+-- Name: dias_semana; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.dias_semana (
@@ -30041,8 +31958,11 @@ CREATE TABLE public.dias_semana (
 );
 
 
+ALTER TABLE public.dias_semana OWNER TO systock;
+
 --
--- Name: distribuicao_drp; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 309 (class 1259 OID 54575)
+-- Name: distribuicao_drp; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.distribuicao_drp (
@@ -30058,8 +31978,11 @@ CREATE TABLE public.distribuicao_drp (
 );
 
 
+ALTER TABLE public.distribuicao_drp OWNER TO systock;
+
 --
--- Name: distribuicao_drp_blacklist; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 310 (class 1259 OID 54581)
+-- Name: distribuicao_drp_blacklist; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.distribuicao_drp_blacklist (
@@ -30071,8 +31994,11 @@ CREATE TABLE public.distribuicao_drp_blacklist (
 );
 
 
+ALTER TABLE public.distribuicao_drp_blacklist OWNER TO systock;
+
 --
--- Name: distribuicao_drp_blacklist_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 311 (class 1259 OID 54584)
+-- Name: distribuicao_drp_blacklist_id_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.distribuicao_drp_blacklist_id_seq
@@ -30083,15 +32009,20 @@ CREATE SEQUENCE public.distribuicao_drp_blacklist_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.distribuicao_drp_blacklist_id_seq OWNER TO systock;
+
 --
--- Name: distribuicao_drp_blacklist_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6424 (class 0 OID 0)
+-- Dependencies: 311
+-- Name: distribuicao_drp_blacklist_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.distribuicao_drp_blacklist_id_seq OWNED BY public.distribuicao_drp_blacklist.id;
 
 
 --
--- Name: distribuicao_drp_exportacao_erp; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 312 (class 1259 OID 54585)
+-- Name: distribuicao_drp_exportacao_erp; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.distribuicao_drp_exportacao_erp (
@@ -30103,8 +32034,11 @@ CREATE TABLE public.distribuicao_drp_exportacao_erp (
 );
 
 
+ALTER TABLE public.distribuicao_drp_exportacao_erp OWNER TO systock;
+
 --
--- Name: distribuicao_drp_exportacao_protheus; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 313 (class 1259 OID 54591)
+-- Name: distribuicao_drp_exportacao_protheus; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.distribuicao_drp_exportacao_protheus (
@@ -30114,8 +32048,11 @@ CREATE TABLE public.distribuicao_drp_exportacao_protheus (
 );
 
 
+ALTER TABLE public.distribuicao_drp_exportacao_protheus OWNER TO systock;
+
 --
--- Name: distribuicao_drp_idpedido_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 314 (class 1259 OID 54597)
+-- Name: distribuicao_drp_idpedido_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.distribuicao_drp_idpedido_seq
@@ -30126,15 +32063,20 @@ CREATE SEQUENCE public.distribuicao_drp_idpedido_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.distribuicao_drp_idpedido_seq OWNER TO systock;
+
 --
--- Name: distribuicao_drp_idpedido_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6425 (class 0 OID 0)
+-- Dependencies: 314
+-- Name: distribuicao_drp_idpedido_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.distribuicao_drp_idpedido_seq OWNED BY public.distribuicao_drp.idpedido;
 
 
 --
--- Name: distribuicao_drp_itens; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 315 (class 1259 OID 54598)
+-- Name: distribuicao_drp_itens; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.distribuicao_drp_itens (
@@ -30151,8 +32093,11 @@ CREATE TABLE public.distribuicao_drp_itens (
 );
 
 
+ALTER TABLE public.distribuicao_drp_itens OWNER TO systock;
+
 --
--- Name: drp_automatico_emails; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 316 (class 1259 OID 54603)
+-- Name: drp_automatico_emails; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.drp_automatico_emails (
@@ -30163,8 +32108,11 @@ CREATE TABLE public.drp_automatico_emails (
 );
 
 
+ALTER TABLE public.drp_automatico_emails OWNER TO systock;
+
 --
--- Name: drp_calendario_separacao; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 317 (class 1259 OID 54606)
+-- Name: drp_calendario_separacao; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.drp_calendario_separacao (
@@ -30177,8 +32125,11 @@ CREATE TABLE public.drp_calendario_separacao (
 );
 
 
+ALTER TABLE public.drp_calendario_separacao OWNER TO systock;
+
 --
--- Name: drp_calendario_separacao_feriados; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 318 (class 1259 OID 54612)
+-- Name: drp_calendario_separacao_feriados; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.drp_calendario_separacao_feriados (
@@ -30187,8 +32138,11 @@ CREATE TABLE public.drp_calendario_separacao_feriados (
 );
 
 
+ALTER TABLE public.drp_calendario_separacao_feriados OWNER TO systock;
+
 --
--- Name: drp_calendario_separacao_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 319 (class 1259 OID 54615)
+-- Name: drp_calendario_separacao_id_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.drp_calendario_separacao_id_seq
@@ -30200,15 +32154,20 @@ CREATE SEQUENCE public.drp_calendario_separacao_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.drp_calendario_separacao_id_seq OWNER TO systock;
+
 --
--- Name: drp_calendario_separacao_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6426 (class 0 OID 0)
+-- Dependencies: 319
+-- Name: drp_calendario_separacao_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.drp_calendario_separacao_id_seq OWNED BY public.drp_calendario_separacao.id;
 
 
 --
--- Name: drp_exportacao_pedido_winthor_regras_precos; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 605 (class 1259 OID 84675)
+-- Name: drp_exportacao_pedido_winthor_regras_precos; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.drp_exportacao_pedido_winthor_regras_precos (
@@ -30220,8 +32179,11 @@ CREATE TABLE public.drp_exportacao_pedido_winthor_regras_precos (
 );
 
 
+ALTER TABLE public.drp_exportacao_pedido_winthor_regras_precos OWNER TO systock;
+
 --
--- Name: drp_exportacao_pedido_winthor_regras_precos_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 604 (class 1259 OID 84674)
+-- Name: drp_exportacao_pedido_winthor_regras_precos_id_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.drp_exportacao_pedido_winthor_regras_precos_id_seq
@@ -30233,15 +32195,20 @@ CREATE SEQUENCE public.drp_exportacao_pedido_winthor_regras_precos_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.drp_exportacao_pedido_winthor_regras_precos_id_seq OWNER TO systock;
+
 --
--- Name: drp_exportacao_pedido_winthor_regras_precos_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6427 (class 0 OID 0)
+-- Dependencies: 604
+-- Name: drp_exportacao_pedido_winthor_regras_precos_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.drp_exportacao_pedido_winthor_regras_precos_id_seq OWNED BY public.drp_exportacao_pedido_winthor_regras_precos.id;
 
 
 --
--- Name: drp_grupo_separacao; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 320 (class 1259 OID 54616)
+-- Name: drp_grupo_separacao; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.drp_grupo_separacao (
@@ -30253,8 +32220,11 @@ CREATE TABLE public.drp_grupo_separacao (
 );
 
 
+ALTER TABLE public.drp_grupo_separacao OWNER TO systock;
+
 --
--- Name: drp_grupo_separacao_filial; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 321 (class 1259 OID 54620)
+-- Name: drp_grupo_separacao_filial; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.drp_grupo_separacao_filial (
@@ -30264,8 +32234,11 @@ CREATE TABLE public.drp_grupo_separacao_filial (
 );
 
 
+ALTER TABLE public.drp_grupo_separacao_filial OWNER TO systock;
+
 --
--- Name: drp_grupo_separacao_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 322 (class 1259 OID 54624)
+-- Name: drp_grupo_separacao_id_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.drp_grupo_separacao_id_seq
@@ -30277,15 +32250,20 @@ CREATE SEQUENCE public.drp_grupo_separacao_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.drp_grupo_separacao_id_seq OWNER TO systock;
+
 --
--- Name: drp_grupo_separacao_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6428 (class 0 OID 0)
+-- Dependencies: 322
+-- Name: drp_grupo_separacao_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.drp_grupo_separacao_id_seq OWNED BY public.drp_grupo_separacao.id;
 
 
 --
--- Name: drp_historico_horarios_grupo_separacao; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 323 (class 1259 OID 54625)
+-- Name: drp_historico_horarios_grupo_separacao; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.drp_historico_horarios_grupo_separacao (
@@ -30298,8 +32276,11 @@ CREATE TABLE public.drp_historico_horarios_grupo_separacao (
 );
 
 
+ALTER TABLE public.drp_historico_horarios_grupo_separacao OWNER TO systock;
+
 --
--- Name: drp_historico_horarios_grupo_separacao_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 324 (class 1259 OID 54628)
+-- Name: drp_historico_horarios_grupo_separacao_id_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.drp_historico_horarios_grupo_separacao_id_seq
@@ -30311,15 +32292,20 @@ CREATE SEQUENCE public.drp_historico_horarios_grupo_separacao_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.drp_historico_horarios_grupo_separacao_id_seq OWNER TO systock;
+
 --
--- Name: drp_historico_horarios_grupo_separacao_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6429 (class 0 OID 0)
+-- Dependencies: 324
+-- Name: drp_historico_horarios_grupo_separacao_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.drp_historico_horarios_grupo_separacao_id_seq OWNED BY public.drp_historico_horarios_grupo_separacao.id;
 
 
 --
--- Name: drp_horarios_grupo_separacao; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 325 (class 1259 OID 54629)
+-- Name: drp_horarios_grupo_separacao; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.drp_horarios_grupo_separacao (
@@ -30329,8 +32315,11 @@ CREATE TABLE public.drp_horarios_grupo_separacao (
 );
 
 
+ALTER TABLE public.drp_horarios_grupo_separacao OWNER TO systock;
+
 --
--- Name: drp_mapa_separacao; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 326 (class 1259 OID 54632)
+-- Name: drp_mapa_separacao; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.drp_mapa_separacao (
@@ -30339,8 +32328,11 @@ CREATE TABLE public.drp_mapa_separacao (
 );
 
 
+ALTER TABLE public.drp_mapa_separacao OWNER TO systock;
+
 --
--- Name: drp_mapa_separacao_automatica; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 327 (class 1259 OID 54635)
+-- Name: drp_mapa_separacao_automatica; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.drp_mapa_separacao_automatica (
@@ -30352,8 +32344,11 @@ CREATE TABLE public.drp_mapa_separacao_automatica (
 );
 
 
+ALTER TABLE public.drp_mapa_separacao_automatica OWNER TO systock;
+
 --
--- Name: drp_produtos_para_nao_fazer_proporcao; Type: VIEW; Schema: public; Owner: -
+-- TOC entry 328 (class 1259 OID 54640)
+-- Name: drp_produtos_para_nao_fazer_proporcao; Type: VIEW; Schema: public; Owner: systock
 --
 
 CREATE VIEW public.drp_produtos_para_nao_fazer_proporcao AS
@@ -30364,8 +32359,11 @@ CREATE VIEW public.drp_produtos_para_nao_fazer_proporcao AS
  LIMIT 0;
 
 
+ALTER VIEW public.drp_produtos_para_nao_fazer_proporcao OWNER TO systock;
+
 --
--- Name: drp_transportes; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 329 (class 1259 OID 54645)
+-- Name: drp_transportes; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.drp_transportes (
@@ -30377,8 +32375,11 @@ CREATE TABLE public.drp_transportes (
 );
 
 
+ALTER TABLE public.drp_transportes OWNER TO systock;
+
 --
--- Name: drp_transportes_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 330 (class 1259 OID 54648)
+-- Name: drp_transportes_id_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.drp_transportes_id_seq
@@ -30390,15 +32391,20 @@ CREATE SEQUENCE public.drp_transportes_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.drp_transportes_id_seq OWNER TO systock;
+
 --
--- Name: drp_transportes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6430 (class 0 OID 0)
+-- Dependencies: 330
+-- Name: drp_transportes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.drp_transportes_id_seq OWNED BY public.drp_transportes.id;
 
 
 --
--- Name: embalagem; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 331 (class 1259 OID 54649)
+-- Name: embalagem; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.embalagem (
@@ -30414,8 +32420,11 @@ CREATE TABLE public.embalagem (
 );
 
 
+ALTER TABLE public.embalagem OWNER TO systock;
+
 --
--- Name: estoque_agrupado; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 332 (class 1259 OID 54652)
+-- Name: estoque_agrupado; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.estoque_agrupado (
@@ -30423,8 +32432,11 @@ CREATE TABLE public.estoque_agrupado (
 );
 
 
+ALTER TABLE public.estoque_agrupado OWNER TO systock;
+
 --
--- Name: exportacao_pedidos_compras; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 333 (class 1259 OID 54657)
+-- Name: exportacao_pedidos_compras; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.exportacao_pedidos_compras (
@@ -30435,8 +32447,11 @@ CREATE TABLE public.exportacao_pedidos_compras (
 );
 
 
+ALTER TABLE public.exportacao_pedidos_compras OWNER TO systock;
+
 --
--- Name: familia_produtos_parceiros; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 334 (class 1259 OID 54663)
+-- Name: familia_produtos_parceiros; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.familia_produtos_parceiros (
@@ -30445,8 +32460,11 @@ CREATE TABLE public.familia_produtos_parceiros (
 );
 
 
+ALTER TABLE public.familia_produtos_parceiros OWNER TO postgres;
+
 --
--- Name: familias; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 335 (class 1259 OID 54666)
+-- Name: familias; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.familias (
@@ -30458,8 +32476,11 @@ CREATE TABLE public.familias (
 );
 
 
+ALTER TABLE public.familias OWNER TO postgres;
+
 --
--- Name: filial_idfilial_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 336 (class 1259 OID 54671)
+-- Name: filial_idfilial_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.filial_idfilial_seq
@@ -30470,8 +32491,11 @@ CREATE SEQUENCE public.filial_idfilial_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.filial_idfilial_seq OWNER TO postgres;
+
 --
--- Name: filial; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 337 (class 1259 OID 54672)
+-- Name: filial; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.filial (
@@ -30490,8 +32514,20 @@ CREATE TABLE public.filial (
 );
 
 
+ALTER TABLE public.filial OWNER TO postgres;
+
 --
--- Name: filtros_produto; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 6431 (class 0 OID 0)
+-- Dependencies: 337
+-- Name: COLUMN filial.idclifor; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN public.filial.idclifor IS 'ID DO CLIENTE FORNECEDOR DA FILIAL';
+
+
+--
+-- TOC entry 338 (class 1259 OID 54676)
+-- Name: filtros_produto; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.filtros_produto (
@@ -30516,8 +32552,11 @@ CREATE TABLE public.filtros_produto (
 );
 
 
+ALTER TABLE public.filtros_produto OWNER TO systock;
+
 --
--- Name: fornecedor_fabricante; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 339 (class 1259 OID 54694)
+-- Name: fornecedor_fabricante; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.fornecedor_fabricante (
@@ -30532,8 +32571,11 @@ CREATE TABLE public.fornecedor_fabricante (
 );
 
 
+ALTER TABLE public.fornecedor_fabricante OWNER TO systock;
+
 --
--- Name: fornecedores_idfornecedor_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 340 (class 1259 OID 54698)
+-- Name: fornecedores_idfornecedor_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.fornecedores_idfornecedor_seq
@@ -30544,8 +32586,11 @@ CREATE SEQUENCE public.fornecedores_idfornecedor_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.fornecedores_idfornecedor_seq OWNER TO postgres;
+
 --
--- Name: fornecedores; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 341 (class 1259 OID 54699)
+-- Name: fornecedores; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.fornecedores (
@@ -30564,8 +32609,11 @@ CREATE TABLE public.fornecedores (
 );
 
 
+ALTER TABLE public.fornecedores OWNER TO postgres;
+
 --
--- Name: fornecedores_grupo_analise; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 342 (class 1259 OID 54703)
+-- Name: fornecedores_grupo_analise; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.fornecedores_grupo_analise (
@@ -30579,8 +32627,20 @@ CREATE TABLE public.fornecedores_grupo_analise (
 );
 
 
+ALTER TABLE public.fornecedores_grupo_analise OWNER TO systock;
+
 --
--- Name: fornecedores_grupo_analise_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 6432 (class 0 OID 0)
+-- Dependencies: 342
+-- Name: COLUMN fornecedores_grupo_analise.status_tempo_esseg; Type: COMMENT; Schema: public; Owner: systock
+--
+
+COMMENT ON COLUMN public.fornecedores_grupo_analise.status_tempo_esseg IS '1 - CURVAS 2 - DEPARTAMENTO/SEGMENTO 3 - FORNECEDOR 4 - PRODUTO';
+
+
+--
+-- TOC entry 343 (class 1259 OID 54707)
+-- Name: fornecedores_grupo_analise_id_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.fornecedores_grupo_analise_id_seq
@@ -30592,15 +32652,20 @@ CREATE SEQUENCE public.fornecedores_grupo_analise_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.fornecedores_grupo_analise_id_seq OWNER TO systock;
+
 --
--- Name: fornecedores_grupo_analise_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6433 (class 0 OID 0)
+-- Dependencies: 343
+-- Name: fornecedores_grupo_analise_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.fornecedores_grupo_analise_id_seq OWNED BY public.fornecedores_grupo_analise.id;
 
 
 --
--- Name: funcoes_idfuncao_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 344 (class 1259 OID 54708)
+-- Name: funcoes_idfuncao_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.funcoes_idfuncao_seq
@@ -30611,8 +32676,11 @@ CREATE SEQUENCE public.funcoes_idfuncao_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.funcoes_idfuncao_seq OWNER TO postgres;
+
 --
--- Name: funcoes; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 345 (class 1259 OID 54709)
+-- Name: funcoes; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.funcoes (
@@ -30621,8 +32689,11 @@ CREATE TABLE public.funcoes (
 );
 
 
+ALTER TABLE public.funcoes OWNER TO postgres;
+
 --
--- Name: grupo_compras; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 346 (class 1259 OID 54713)
+-- Name: grupo_compras; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.grupo_compras (
@@ -30639,8 +32710,11 @@ CREATE TABLE public.grupo_compras (
 );
 
 
+ALTER TABLE public.grupo_compras OWNER TO systock;
+
 --
--- Name: grupo_compras_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 347 (class 1259 OID 54721)
+-- Name: grupo_compras_id_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.grupo_compras_id_seq
@@ -30651,15 +32725,20 @@ CREATE SEQUENCE public.grupo_compras_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.grupo_compras_id_seq OWNER TO systock;
+
 --
--- Name: grupo_compras_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6434 (class 0 OID 0)
+-- Dependencies: 347
+-- Name: grupo_compras_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.grupo_compras_id_seq OWNED BY public.grupo_compras.id;
 
 
 --
--- Name: grupo_distribuicao; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 348 (class 1259 OID 54722)
+-- Name: grupo_distribuicao; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.grupo_distribuicao (
@@ -30669,8 +32748,11 @@ CREATE TABLE public.grupo_distribuicao (
 );
 
 
+ALTER TABLE public.grupo_distribuicao OWNER TO systock;
+
 --
--- Name: grupo_distribuicao_filial; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 349 (class 1259 OID 54725)
+-- Name: grupo_distribuicao_filial; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.grupo_distribuicao_filial (
@@ -30680,8 +32762,11 @@ CREATE TABLE public.grupo_distribuicao_filial (
 );
 
 
+ALTER TABLE public.grupo_distribuicao_filial OWNER TO systock;
+
 --
--- Name: grupo_distribuicao_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 350 (class 1259 OID 54729)
+-- Name: grupo_distribuicao_id_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.grupo_distribuicao_id_seq
@@ -30693,15 +32778,20 @@ CREATE SEQUENCE public.grupo_distribuicao_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.grupo_distribuicao_id_seq OWNER TO systock;
+
 --
--- Name: grupo_distribuicao_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6435 (class 0 OID 0)
+-- Dependencies: 350
+-- Name: grupo_distribuicao_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.grupo_distribuicao_id_seq OWNED BY public.grupo_distribuicao.id;
 
 
 --
--- Name: grupo_filiais_drp; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 351 (class 1259 OID 54730)
+-- Name: grupo_filiais_drp; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.grupo_filiais_drp (
@@ -30710,8 +32800,11 @@ CREATE TABLE public.grupo_filiais_drp (
 );
 
 
+ALTER TABLE public.grupo_filiais_drp OWNER TO systock;
+
 --
--- Name: grupos_analise_fornecedor; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 352 (class 1259 OID 54733)
+-- Name: grupos_analise_fornecedor; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.grupos_analise_fornecedor (
@@ -30724,8 +32817,11 @@ CREATE TABLE public.grupos_analise_fornecedor (
 );
 
 
+ALTER TABLE public.grupos_analise_fornecedor OWNER TO systock;
+
 --
--- Name: grupos_analise_fornecedor_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 353 (class 1259 OID 54738)
+-- Name: grupos_analise_fornecedor_id_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.grupos_analise_fornecedor_id_seq
@@ -30737,15 +32833,20 @@ CREATE SEQUENCE public.grupos_analise_fornecedor_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.grupos_analise_fornecedor_id_seq OWNER TO systock;
+
 --
--- Name: grupos_analise_fornecedor_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6436 (class 0 OID 0)
+-- Dependencies: 353
+-- Name: grupos_analise_fornecedor_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.grupos_analise_fornecedor_id_seq OWNED BY public.grupos_analise_fornecedor.id;
 
 
 --
--- Name: herancas; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 354 (class 1259 OID 54739)
+-- Name: herancas; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.herancas (
@@ -30757,8 +32858,11 @@ CREATE TABLE public.herancas (
 );
 
 
+ALTER TABLE public.herancas OWNER TO systock;
+
 --
--- Name: herancas_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 355 (class 1259 OID 54746)
+-- Name: herancas_id_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.herancas_id_seq
@@ -30769,15 +32873,20 @@ CREATE SEQUENCE public.herancas_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.herancas_id_seq OWNER TO systock;
+
 --
--- Name: herancas_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6437 (class 0 OID 0)
+-- Dependencies: 355
+-- Name: herancas_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.herancas_id_seq OWNED BY public.herancas.id;
 
 
 --
--- Name: hist_analise_compras; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 356 (class 1259 OID 54747)
+-- Name: hist_analise_compras; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.hist_analise_compras (
@@ -30795,8 +32904,11 @@ CREATE TABLE public.hist_analise_compras (
 );
 
 
+ALTER TABLE public.hist_analise_compras OWNER TO systock;
+
 --
--- Name: hist_analise_compras_filial; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 357 (class 1259 OID 54758)
+-- Name: hist_analise_compras_filial; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.hist_analise_compras_filial (
@@ -30815,8 +32927,11 @@ CREATE TABLE public.hist_analise_compras_filial (
 WITH (autovacuum_vacuum_scale_factor='0.04406');
 
 
+ALTER TABLE public.hist_analise_compras_filial OWNER TO systock;
+
 --
--- Name: hist_analise_compras_grupo; Type: MATERIALIZED VIEW; Schema: public; Owner: -
+-- TOC entry 358 (class 1259 OID 54769)
+-- Name: hist_analise_compras_grupo; Type: MATERIALIZED VIEW; Schema: public; Owner: systock
 --
 
 CREATE MATERIALIZED VIEW public.hist_analise_compras_grupo AS
@@ -30839,8 +32954,11 @@ CREATE MATERIALIZED VIEW public.hist_analise_compras_grupo AS
   WITH NO DATA;
 
 
+ALTER MATERIALIZED VIEW public.hist_analise_compras_grupo OWNER TO systock;
+
 --
--- Name: hist_estoque; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 359 (class 1259 OID 54776)
+-- Name: hist_estoque; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.hist_estoque (
@@ -30853,8 +32971,11 @@ CREATE TABLE public.hist_estoque (
 WITH (autovacuum_vacuum_scale_factor='0.03807');
 
 
+ALTER TABLE public.hist_estoque OWNER TO systock;
+
 --
--- Name: hist_fator_atuacao; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 360 (class 1259 OID 54781)
+-- Name: hist_fator_atuacao; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.hist_fator_atuacao (
@@ -30871,8 +32992,11 @@ CREATE TABLE public.hist_fator_atuacao (
 );
 
 
+ALTER TABLE public.hist_fator_atuacao OWNER TO systock;
+
 --
--- Name: hist_fator_atuacao_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 361 (class 1259 OID 54788)
+-- Name: hist_fator_atuacao_id_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.hist_fator_atuacao_id_seq
@@ -30883,15 +33007,20 @@ CREATE SEQUENCE public.hist_fator_atuacao_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.hist_fator_atuacao_id_seq OWNER TO systock;
+
 --
--- Name: hist_fator_atuacao_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6438 (class 0 OID 0)
+-- Dependencies: 361
+-- Name: hist_fator_atuacao_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.hist_fator_atuacao_id_seq OWNED BY public.hist_fator_atuacao.id;
 
 
 --
--- Name: hist_gatilho_compras; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 362 (class 1259 OID 54789)
+-- Name: hist_gatilho_compras; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.hist_gatilho_compras (
@@ -30909,8 +33038,11 @@ CREATE TABLE public.hist_gatilho_compras (
 );
 
 
+ALTER TABLE public.hist_gatilho_compras OWNER TO systock;
+
 --
--- Name: hist_gatilho_compras_grupo; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 363 (class 1259 OID 54798)
+-- Name: hist_gatilho_compras_grupo; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.hist_gatilho_compras_grupo (
@@ -30931,8 +33063,11 @@ CREATE TABLE public.hist_gatilho_compras_grupo (
 WITH (autovacuum_vacuum_scale_factor='2.36380');
 
 
+ALTER TABLE public.hist_gatilho_compras_grupo OWNER TO systock;
+
 --
--- Name: hist_sazonalidades; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 364 (class 1259 OID 54807)
+-- Name: hist_sazonalidades; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.hist_sazonalidades (
@@ -30954,8 +33089,11 @@ CREATE TABLE public.hist_sazonalidades (
 );
 
 
+ALTER TABLE public.hist_sazonalidades OWNER TO systock;
+
 --
--- Name: hist_sazonalidades_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 365 (class 1259 OID 54821)
+-- Name: hist_sazonalidades_id_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.hist_sazonalidades_id_seq
@@ -30967,15 +33105,20 @@ CREATE SEQUENCE public.hist_sazonalidades_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.hist_sazonalidades_id_seq OWNER TO systock;
+
 --
--- Name: hist_sazonalidades_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6439 (class 0 OID 0)
+-- Dependencies: 365
+-- Name: hist_sazonalidades_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.hist_sazonalidades_id_seq OWNED BY public.hist_sazonalidades.id;
 
 
 --
--- Name: imagens_produtos_idimagem_produto_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 366 (class 1259 OID 54822)
+-- Name: imagens_produtos_idimagem_produto_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.imagens_produtos_idimagem_produto_seq
@@ -30986,8 +33129,11 @@ CREATE SEQUENCE public.imagens_produtos_idimagem_produto_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.imagens_produtos_idimagem_produto_seq OWNER TO postgres;
+
 --
--- Name: imagens_produtos; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 367 (class 1259 OID 54823)
+-- Name: imagens_produtos; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.imagens_produtos (
@@ -30999,8 +33145,11 @@ CREATE TABLE public.imagens_produtos (
 );
 
 
+ALTER TABLE public.imagens_produtos OWNER TO postgres;
+
 --
--- Name: integracao_sistemas; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 368 (class 1259 OID 54828)
+-- Name: integracao_sistemas; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.integracao_sistemas (
@@ -31011,8 +33160,11 @@ CREATE TABLE public.integracao_sistemas (
 );
 
 
+ALTER TABLE public.integracao_sistemas OWNER TO systock;
+
 --
--- Name: integracao_sistemas_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 369 (class 1259 OID 54833)
+-- Name: integracao_sistemas_id_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.integracao_sistemas_id_seq
@@ -31023,15 +33175,20 @@ CREATE SEQUENCE public.integracao_sistemas_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.integracao_sistemas_id_seq OWNER TO systock;
+
 --
--- Name: integracao_sistemas_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6440 (class 0 OID 0)
+-- Dependencies: 369
+-- Name: integracao_sistemas_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.integracao_sistemas_id_seq OWNED BY public.integracao_sistemas.id;
 
 
 --
--- Name: inventario; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 370 (class 1259 OID 54834)
+-- Name: inventario; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.inventario (
@@ -31043,8 +33200,11 @@ CREATE TABLE public.inventario (
 );
 
 
+ALTER TABLE public.inventario OWNER TO postgres;
+
 --
--- Name: jobs; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 371 (class 1259 OID 54839)
+-- Name: jobs; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.jobs (
@@ -31058,8 +33218,11 @@ CREATE TABLE public.jobs (
 );
 
 
+ALTER TABLE public.jobs OWNER TO systock;
+
 --
--- Name: jobs_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 372 (class 1259 OID 54844)
+-- Name: jobs_id_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.jobs_id_seq
@@ -31070,15 +33233,20 @@ CREATE SEQUENCE public.jobs_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.jobs_id_seq OWNER TO systock;
+
 --
--- Name: jobs_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6441 (class 0 OID 0)
+-- Dependencies: 372
+-- Name: jobs_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.jobs_id_seq OWNED BY public.jobs.id;
 
 
 --
--- Name: linha_produtos; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 373 (class 1259 OID 54845)
+-- Name: linha_produtos; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.linha_produtos (
@@ -31088,8 +33256,11 @@ CREATE TABLE public.linha_produtos (
 );
 
 
+ALTER TABLE public.linha_produtos OWNER TO systock;
+
 --
--- Name: linha_produtos_idlinhaprod_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 374 (class 1259 OID 54848)
+-- Name: linha_produtos_idlinhaprod_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.linha_produtos_idlinhaprod_seq
@@ -31101,15 +33272,20 @@ CREATE SEQUENCE public.linha_produtos_idlinhaprod_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.linha_produtos_idlinhaprod_seq OWNER TO systock;
+
 --
--- Name: linha_produtos_idlinhaprod_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6442 (class 0 OID 0)
+-- Dependencies: 374
+-- Name: linha_produtos_idlinhaprod_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.linha_produtos_idlinhaprod_seq OWNED BY public.linha_produtos.idlinhaprod;
 
 
 --
--- Name: log_pedidos_compras_itens; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 375 (class 1259 OID 54849)
+-- Name: log_pedidos_compras_itens; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.log_pedidos_compras_itens (
@@ -31131,8 +33307,11 @@ CREATE TABLE public.log_pedidos_compras_itens (
 );
 
 
+ALTER TABLE public.log_pedidos_compras_itens OWNER TO systock;
+
 --
--- Name: log_pedidos_compras_itens_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 376 (class 1259 OID 54852)
+-- Name: log_pedidos_compras_itens_id_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.log_pedidos_compras_itens_id_seq
@@ -31144,15 +33323,20 @@ CREATE SEQUENCE public.log_pedidos_compras_itens_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.log_pedidos_compras_itens_id_seq OWNER TO systock;
+
 --
--- Name: log_pedidos_compras_itens_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6443 (class 0 OID 0)
+-- Dependencies: 376
+-- Name: log_pedidos_compras_itens_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.log_pedidos_compras_itens_id_seq OWNED BY public.log_pedidos_compras_itens.id;
 
 
 --
--- Name: lote_produtos; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 377 (class 1259 OID 54853)
+-- Name: lote_produtos; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.lote_produtos (
@@ -31168,8 +33352,11 @@ CREATE TABLE public.lote_produtos (
 );
 
 
+ALTER TABLE public.lote_produtos OWNER TO systock;
+
 --
--- Name: mapa_compra; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 378 (class 1259 OID 54856)
+-- Name: mapa_compra; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.mapa_compra (
@@ -31178,8 +33365,11 @@ CREATE TABLE public.mapa_compra (
 );
 
 
+ALTER TABLE public.mapa_compra OWNER TO systock;
+
 --
--- Name: marcas; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 379 (class 1259 OID 54859)
+-- Name: marcas; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.marcas (
@@ -31208,8 +33398,11 @@ CREATE TABLE public.marcas (
 );
 
 
+ALTER TABLE public.marcas OWNER TO systock;
+
 --
--- Name: matriz_priorizacao; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 380 (class 1259 OID 54880)
+-- Name: matriz_priorizacao; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.matriz_priorizacao (
@@ -31219,8 +33412,11 @@ CREATE TABLE public.matriz_priorizacao (
 );
 
 
+ALTER TABLE public.matriz_priorizacao OWNER TO postgres;
+
 --
--- Name: migrations; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 381 (class 1259 OID 54883)
+-- Name: migrations; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.migrations (
@@ -31230,8 +33426,11 @@ CREATE TABLE public.migrations (
 );
 
 
+ALTER TABLE public.migrations OWNER TO systock;
+
 --
--- Name: migrations_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 382 (class 1259 OID 54886)
+-- Name: migrations_id_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.migrations_id_seq
@@ -31243,15 +33442,20 @@ CREATE SEQUENCE public.migrations_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.migrations_id_seq OWNER TO systock;
+
 --
--- Name: migrations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6444 (class 0 OID 0)
+-- Dependencies: 382
+-- Name: migrations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.migrations_id_seq OWNED BY public.migrations.id;
 
 
 --
--- Name: modulos_idmodulo_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 383 (class 1259 OID 54887)
+-- Name: modulos_idmodulo_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.modulos_idmodulo_seq
@@ -31262,8 +33466,11 @@ CREATE SEQUENCE public.modulos_idmodulo_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.modulos_idmodulo_seq OWNER TO postgres;
+
 --
--- Name: modulos; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 384 (class 1259 OID 54888)
+-- Name: modulos; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.modulos (
@@ -31274,8 +33481,11 @@ CREATE TABLE public.modulos (
 );
 
 
+ALTER TABLE public.modulos OWNER TO postgres;
+
 --
--- Name: motivo_blacklist_produto; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 385 (class 1259 OID 54893)
+-- Name: motivo_blacklist_produto; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.motivo_blacklist_produto (
@@ -31284,8 +33494,11 @@ CREATE TABLE public.motivo_blacklist_produto (
 );
 
 
+ALTER TABLE public.motivo_blacklist_produto OWNER TO systock;
+
 --
--- Name: motivo_blacklist_produto_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 386 (class 1259 OID 54896)
+-- Name: motivo_blacklist_produto_id_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.motivo_blacklist_produto_id_seq
@@ -31296,15 +33509,20 @@ CREATE SEQUENCE public.motivo_blacklist_produto_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.motivo_blacklist_produto_id_seq OWNER TO systock;
+
 --
--- Name: motivo_blacklist_produto_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6445 (class 0 OID 0)
+-- Dependencies: 386
+-- Name: motivo_blacklist_produto_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.motivo_blacklist_produto_id_seq OWNED BY public.motivo_blacklist_produto.id;
 
 
 --
--- Name: motivos_compras_oportunidade; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 387 (class 1259 OID 54897)
+-- Name: motivos_compras_oportunidade; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.motivos_compras_oportunidade (
@@ -31313,8 +33531,11 @@ CREATE TABLE public.motivos_compras_oportunidade (
 );
 
 
+ALTER TABLE public.motivos_compras_oportunidade OWNER TO systock;
+
 --
--- Name: motivos_compras_oportunidade_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 388 (class 1259 OID 54900)
+-- Name: motivos_compras_oportunidade_id_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.motivos_compras_oportunidade_id_seq
@@ -31325,15 +33546,20 @@ CREATE SEQUENCE public.motivos_compras_oportunidade_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.motivos_compras_oportunidade_id_seq OWNER TO systock;
+
 --
--- Name: motivos_compras_oportunidade_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6446 (class 0 OID 0)
+-- Dependencies: 388
+-- Name: motivos_compras_oportunidade_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.motivos_compras_oportunidade_id_seq OWNED BY public.motivos_compras_oportunidade.id;
 
 
 --
--- Name: motivos_para_categorias_mp_pa_silenciada; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 389 (class 1259 OID 54901)
+-- Name: motivos_para_categorias_mp_pa_silenciada; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.motivos_para_categorias_mp_pa_silenciada (
@@ -31342,8 +33568,11 @@ CREATE TABLE public.motivos_para_categorias_mp_pa_silenciada (
 );
 
 
+ALTER TABLE public.motivos_para_categorias_mp_pa_silenciada OWNER TO systock;
+
 --
--- Name: motivos_para_produto_silenciado; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 390 (class 1259 OID 54904)
+-- Name: motivos_para_produto_silenciado; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.motivos_para_produto_silenciado (
@@ -31352,8 +33581,11 @@ CREATE TABLE public.motivos_para_produto_silenciado (
 );
 
 
+ALTER TABLE public.motivos_para_produto_silenciado OWNER TO systock;
+
 --
--- Name: movimentacoes_idmovimentacao_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 391 (class 1259 OID 54907)
+-- Name: movimentacoes_idmovimentacao_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.movimentacoes_idmovimentacao_seq
@@ -31364,8 +33596,11 @@ CREATE SEQUENCE public.movimentacoes_idmovimentacao_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.movimentacoes_idmovimentacao_seq OWNER TO postgres;
+
 --
--- Name: movimentacoes; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 392 (class 1259 OID 54908)
+-- Name: movimentacoes; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.movimentacoes (
@@ -31379,8 +33614,11 @@ CREATE TABLE public.movimentacoes (
 );
 
 
+ALTER TABLE public.movimentacoes OWNER TO postgres;
+
 --
--- Name: movimentacoes_produtos; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 393 (class 1259 OID 54913)
+-- Name: movimentacoes_produtos; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.movimentacoes_produtos (
@@ -31390,8 +33628,11 @@ CREATE TABLE public.movimentacoes_produtos (
 );
 
 
+ALTER TABLE public.movimentacoes_produtos OWNER TO postgres;
+
 --
--- Name: notificacao; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 394 (class 1259 OID 54917)
+-- Name: notificacao; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.notificacao (
@@ -31411,8 +33652,11 @@ CREATE TABLE public.notificacao (
 );
 
 
+ALTER TABLE public.notificacao OWNER TO systock;
+
 --
--- Name: notificacao_categorias_mp_pa_blacklist; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 395 (class 1259 OID 54922)
+-- Name: notificacao_categorias_mp_pa_blacklist; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.notificacao_categorias_mp_pa_blacklist (
@@ -31429,8 +33673,11 @@ CREATE TABLE public.notificacao_categorias_mp_pa_blacklist (
 );
 
 
+ALTER TABLE public.notificacao_categorias_mp_pa_blacklist OWNER TO systock;
+
 --
--- Name: notificacao_categorias_mp_pa_blacklist_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 396 (class 1259 OID 54925)
+-- Name: notificacao_categorias_mp_pa_blacklist_id_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.notificacao_categorias_mp_pa_blacklist_id_seq
@@ -31442,15 +33689,20 @@ CREATE SEQUENCE public.notificacao_categorias_mp_pa_blacklist_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.notificacao_categorias_mp_pa_blacklist_id_seq OWNER TO systock;
+
 --
--- Name: notificacao_categorias_mp_pa_blacklist_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6447 (class 0 OID 0)
+-- Dependencies: 396
+-- Name: notificacao_categorias_mp_pa_blacklist_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.notificacao_categorias_mp_pa_blacklist_id_seq OWNED BY public.notificacao_categorias_mp_pa_blacklist.id;
 
 
 --
--- Name: notificacao_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 397 (class 1259 OID 54926)
+-- Name: notificacao_id_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.notificacao_id_seq
@@ -31461,15 +33713,20 @@ CREATE SEQUENCE public.notificacao_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.notificacao_id_seq OWNER TO systock;
+
 --
--- Name: notificacao_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6448 (class 0 OID 0)
+-- Dependencies: 397
+-- Name: notificacao_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.notificacao_id_seq OWNED BY public.notificacao.id;
 
 
 --
--- Name: notificacao_produtos_blacklist; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 398 (class 1259 OID 54927)
+-- Name: notificacao_produtos_blacklist; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.notificacao_produtos_blacklist (
@@ -31488,8 +33745,11 @@ CREATE TABLE public.notificacao_produtos_blacklist (
 );
 
 
+ALTER TABLE public.notificacao_produtos_blacklist OWNER TO systock;
+
 --
--- Name: notificacao_produtos_blacklist_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 399 (class 1259 OID 54930)
+-- Name: notificacao_produtos_blacklist_id_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.notificacao_produtos_blacklist_id_seq
@@ -31500,15 +33760,20 @@ CREATE SEQUENCE public.notificacao_produtos_blacklist_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.notificacao_produtos_blacklist_id_seq OWNER TO systock;
+
 --
--- Name: notificacao_produtos_blacklist_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6449 (class 0 OID 0)
+-- Dependencies: 399
+-- Name: notificacao_produtos_blacklist_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.notificacao_produtos_blacklist_id_seq OWNED BY public.notificacao_produtos_blacklist.id;
 
 
 --
--- Name: parametros_avaliacao; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 400 (class 1259 OID 54931)
+-- Name: parametros_avaliacao; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.parametros_avaliacao (
@@ -31517,8 +33782,11 @@ CREATE TABLE public.parametros_avaliacao (
 );
 
 
+ALTER TABLE public.parametros_avaliacao OWNER TO postgres;
+
 --
--- Name: parametros_compra_idparametro_compra_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 401 (class 1259 OID 54937)
+-- Name: parametros_compra_idparametro_compra_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.parametros_compra_idparametro_compra_seq
@@ -31529,8 +33797,11 @@ CREATE SEQUENCE public.parametros_compra_idparametro_compra_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.parametros_compra_idparametro_compra_seq OWNER TO postgres;
+
 --
--- Name: parametros_compra; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 402 (class 1259 OID 54938)
+-- Name: parametros_compra; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.parametros_compra (
@@ -31544,8 +33815,11 @@ CREATE TABLE public.parametros_compra (
 );
 
 
+ALTER TABLE public.parametros_compra OWNER TO postgres;
+
 --
--- Name: parametros_criticidade; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 403 (class 1259 OID 54944)
+-- Name: parametros_criticidade; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.parametros_criticidade (
@@ -31554,8 +33828,11 @@ CREATE TABLE public.parametros_criticidade (
 );
 
 
+ALTER TABLE public.parametros_criticidade OWNER TO postgres;
+
 --
--- Name: parametros_financeiro_idparametros_financeiro_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 404 (class 1259 OID 54949)
+-- Name: parametros_financeiro_idparametros_financeiro_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.parametros_financeiro_idparametros_financeiro_seq
@@ -31566,8 +33843,11 @@ CREATE SEQUENCE public.parametros_financeiro_idparametros_financeiro_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.parametros_financeiro_idparametros_financeiro_seq OWNER TO postgres;
+
 --
--- Name: parametros_financeiro; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 405 (class 1259 OID 54950)
+-- Name: parametros_financeiro; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.parametros_financeiro (
@@ -31580,8 +33860,11 @@ CREATE TABLE public.parametros_financeiro (
 );
 
 
+ALTER TABLE public.parametros_financeiro OWNER TO postgres;
+
 --
--- Name: parametros_popularidade_idparametros_popularidade_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 406 (class 1259 OID 54956)
+-- Name: parametros_popularidade_idparametros_popularidade_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.parametros_popularidade_idparametros_popularidade_seq
@@ -31592,8 +33875,11 @@ CREATE SEQUENCE public.parametros_popularidade_idparametros_popularidade_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.parametros_popularidade_idparametros_popularidade_seq OWNER TO postgres;
+
 --
--- Name: parametros_popularidade; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 407 (class 1259 OID 54957)
+-- Name: parametros_popularidade; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.parametros_popularidade (
@@ -31606,8 +33892,11 @@ CREATE TABLE public.parametros_popularidade (
 );
 
 
+ALTER TABLE public.parametros_popularidade OWNER TO postgres;
+
 --
--- Name: parceiros_idparceiro_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 408 (class 1259 OID 54963)
+-- Name: parceiros_idparceiro_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.parceiros_idparceiro_seq
@@ -31618,8 +33907,11 @@ CREATE SEQUENCE public.parceiros_idparceiro_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.parceiros_idparceiro_seq OWNER TO postgres;
+
 --
--- Name: parceiros; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 409 (class 1259 OID 54964)
+-- Name: parceiros; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.parceiros (
@@ -31634,8 +33926,11 @@ CREATE TABLE public.parceiros (
 );
 
 
+ALTER TABLE public.parceiros OWNER TO postgres;
+
 --
--- Name: pedidos_compra_departamento; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 410 (class 1259 OID 54968)
+-- Name: pedidos_compra_departamento; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.pedidos_compra_departamento (
@@ -31644,8 +33939,11 @@ CREATE TABLE public.pedidos_compra_departamento (
 );
 
 
+ALTER TABLE public.pedidos_compra_departamento OWNER TO systock;
+
 --
--- Name: pedidos_compra_tipo; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 411 (class 1259 OID 54971)
+-- Name: pedidos_compra_tipo; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.pedidos_compra_tipo (
@@ -31665,8 +33963,11 @@ CREATE TABLE public.pedidos_compra_tipo (
 );
 
 
+ALTER TABLE public.pedidos_compra_tipo OWNER TO systock;
+
 --
--- Name: pedidos_compra_tipo_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 412 (class 1259 OID 54976)
+-- Name: pedidos_compra_tipo_id_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.pedidos_compra_tipo_id_seq
@@ -31678,15 +33979,20 @@ CREATE SEQUENCE public.pedidos_compra_tipo_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.pedidos_compra_tipo_id_seq OWNER TO systock;
+
 --
--- Name: pedidos_compra_tipo_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6450 (class 0 OID 0)
+-- Dependencies: 412
+-- Name: pedidos_compra_tipo_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.pedidos_compra_tipo_id_seq OWNED BY public.pedidos_compra_tipo.id;
 
 
 --
--- Name: pedidos_compras; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 413 (class 1259 OID 54977)
+-- Name: pedidos_compras; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.pedidos_compras (
@@ -31715,8 +34021,11 @@ CREATE TABLE public.pedidos_compras (
 );
 
 
+ALTER TABLE public.pedidos_compras OWNER TO systock;
+
 --
--- Name: pedidos_compras_fornecedores_agrupados; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 414 (class 1259 OID 54993)
+-- Name: pedidos_compras_fornecedores_agrupados; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.pedidos_compras_fornecedores_agrupados (
@@ -31726,8 +34035,11 @@ CREATE TABLE public.pedidos_compras_fornecedores_agrupados (
 );
 
 
+ALTER TABLE public.pedidos_compras_fornecedores_agrupados OWNER TO systock;
+
 --
--- Name: pedidos_compras_fornecedores_agrupados_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 415 (class 1259 OID 54996)
+-- Name: pedidos_compras_fornecedores_agrupados_id_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.pedidos_compras_fornecedores_agrupados_id_seq
@@ -31739,15 +34051,20 @@ CREATE SEQUENCE public.pedidos_compras_fornecedores_agrupados_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.pedidos_compras_fornecedores_agrupados_id_seq OWNER TO systock;
+
 --
--- Name: pedidos_compras_fornecedores_agrupados_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6451 (class 0 OID 0)
+-- Dependencies: 415
+-- Name: pedidos_compras_fornecedores_agrupados_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.pedidos_compras_fornecedores_agrupados_id_seq OWNED BY public.pedidos_compras_fornecedores_agrupados.id;
 
 
 --
--- Name: pedidos_compras_produto_fracionado; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 416 (class 1259 OID 54997)
+-- Name: pedidos_compras_produto_fracionado; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.pedidos_compras_produto_fracionado (
@@ -31773,8 +34090,11 @@ CREATE TABLE public.pedidos_compras_produto_fracionado (
 );
 
 
+ALTER TABLE public.pedidos_compras_produto_fracionado OWNER TO systock;
+
 --
--- Name: pedidos_compras_fracionada_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 417 (class 1259 OID 55000)
+-- Name: pedidos_compras_fracionada_id_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.pedidos_compras_fracionada_id_seq
@@ -31785,15 +34105,20 @@ CREATE SEQUENCE public.pedidos_compras_fracionada_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.pedidos_compras_fracionada_id_seq OWNER TO systock;
+
 --
--- Name: pedidos_compras_fracionada_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6452 (class 0 OID 0)
+-- Dependencies: 417
+-- Name: pedidos_compras_fracionada_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.pedidos_compras_fracionada_id_seq OWNED BY public.pedidos_compras_produto_fracionado.id;
 
 
 --
--- Name: pedidos_compras_idpedido_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 418 (class 1259 OID 55001)
+-- Name: pedidos_compras_idpedido_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.pedidos_compras_idpedido_seq
@@ -31804,15 +34129,20 @@ CREATE SEQUENCE public.pedidos_compras_idpedido_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.pedidos_compras_idpedido_seq OWNER TO systock;
+
 --
--- Name: pedidos_compras_idpedido_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6453 (class 0 OID 0)
+-- Dependencies: 418
+-- Name: pedidos_compras_idpedido_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.pedidos_compras_idpedido_seq OWNED BY public.pedidos_compras.idpedido;
 
 
 --
--- Name: pedidos_compras_itens; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 419 (class 1259 OID 55002)
+-- Name: pedidos_compras_itens; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.pedidos_compras_itens (
@@ -31835,8 +34165,11 @@ CREATE TABLE public.pedidos_compras_itens (
 );
 
 
+ALTER TABLE public.pedidos_compras_itens OWNER TO systock;
+
 --
--- Name: pedidos_motivos_oportunidade; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 420 (class 1259 OID 55008)
+-- Name: pedidos_motivos_oportunidade; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.pedidos_motivos_oportunidade (
@@ -31846,8 +34179,11 @@ CREATE TABLE public.pedidos_motivos_oportunidade (
 );
 
 
+ALTER TABLE public.pedidos_motivos_oportunidade OWNER TO systock;
+
 --
--- Name: perfil_idperfil_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 421 (class 1259 OID 55011)
+-- Name: perfil_idperfil_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.perfil_idperfil_seq
@@ -31858,8 +34194,11 @@ CREATE SEQUENCE public.perfil_idperfil_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.perfil_idperfil_seq OWNER TO postgres;
+
 --
--- Name: perfil; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 422 (class 1259 OID 55012)
+-- Name: perfil; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.perfil (
@@ -31869,8 +34208,11 @@ CREATE TABLE public.perfil (
 );
 
 
+ALTER TABLE public.perfil OWNER TO postgres;
+
 --
--- Name: preferencias_tabelas_usuario; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 423 (class 1259 OID 55017)
+-- Name: preferencias_tabelas_usuario; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.preferencias_tabelas_usuario (
@@ -31880,8 +34222,11 @@ CREATE TABLE public.preferencias_tabelas_usuario (
 );
 
 
+ALTER TABLE public.preferencias_tabelas_usuario OWNER TO systock;
+
 --
--- Name: prismas_filiais; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 424 (class 1259 OID 55022)
+-- Name: prismas_filiais; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.prismas_filiais (
@@ -31894,8 +34239,11 @@ CREATE TABLE public.prismas_filiais (
 WITH (autovacuum_vacuum_scale_factor='1.07871');
 
 
+ALTER TABLE public.prismas_filiais OWNER TO systock;
+
 --
--- Name: prismas_grupos; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 425 (class 1259 OID 55025)
+-- Name: prismas_grupos; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.prismas_grupos (
@@ -31909,8 +34257,11 @@ CREATE TABLE public.prismas_grupos (
 WITH (autovacuum_vacuum_scale_factor='2.96159');
 
 
+ALTER TABLE public.prismas_grupos OWNER TO systock;
+
 --
--- Name: produtos_analise_mercado; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 426 (class 1259 OID 55028)
+-- Name: produtos_analise_mercado; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.produtos_analise_mercado (
@@ -31937,8 +34288,11 @@ CREATE TABLE public.produtos_analise_mercado (
 );
 
 
+ALTER TABLE public.produtos_analise_mercado OWNER TO systock;
+
 --
--- Name: produtos_analise_mercado_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 427 (class 1259 OID 55034)
+-- Name: produtos_analise_mercado_id_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.produtos_analise_mercado_id_seq
@@ -31950,15 +34304,20 @@ CREATE SEQUENCE public.produtos_analise_mercado_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.produtos_analise_mercado_id_seq OWNER TO systock;
+
 --
--- Name: produtos_analise_mercado_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6454 (class 0 OID 0)
+-- Dependencies: 427
+-- Name: produtos_analise_mercado_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.produtos_analise_mercado_id_seq OWNED BY public.produtos_analise_mercado.id;
 
 
 --
--- Name: produtos_capa_listas_preco; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 428 (class 1259 OID 55035)
+-- Name: produtos_capa_listas_preco; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.produtos_capa_listas_preco (
@@ -31970,8 +34329,11 @@ CREATE TABLE public.produtos_capa_listas_preco (
 );
 
 
+ALTER TABLE public.produtos_capa_listas_preco OWNER TO systock;
+
 --
--- Name: produtos_combinados_compras_filial; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 429 (class 1259 OID 55038)
+-- Name: produtos_combinados_compras_filial; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.produtos_combinados_compras_filial (
@@ -32048,8 +34410,20 @@ CREATE TABLE public.produtos_combinados_compras_filial (
 );
 
 
+ALTER TABLE public.produtos_combinados_compras_filial OWNER TO systock;
+
 --
--- Name: produtos_combinados_compras_grupo; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 6455 (class 0 OID 0)
+-- Dependencies: 429
+-- Name: COLUMN produtos_combinados_compras_filial.estoque_pendente; Type: COMMENT; Schema: public; Owner: systock
+--
+
+COMMENT ON COLUMN public.produtos_combinados_compras_filial.estoque_pendente IS 'Saldo de venda futura';
+
+
+--
+-- TOC entry 430 (class 1259 OID 55045)
+-- Name: produtos_combinados_compras_grupo; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.produtos_combinados_compras_grupo (
@@ -32125,8 +34499,20 @@ CREATE TABLE public.produtos_combinados_compras_grupo (
 );
 
 
+ALTER TABLE public.produtos_combinados_compras_grupo OWNER TO systock;
+
 --
--- Name: produtos_combinados_forecast_filial; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 6456 (class 0 OID 0)
+-- Dependencies: 430
+-- Name: COLUMN produtos_combinados_compras_grupo.estoque_pendente; Type: COMMENT; Schema: public; Owner: systock
+--
+
+COMMENT ON COLUMN public.produtos_combinados_compras_grupo.estoque_pendente IS 'Saldo de venda futura';
+
+
+--
+-- TOC entry 431 (class 1259 OID 55053)
+-- Name: produtos_combinados_forecast_filial; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.produtos_combinados_forecast_filial (
@@ -32140,8 +34526,11 @@ CREATE TABLE public.produtos_combinados_forecast_filial (
 );
 
 
+ALTER TABLE public.produtos_combinados_forecast_filial OWNER TO systock;
+
 --
--- Name: produtos_combinados_forecast_grupo; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 432 (class 1259 OID 55058)
+-- Name: produtos_combinados_forecast_grupo; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.produtos_combinados_forecast_grupo (
@@ -32154,8 +34543,11 @@ CREATE TABLE public.produtos_combinados_forecast_grupo (
 );
 
 
+ALTER TABLE public.produtos_combinados_forecast_grupo OWNER TO systock;
+
 --
--- Name: produtos_combinados_transito_filial; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 433 (class 1259 OID 55063)
+-- Name: produtos_combinados_transito_filial; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.produtos_combinados_transito_filial (
@@ -32175,8 +34567,11 @@ CREATE TABLE public.produtos_combinados_transito_filial (
 );
 
 
+ALTER TABLE public.produtos_combinados_transito_filial OWNER TO systock;
+
 --
--- Name: produtos_combinados_transito_grupo; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 434 (class 1259 OID 55068)
+-- Name: produtos_combinados_transito_grupo; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.produtos_combinados_transito_grupo (
@@ -32195,8 +34590,11 @@ CREATE TABLE public.produtos_combinados_transito_grupo (
 );
 
 
+ALTER TABLE public.produtos_combinados_transito_grupo OWNER TO systock;
+
 --
--- Name: produtos_compras_categorias; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 435 (class 1259 OID 55073)
+-- Name: produtos_compras_categorias; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.produtos_compras_categorias (
@@ -32239,8 +34637,11 @@ CREATE TABLE public.produtos_compras_categorias (
 );
 
 
+ALTER TABLE public.produtos_compras_categorias OWNER TO systock;
+
 --
--- Name: produtos_compras_categorias_mp_pa; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 436 (class 1259 OID 55099)
+-- Name: produtos_compras_categorias_mp_pa; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.produtos_compras_categorias_mp_pa (
@@ -32295,8 +34696,11 @@ CREATE TABLE public.produtos_compras_categorias_mp_pa (
 );
 
 
+ALTER TABLE public.produtos_compras_categorias_mp_pa OWNER TO systock;
+
 --
--- Name: produtos_compras_categorias_mp_pa_transito; Type: VIEW; Schema: public; Owner: -
+-- TOC entry 549 (class 1259 OID 84229)
+-- Name: produtos_compras_categorias_mp_pa_transito; Type: VIEW; Schema: public; Owner: systock
 --
 
 CREATE VIEW public.produtos_compras_categorias_mp_pa_transito AS
@@ -32339,8 +34743,11 @@ CREATE VIEW public.produtos_compras_categorias_mp_pa_transito AS
    FROM saldo_residual sr;
 
 
+ALTER VIEW public.produtos_compras_categorias_mp_pa_transito OWNER TO systock;
+
 --
--- Name: produtos_compras_filial; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 437 (class 1259 OID 55105)
+-- Name: produtos_compras_filial; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.produtos_compras_filial (
@@ -32419,8 +34826,20 @@ CREATE TABLE public.produtos_compras_filial (
 );
 
 
+ALTER TABLE public.produtos_compras_filial OWNER TO systock;
+
 --
--- Name: produtos_desconsiderados_analise_diagnostico_estoque; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 6457 (class 0 OID 0)
+-- Dependencies: 437
+-- Name: COLUMN produtos_compras_filial.estoque_pendente; Type: COMMENT; Schema: public; Owner: systock
+--
+
+COMMENT ON COLUMN public.produtos_compras_filial.estoque_pendente IS 'Saldo de venda futura';
+
+
+--
+-- TOC entry 438 (class 1259 OID 55122)
+-- Name: produtos_desconsiderados_analise_diagnostico_estoque; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.produtos_desconsiderados_analise_diagnostico_estoque (
@@ -32428,8 +34847,11 @@ CREATE TABLE public.produtos_desconsiderados_analise_diagnostico_estoque (
 );
 
 
+ALTER TABLE public.produtos_desconsiderados_analise_diagnostico_estoque OWNER TO systock;
+
 --
--- Name: produtos_estatistica; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 439 (class 1259 OID 55125)
+-- Name: produtos_estatistica; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.produtos_estatistica (
@@ -32446,8 +34868,11 @@ CREATE TABLE public.produtos_estatistica (
 );
 
 
+ALTER TABLE public.produtos_estatistica OWNER TO postgres;
+
 --
--- Name: produtos_forecast; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 440 (class 1259 OID 55132)
+-- Name: produtos_forecast; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.produtos_forecast (
@@ -32479,8 +34904,11 @@ CREATE TABLE public.produtos_forecast (
 );
 
 
+ALTER TABLE public.produtos_forecast OWNER TO systock;
+
 --
--- Name: produtos_forecast_categorias; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 441 (class 1259 OID 55137)
+-- Name: produtos_forecast_categorias; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.produtos_forecast_categorias (
@@ -32505,8 +34933,11 @@ CREATE TABLE public.produtos_forecast_categorias (
 );
 
 
+ALTER TABLE public.produtos_forecast_categorias OWNER TO systock;
+
 --
--- Name: produtos_forecast_categorias_mp_pa; Type: VIEW; Schema: public; Owner: -
+-- TOC entry 442 (class 1259 OID 55145)
+-- Name: produtos_forecast_categorias_mp_pa; Type: VIEW; Schema: public; Owner: systock
 --
 
 CREATE VIEW public.produtos_forecast_categorias_mp_pa AS
@@ -32571,8 +35002,11 @@ CREATE VIEW public.produtos_forecast_categorias_mp_pa AS
   WHERE ((saldo_futuro <= ponto_pedido) AND (lote_compras_bruto > (0)::numeric));
 
 
+ALTER VIEW public.produtos_forecast_categorias_mp_pa OWNER TO systock;
+
 --
--- Name: produtos_forecast_filial; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 443 (class 1259 OID 55150)
+-- Name: produtos_forecast_filial; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.produtos_forecast_filial (
@@ -32605,8 +35039,11 @@ CREATE TABLE public.produtos_forecast_filial (
 );
 
 
+ALTER TABLE public.produtos_forecast_filial OWNER TO systock;
+
 --
--- Name: produtos_forecast_itens; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 444 (class 1259 OID 55155)
+-- Name: produtos_forecast_itens; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.produtos_forecast_itens (
@@ -32615,8 +35052,11 @@ CREATE TABLE public.produtos_forecast_itens (
 );
 
 
+ALTER TABLE public.produtos_forecast_itens OWNER TO systock;
+
 --
--- Name: produtos_impostos; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 445 (class 1259 OID 55158)
+-- Name: produtos_impostos; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.produtos_impostos (
@@ -32636,8 +35076,11 @@ CREATE TABLE public.produtos_impostos (
 );
 
 
+ALTER TABLE public.produtos_impostos OWNER TO systock;
+
 --
--- Name: produtos_margem; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 446 (class 1259 OID 55161)
+-- Name: produtos_margem; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.produtos_margem (
@@ -32651,8 +35094,11 @@ CREATE TABLE public.produtos_margem (
 );
 
 
+ALTER TABLE public.produtos_margem OWNER TO systock;
+
 --
--- Name: produtos_mp; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 447 (class 1259 OID 55165)
+-- Name: produtos_mp; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.produtos_mp (
@@ -32673,8 +35119,11 @@ CREATE TABLE public.produtos_mp (
 );
 
 
+ALTER TABLE public.produtos_mp OWNER TO systock;
+
 --
--- Name: produtos_pa; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 448 (class 1259 OID 55169)
+-- Name: produtos_pa; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.produtos_pa (
@@ -32689,8 +35138,11 @@ CREATE TABLE public.produtos_pa (
 );
 
 
+ALTER TABLE public.produtos_pa OWNER TO systock;
+
 --
--- Name: produtos_para_nao_exibir_nos_indicadores; Type: VIEW; Schema: public; Owner: -
+-- TOC entry 449 (class 1259 OID 55177)
+-- Name: produtos_para_nao_exibir_nos_indicadores; Type: VIEW; Schema: public; Owner: systock
 --
 
 CREATE VIEW public.produtos_para_nao_exibir_nos_indicadores AS
@@ -32699,8 +35151,11 @@ CREATE VIEW public.produtos_para_nao_exibir_nos_indicadores AS
  LIMIT 0;
 
 
+ALTER VIEW public.produtos_para_nao_exibir_nos_indicadores OWNER TO systock;
+
 --
--- Name: produtos_pedidos_compra_tipo; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 450 (class 1259 OID 55182)
+-- Name: produtos_pedidos_compra_tipo; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.produtos_pedidos_compra_tipo (
@@ -32719,8 +35174,11 @@ CREATE TABLE public.produtos_pedidos_compra_tipo (
 );
 
 
+ALTER TABLE public.produtos_pedidos_compra_tipo OWNER TO systock;
+
 --
--- Name: produtos_pedidos_compra_tipo_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 451 (class 1259 OID 55186)
+-- Name: produtos_pedidos_compra_tipo_id_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.produtos_pedidos_compra_tipo_id_seq
@@ -32731,15 +35189,20 @@ CREATE SEQUENCE public.produtos_pedidos_compra_tipo_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.produtos_pedidos_compra_tipo_id_seq OWNER TO systock;
+
 --
--- Name: produtos_pedidos_compra_tipo_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6458 (class 0 OID 0)
+-- Dependencies: 451
+-- Name: produtos_pedidos_compra_tipo_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.produtos_pedidos_compra_tipo_id_seq OWNED BY public.produtos_pedidos_compra_tipo.id;
 
 
 --
--- Name: produtos_separacao_tmp; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 452 (class 1259 OID 55187)
+-- Name: produtos_separacao_tmp; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.produtos_separacao_tmp (
@@ -32756,8 +35219,11 @@ CREATE TABLE public.produtos_separacao_tmp (
 );
 
 
+ALTER TABLE public.produtos_separacao_tmp OWNER TO systock;
+
 --
--- Name: produtos_separacao; Type: MATERIALIZED VIEW; Schema: public; Owner: -
+-- TOC entry 453 (class 1259 OID 55196)
+-- Name: produtos_separacao; Type: MATERIALIZED VIEW; Schema: public; Owner: systock
 --
 
 CREATE MATERIALIZED VIEW public.produtos_separacao AS
@@ -32774,8 +35240,11 @@ CREATE MATERIALIZED VIEW public.produtos_separacao AS
   WITH NO DATA;
 
 
+ALTER MATERIALIZED VIEW public.produtos_separacao OWNER TO systock;
+
 --
--- Name: produtos_transito; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 454 (class 1259 OID 55200)
+-- Name: produtos_transito; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.produtos_transito (
@@ -32811,8 +35280,11 @@ CREATE TABLE public.produtos_transito (
 );
 
 
+ALTER TABLE public.produtos_transito OWNER TO systock;
+
 --
--- Name: produtos_transito_categorias; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 455 (class 1259 OID 55205)
+-- Name: produtos_transito_categorias; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.produtos_transito_categorias (
@@ -32838,8 +35310,11 @@ CREATE TABLE public.produtos_transito_categorias (
 );
 
 
+ALTER TABLE public.produtos_transito_categorias OWNER TO systock;
+
 --
--- Name: produtos_transito_filial; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 456 (class 1259 OID 55210)
+-- Name: produtos_transito_filial; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.produtos_transito_filial (
@@ -32876,8 +35351,11 @@ CREATE TABLE public.produtos_transito_filial (
 );
 
 
+ALTER TABLE public.produtos_transito_filial OWNER TO systock;
+
 --
--- Name: questionario_criticidade_idquestionario_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 457 (class 1259 OID 55215)
+-- Name: questionario_criticidade_idquestionario_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.questionario_criticidade_idquestionario_seq
@@ -32888,8 +35366,11 @@ CREATE SEQUENCE public.questionario_criticidade_idquestionario_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.questionario_criticidade_idquestionario_seq OWNER TO postgres;
+
 --
--- Name: questionario_criticidade; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 458 (class 1259 OID 55216)
+-- Name: questionario_criticidade; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.questionario_criticidade (
@@ -32898,8 +35379,11 @@ CREATE TABLE public.questionario_criticidade (
 );
 
 
+ALTER TABLE public.questionario_criticidade OWNER TO postgres;
+
 --
--- Name: release_notes; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 459 (class 1259 OID 55222)
+-- Name: release_notes; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.release_notes (
@@ -32909,8 +35393,11 @@ CREATE TABLE public.release_notes (
 );
 
 
+ALTER TABLE public.release_notes OWNER TO systock;
+
 --
--- Name: release_notes_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 460 (class 1259 OID 55227)
+-- Name: release_notes_id_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.release_notes_id_seq
@@ -32922,15 +35409,20 @@ CREATE SEQUENCE public.release_notes_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.release_notes_id_seq OWNER TO systock;
+
 --
--- Name: release_notes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6459 (class 0 OID 0)
+-- Dependencies: 460
+-- Name: release_notes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.release_notes_id_seq OWNED BY public.release_notes.id;
 
 
 --
--- Name: rentabilidade; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 461 (class 1259 OID 55228)
+-- Name: rentabilidade; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.rentabilidade (
@@ -32953,8 +35445,11 @@ CREATE TABLE public.rentabilidade (
 );
 
 
+ALTER TABLE public.rentabilidade OWNER TO systock;
+
 --
--- Name: requisicoes_desconsideradas; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 462 (class 1259 OID 55231)
+-- Name: requisicoes_desconsideradas; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.requisicoes_desconsideradas (
@@ -32967,8 +35462,11 @@ CREATE TABLE public.requisicoes_desconsideradas (
 );
 
 
+ALTER TABLE public.requisicoes_desconsideradas OWNER TO systock;
+
 --
--- Name: requisicoes_tmp; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 463 (class 1259 OID 55234)
+-- Name: requisicoes_tmp; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.requisicoes_tmp (
@@ -33004,8 +35502,20 @@ CREATE TABLE public.requisicoes_tmp (
 );
 
 
+ALTER TABLE public.requisicoes_tmp OWNER TO systock;
+
 --
--- Name: resposta_criticidade_idresposta_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 6460 (class 0 OID 0)
+-- Dependencies: 463
+-- Name: COLUMN requisicoes_tmp.moeda; Type: COMMENT; Schema: public; Owner: systock
+--
+
+COMMENT ON COLUMN public.requisicoes_tmp.moeda IS 'R - Real, D - Dolar, UE - Euro, ST - Sem Tabela';
+
+
+--
+-- TOC entry 464 (class 1259 OID 55250)
+-- Name: resposta_criticidade_idresposta_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.resposta_criticidade_idresposta_seq
@@ -33016,8 +35526,11 @@ CREATE SEQUENCE public.resposta_criticidade_idresposta_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.resposta_criticidade_idresposta_seq OWNER TO postgres;
+
 --
--- Name: resposta_criticidade; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 465 (class 1259 OID 55251)
+-- Name: resposta_criticidade; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.resposta_criticidade (
@@ -33028,8 +35541,11 @@ CREATE TABLE public.resposta_criticidade (
 );
 
 
+ALTER TABLE public.resposta_criticidade OWNER TO postgres;
+
 --
--- Name: ressuprimentos; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 466 (class 1259 OID 55257)
+-- Name: ressuprimentos; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.ressuprimentos (
@@ -33042,8 +35558,11 @@ CREATE TABLE public.ressuprimentos (
 );
 
 
+ALTER TABLE public.ressuprimentos OWNER TO postgres;
+
 --
--- Name: saldo_grupos; Type: MATERIALIZED VIEW; Schema: public; Owner: -
+-- TOC entry 467 (class 1259 OID 55262)
+-- Name: saldo_grupos; Type: MATERIALIZED VIEW; Schema: public; Owner: systock
 --
 
 CREATE MATERIALIZED VIEW public.saldo_grupos
@@ -33105,8 +35624,11 @@ WITH (autovacuum_vacuum_scale_factor='0.06871') AS
   WITH NO DATA;
 
 
+ALTER MATERIALIZED VIEW public.saldo_grupos OWNER TO systock;
+
 --
--- Name: saldo_grupos_categorias_mp_pa; Type: VIEW; Schema: public; Owner: -
+-- TOC entry 468 (class 1259 OID 55269)
+-- Name: saldo_grupos_categorias_mp_pa; Type: VIEW; Schema: public; Owner: systock
 --
 
 CREATE VIEW public.saldo_grupos_categorias_mp_pa AS
@@ -33121,8 +35643,11 @@ SELECT
     NULL::numeric AS consumo_medio;
 
 
+ALTER VIEW public.saldo_grupos_categorias_mp_pa OWNER TO systock;
+
 --
--- Name: sazonalidade_produtos; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 469 (class 1259 OID 55273)
+-- Name: sazonalidade_produtos; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.sazonalidade_produtos (
@@ -33153,8 +35678,11 @@ CREATE TABLE public.sazonalidade_produtos (
 );
 
 
+ALTER TABLE public.sazonalidade_produtos OWNER TO systock;
+
 --
--- Name: sazonalidades_produtos; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 470 (class 1259 OID 55296)
+-- Name: sazonalidades_produtos; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.sazonalidades_produtos (
@@ -33175,8 +35703,11 @@ CREATE TABLE public.sazonalidades_produtos (
 );
 
 
+ALTER TABLE public.sazonalidades_produtos OWNER TO systock;
+
 --
--- Name: sazonalidades_produtos_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 471 (class 1259 OID 55309)
+-- Name: sazonalidades_produtos_id_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.sazonalidades_produtos_id_seq
@@ -33188,15 +35719,20 @@ CREATE SEQUENCE public.sazonalidades_produtos_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.sazonalidades_produtos_id_seq OWNER TO systock;
+
 --
--- Name: sazonalidades_produtos_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6461 (class 0 OID 0)
+-- Dependencies: 471
+-- Name: sazonalidades_produtos_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.sazonalidades_produtos_id_seq OWNED BY public.sazonalidades_produtos.id;
 
 
 --
--- Name: sazonalidades_produtos_periodos; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 472 (class 1259 OID 55310)
+-- Name: sazonalidades_produtos_periodos; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.sazonalidades_produtos_periodos (
@@ -33211,8 +35747,20 @@ CREATE TABLE public.sazonalidades_produtos_periodos (
 );
 
 
+ALTER TABLE public.sazonalidades_produtos_periodos OWNER TO systock;
+
 --
--- Name: secao; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 6462 (class 0 OID 0)
+-- Dependencies: 472
+-- Name: COLUMN sazonalidades_produtos_periodos.status; Type: COMMENT; Schema: public; Owner: systock
+--
+
+COMMENT ON COLUMN public.sazonalidades_produtos_periodos.status IS 'S - sim, N - não';
+
+
+--
+-- TOC entry 473 (class 1259 OID 55318)
+-- Name: secao; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.secao (
@@ -33223,8 +35771,11 @@ CREATE TABLE public.secao (
 );
 
 
+ALTER TABLE public.secao OWNER TO systock;
+
 --
--- Name: secao_idsecao_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 474 (class 1259 OID 55321)
+-- Name: secao_idsecao_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.secao_idsecao_seq
@@ -33236,15 +35787,20 @@ CREATE SEQUENCE public.secao_idsecao_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.secao_idsecao_seq OWNER TO systock;
+
 --
--- Name: secao_idsecao_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6463 (class 0 OID 0)
+-- Dependencies: 474
+-- Name: secao_idsecao_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.secao_idsecao_seq OWNED BY public.secao.idsecao;
 
 
 --
--- Name: sequencias; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 475 (class 1259 OID 55322)
+-- Name: sequencias; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.sequencias (
@@ -33253,8 +35809,11 @@ CREATE TABLE public.sequencias (
 );
 
 
+ALTER TABLE public.sequencias OWNER TO postgres;
+
 --
--- Name: similares; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 476 (class 1259 OID 55325)
+-- Name: similares; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.similares (
@@ -33266,8 +35825,11 @@ CREATE TABLE public.similares (
 );
 
 
+ALTER TABLE public.similares OWNER TO systock;
+
 --
--- Name: similares_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 477 (class 1259 OID 55330)
+-- Name: similares_id_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.similares_id_seq
@@ -33278,15 +35840,20 @@ CREATE SEQUENCE public.similares_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.similares_id_seq OWNER TO systock;
+
 --
--- Name: similares_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6464 (class 0 OID 0)
+-- Dependencies: 477
+-- Name: similares_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.similares_id_seq OWNED BY public.similares.id;
 
 
 --
--- Name: solicitacoes_compras_idsolicitacao_compra_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 478 (class 1259 OID 55331)
+-- Name: solicitacoes_compras_idsolicitacao_compra_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.solicitacoes_compras_idsolicitacao_compra_seq
@@ -33297,8 +35864,11 @@ CREATE SEQUENCE public.solicitacoes_compras_idsolicitacao_compra_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.solicitacoes_compras_idsolicitacao_compra_seq OWNER TO postgres;
+
 --
--- Name: solicitacoes_compras; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 479 (class 1259 OID 55332)
+-- Name: solicitacoes_compras; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.solicitacoes_compras (
@@ -33315,8 +35885,11 @@ CREATE TABLE public.solicitacoes_compras (
 );
 
 
+ALTER TABLE public.solicitacoes_compras OWNER TO postgres;
+
 --
--- Name: status_consumos_para_ocultar; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 480 (class 1259 OID 55336)
+-- Name: status_consumos_para_ocultar; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.status_consumos_para_ocultar (
@@ -33325,8 +35898,11 @@ CREATE TABLE public.status_consumos_para_ocultar (
 );
 
 
+ALTER TABLE public.status_consumos_para_ocultar OWNER TO systock;
+
 --
--- Name: status_consumos_para_ocultar_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 481 (class 1259 OID 55339)
+-- Name: status_consumos_para_ocultar_id_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.status_consumos_para_ocultar_id_seq
@@ -33338,15 +35914,20 @@ CREATE SEQUENCE public.status_consumos_para_ocultar_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.status_consumos_para_ocultar_id_seq OWNER TO systock;
+
 --
--- Name: status_consumos_para_ocultar_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6465 (class 0 OID 0)
+-- Dependencies: 481
+-- Name: status_consumos_para_ocultar_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.status_consumos_para_ocultar_id_seq OWNED BY public.status_consumos_para_ocultar.id;
 
 
 --
--- Name: status_produto; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 482 (class 1259 OID 55340)
+-- Name: status_produto; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.status_produto (
@@ -33406,8 +35987,11 @@ CREATE TABLE public.status_produto (
 WITH (autovacuum_vacuum_scale_factor='0.35342');
 
 
+ALTER TABLE public.status_produto OWNER TO systock;
+
 --
--- Name: vw_analise_drp_parametrizada; Type: VIEW; Schema: public; Owner: -
+-- TOC entry 483 (class 1259 OID 55345)
+-- Name: vw_analise_drp_parametrizada; Type: VIEW; Schema: public; Owner: systock
 --
 
 CREATE VIEW public.vw_analise_drp_parametrizada AS
@@ -33525,8 +36109,11 @@ CREATE VIEW public.vw_analise_drp_parametrizada AS
      JOIN public.fornecedor f ON ((f.id = a.idfornecedor)));
 
 
+ALTER VIEW public.vw_analise_drp_parametrizada OWNER TO systock;
+
 --
--- Name: sys_analise_diagnostico_drp_estoque_filial; Type: MATERIALIZED VIEW; Schema: public; Owner: -
+-- TOC entry 547 (class 1259 OID 84191)
+-- Name: sys_analise_diagnostico_drp_estoque_filial; Type: MATERIALIZED VIEW; Schema: public; Owner: systock
 --
 
 CREATE MATERIALIZED VIEW public.sys_analise_diagnostico_drp_estoque_filial AS
@@ -33849,8 +36436,11 @@ CREATE MATERIALIZED VIEW public.sys_analise_diagnostico_drp_estoque_filial AS
   WITH NO DATA;
 
 
+ALTER MATERIALIZED VIEW public.sys_analise_diagnostico_drp_estoque_filial OWNER TO systock;
+
 --
--- Name: sys_analise_diagnostico_drp_estoque_filial_historico; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 484 (class 1259 OID 55357)
+-- Name: sys_analise_diagnostico_drp_estoque_filial_historico; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.sys_analise_diagnostico_drp_estoque_filial_historico (
@@ -33923,8 +36513,11 @@ CREATE TABLE public.sys_analise_diagnostico_drp_estoque_filial_historico (
 );
 
 
+ALTER TABLE public.sys_analise_diagnostico_drp_estoque_filial_historico OWNER TO systock;
+
 --
--- Name: sys_exportacoes_pedidos_compras_api; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 552 (class 1259 OID 84244)
+-- Name: sys_exportacoes_pedidos_compras_api; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.sys_exportacoes_pedidos_compras_api (
@@ -33940,8 +36533,11 @@ CREATE TABLE public.sys_exportacoes_pedidos_compras_api (
 );
 
 
+ALTER TABLE public.sys_exportacoes_pedidos_compras_api OWNER TO systock;
+
 --
--- Name: sys_exportacoes_pedidos_compras_api_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 551 (class 1259 OID 84243)
+-- Name: sys_exportacoes_pedidos_compras_api_id_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.sys_exportacoes_pedidos_compras_api_id_seq
@@ -33953,15 +36549,20 @@ CREATE SEQUENCE public.sys_exportacoes_pedidos_compras_api_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.sys_exportacoes_pedidos_compras_api_id_seq OWNER TO systock;
+
 --
--- Name: sys_exportacoes_pedidos_compras_api_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6466 (class 0 OID 0)
+-- Dependencies: 551
+-- Name: sys_exportacoes_pedidos_compras_api_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.sys_exportacoes_pedidos_compras_api_id_seq OWNED BY public.sys_exportacoes_pedidos_compras_api.id;
 
 
 --
--- Name: sys_exportacoes_pedidos_compras_api_itens; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 554 (class 1259 OID 84286)
+-- Name: sys_exportacoes_pedidos_compras_api_itens; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.sys_exportacoes_pedidos_compras_api_itens (
@@ -33974,8 +36575,11 @@ CREATE TABLE public.sys_exportacoes_pedidos_compras_api_itens (
 );
 
 
+ALTER TABLE public.sys_exportacoes_pedidos_compras_api_itens OWNER TO systock;
+
 --
--- Name: sys_herancas_produtos_combinados; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 550 (class 1259 OID 84235)
+-- Name: sys_herancas_produtos_combinados; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.sys_herancas_produtos_combinados (
@@ -33986,8 +36590,11 @@ CREATE TABLE public.sys_herancas_produtos_combinados (
 );
 
 
+ALTER TABLE public.sys_herancas_produtos_combinados OWNER TO systock;
+
 --
--- Name: sys_historico_de_atualizacao_em_massa_por_filial; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 485 (class 1259 OID 55362)
+-- Name: sys_historico_de_atualizacao_em_massa_por_filial; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.sys_historico_de_atualizacao_em_massa_por_filial (
@@ -33998,8 +36605,11 @@ CREATE TABLE public.sys_historico_de_atualizacao_em_massa_por_filial (
 );
 
 
+ALTER TABLE public.sys_historico_de_atualizacao_em_massa_por_filial OWNER TO systock;
+
 --
--- Name: sys_historico_de_atualizacao_em_massa_por_filial_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 486 (class 1259 OID 55365)
+-- Name: sys_historico_de_atualizacao_em_massa_por_filial_id_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.sys_historico_de_atualizacao_em_massa_por_filial_id_seq
@@ -34011,15 +36621,20 @@ CREATE SEQUENCE public.sys_historico_de_atualizacao_em_massa_por_filial_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.sys_historico_de_atualizacao_em_massa_por_filial_id_seq OWNER TO systock;
+
 --
--- Name: sys_historico_de_atualizacao_em_massa_por_filial_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6467 (class 0 OID 0)
+-- Dependencies: 486
+-- Name: sys_historico_de_atualizacao_em_massa_por_filial_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.sys_historico_de_atualizacao_em_massa_por_filial_id_seq OWNED BY public.sys_historico_de_atualizacao_em_massa_por_filial.id;
 
 
 --
--- Name: sys_justificativas_distribuicao_drp; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 599 (class 1259 OID 84634)
+-- Name: sys_justificativas_distribuicao_drp; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.sys_justificativas_distribuicao_drp (
@@ -34033,8 +36648,11 @@ CREATE TABLE public.sys_justificativas_distribuicao_drp (
 );
 
 
+ALTER TABLE public.sys_justificativas_distribuicao_drp OWNER TO systock;
+
 --
--- Name: sys_justificativas_distribuicao_drp_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 598 (class 1259 OID 84633)
+-- Name: sys_justificativas_distribuicao_drp_id_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.sys_justificativas_distribuicao_drp_id_seq
@@ -34045,15 +36663,20 @@ CREATE SEQUENCE public.sys_justificativas_distribuicao_drp_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.sys_justificativas_distribuicao_drp_id_seq OWNER TO systock;
+
 --
--- Name: sys_justificativas_distribuicao_drp_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6468 (class 0 OID 0)
+-- Dependencies: 598
+-- Name: sys_justificativas_distribuicao_drp_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.sys_justificativas_distribuicao_drp_id_seq OWNED BY public.sys_justificativas_distribuicao_drp.id;
 
 
 --
--- Name: sys_justificativas_mix_filiais; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 556 (class 1259 OID 84295)
+-- Name: sys_justificativas_mix_filiais; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.sys_justificativas_mix_filiais (
@@ -34065,8 +36688,11 @@ CREATE TABLE public.sys_justificativas_mix_filiais (
 );
 
 
+ALTER TABLE public.sys_justificativas_mix_filiais OWNER TO systock;
+
 --
--- Name: sys_justificativas_mix_filiais_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 555 (class 1259 OID 84294)
+-- Name: sys_justificativas_mix_filiais_id_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.sys_justificativas_mix_filiais_id_seq
@@ -34077,15 +36703,20 @@ CREATE SEQUENCE public.sys_justificativas_mix_filiais_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.sys_justificativas_mix_filiais_id_seq OWNER TO systock;
+
 --
--- Name: sys_justificativas_mix_filiais_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6469 (class 0 OID 0)
+-- Dependencies: 555
+-- Name: sys_justificativas_mix_filiais_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.sys_justificativas_mix_filiais_id_seq OWNED BY public.sys_justificativas_mix_filiais.id;
 
 
 --
--- Name: sys_listas_separacao_drp; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 487 (class 1259 OID 55366)
+-- Name: sys_listas_separacao_drp; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.sys_listas_separacao_drp (
@@ -34096,8 +36727,11 @@ CREATE TABLE public.sys_listas_separacao_drp (
 );
 
 
+ALTER TABLE public.sys_listas_separacao_drp OWNER TO systock;
+
 --
--- Name: sys_listas_separacao_drp_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 488 (class 1259 OID 55372)
+-- Name: sys_listas_separacao_drp_id_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.sys_listas_separacao_drp_id_seq
@@ -34109,15 +36743,20 @@ CREATE SEQUENCE public.sys_listas_separacao_drp_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.sys_listas_separacao_drp_id_seq OWNER TO systock;
+
 --
--- Name: sys_listas_separacao_drp_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6470 (class 0 OID 0)
+-- Dependencies: 488
+-- Name: sys_listas_separacao_drp_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.sys_listas_separacao_drp_id_seq OWNED BY public.sys_listas_separacao_drp.id;
 
 
 --
--- Name: sys_produtos_analise_por_lotes; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 489 (class 1259 OID 55373)
+-- Name: sys_produtos_analise_por_lotes; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.sys_produtos_analise_por_lotes (
@@ -34134,8 +36773,11 @@ CREATE TABLE public.sys_produtos_analise_por_lotes (
 );
 
 
+ALTER TABLE public.sys_produtos_analise_por_lotes OWNER TO systock;
+
 --
--- Name: sys_produtos_combinados_sequence; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 490 (class 1259 OID 55378)
+-- Name: sys_produtos_combinados_sequence; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.sys_produtos_combinados_sequence
@@ -34146,8 +36788,11 @@ CREATE SEQUENCE public.sys_produtos_combinados_sequence
     CACHE 1;
 
 
+ALTER SEQUENCE public.sys_produtos_combinados_sequence OWNER TO systock;
+
 --
--- Name: sys_produtos_combinados; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 491 (class 1259 OID 55379)
+-- Name: sys_produtos_combinados; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.sys_produtos_combinados (
@@ -34158,8 +36803,11 @@ CREATE TABLE public.sys_produtos_combinados (
 );
 
 
+ALTER TABLE public.sys_produtos_combinados OWNER TO systock;
+
 --
--- Name: sys_produtos_combinados_itens; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 492 (class 1259 OID 55384)
+-- Name: sys_produtos_combinados_itens; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.sys_produtos_combinados_itens (
@@ -34170,8 +36818,11 @@ CREATE TABLE public.sys_produtos_combinados_itens (
 );
 
 
+ALTER TABLE public.sys_produtos_combinados_itens OWNER TO systock;
+
 --
--- Name: sys_produtos_comparacao; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 493 (class 1259 OID 55389)
+-- Name: sys_produtos_comparacao; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.sys_produtos_comparacao (
@@ -34182,8 +36833,11 @@ CREATE TABLE public.sys_produtos_comparacao (
 );
 
 
+ALTER TABLE public.sys_produtos_comparacao OWNER TO systock;
+
 --
--- Name: sys_produtos_importados_em_massa_por_filial; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 494 (class 1259 OID 55395)
+-- Name: sys_produtos_importados_em_massa_por_filial; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.sys_produtos_importados_em_massa_por_filial (
@@ -34200,8 +36854,11 @@ CREATE TABLE public.sys_produtos_importados_em_massa_por_filial (
 );
 
 
+ALTER TABLE public.sys_produtos_importados_em_massa_por_filial OWNER TO systock;
+
 --
--- Name: sys_produtos_importados_em_massa_por_filial_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 495 (class 1259 OID 55400)
+-- Name: sys_produtos_importados_em_massa_por_filial_id_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.sys_produtos_importados_em_massa_por_filial_id_seq
@@ -34213,15 +36870,20 @@ CREATE SEQUENCE public.sys_produtos_importados_em_massa_por_filial_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.sys_produtos_importados_em_massa_por_filial_id_seq OWNER TO systock;
+
 --
--- Name: sys_produtos_importados_em_massa_por_filial_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6471 (class 0 OID 0)
+-- Dependencies: 495
+-- Name: sys_produtos_importados_em_massa_por_filial_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.sys_produtos_importados_em_massa_por_filial_id_seq OWNED BY public.sys_produtos_importados_em_massa_por_filial.id;
 
 
 --
--- Name: sys_produtos_mix_filial; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 557 (class 1259 OID 84304)
+-- Name: sys_produtos_mix_filial; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.sys_produtos_mix_filial (
@@ -34233,8 +36895,11 @@ CREATE TABLE public.sys_produtos_mix_filial (
 );
 
 
+ALTER TABLE public.sys_produtos_mix_filial OWNER TO systock;
+
 --
--- Name: sys_rodadas_compra_sazonal; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 607 (class 1259 OID 84686)
+-- Name: sys_rodadas_compra_sazonal; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.sys_rodadas_compra_sazonal (
@@ -34249,8 +36914,11 @@ CREATE TABLE public.sys_rodadas_compra_sazonal (
 );
 
 
+ALTER TABLE public.sys_rodadas_compra_sazonal OWNER TO systock;
+
 --
--- Name: sys_rodadas_compra_sazonal_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 606 (class 1259 OID 84685)
+-- Name: sys_rodadas_compra_sazonal_id_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.sys_rodadas_compra_sazonal_id_seq
@@ -34261,15 +36929,20 @@ CREATE SEQUENCE public.sys_rodadas_compra_sazonal_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.sys_rodadas_compra_sazonal_id_seq OWNER TO systock;
+
 --
--- Name: sys_rodadas_compra_sazonal_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6472 (class 0 OID 0)
+-- Dependencies: 606
+-- Name: sys_rodadas_compra_sazonal_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.sys_rodadas_compra_sazonal_id_seq OWNED BY public.sys_rodadas_compra_sazonal.id;
 
 
 --
--- Name: sys_rodadas_compra_sazonal_itens; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 609 (class 1259 OID 84703)
+-- Name: sys_rodadas_compra_sazonal_itens; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.sys_rodadas_compra_sazonal_itens (
@@ -34281,8 +36954,11 @@ CREATE TABLE public.sys_rodadas_compra_sazonal_itens (
 );
 
 
+ALTER TABLE public.sys_rodadas_compra_sazonal_itens OWNER TO systock;
+
 --
--- Name: sys_rodadas_compra_sazonal_itens_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 608 (class 1259 OID 84702)
+-- Name: sys_rodadas_compra_sazonal_itens_id_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.sys_rodadas_compra_sazonal_itens_id_seq
@@ -34293,15 +36969,20 @@ CREATE SEQUENCE public.sys_rodadas_compra_sazonal_itens_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.sys_rodadas_compra_sazonal_itens_id_seq OWNER TO systock;
+
 --
--- Name: sys_rodadas_compra_sazonal_itens_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6473 (class 0 OID 0)
+-- Dependencies: 608
+-- Name: sys_rodadas_compra_sazonal_itens_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.sys_rodadas_compra_sazonal_itens_id_seq OWNED BY public.sys_rodadas_compra_sazonal_itens.id;
 
 
 --
--- Name: sys_tipo_projecao_media_sazonal_produtos_filial; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 496 (class 1259 OID 55401)
+-- Name: sys_tipo_projecao_media_sazonal_produtos_filial; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.sys_tipo_projecao_media_sazonal_produtos_filial (
@@ -34318,8 +36999,11 @@ CREATE TABLE public.sys_tipo_projecao_media_sazonal_produtos_filial (
 );
 
 
+ALTER TABLE public.sys_tipo_projecao_media_sazonal_produtos_filial OWNER TO systock;
+
 --
--- Name: sys_tipos_justificativas_distribuicao_drp; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 603 (class 1259 OID 84662)
+-- Name: sys_tipos_justificativas_distribuicao_drp; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.sys_tipos_justificativas_distribuicao_drp (
@@ -34330,8 +37014,11 @@ CREATE TABLE public.sys_tipos_justificativas_distribuicao_drp (
 );
 
 
+ALTER TABLE public.sys_tipos_justificativas_distribuicao_drp OWNER TO systock;
+
 --
--- Name: sys_tipos_justificativas_distribuicao_drp_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 602 (class 1259 OID 84661)
+-- Name: sys_tipos_justificativas_distribuicao_drp_id_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.sys_tipos_justificativas_distribuicao_drp_id_seq
@@ -34342,15 +37029,20 @@ CREATE SEQUENCE public.sys_tipos_justificativas_distribuicao_drp_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.sys_tipos_justificativas_distribuicao_drp_id_seq OWNER TO systock;
+
 --
--- Name: sys_tipos_justificativas_distribuicao_drp_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6474 (class 0 OID 0)
+-- Dependencies: 602
+-- Name: sys_tipos_justificativas_distribuicao_drp_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.sys_tipos_justificativas_distribuicao_drp_id_seq OWNED BY public.sys_tipos_justificativas_distribuicao_drp.id;
 
 
 --
--- Name: sys_tipos_projecao_vendas_produtos_filial; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 497 (class 1259 OID 55406)
+-- Name: sys_tipos_projecao_vendas_produtos_filial; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.sys_tipos_projecao_vendas_produtos_filial (
@@ -34364,8 +37056,11 @@ CREATE TABLE public.sys_tipos_projecao_vendas_produtos_filial (
 );
 
 
+ALTER TABLE public.sys_tipos_projecao_vendas_produtos_filial OWNER TO systock;
+
 --
--- Name: temp_analise_balanceamento; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 498 (class 1259 OID 55410)
+-- Name: temp_analise_balanceamento; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.temp_analise_balanceamento (
@@ -34410,8 +37105,11 @@ CREATE TABLE public.temp_analise_balanceamento (
 );
 
 
+ALTER TABLE public.temp_analise_balanceamento OWNER TO systock;
+
 --
--- Name: tempo; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 499 (class 1259 OID 55415)
+-- Name: tempo; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.tempo (
@@ -34421,8 +37119,11 @@ CREATE TABLE public.tempo (
 );
 
 
+ALTER TABLE public.tempo OWNER TO postgres;
+
 --
--- Name: tempo_cobertura_compras; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 500 (class 1259 OID 55418)
+-- Name: tempo_cobertura_compras; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.tempo_cobertura_compras (
@@ -34441,8 +37142,11 @@ CREATE TABLE public.tempo_cobertura_compras (
 );
 
 
+ALTER TABLE public.tempo_cobertura_compras OWNER TO systock;
+
 --
--- Name: tempo_cobertura_compras_fornecedor; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 501 (class 1259 OID 55422)
+-- Name: tempo_cobertura_compras_fornecedor; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.tempo_cobertura_compras_fornecedor (
@@ -34460,8 +37164,47 @@ CREATE TABLE public.tempo_cobertura_compras_fornecedor (
 );
 
 
+ALTER TABLE public.tempo_cobertura_compras_fornecedor OWNER TO systock;
+
 --
--- Name: tempo_cobertura_compras_fornecedor_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 6475 (class 0 OID 0)
+-- Dependencies: 501
+-- Name: COLUMN tempo_cobertura_compras_fornecedor.tempo_cobertura_esseg; Type: COMMENT; Schema: public; Owner: systock
+--
+
+COMMENT ON COLUMN public.tempo_cobertura_compras_fornecedor.tempo_cobertura_esseg IS '1 - CURVAS 2 - DEPARTAMENTO/SEGMENTO 3 - FORNECEDOR 4 - PRODUTO';
+
+
+--
+-- TOC entry 6476 (class 0 OID 0)
+-- Dependencies: 501
+-- Name: COLUMN tempo_cobertura_compras_fornecedor.cobertura_estoque_curva_a; Type: COMMENT; Schema: public; Owner: systock
+--
+
+COMMENT ON COLUMN public.tempo_cobertura_compras_fornecedor.cobertura_estoque_curva_a IS 'COBERTURA DE ESTOQUE ITENS CURVA A';
+
+
+--
+-- TOC entry 6477 (class 0 OID 0)
+-- Dependencies: 501
+-- Name: COLUMN tempo_cobertura_compras_fornecedor.cobertura_estoque_curva_b; Type: COMMENT; Schema: public; Owner: systock
+--
+
+COMMENT ON COLUMN public.tempo_cobertura_compras_fornecedor.cobertura_estoque_curva_b IS 'COBERTURA DE ESTOQUE ITENS CURVA B';
+
+
+--
+-- TOC entry 6478 (class 0 OID 0)
+-- Dependencies: 501
+-- Name: COLUMN tempo_cobertura_compras_fornecedor.cobertura_estoque_curva_c; Type: COMMENT; Schema: public; Owner: systock
+--
+
+COMMENT ON COLUMN public.tempo_cobertura_compras_fornecedor.cobertura_estoque_curva_c IS 'COBERTURA DE ESTOQUE ITENS CURVA C';
+
+
+--
+-- TOC entry 502 (class 1259 OID 55426)
+-- Name: tempo_cobertura_compras_fornecedor_id_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.tempo_cobertura_compras_fornecedor_id_seq
@@ -34473,15 +37216,20 @@ CREATE SEQUENCE public.tempo_cobertura_compras_fornecedor_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.tempo_cobertura_compras_fornecedor_id_seq OWNER TO systock;
+
 --
--- Name: tempo_cobertura_compras_fornecedor_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6479 (class 0 OID 0)
+-- Dependencies: 502
+-- Name: tempo_cobertura_compras_fornecedor_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.tempo_cobertura_compras_fornecedor_id_seq OWNED BY public.tempo_cobertura_compras_fornecedor.id;
 
 
 --
--- Name: tempo_cobertura_compras_geral; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 503 (class 1259 OID 55427)
+-- Name: tempo_cobertura_compras_geral; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.tempo_cobertura_compras_geral (
@@ -34501,8 +37249,11 @@ CREATE TABLE public.tempo_cobertura_compras_geral (
 );
 
 
+ALTER TABLE public.tempo_cobertura_compras_geral OWNER TO systock;
+
 --
--- Name: tempo_cobertura_compras_geral_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 504 (class 1259 OID 55434)
+-- Name: tempo_cobertura_compras_geral_id_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.tempo_cobertura_compras_geral_id_seq
@@ -34514,15 +37265,20 @@ CREATE SEQUENCE public.tempo_cobertura_compras_geral_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.tempo_cobertura_compras_geral_id_seq OWNER TO systock;
+
 --
--- Name: tempo_cobertura_compras_geral_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6480 (class 0 OID 0)
+-- Dependencies: 504
+-- Name: tempo_cobertura_compras_geral_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.tempo_cobertura_compras_geral_id_seq OWNED BY public.tempo_cobertura_compras_geral.id;
 
 
 --
--- Name: tempo_cobertura_compras_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 505 (class 1259 OID 55435)
+-- Name: tempo_cobertura_compras_id_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.tempo_cobertura_compras_id_seq
@@ -34534,15 +37290,20 @@ CREATE SEQUENCE public.tempo_cobertura_compras_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.tempo_cobertura_compras_id_seq OWNER TO systock;
+
 --
--- Name: tempo_cobertura_compras_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6481 (class 0 OID 0)
+-- Dependencies: 505
+-- Name: tempo_cobertura_compras_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.tempo_cobertura_compras_id_seq OWNED BY public.tempo_cobertura_compras.id;
 
 
 --
--- Name: tempo_cobertura_compras_produtos; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 506 (class 1259 OID 55436)
+-- Name: tempo_cobertura_compras_produtos; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.tempo_cobertura_compras_produtos (
@@ -34557,8 +37318,20 @@ CREATE TABLE public.tempo_cobertura_compras_produtos (
 );
 
 
+ALTER TABLE public.tempo_cobertura_compras_produtos OWNER TO systock;
+
 --
--- Name: tempo_cobertura_compras_produtos_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 6482 (class 0 OID 0)
+-- Dependencies: 506
+-- Name: COLUMN tempo_cobertura_compras_produtos.tempo_cobertura_esseg; Type: COMMENT; Schema: public; Owner: systock
+--
+
+COMMENT ON COLUMN public.tempo_cobertura_compras_produtos.tempo_cobertura_esseg IS '1 - CURVAS 2 - DEPARTAMENTO/SEGMENTO 3 - FORNECEDOR 4 - PRODUTO';
+
+
+--
+-- TOC entry 507 (class 1259 OID 55440)
+-- Name: tempo_cobertura_compras_produtos_id_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.tempo_cobertura_compras_produtos_id_seq
@@ -34570,15 +37343,20 @@ CREATE SEQUENCE public.tempo_cobertura_compras_produtos_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.tempo_cobertura_compras_produtos_id_seq OWNER TO systock;
+
 --
--- Name: tempo_cobertura_compras_produtos_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6483 (class 0 OID 0)
+-- Dependencies: 507
+-- Name: tempo_cobertura_compras_produtos_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.tempo_cobertura_compras_produtos_id_seq OWNED BY public.tempo_cobertura_compras_produtos.id;
 
 
 --
--- Name: tempo_cobertura_compras_segmentos; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 508 (class 1259 OID 55441)
+-- Name: tempo_cobertura_compras_segmentos; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.tempo_cobertura_compras_segmentos (
@@ -34593,8 +37371,20 @@ CREATE TABLE public.tempo_cobertura_compras_segmentos (
 );
 
 
+ALTER TABLE public.tempo_cobertura_compras_segmentos OWNER TO systock;
+
 --
--- Name: tempo_cobertura_compras_segmentos_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 6484 (class 0 OID 0)
+-- Dependencies: 508
+-- Name: COLUMN tempo_cobertura_compras_segmentos.tempo_cobertura_esseg; Type: COMMENT; Schema: public; Owner: systock
+--
+
+COMMENT ON COLUMN public.tempo_cobertura_compras_segmentos.tempo_cobertura_esseg IS '1 - CURVAS 2 - DEPARTAMENTO/SEGMENTO 3 - FORNECEDOR 4 - PRODUTO';
+
+
+--
+-- TOC entry 509 (class 1259 OID 55445)
+-- Name: tempo_cobertura_compras_segmentos_id_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.tempo_cobertura_compras_segmentos_id_seq
@@ -34606,15 +37396,20 @@ CREATE SEQUENCE public.tempo_cobertura_compras_segmentos_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.tempo_cobertura_compras_segmentos_id_seq OWNER TO systock;
+
 --
--- Name: tempo_cobertura_compras_segmentos_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6485 (class 0 OID 0)
+-- Dependencies: 509
+-- Name: tempo_cobertura_compras_segmentos_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.tempo_cobertura_compras_segmentos_id_seq OWNED BY public.tempo_cobertura_compras_segmentos.id;
 
 
 --
--- Name: tempo_cobertura_por_curva_popularidade; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 510 (class 1259 OID 55446)
+-- Name: tempo_cobertura_por_curva_popularidade; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.tempo_cobertura_por_curva_popularidade (
@@ -34633,8 +37428,11 @@ CREATE TABLE public.tempo_cobertura_por_curva_popularidade (
 );
 
 
+ALTER TABLE public.tempo_cobertura_por_curva_popularidade OWNER TO systock;
+
 --
--- Name: tempo_cobertura_por_curva_popularidade_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 511 (class 1259 OID 55449)
+-- Name: tempo_cobertura_por_curva_popularidade_id_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.tempo_cobertura_por_curva_popularidade_id_seq
@@ -34646,15 +37444,20 @@ CREATE SEQUENCE public.tempo_cobertura_por_curva_popularidade_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.tempo_cobertura_por_curva_popularidade_id_seq OWNER TO systock;
+
 --
--- Name: tempo_cobertura_por_curva_popularidade_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6486 (class 0 OID 0)
+-- Dependencies: 511
+-- Name: tempo_cobertura_por_curva_popularidade_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.tempo_cobertura_por_curva_popularidade_id_seq OWNED BY public.tempo_cobertura_por_curva_popularidade.id;
 
 
 --
--- Name: tipo_solicitacoes_idtipo_solicitacao_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 512 (class 1259 OID 55450)
+-- Name: tipo_solicitacoes_idtipo_solicitacao_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.tipo_solicitacoes_idtipo_solicitacao_seq
@@ -34665,8 +37468,11 @@ CREATE SEQUENCE public.tipo_solicitacoes_idtipo_solicitacao_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.tipo_solicitacoes_idtipo_solicitacao_seq OWNER TO postgres;
+
 --
--- Name: tipo_solicitacoes; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 513 (class 1259 OID 55451)
+-- Name: tipo_solicitacoes; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.tipo_solicitacoes (
@@ -34675,8 +37481,11 @@ CREATE TABLE public.tipo_solicitacoes (
 );
 
 
+ALTER TABLE public.tipo_solicitacoes OWNER TO postgres;
+
 --
--- Name: tipos_pedidos_compras; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 514 (class 1259 OID 55455)
+-- Name: tipos_pedidos_compras; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.tipos_pedidos_compras (
@@ -34686,8 +37495,11 @@ CREATE TABLE public.tipos_pedidos_compras (
 );
 
 
+ALTER TABLE public.tipos_pedidos_compras OWNER TO systock;
+
 --
--- Name: tmp_total_saldo_estoque_semestral; Type: MATERIALIZED VIEW; Schema: public; Owner: -
+-- TOC entry 515 (class 1259 OID 55458)
+-- Name: tmp_total_saldo_estoque_semestral; Type: MATERIALIZED VIEW; Schema: public; Owner: systock
 --
 
 CREATE MATERIALIZED VIEW public.tmp_total_saldo_estoque_semestral
@@ -34707,8 +37519,11 @@ WITH (autovacuum_vacuum_scale_factor='3.07175') AS
   WITH NO DATA;
 
 
+ALTER MATERIALIZED VIEW public.tmp_total_saldo_estoque_semestral OWNER TO systock;
+
 --
--- Name: tmp_total_vendas_semestral; Type: MATERIALIZED VIEW; Schema: public; Owner: -
+-- TOC entry 516 (class 1259 OID 55463)
+-- Name: tmp_total_vendas_semestral; Type: MATERIALIZED VIEW; Schema: public; Owner: systock
 --
 
 CREATE MATERIALIZED VIEW public.tmp_total_vendas_semestral
@@ -34726,8 +37541,11 @@ WITH (autovacuum_vacuum_scale_factor='3.07766') AS
   WITH NO DATA;
 
 
+ALTER MATERIALIZED VIEW public.tmp_total_vendas_semestral OWNER TO systock;
+
 --
--- Name: tmr; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 517 (class 1259 OID 55470)
+-- Name: tmr; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.tmr (
@@ -34735,8 +37553,11 @@ CREATE TABLE public.tmr (
 );
 
 
+ALTER TABLE public.tmr OWNER TO systock;
+
 --
--- Name: totais_produtos_compradores; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 518 (class 1259 OID 55475)
+-- Name: totais_produtos_compradores; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.totais_produtos_compradores (
@@ -34761,8 +37582,11 @@ CREATE TABLE public.totais_produtos_compradores (
 );
 
 
+ALTER TABLE public.totais_produtos_compradores OWNER TO systock;
+
 --
--- Name: totais_produtos_fonecedores; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 519 (class 1259 OID 55478)
+-- Name: totais_produtos_fonecedores; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.totais_produtos_fonecedores (
@@ -34785,8 +37609,11 @@ CREATE TABLE public.totais_produtos_fonecedores (
 );
 
 
+ALTER TABLE public.totais_produtos_fonecedores OWNER TO systock;
+
 --
--- Name: totais_produtos_segmentos; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 520 (class 1259 OID 55481)
+-- Name: totais_produtos_segmentos; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.totais_produtos_segmentos (
@@ -34810,8 +37637,11 @@ CREATE TABLE public.totais_produtos_segmentos (
 );
 
 
+ALTER TABLE public.totais_produtos_segmentos OWNER TO systock;
+
 --
--- Name: ultimas_saidas_produtos_filial; Type: MATERIALIZED VIEW; Schema: public; Owner: -
+-- TOC entry 521 (class 1259 OID 55484)
+-- Name: ultimas_saidas_produtos_filial; Type: MATERIALIZED VIEW; Schema: public; Owner: systock
 --
 
 CREATE MATERIALIZED VIEW public.ultimas_saidas_produtos_filial AS
@@ -34827,8 +37657,11 @@ CREATE MATERIALIZED VIEW public.ultimas_saidas_produtos_filial AS
   WITH NO DATA;
 
 
+ALTER MATERIALIZED VIEW public.ultimas_saidas_produtos_filial OWNER TO systock;
+
 --
--- Name: unidades_medida; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 522 (class 1259 OID 55489)
+-- Name: unidades_medida; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.unidades_medida (
@@ -34837,8 +37670,11 @@ CREATE TABLE public.unidades_medida (
 );
 
 
+ALTER TABLE public.unidades_medida OWNER TO postgres;
+
 --
--- Name: user_config_cart; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 523 (class 1259 OID 55493)
+-- Name: user_config_cart; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.user_config_cart (
@@ -34859,8 +37695,11 @@ CREATE TABLE public.user_config_cart (
 );
 
 
+ALTER TABLE public.user_config_cart OWNER TO systock;
+
 --
--- Name: users; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 524 (class 1259 OID 55502)
+-- Name: users; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.users (
@@ -34888,8 +37727,29 @@ CREATE TABLE public.users (
 );
 
 
+ALTER TABLE public.users OWNER TO systock;
+
 --
--- Name: users_api; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 6487 (class 0 OID 0)
+-- Dependencies: 524
+-- Name: COLUMN users.data_inicial_indicador_evolucao_slow_no_moving; Type: COMMENT; Schema: public; Owner: systock
+--
+
+COMMENT ON COLUMN public.users.data_inicial_indicador_evolucao_slow_no_moving IS '1. Primeiro dia do mês fechado, 2. Primeiro dia do mês corrente ou 3. Data específica';
+
+
+--
+-- TOC entry 6488 (class 0 OID 0)
+-- Dependencies: 524
+-- Name: COLUMN users.data_final_indicador_evolucao_slow_no_moving; Type: COMMENT; Schema: public; Owner: systock
+--
+
+COMMENT ON COLUMN public.users.data_final_indicador_evolucao_slow_no_moving IS '1. Último dia do mês fechado, 2. Último dia do mês corrente ou uma 3. Data espeficica';
+
+
+--
+-- TOC entry 525 (class 1259 OID 55513)
+-- Name: users_api; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.users_api (
@@ -34900,8 +37760,11 @@ CREATE TABLE public.users_api (
 );
 
 
+ALTER TABLE public.users_api OWNER TO systock;
+
 --
--- Name: users_api_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 526 (class 1259 OID 55516)
+-- Name: users_api_id_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.users_api_id_seq
@@ -34913,15 +37776,20 @@ CREATE SEQUENCE public.users_api_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.users_api_id_seq OWNER TO systock;
+
 --
--- Name: users_api_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6489 (class 0 OID 0)
+-- Dependencies: 526
+-- Name: users_api_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.users_api_id_seq OWNED BY public.users_api.id;
 
 
 --
--- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 527 (class 1259 OID 55517)
+-- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.users_id_seq
@@ -34932,15 +37800,20 @@ CREATE SEQUENCE public.users_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.users_id_seq OWNER TO systock;
+
 --
--- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6490 (class 0 OID 0)
+-- Dependencies: 527
+-- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
 
 
 --
--- Name: usuarios_idusuario_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 528 (class 1259 OID 55518)
+-- Name: usuarios_idusuario_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.usuarios_idusuario_seq
@@ -34951,8 +37824,11 @@ CREATE SEQUENCE public.usuarios_idusuario_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.usuarios_idusuario_seq OWNER TO postgres;
+
 --
--- Name: usuarios; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 529 (class 1259 OID 55519)
+-- Name: usuarios; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.usuarios (
@@ -34971,8 +37847,11 @@ CREATE TABLE public.usuarios (
 );
 
 
+ALTER TABLE public.usuarios OWNER TO postgres;
+
 --
--- Name: usuarios_comprador; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 597 (class 1259 OID 84620)
+-- Name: usuarios_comprador; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.usuarios_comprador (
@@ -34981,8 +37860,11 @@ CREATE TABLE public.usuarios_comprador (
 );
 
 
+ALTER TABLE public.usuarios_comprador OWNER TO systock;
+
 --
--- Name: vw_aderencia; Type: MATERIALIZED VIEW; Schema: public; Owner: -
+-- TOC entry 530 (class 1259 OID 55525)
+-- Name: vw_aderencia; Type: MATERIALIZED VIEW; Schema: public; Owner: systock
 --
 
 CREATE MATERIALIZED VIEW public.vw_aderencia AS
@@ -35175,8 +38057,11 @@ CREATE MATERIALIZED VIEW public.vw_aderencia AS
   WITH NO DATA;
 
 
+ALTER MATERIALIZED VIEW public.vw_aderencia OWNER TO systock;
+
 --
--- Name: vw_analise_drp_parametrizada_reverso; Type: VIEW; Schema: public; Owner: -
+-- TOC entry 531 (class 1259 OID 55532)
+-- Name: vw_analise_drp_parametrizada_reverso; Type: VIEW; Schema: public; Owner: systock
 --
 
 CREATE VIEW public.vw_analise_drp_parametrizada_reverso AS
@@ -35264,8 +38149,11 @@ CREATE VIEW public.vw_analise_drp_parametrizada_reverso AS
      JOIN public.fornecedor f ON ((f.id = a.idfornecedor)));
 
 
+ALTER VIEW public.vw_analise_drp_parametrizada_reverso OWNER TO systock;
+
 --
--- Name: vw_analise_pa_mp; Type: VIEW; Schema: public; Owner: -
+-- TOC entry 532 (class 1259 OID 55537)
+-- Name: vw_analise_pa_mp; Type: VIEW; Schema: public; Owner: systock
 --
 
 CREATE VIEW public.vw_analise_pa_mp AS
@@ -35318,8 +38206,11 @@ CREATE VIEW public.vw_analise_pa_mp AS
           ORDER BY pp.id_produto_materia_prima) a;
 
 
+ALTER VIEW public.vw_analise_pa_mp OWNER TO systock;
+
 --
--- Name: vw_categorias_compras_dinamica_grupo; Type: VIEW; Schema: public; Owner: -
+-- TOC entry 533 (class 1259 OID 55542)
+-- Name: vw_categorias_compras_dinamica_grupo; Type: VIEW; Schema: public; Owner: systock
 --
 
 CREATE VIEW public.vw_categorias_compras_dinamica_grupo AS
@@ -35363,8 +38254,11 @@ UNION
   WHERE (ptc.lote_compras > (0)::numeric);
 
 
+ALTER VIEW public.vw_categorias_compras_dinamica_grupo OWNER TO systock;
+
 --
--- Name: vw_categorias_compras_mp_pa_dinamica_grupo; Type: VIEW; Schema: public; Owner: -
+-- TOC entry 534 (class 1259 OID 55547)
+-- Name: vw_categorias_compras_mp_pa_dinamica_grupo; Type: VIEW; Schema: public; Owner: systock
 --
 
 CREATE VIEW public.vw_categorias_compras_mp_pa_dinamica_grupo AS
@@ -35419,8 +38313,11 @@ UNION
   WHERE (v.lote_compras > (0)::numeric);
 
 
+ALTER VIEW public.vw_categorias_compras_mp_pa_dinamica_grupo OWNER TO systock;
+
 --
--- Name: vw_grupo_compras_produtos_mt; Type: MATERIALIZED VIEW; Schema: public; Owner: -
+-- TOC entry 535 (class 1259 OID 55552)
+-- Name: vw_grupo_compras_produtos_mt; Type: MATERIALIZED VIEW; Schema: public; Owner: systock
 --
 
 CREATE MATERIALIZED VIEW public.vw_grupo_compras_produtos_mt AS
@@ -35482,8 +38379,11 @@ CREATE MATERIALIZED VIEW public.vw_grupo_compras_produtos_mt AS
   WITH NO DATA;
 
 
+ALTER MATERIALIZED VIEW public.vw_grupo_compras_produtos_mt OWNER TO systock;
+
 --
--- Name: vw_lista_compras_dinamica_grupo; Type: VIEW; Schema: public; Owner: -
+-- TOC entry 536 (class 1259 OID 55559)
+-- Name: vw_lista_compras_dinamica_grupo; Type: VIEW; Schema: public; Owner: systock
 --
 
 CREATE VIEW public.vw_lista_compras_dinamica_grupo AS
@@ -35551,8 +38451,11 @@ UNION
    FROM public.produtos_forecast t;
 
 
+ALTER VIEW public.vw_lista_compras_dinamica_grupo OWNER TO systock;
+
 --
--- Name: vw_lista_compras_dinamica_grupo_filial; Type: VIEW; Schema: public; Owner: -
+-- TOC entry 537 (class 1259 OID 55564)
+-- Name: vw_lista_compras_dinamica_grupo_filial; Type: VIEW; Schema: public; Owner: systock
 --
 
 CREATE VIEW public.vw_lista_compras_dinamica_grupo_filial AS
@@ -35623,8 +38526,11 @@ UNION
    FROM public.produtos_forecast_filial t;
 
 
+ALTER VIEW public.vw_lista_compras_dinamica_grupo_filial OWNER TO systock;
+
 --
--- Name: vw_lista_compras_dinamica_grupo_mt; Type: MATERIALIZED VIEW; Schema: public; Owner: -
+-- TOC entry 538 (class 1259 OID 55569)
+-- Name: vw_lista_compras_dinamica_grupo_mt; Type: MATERIALIZED VIEW; Schema: public; Owner: systock
 --
 
 CREATE MATERIALIZED VIEW public.vw_lista_compras_dinamica_grupo_mt AS
@@ -35648,8 +38554,11 @@ CREATE MATERIALIZED VIEW public.vw_lista_compras_dinamica_grupo_mt AS
   WITH NO DATA;
 
 
+ALTER MATERIALIZED VIEW public.vw_lista_compras_dinamica_grupo_mt OWNER TO systock;
+
 --
--- Name: vw_lista_compras_dinamica_produtos_combinados_filial; Type: VIEW; Schema: public; Owner: -
+-- TOC entry 539 (class 1259 OID 55575)
+-- Name: vw_lista_compras_dinamica_produtos_combinados_filial; Type: VIEW; Schema: public; Owner: systock
 --
 
 CREATE VIEW public.vw_lista_compras_dinamica_produtos_combinados_filial AS
@@ -35691,8 +38600,11 @@ UNION
      JOIN public.produtos_combinados_compras_filial v1 ON (((v1.id_grupo = v.id_grupo) AND (v1.filial = v.filial) AND ((v1.id_produto_combinado)::text = (v.id_produto_combinado)::text))));
 
 
+ALTER VIEW public.vw_lista_compras_dinamica_produtos_combinados_filial OWNER TO systock;
+
 --
--- Name: vw_lista_compras_dinamica_produtos_combinados_grupo; Type: VIEW; Schema: public; Owner: -
+-- TOC entry 540 (class 1259 OID 55580)
+-- Name: vw_lista_compras_dinamica_produtos_combinados_grupo; Type: VIEW; Schema: public; Owner: systock
 --
 
 CREATE VIEW public.vw_lista_compras_dinamica_produtos_combinados_grupo AS
@@ -35731,8 +38643,11 @@ UNION
      JOIN public.produtos_combinados_compras_grupo v1 ON (((v1.id_grupo = v.id_grupo) AND ((v1.id_produto_combinado)::text = (v.id_produto_combinado)::text))));
 
 
+ALTER VIEW public.vw_lista_compras_dinamica_produtos_combinados_grupo OWNER TO systock;
+
 --
--- Name: vw_produtos; Type: VIEW; Schema: public; Owner: -
+-- TOC entry 541 (class 1259 OID 55585)
+-- Name: vw_produtos; Type: VIEW; Schema: public; Owner: systock
 --
 
 CREATE VIEW public.vw_produtos AS
@@ -35750,8 +38665,11 @@ CREATE VIEW public.vw_produtos AS
   ORDER BY idproduto;
 
 
+ALTER VIEW public.vw_produtos OWNER TO systock;
+
 --
--- Name: wkf_compras_autorizacoes; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 542 (class 1259 OID 55590)
+-- Name: wkf_compras_autorizacoes; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.wkf_compras_autorizacoes (
@@ -35767,8 +38685,21 @@ CREATE TABLE public.wkf_compras_autorizacoes (
 );
 
 
+ALTER TABLE public.wkf_compras_autorizacoes OWNER TO systock;
+
 --
--- Name: wkf_compras_autorizacoes_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 6491 (class 0 OID 0)
+-- Dependencies: 542
+-- Name: COLUMN wkf_compras_autorizacoes.status_auto; Type: COMMENT; Schema: public; Owner: systock
+--
+
+COMMENT ON COLUMN public.wkf_compras_autorizacoes.status_auto IS 'A - Autorizado
+R - Reprovado';
+
+
+--
+-- TOC entry 543 (class 1259 OID 55595)
+-- Name: wkf_compras_autorizacoes_id_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.wkf_compras_autorizacoes_id_seq
@@ -35779,15 +38710,20 @@ CREATE SEQUENCE public.wkf_compras_autorizacoes_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.wkf_compras_autorizacoes_id_seq OWNER TO systock;
+
 --
--- Name: wkf_compras_autorizacoes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6492 (class 0 OID 0)
+-- Dependencies: 543
+-- Name: wkf_compras_autorizacoes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.wkf_compras_autorizacoes_id_seq OWNED BY public.wkf_compras_autorizacoes.id;
 
 
 --
--- Name: wkf_compras_controle_grupos; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 544 (class 1259 OID 55596)
+-- Name: wkf_compras_controle_grupos; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.wkf_compras_controle_grupos (
@@ -35799,8 +38735,11 @@ CREATE TABLE public.wkf_compras_controle_grupos (
 );
 
 
+ALTER TABLE public.wkf_compras_controle_grupos OWNER TO systock;
+
 --
--- Name: wkf_compras_itens; Type: TABLE; Schema: public; Owner: -
+-- TOC entry 545 (class 1259 OID 55599)
+-- Name: wkf_compras_itens; Type: TABLE; Schema: public; Owner: systock
 --
 
 CREATE TABLE public.wkf_compras_itens (
@@ -35814,8 +38753,30 @@ CREATE TABLE public.wkf_compras_itens (
 );
 
 
+ALTER TABLE public.wkf_compras_itens OWNER TO systock;
+
 --
--- Name: wkf_compras_itens_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- TOC entry 6493 (class 0 OID 0)
+-- Dependencies: 545
+-- Name: COLUMN wkf_compras_itens.tipo; Type: COMMENT; Schema: public; Owner: systock
+--
+
+COMMENT ON COLUMN public.wkf_compras_itens.tipo IS '1- Campo Descritivo (S,N)
+2- Campo Quantitativo (Valores)';
+
+
+--
+-- TOC entry 6494 (class 0 OID 0)
+-- Dependencies: 545
+-- Name: COLUMN wkf_compras_itens.regra; Type: COMMENT; Schema: public; Owner: systock
+--
+
+COMMENT ON COLUMN public.wkf_compras_itens.regra IS '1-ativa(A regra será aplicada no momento da ação) 2-reativa(A regra será enviado para workflow de aprovação)';
+
+
+--
+-- TOC entry 546 (class 1259 OID 55603)
+-- Name: wkf_compras_itens_id_seq; Type: SEQUENCE; Schema: public; Owner: systock
 --
 
 CREATE SEQUENCE public.wkf_compras_itens_id_seq
@@ -35826,589 +38787,676 @@ CREATE SEQUENCE public.wkf_compras_itens_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.wkf_compras_itens_id_seq OWNER TO systock;
+
 --
--- Name: wkf_compras_itens_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- TOC entry 6495 (class 0 OID 0)
+-- Dependencies: 546
+-- Name: wkf_compras_itens_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: systock
 --
 
 ALTER SEQUENCE public.wkf_compras_itens_id_seq OWNED BY public.wkf_compras_itens.id;
 
 
 --
--- Name: activity_log id; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 4711 (class 2604 OID 55604)
+-- Name: activity_log id; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.activity_log ALTER COLUMN id SET DEFAULT nextval('public.activity_log_id_seq'::regclass);
 
 
 --
--- Name: capa_listas_preco id; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 4922 (class 2604 OID 55605)
+-- Name: capa_listas_preco id; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.capa_listas_preco ALTER COLUMN id SET DEFAULT nextval('public.capa_listas_preco_id_seq'::regclass);
 
 
 --
--- Name: categorias idcategoria; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 4925 (class 2604 OID 55606)
+-- Name: categorias idcategoria; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.categorias ALTER COLUMN idcategoria SET DEFAULT nextval('public.categorias_idcategoria_seq'::regclass);
 
 
 --
--- Name: categorias_distribuicao_filial id; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 4926 (class 2604 OID 55607)
+-- Name: categorias_distribuicao_filial id; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.categorias_distribuicao_filial ALTER COLUMN id SET DEFAULT nextval('public.categorias_distribuicao_filial_id_seq'::regclass);
 
 
 --
--- Name: categorias_mp_pa id; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 4858 (class 2604 OID 55608)
+-- Name: categorias_mp_pa id; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.categorias_mp_pa ALTER COLUMN id SET DEFAULT nextval('public.categorias_mp_pa_id_seq'::regclass);
 
 
 --
--- Name: cfgsystem id; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 4930 (class 2604 OID 55609)
+-- Name: cfgsystem id; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.cfgsystem ALTER COLUMN id SET DEFAULT nextval('public.cfgsystem_id_seq'::regclass);
 
 
 --
--- Name: cfgsystem_atualizacoes id; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 5023 (class 2604 OID 55610)
+-- Name: cfgsystem_atualizacoes id; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.cfgsystem_atualizacoes ALTER COLUMN id SET DEFAULT nextval('public.cfgsystem_atualizacoes_id_seq'::regclass);
 
 
 --
--- Name: cotacao_config cotacao_config_id; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 5375 (class 2604 OID 84351)
+-- Name: cotacao_config cotacao_config_id; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.cotacao_config ALTER COLUMN cotacao_config_id SET DEFAULT nextval('public.cotacao_config_cotacao_config_id_seq'::regclass);
 
 
 --
--- Name: cotacao_decisao cotacao_decisao_id; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 5394 (class 2604 OID 84569)
+-- Name: cotacao_decisao cotacao_decisao_id; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.cotacao_decisao ALTER COLUMN cotacao_decisao_id SET DEFAULT nextval('public.cotacao_decisao_cotacao_decisao_id_seq'::regclass);
 
 
 --
--- Name: cotacao_fornecedores cotacao_fornecedores_id; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 5382 (class 2604 OID 84418)
+-- Name: cotacao_fornecedores cotacao_fornecedores_id; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.cotacao_fornecedores ALTER COLUMN cotacao_fornecedores_id SET DEFAULT nextval('public.cotacao_fornecedores_cotacao_fornecedores_id_seq'::regclass);
 
 
 --
--- Name: cotacao_fornecedores_participantes cotacao_fornecedores_participantes_id; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 5401 (class 2604 OID 84647)
+-- Name: cotacao_fornecedores_participantes cotacao_fornecedores_participantes_id; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.cotacao_fornecedores_participantes ALTER COLUMN cotacao_fornecedores_participantes_id SET DEFAULT nextval('public.cotacao_fornecedores_particip_cotacao_fornecedores_particip_seq'::regclass);
 
 
 --
--- Name: cotacao_integracao_erp cotacao_integracao_erp_id; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 5397 (class 2604 OID 84603)
+-- Name: cotacao_integracao_erp cotacao_integracao_erp_id; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.cotacao_integracao_erp ALTER COLUMN cotacao_integracao_erp_id SET DEFAULT nextval('public.cotacao_integracao_erp_cotacao_integracao_erp_id_seq'::regclass);
 
 
 --
--- Name: cotacao_local_recebimento cotacao_local_recebimento_id; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 5376 (class 2604 OID 84363)
+-- Name: cotacao_local_recebimento cotacao_local_recebimento_id; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.cotacao_local_recebimento ALTER COLUMN cotacao_local_recebimento_id SET DEFAULT nextval('public.cotacao_local_recebimento_cotacao_local_recebimento_id_seq'::regclass);
 
 
 --
--- Name: cotacao_local_recebimento_dias cotacao_local_recebimento_dias_id; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 5390 (class 2604 OID 84498)
+-- Name: cotacao_local_recebimento_dias cotacao_local_recebimento_dias_id; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.cotacao_local_recebimento_dias ALTER COLUMN cotacao_local_recebimento_dias_id SET DEFAULT nextval('public.cotacao_local_recebimento_dia_cotacao_local_recebimento_dia_seq'::regclass);
 
 
 --
--- Name: cotacao_mensageria cotacao_mensageria_id; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 5398 (class 2604 OID 84615)
+-- Name: cotacao_mensageria cotacao_mensageria_id; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.cotacao_mensageria ALTER COLUMN cotacao_mensageria_id SET DEFAULT nextval('public.cotacao_mensageria_cotacao_mensageria_id_seq'::regclass);
 
 
 --
--- Name: cotacao_notificacoes cotacao_notificacao_id; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 5384 (class 2604 OID 84466)
+-- Name: cotacao_notificacoes cotacao_notificacao_id; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.cotacao_notificacoes ALTER COLUMN cotacao_notificacao_id SET DEFAULT nextval('public.cotacao_notificacoes_cotacao_notificacao_id_seq'::regclass);
 
 
 --
--- Name: cotacao_participacao_fornecedor cotacao_participacao_fornecedor_id; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 5396 (class 2604 OID 84596)
+-- Name: cotacao_participacao_fornecedor cotacao_participacao_fornecedor_id; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.cotacao_participacao_fornecedor ALTER COLUMN cotacao_participacao_fornecedor_id SET DEFAULT nextval('public.cotacao_participacao_forneced_cotacao_participacao_forneced_seq'::regclass);
 
 
 --
--- Name: cotacao_pedidos cotacao_pedidos_id; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 5374 (class 2604 OID 84339)
+-- Name: cotacao_pedidos cotacao_pedidos_id; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.cotacao_pedidos ALTER COLUMN cotacao_pedidos_id SET DEFAULT nextval('public.cotacao_pedidos_cotacao_pedidos_id_seq'::regclass);
 
 
 --
--- Name: cotacao_produtos cotacao_produtos_id; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 5377 (class 2604 OID 84380)
+-- Name: cotacao_produtos cotacao_produtos_id; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.cotacao_produtos ALTER COLUMN cotacao_produtos_id SET DEFAULT nextval('public.cotacao_produtos_cotacao_produtos_id_seq'::regclass);
 
 
 --
--- Name: cotacao_representante_fornecedor cotacao_representante_fornecedor_id; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 5383 (class 2604 OID 84435)
+-- Name: cotacao_representante_fornecedor cotacao_representante_fornecedor_id; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.cotacao_representante_fornecedor ALTER COLUMN cotacao_representante_fornecedor_id SET DEFAULT nextval('public.cotacao_representante_fornece_cotacao_representante_fornece_seq'::regclass);
 
 
 --
--- Name: cotacao_representante_participacao cotacao_representante_participacao_id; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 5391 (class 2604 OID 84518)
+-- Name: cotacao_representante_participacao cotacao_representante_participacao_id; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.cotacao_representante_participacao ALTER COLUMN cotacao_representante_participacao_id SET DEFAULT nextval('public.cotacao_representante_partici_cotacao_representante_partici_seq'::regclass);
 
 
 --
--- Name: cotacao_responsavel cotacao_responsavel_id; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 5381 (class 2604 OID 84401)
+-- Name: cotacao_responsavel cotacao_responsavel_id; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.cotacao_responsavel ALTER COLUMN cotacao_responsavel_id SET DEFAULT nextval('public.cotacao_responsavel_cotacao_responsavel_id_seq'::regclass);
 
 
 --
--- Name: cotacao_seguidores cotacao_seguidores_id; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 5380 (class 2604 OID 84392)
+-- Name: cotacao_seguidores cotacao_seguidores_id; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.cotacao_seguidores ALTER COLUMN cotacao_seguidores_id SET DEFAULT nextval('public.cotacao_seguidores_cotacao_seguidores_id_seq'::regclass);
 
 
 --
--- Name: cotacao_seguidores_favoritos cotacao_seguidores_favoritos_id; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 5392 (class 2604 OID 84544)
+-- Name: cotacao_seguidores_favoritos cotacao_seguidores_favoritos_id; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.cotacao_seguidores_favoritos ALTER COLUMN cotacao_seguidores_favoritos_id SET DEFAULT nextval('public.cotacao_seguidores_favoritos_cotacao_seguidores_favoritos_i_seq'::regclass);
 
 
 --
--- Name: cotacao_situacao_pedidos cotacao_situacao_pedidos_id; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 5395 (class 2604 OID 84581)
+-- Name: cotacao_situacao_pedidos cotacao_situacao_pedidos_id; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.cotacao_situacao_pedidos ALTER COLUMN cotacao_situacao_pedidos_id SET DEFAULT nextval('public.cotacao_situacao_pedidos_cotacao_situacao_pedidos_id_seq'::regclass);
 
 
 --
--- Name: cotacao_status cotacao_status_id; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 5393 (class 2604 OID 84557)
+-- Name: cotacao_status cotacao_status_id; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.cotacao_status ALTER COLUMN cotacao_status_id SET DEFAULT nextval('public.cotacao_status_cotacao_status_id_seq'::regclass);
 
 
 --
--- Name: cotacao_transacao cotacao_transacao_id; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 5370 (class 2604 OID 84326)
+-- Name: cotacao_transacao cotacao_transacao_id; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.cotacao_transacao ALTER COLUMN cotacao_transacao_id SET DEFAULT nextval('public.cotacao_transacao_cotacao_transacao_id_seq'::regclass);
 
 
 --
--- Name: diagnostico_clientes_emails id; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 5028 (class 2604 OID 55611)
+-- Name: diagnostico_clientes_emails id; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.diagnostico_clientes_emails ALTER COLUMN id SET DEFAULT nextval('public.diagnostico_clientes_emails_id_seq'::regclass);
 
 
 --
--- Name: distribuicao_drp idpedido; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 5029 (class 2604 OID 55612)
+-- Name: distribuicao_drp idpedido; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.distribuicao_drp ALTER COLUMN idpedido SET DEFAULT nextval('public.distribuicao_drp_idpedido_seq'::regclass);
 
 
 --
--- Name: distribuicao_drp_blacklist id; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 5031 (class 2604 OID 55613)
+-- Name: distribuicao_drp_blacklist id; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.distribuicao_drp_blacklist ALTER COLUMN id SET DEFAULT nextval('public.distribuicao_drp_blacklist_id_seq'::regclass);
 
 
 --
--- Name: drp_calendario_separacao id; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 5038 (class 2604 OID 55614)
+-- Name: drp_calendario_separacao id; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.drp_calendario_separacao ALTER COLUMN id SET DEFAULT nextval('public.drp_calendario_separacao_id_seq'::regclass);
 
 
 --
--- Name: drp_exportacao_pedido_winthor_regras_precos id; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 5406 (class 2604 OID 84678)
+-- Name: drp_exportacao_pedido_winthor_regras_precos id; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.drp_exportacao_pedido_winthor_regras_precos ALTER COLUMN id SET DEFAULT nextval('public.drp_exportacao_pedido_winthor_regras_precos_id_seq'::regclass);
 
 
 --
--- Name: drp_grupo_separacao id; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 5040 (class 2604 OID 55615)
+-- Name: drp_grupo_separacao id; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.drp_grupo_separacao ALTER COLUMN id SET DEFAULT nextval('public.drp_grupo_separacao_id_seq'::regclass);
 
 
 --
--- Name: drp_historico_horarios_grupo_separacao id; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 5043 (class 2604 OID 55616)
+-- Name: drp_historico_horarios_grupo_separacao id; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.drp_historico_horarios_grupo_separacao ALTER COLUMN id SET DEFAULT nextval('public.drp_historico_horarios_grupo_separacao_id_seq'::regclass);
 
 
 --
--- Name: drp_transportes id; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 5046 (class 2604 OID 55617)
+-- Name: drp_transportes id; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.drp_transportes ALTER COLUMN id SET DEFAULT nextval('public.drp_transportes_id_seq'::regclass);
 
 
 --
--- Name: fornecedores_grupo_analise id; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 5066 (class 2604 OID 55618)
+-- Name: fornecedores_grupo_analise id; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.fornecedores_grupo_analise ALTER COLUMN id SET DEFAULT nextval('public.fornecedores_grupo_analise_id_seq'::regclass);
 
 
 --
--- Name: grupo_compras id; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 5069 (class 2604 OID 55619)
+-- Name: grupo_compras id; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.grupo_compras ALTER COLUMN id SET DEFAULT nextval('public.grupo_compras_id_seq'::regclass);
 
 
 --
--- Name: grupo_distribuicao id; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 5076 (class 2604 OID 55620)
+-- Name: grupo_distribuicao id; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.grupo_distribuicao ALTER COLUMN id SET DEFAULT nextval('public.grupo_distribuicao_id_seq'::regclass);
 
 
 --
--- Name: grupos_analise_fornecedor id; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 5078 (class 2604 OID 55621)
+-- Name: grupos_analise_fornecedor id; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.grupos_analise_fornecedor ALTER COLUMN id SET DEFAULT nextval('public.grupos_analise_fornecedor_id_seq'::regclass);
 
 
 --
--- Name: herancas id; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 5079 (class 2604 OID 55622)
+-- Name: herancas id; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.herancas ALTER COLUMN id SET DEFAULT nextval('public.herancas_id_seq'::regclass);
 
 
 --
--- Name: hist_fator_atuacao id; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 5100 (class 2604 OID 55623)
+-- Name: hist_fator_atuacao id; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.hist_fator_atuacao ALTER COLUMN id SET DEFAULT nextval('public.hist_fator_atuacao_id_seq'::regclass);
 
 
 --
--- Name: hist_sazonalidades id; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 5117 (class 2604 OID 55624)
+-- Name: hist_sazonalidades id; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.hist_sazonalidades ALTER COLUMN id SET DEFAULT nextval('public.hist_sazonalidades_id_seq'::regclass);
 
 
 --
--- Name: integracao_sistemas id; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 5129 (class 2604 OID 55625)
+-- Name: integracao_sistemas id; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.integracao_sistemas ALTER COLUMN id SET DEFAULT nextval('public.integracao_sistemas_id_seq'::regclass);
 
 
 --
--- Name: jobs id; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 5130 (class 2604 OID 55626)
+-- Name: jobs id; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.jobs ALTER COLUMN id SET DEFAULT nextval('public.jobs_id_seq'::regclass);
 
 
 --
--- Name: linha_produtos idlinhaprod; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 5131 (class 2604 OID 55627)
+-- Name: linha_produtos idlinhaprod; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.linha_produtos ALTER COLUMN idlinhaprod SET DEFAULT nextval('public.linha_produtos_idlinhaprod_seq'::regclass);
 
 
 --
--- Name: log_pedidos_compras_itens id; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 5133 (class 2604 OID 55628)
+-- Name: log_pedidos_compras_itens id; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.log_pedidos_compras_itens ALTER COLUMN id SET DEFAULT nextval('public.log_pedidos_compras_itens_id_seq'::regclass);
 
 
 --
--- Name: migrations id; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 5147 (class 2604 OID 55629)
+-- Name: migrations id; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.migrations ALTER COLUMN id SET DEFAULT nextval('public.migrations_id_seq'::regclass);
 
 
 --
--- Name: motivo_blacklist_produto id; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 5150 (class 2604 OID 55630)
+-- Name: motivo_blacklist_produto id; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.motivo_blacklist_produto ALTER COLUMN id SET DEFAULT nextval('public.motivo_blacklist_produto_id_seq'::regclass);
 
 
 --
--- Name: motivos_compras_oportunidade id; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 5151 (class 2604 OID 55631)
+-- Name: motivos_compras_oportunidade id; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.motivos_compras_oportunidade ALTER COLUMN id SET DEFAULT nextval('public.motivos_compras_oportunidade_id_seq'::regclass);
 
 
 --
--- Name: notificacao id; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 5155 (class 2604 OID 55632)
+-- Name: notificacao id; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.notificacao ALTER COLUMN id SET DEFAULT nextval('public.notificacao_id_seq'::regclass);
 
 
 --
--- Name: notificacao_categorias_mp_pa_blacklist id; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 5156 (class 2604 OID 55633)
+-- Name: notificacao_categorias_mp_pa_blacklist id; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.notificacao_categorias_mp_pa_blacklist ALTER COLUMN id SET DEFAULT nextval('public.notificacao_categorias_mp_pa_blacklist_id_seq'::regclass);
 
 
 --
--- Name: notificacao_produtos_blacklist id; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 5157 (class 2604 OID 55634)
+-- Name: notificacao_produtos_blacklist id; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.notificacao_produtos_blacklist ALTER COLUMN id SET DEFAULT nextval('public.notificacao_produtos_blacklist_id_seq'::regclass);
 
 
 --
--- Name: pedidos_compra_tipo id; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 5165 (class 2604 OID 55635)
+-- Name: pedidos_compra_tipo id; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.pedidos_compra_tipo ALTER COLUMN id SET DEFAULT nextval('public.pedidos_compra_tipo_id_seq'::regclass);
 
 
 --
--- Name: pedidos_compras idpedido; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 5168 (class 2604 OID 55636)
+-- Name: pedidos_compras idpedido; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.pedidos_compras ALTER COLUMN idpedido SET DEFAULT nextval('public.pedidos_compras_idpedido_seq'::regclass);
 
 
 --
--- Name: pedidos_compras_fornecedores_agrupados id; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 5180 (class 2604 OID 55637)
+-- Name: pedidos_compras_fornecedores_agrupados id; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.pedidos_compras_fornecedores_agrupados ALTER COLUMN id SET DEFAULT nextval('public.pedidos_compras_fornecedores_agrupados_id_seq'::regclass);
 
 
 --
--- Name: pedidos_compras_produto_fracionado id; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 5181 (class 2604 OID 55638)
+-- Name: pedidos_compras_produto_fracionado id; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.pedidos_compras_produto_fracionado ALTER COLUMN id SET DEFAULT nextval('public.pedidos_compras_fracionada_id_seq'::regclass);
 
 
 --
--- Name: produtos_analise_mercado id; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 5187 (class 2604 OID 55639)
+-- Name: produtos_analise_mercado id; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.produtos_analise_mercado ALTER COLUMN id SET DEFAULT nextval('public.produtos_analise_mercado_id_seq'::regclass);
 
 
 --
--- Name: produtos_pedidos_compra_tipo id; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 5239 (class 2604 OID 55640)
+-- Name: produtos_pedidos_compra_tipo id; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.produtos_pedidos_compra_tipo ALTER COLUMN id SET DEFAULT nextval('public.produtos_pedidos_compra_tipo_id_seq'::regclass);
 
 
 --
--- Name: release_notes id; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 5248 (class 2604 OID 55641)
+-- Name: release_notes id; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.release_notes ALTER COLUMN id SET DEFAULT nextval('public.release_notes_id_seq'::regclass);
 
 
 --
--- Name: sazonalidades_produtos id; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 5284 (class 2604 OID 55642)
+-- Name: sazonalidades_produtos id; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.sazonalidades_produtos ALTER COLUMN id SET DEFAULT nextval('public.sazonalidades_produtos_id_seq'::regclass);
 
 
 --
--- Name: secao idsecao; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 5296 (class 2604 OID 55643)
+-- Name: secao idsecao; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.secao ALTER COLUMN idsecao SET DEFAULT nextval('public.secao_idsecao_seq'::regclass);
 
 
 --
--- Name: similares id; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 5297 (class 2604 OID 55644)
+-- Name: similares id; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.similares ALTER COLUMN id SET DEFAULT nextval('public.similares_id_seq'::regclass);
 
 
 --
--- Name: status_consumos_para_ocultar id; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 5301 (class 2604 OID 55645)
+-- Name: status_consumos_para_ocultar id; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.status_consumos_para_ocultar ALTER COLUMN id SET DEFAULT nextval('public.status_consumos_para_ocultar_id_seq'::regclass);
 
 
 --
--- Name: sys_exportacoes_pedidos_compras_api id; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 5361 (class 2604 OID 84247)
+-- Name: sys_exportacoes_pedidos_compras_api id; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.sys_exportacoes_pedidos_compras_api ALTER COLUMN id SET DEFAULT nextval('public.sys_exportacoes_pedidos_compras_api_id_seq'::regclass);
 
 
 --
--- Name: sys_historico_de_atualizacao_em_massa_por_filial id; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 5302 (class 2604 OID 55646)
+-- Name: sys_historico_de_atualizacao_em_massa_por_filial id; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.sys_historico_de_atualizacao_em_massa_por_filial ALTER COLUMN id SET DEFAULT nextval('public.sys_historico_de_atualizacao_em_massa_por_filial_id_seq'::regclass);
 
 
 --
--- Name: sys_justificativas_distribuicao_drp id; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 5399 (class 2604 OID 84637)
+-- Name: sys_justificativas_distribuicao_drp id; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.sys_justificativas_distribuicao_drp ALTER COLUMN id SET DEFAULT nextval('public.sys_justificativas_distribuicao_drp_id_seq'::regclass);
 
 
 --
--- Name: sys_justificativas_mix_filiais id; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 5365 (class 2604 OID 84298)
+-- Name: sys_justificativas_mix_filiais id; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.sys_justificativas_mix_filiais ALTER COLUMN id SET DEFAULT nextval('public.sys_justificativas_mix_filiais_id_seq'::regclass);
 
 
 --
--- Name: sys_listas_separacao_drp id; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 5303 (class 2604 OID 55647)
+-- Name: sys_listas_separacao_drp id; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.sys_listas_separacao_drp ALTER COLUMN id SET DEFAULT nextval('public.sys_listas_separacao_drp_id_seq'::regclass);
 
 
 --
--- Name: sys_produtos_importados_em_massa_por_filial id; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 5312 (class 2604 OID 55648)
+-- Name: sys_produtos_importados_em_massa_por_filial id; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.sys_produtos_importados_em_massa_por_filial ALTER COLUMN id SET DEFAULT nextval('public.sys_produtos_importados_em_massa_por_filial_id_seq'::regclass);
 
 
 --
--- Name: sys_rodadas_compra_sazonal id; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 5407 (class 2604 OID 84689)
+-- Name: sys_rodadas_compra_sazonal id; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.sys_rodadas_compra_sazonal ALTER COLUMN id SET DEFAULT nextval('public.sys_rodadas_compra_sazonal_id_seq'::regclass);
 
 
 --
--- Name: sys_rodadas_compra_sazonal_itens id; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 5409 (class 2604 OID 84706)
+-- Name: sys_rodadas_compra_sazonal_itens id; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.sys_rodadas_compra_sazonal_itens ALTER COLUMN id SET DEFAULT nextval('public.sys_rodadas_compra_sazonal_itens_id_seq'::regclass);
 
 
 --
--- Name: sys_tipos_justificativas_distribuicao_drp id; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 5404 (class 2604 OID 84665)
+-- Name: sys_tipos_justificativas_distribuicao_drp id; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.sys_tipos_justificativas_distribuicao_drp ALTER COLUMN id SET DEFAULT nextval('public.sys_tipos_justificativas_distribuicao_drp_id_seq'::regclass);
 
 
 --
--- Name: tempo_cobertura_compras id; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 5314 (class 2604 OID 55649)
+-- Name: tempo_cobertura_compras id; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.tempo_cobertura_compras ALTER COLUMN id SET DEFAULT nextval('public.tempo_cobertura_compras_id_seq'::regclass);
 
 
 --
--- Name: tempo_cobertura_compras_fornecedor id; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 5316 (class 2604 OID 55650)
+-- Name: tempo_cobertura_compras_fornecedor id; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.tempo_cobertura_compras_fornecedor ALTER COLUMN id SET DEFAULT nextval('public.tempo_cobertura_compras_fornecedor_id_seq'::regclass);
 
 
 --
--- Name: tempo_cobertura_compras_geral id; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 5321 (class 2604 OID 55651)
+-- Name: tempo_cobertura_compras_geral id; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.tempo_cobertura_compras_geral ALTER COLUMN id SET DEFAULT nextval('public.tempo_cobertura_compras_geral_id_seq'::regclass);
 
 
 --
--- Name: tempo_cobertura_compras_produtos id; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 5326 (class 2604 OID 55652)
+-- Name: tempo_cobertura_compras_produtos id; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.tempo_cobertura_compras_produtos ALTER COLUMN id SET DEFAULT nextval('public.tempo_cobertura_compras_produtos_id_seq'::regclass);
 
 
 --
--- Name: tempo_cobertura_compras_segmentos id; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 5328 (class 2604 OID 55653)
+-- Name: tempo_cobertura_compras_segmentos id; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.tempo_cobertura_compras_segmentos ALTER COLUMN id SET DEFAULT nextval('public.tempo_cobertura_compras_segmentos_id_seq'::regclass);
 
 
 --
--- Name: tempo_cobertura_por_curva_popularidade id; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 5330 (class 2604 OID 55654)
+-- Name: tempo_cobertura_por_curva_popularidade id; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.tempo_cobertura_por_curva_popularidade ALTER COLUMN id SET DEFAULT nextval('public.tempo_cobertura_por_curva_popularidade_id_seq'::regclass);
 
 
 --
--- Name: users id; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 5346 (class 2604 OID 55655)
+-- Name: users id; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_id_seq'::regclass);
 
 
 --
--- Name: users_api id; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 5353 (class 2604 OID 55656)
+-- Name: users_api id; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.users_api ALTER COLUMN id SET DEFAULT nextval('public.users_api_id_seq'::regclass);
 
 
 --
--- Name: wkf_compras_autorizacoes id; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 5357 (class 2604 OID 55657)
+-- Name: wkf_compras_autorizacoes id; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.wkf_compras_autorizacoes ALTER COLUMN id SET DEFAULT nextval('public.wkf_compras_autorizacoes_id_seq'::regclass);
 
 
 --
--- Name: wkf_compras_itens id; Type: DEFAULT; Schema: public; Owner: -
+-- TOC entry 5358 (class 2604 OID 55658)
+-- Name: wkf_compras_itens id; Type: DEFAULT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.wkf_compras_itens ALTER COLUMN id SET DEFAULT nextval('public.wkf_compras_itens_id_seq'::regclass);
 
 
 --
--- Name: activity_log activity_log_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5432 (class 2606 OID 55660)
+-- Name: activity_log activity_log_pkey; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.activity_log
@@ -36416,7 +39464,8 @@ ALTER TABLE ONLY public.activity_log
 
 
 --
--- Name: analise_diagnostico_estoque_filial analise_diagnostico_estoque_filial_pk; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5437 (class 2606 OID 55662)
+-- Name: analise_diagnostico_estoque_filial analise_diagnostico_estoque_filial_pk; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.analise_diagnostico_estoque_filial
@@ -36424,7 +39473,8 @@ ALTER TABLE ONLY public.analise_diagnostico_estoque_filial
 
 
 --
--- Name: analise_diagnostico_estoque_grupo_diario analise_diagnostico_estoque_grupo_diario_pk; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5446 (class 2606 OID 55664)
+-- Name: analise_diagnostico_estoque_grupo_diario analise_diagnostico_estoque_grupo_diario_pk; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.analise_diagnostico_estoque_grupo_diario
@@ -36432,7 +39482,8 @@ ALTER TABLE ONLY public.analise_diagnostico_estoque_grupo_diario
 
 
 --
--- Name: analise_diagnostico_estoque_grupo analise_diagnostico_estoque_grupo_pk; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5441 (class 2606 OID 55666)
+-- Name: analise_diagnostico_estoque_grupo analise_diagnostico_estoque_grupo_pk; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.analise_diagnostico_estoque_grupo
@@ -36440,7 +39491,8 @@ ALTER TABLE ONLY public.analise_diagnostico_estoque_grupo
 
 
 --
--- Name: analise_movimentacoes_produtos_filial analise_movimentacoes_produtos_filial_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5514 (class 2606 OID 55668)
+-- Name: analise_movimentacoes_produtos_filial analise_movimentacoes_produtos_filial_pkey; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.analise_movimentacoes_produtos_filial
@@ -36448,7 +39500,8 @@ ALTER TABLE ONLY public.analise_movimentacoes_produtos_filial
 
 
 --
--- Name: analise_produtos_abc analise_produtos_abc_pk; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5516 (class 2606 OID 55670)
+-- Name: analise_produtos_abc analise_produtos_abc_pk; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.analise_produtos_abc
@@ -36456,7 +39509,8 @@ ALTER TABLE ONLY public.analise_produtos_abc
 
 
 --
--- Name: analise_produtos_comprador_grupo analise_produtos_comprador_grupo_pk; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5518 (class 2606 OID 55672)
+-- Name: analise_produtos_comprador_grupo analise_produtos_comprador_grupo_pk; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.analise_produtos_comprador_grupo
@@ -36464,7 +39518,8 @@ ALTER TABLE ONLY public.analise_produtos_comprador_grupo
 
 
 --
--- Name: analise_statistica_produtos analise_statistica_produtos_pk; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5523 (class 2606 OID 55674)
+-- Name: analise_statistica_produtos analise_statistica_produtos_pk; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.analise_statistica_produtos
@@ -36472,7 +39527,8 @@ ALTER TABLE ONLY public.analise_statistica_produtos
 
 
 --
--- Name: analise_status_mensal_filial_analitica analise_status_mensal_filial_analitica_pk; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5529 (class 2606 OID 55676)
+-- Name: analise_status_mensal_filial_analitica analise_status_mensal_filial_analitica_pk; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.analise_status_mensal_filial_analitica
@@ -36480,7 +39536,8 @@ ALTER TABLE ONLY public.analise_status_mensal_filial_analitica
 
 
 --
--- Name: aplicativos_perfil aplicativos_perfil_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5534 (class 2606 OID 55678)
+-- Name: aplicativos_perfil aplicativos_perfil_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.aplicativos_perfil
@@ -36488,7 +39545,8 @@ ALTER TABLE ONLY public.aplicativos_perfil
 
 
 --
--- Name: aplicativos aplicativos_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5531 (class 2606 OID 55680)
+-- Name: aplicativos aplicativos_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.aplicativos
@@ -36496,7 +39554,8 @@ ALTER TABLE ONLY public.aplicativos
 
 
 --
--- Name: aplicativos_sistemas aplicativos_sistemas_pk; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5538 (class 2606 OID 55682)
+-- Name: aplicativos_sistemas aplicativos_sistemas_pk; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.aplicativos_sistemas
@@ -36504,7 +39563,8 @@ ALTER TABLE ONLY public.aplicativos_sistemas
 
 
 --
--- Name: area_responsavel area_responsavel_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5540 (class 2606 OID 55684)
+-- Name: area_responsavel area_responsavel_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.area_responsavel
@@ -36512,7 +39572,8 @@ ALTER TABLE ONLY public.area_responsavel
 
 
 --
--- Name: arvore_decisao arvore_decisao_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5544 (class 2606 OID 55686)
+-- Name: arvore_decisao arvore_decisao_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.arvore_decisao
@@ -36520,7 +39581,8 @@ ALTER TABLE ONLY public.arvore_decisao
 
 
 --
--- Name: avaria_produtos avaria_produtos_pk; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5939 (class 2606 OID 84213)
+-- Name: avaria_produtos avaria_produtos_pk; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.avaria_produtos
@@ -36528,7 +39590,8 @@ ALTER TABLE ONLY public.avaria_produtos
 
 
 --
--- Name: drp_calendario_separacao calendario_separacao_pk; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5595 (class 2606 OID 55688)
+-- Name: drp_calendario_separacao calendario_separacao_pk; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.drp_calendario_separacao
@@ -36536,7 +39599,8 @@ ALTER TABLE ONLY public.drp_calendario_separacao
 
 
 --
--- Name: categorias_mp_pa capa_categorias_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5501 (class 2606 OID 55690)
+-- Name: categorias_mp_pa capa_categorias_pkey; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.categorias_mp_pa
@@ -36544,7 +39608,8 @@ ALTER TABLE ONLY public.categorias_mp_pa
 
 
 --
--- Name: categorias categoria_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5550 (class 2606 OID 55692)
+-- Name: categorias categoria_pkey; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.categorias
@@ -36552,7 +39617,8 @@ ALTER TABLE ONLY public.categorias
 
 
 --
--- Name: categorias_distribuicao_filial categorias_distribuicao_filial_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5552 (class 2606 OID 55694)
+-- Name: categorias_distribuicao_filial categorias_distribuicao_filial_pkey; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.categorias_distribuicao_filial
@@ -36560,7 +39626,8 @@ ALTER TABLE ONLY public.categorias_distribuicao_filial
 
 
 --
--- Name: centro_custos centro_custos_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5556 (class 2606 OID 55696)
+-- Name: centro_custos centro_custos_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.centro_custos
@@ -36568,7 +39635,8 @@ ALTER TABLE ONLY public.centro_custos
 
 
 --
--- Name: cfg_produto_distribuicao cfg_produto_distribuicao_pk; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5558 (class 2606 OID 55698)
+-- Name: cfg_produto_distribuicao cfg_produto_distribuicao_pk; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.cfg_produto_distribuicao
@@ -36576,7 +39644,8 @@ ALTER TABLE ONLY public.cfg_produto_distribuicao
 
 
 --
--- Name: cfgsystem_atualizacoes cfgsystem_atualizacoes_pk; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5562 (class 2606 OID 55700)
+-- Name: cfgsystem_atualizacoes cfgsystem_atualizacoes_pk; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.cfgsystem_atualizacoes
@@ -36584,7 +39653,8 @@ ALTER TABLE ONLY public.cfgsystem_atualizacoes
 
 
 --
--- Name: cfgsystem cfgsystem_pk; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5560 (class 2606 OID 55702)
+-- Name: cfgsystem cfgsystem_pk; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.cfgsystem
@@ -36592,7 +39662,8 @@ ALTER TABLE ONLY public.cfgsystem
 
 
 --
--- Name: colaboradores colaboradores_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5564 (class 2606 OID 55704)
+-- Name: colaboradores colaboradores_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.colaboradores
@@ -36600,7 +39671,8 @@ ALTER TABLE ONLY public.colaboradores
 
 
 --
--- Name: comprador comprador_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5448 (class 2606 OID 55706)
+-- Name: comprador comprador_pkey; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.comprador
@@ -36608,7 +39680,8 @@ ALTER TABLE ONLY public.comprador
 
 
 --
--- Name: condicao_pagto cond_pagto_pk; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5568 (class 2606 OID 55708)
+-- Name: condicao_pagto cond_pagto_pk; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.condicao_pagto
@@ -36616,7 +39689,8 @@ ALTER TABLE ONLY public.condicao_pagto
 
 
 --
--- Name: config_notificacao_email config_notificacao_email_pk; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5570 (class 2606 OID 55710)
+-- Name: config_notificacao_email config_notificacao_email_pk; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.config_notificacao_email
@@ -36624,7 +39698,8 @@ ALTER TABLE ONLY public.config_notificacao_email
 
 
 --
--- Name: consumos_desconsiderados consumos_desconsideradas_pk; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5572 (class 2606 OID 55712)
+-- Name: consumos_desconsiderados consumos_desconsideradas_pk; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.consumos_desconsiderados
@@ -36632,7 +39707,8 @@ ALTER TABLE ONLY public.consumos_desconsiderados
 
 
 --
--- Name: cotacao_config cotacao_config_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5961 (class 2606 OID 84353)
+-- Name: cotacao_config cotacao_config_pkey; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.cotacao_config
@@ -36640,7 +39716,8 @@ ALTER TABLE ONLY public.cotacao_config
 
 
 --
--- Name: cotacao_decisao cotacao_decisao_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5996 (class 2606 OID 84571)
+-- Name: cotacao_decisao cotacao_decisao_pkey; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.cotacao_decisao
@@ -36648,7 +39725,8 @@ ALTER TABLE ONLY public.cotacao_decisao
 
 
 --
--- Name: cotacao_fornecedores_participantes cotacao_fornecedores_participantes_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6011 (class 2606 OID 84650)
+-- Name: cotacao_fornecedores_participantes cotacao_fornecedores_participantes_pkey; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.cotacao_fornecedores_participantes
@@ -36656,7 +39734,8 @@ ALTER TABLE ONLY public.cotacao_fornecedores_participantes
 
 
 --
--- Name: cotacao_fornecedores cotacao_fornecedores_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5972 (class 2606 OID 84420)
+-- Name: cotacao_fornecedores cotacao_fornecedores_pkey; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.cotacao_fornecedores
@@ -36664,7 +39743,8 @@ ALTER TABLE ONLY public.cotacao_fornecedores
 
 
 --
--- Name: cotacao_integracao_erp cotacao_integracao_erp_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6002 (class 2606 OID 84605)
+-- Name: cotacao_integracao_erp cotacao_integracao_erp_pkey; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.cotacao_integracao_erp
@@ -36672,7 +39752,8 @@ ALTER TABLE ONLY public.cotacao_integracao_erp
 
 
 --
--- Name: cotacao_local_recebimento_dias cotacao_local_recebimento_dias_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5982 (class 2606 OID 84500)
+-- Name: cotacao_local_recebimento_dias cotacao_local_recebimento_dias_pkey; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.cotacao_local_recebimento_dias
@@ -36680,7 +39761,8 @@ ALTER TABLE ONLY public.cotacao_local_recebimento_dias
 
 
 --
--- Name: cotacao_local_recebimento cotacao_local_recebimento_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5963 (class 2606 OID 84365)
+-- Name: cotacao_local_recebimento cotacao_local_recebimento_pkey; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.cotacao_local_recebimento
@@ -36688,7 +39770,8 @@ ALTER TABLE ONLY public.cotacao_local_recebimento
 
 
 --
--- Name: cotacao_mensageria cotacao_mensageria_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6004 (class 2606 OID 84619)
+-- Name: cotacao_mensageria cotacao_mensageria_pkey; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.cotacao_mensageria
@@ -36696,7 +39779,8 @@ ALTER TABLE ONLY public.cotacao_mensageria
 
 
 --
--- Name: cotacao_notificacoes cotacao_notificacoes_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5976 (class 2606 OID 84477)
+-- Name: cotacao_notificacoes cotacao_notificacoes_pkey; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.cotacao_notificacoes
@@ -36704,7 +39788,8 @@ ALTER TABLE ONLY public.cotacao_notificacoes
 
 
 --
--- Name: cotacao_participacao_fornecedor cotacao_participacao_fornecedor_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6000 (class 2606 OID 84598)
+-- Name: cotacao_participacao_fornecedor cotacao_participacao_fornecedor_pkey; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.cotacao_participacao_fornecedor
@@ -36712,7 +39797,8 @@ ALTER TABLE ONLY public.cotacao_participacao_fornecedor
 
 
 --
--- Name: cotacao_pedidos cotacao_pedidos_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5959 (class 2606 OID 84341)
+-- Name: cotacao_pedidos cotacao_pedidos_pkey; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.cotacao_pedidos
@@ -36720,7 +39806,8 @@ ALTER TABLE ONLY public.cotacao_pedidos
 
 
 --
--- Name: cotacao_produtos cotacao_produtos_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5965 (class 2606 OID 84382)
+-- Name: cotacao_produtos cotacao_produtos_pkey; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.cotacao_produtos
@@ -36728,7 +39815,8 @@ ALTER TABLE ONLY public.cotacao_produtos
 
 
 --
--- Name: cotacao_representante_fornecedor cotacao_representante_fornecedor_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5974 (class 2606 OID 84439)
+-- Name: cotacao_representante_fornecedor cotacao_representante_fornecedor_pkey; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.cotacao_representante_fornecedor
@@ -36736,7 +39824,8 @@ ALTER TABLE ONLY public.cotacao_representante_fornecedor
 
 
 --
--- Name: cotacao_representante_participacao cotacao_representante_participacao_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5985 (class 2606 OID 84520)
+-- Name: cotacao_representante_participacao cotacao_representante_participacao_pkey; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.cotacao_representante_participacao
@@ -36744,7 +39833,8 @@ ALTER TABLE ONLY public.cotacao_representante_participacao
 
 
 --
--- Name: cotacao_responsavel cotacao_responsavel_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5970 (class 2606 OID 84403)
+-- Name: cotacao_responsavel cotacao_responsavel_pkey; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.cotacao_responsavel
@@ -36752,7 +39842,8 @@ ALTER TABLE ONLY public.cotacao_responsavel
 
 
 --
--- Name: cotacao_seguidores_favoritos cotacao_seguidores_favoritos_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5991 (class 2606 OID 84546)
+-- Name: cotacao_seguidores_favoritos cotacao_seguidores_favoritos_pkey; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.cotacao_seguidores_favoritos
@@ -36760,7 +39851,8 @@ ALTER TABLE ONLY public.cotacao_seguidores_favoritos
 
 
 --
--- Name: cotacao_seguidores cotacao_seguidores_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5967 (class 2606 OID 84394)
+-- Name: cotacao_seguidores cotacao_seguidores_pkey; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.cotacao_seguidores
@@ -36768,7 +39860,8 @@ ALTER TABLE ONLY public.cotacao_seguidores
 
 
 --
--- Name: cotacao_situacao_pedidos cotacao_situacao_pedidos_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5998 (class 2606 OID 84583)
+-- Name: cotacao_situacao_pedidos cotacao_situacao_pedidos_pkey; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.cotacao_situacao_pedidos
@@ -36776,7 +39869,8 @@ ALTER TABLE ONLY public.cotacao_situacao_pedidos
 
 
 --
--- Name: cotacao_status cotacao_status_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5994 (class 2606 OID 84559)
+-- Name: cotacao_status cotacao_status_pkey; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.cotacao_status
@@ -36784,7 +39878,8 @@ ALTER TABLE ONLY public.cotacao_status
 
 
 --
--- Name: cotacao_transacao cotacao_transacao_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5957 (class 2606 OID 84329)
+-- Name: cotacao_transacao cotacao_transacao_pkey; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.cotacao_transacao
@@ -36792,7 +39887,8 @@ ALTER TABLE ONLY public.cotacao_transacao
 
 
 --
--- Name: departamentos departamentos_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5491 (class 2606 OID 55714)
+-- Name: departamentos departamentos_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.departamentos
@@ -36800,7 +39896,8 @@ ALTER TABLE ONLY public.departamentos
 
 
 --
--- Name: depositos depositos_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5578 (class 2606 OID 55716)
+-- Name: depositos depositos_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.depositos
@@ -36808,7 +39905,8 @@ ALTER TABLE ONLY public.depositos
 
 
 --
--- Name: dias_semana dias_semana_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5955 (class 2606 OID 84321)
+-- Name: dias_semana dias_semana_pkey; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.dias_semana
@@ -36816,7 +39914,8 @@ ALTER TABLE ONLY public.dias_semana
 
 
 --
--- Name: distribuicao_drp_blacklist dist_drp_blacklist_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5585 (class 2606 OID 55718)
+-- Name: distribuicao_drp_blacklist dist_drp_blacklist_pkey; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.distribuicao_drp_blacklist
@@ -36824,7 +39923,8 @@ ALTER TABLE ONLY public.distribuicao_drp_blacklist
 
 
 --
--- Name: distribuicao_drp_itens dist_drp_itens_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5591 (class 2606 OID 55720)
+-- Name: distribuicao_drp_itens dist_drp_itens_pkey; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.distribuicao_drp_itens
@@ -36832,7 +39932,8 @@ ALTER TABLE ONLY public.distribuicao_drp_itens
 
 
 --
--- Name: distribuicao_drp distrib_drp_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5582 (class 2606 OID 55722)
+-- Name: distribuicao_drp distrib_drp_pkey; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.distribuicao_drp
@@ -36840,7 +39941,8 @@ ALTER TABLE ONLY public.distribuicao_drp
 
 
 --
--- Name: drp_automatico_emails drp_automatico_emails_pk; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5593 (class 2606 OID 55724)
+-- Name: drp_automatico_emails drp_automatico_emails_pk; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.drp_automatico_emails
@@ -36848,7 +39950,8 @@ ALTER TABLE ONLY public.drp_automatico_emails
 
 
 --
--- Name: drp_calendario_separacao_feriados drp_calendario_separacao_feriados_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5597 (class 2606 OID 55726)
+-- Name: drp_calendario_separacao_feriados drp_calendario_separacao_feriados_pkey; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.drp_calendario_separacao_feriados
@@ -36856,7 +39959,8 @@ ALTER TABLE ONLY public.drp_calendario_separacao_feriados
 
 
 --
--- Name: drp_exportacao_pedido_winthor_regras_precos drp_exportacao_pedido_winthor_regras_precos_pk; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6015 (class 2606 OID 84682)
+-- Name: drp_exportacao_pedido_winthor_regras_precos drp_exportacao_pedido_winthor_regras_precos_pk; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.drp_exportacao_pedido_winthor_regras_precos
@@ -36864,7 +39968,8 @@ ALTER TABLE ONLY public.drp_exportacao_pedido_winthor_regras_precos
 
 
 --
--- Name: drp_historico_horarios_grupo_separacao drp_historico_horarios_grupo_separacao_pk; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5603 (class 2606 OID 55728)
+-- Name: drp_historico_horarios_grupo_separacao drp_historico_horarios_grupo_separacao_pk; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.drp_historico_horarios_grupo_separacao
@@ -36872,7 +39977,8 @@ ALTER TABLE ONLY public.drp_historico_horarios_grupo_separacao
 
 
 --
--- Name: drp_horarios_grupo_separacao drp_horarios_grupo_separacao_pk; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5605 (class 2606 OID 55730)
+-- Name: drp_horarios_grupo_separacao drp_horarios_grupo_separacao_pk; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.drp_horarios_grupo_separacao
@@ -36880,7 +39986,8 @@ ALTER TABLE ONLY public.drp_horarios_grupo_separacao
 
 
 --
--- Name: drp_mapa_separacao drp_map_separacao_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5607 (class 2606 OID 55732)
+-- Name: drp_mapa_separacao drp_map_separacao_pkey; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.drp_mapa_separacao
@@ -36888,7 +39995,8 @@ ALTER TABLE ONLY public.drp_mapa_separacao
 
 
 --
--- Name: drp_mapa_separacao_automatica drp_mapa_separacao_automatica_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5609 (class 2606 OID 55734)
+-- Name: drp_mapa_separacao_automatica drp_mapa_separacao_automatica_pkey; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.drp_mapa_separacao_automatica
@@ -36896,7 +40004,8 @@ ALTER TABLE ONLY public.drp_mapa_separacao_automatica
 
 
 --
--- Name: embalagem embalagem_pk; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5614 (class 2606 OID 55736)
+-- Name: embalagem embalagem_pk; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.embalagem
@@ -36904,7 +40013,8 @@ ALTER TABLE ONLY public.embalagem
 
 
 --
--- Name: entrada_mercadorias entrada_mercadorias_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5459 (class 2606 OID 55738)
+-- Name: entrada_mercadorias entrada_mercadorias_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.entrada_mercadorias
@@ -36912,7 +40022,8 @@ ALTER TABLE ONLY public.entrada_mercadorias
 
 
 --
--- Name: familia_produtos_parceiros familia_produtos_parceiros_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5618 (class 2606 OID 55740)
+-- Name: familia_produtos_parceiros familia_produtos_parceiros_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.familia_produtos_parceiros
@@ -36920,7 +40031,8 @@ ALTER TABLE ONLY public.familia_produtos_parceiros
 
 
 --
--- Name: familia_produtos familia_produtos_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5462 (class 2606 OID 55742)
+-- Name: familia_produtos familia_produtos_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.familia_produtos
@@ -36928,7 +40040,8 @@ ALTER TABLE ONLY public.familia_produtos
 
 
 --
--- Name: categorias_distribuicao_filial filial_categoria_unique; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5554 (class 2606 OID 55744)
+-- Name: categorias_distribuicao_filial filial_categoria_unique; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.categorias_distribuicao_filial
@@ -36936,7 +40049,8 @@ ALTER TABLE ONLY public.categorias_distribuicao_filial
 
 
 --
--- Name: filial filial_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5622 (class 2606 OID 55746)
+-- Name: filial filial_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.filial
@@ -36944,7 +40058,8 @@ ALTER TABLE ONLY public.filial
 
 
 --
--- Name: filtros_produto filtros_produto_pk; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5624 (class 2606 OID 55748)
+-- Name: filtros_produto filtros_produto_pk; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.filtros_produto
@@ -36952,7 +40067,8 @@ ALTER TABLE ONLY public.filtros_produto
 
 
 --
--- Name: fornecedor_fabricante fornecedor_fabricante_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5626 (class 2606 OID 55750)
+-- Name: fornecedor_fabricante fornecedor_fabricante_pkey; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.fornecedor_fabricante
@@ -36960,7 +40076,8 @@ ALTER TABLE ONLY public.fornecedor_fabricante
 
 
 --
--- Name: fornecedor fornecedor_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5464 (class 2606 OID 55752)
+-- Name: fornecedor fornecedor_pkey; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.fornecedor
@@ -36968,7 +40085,8 @@ ALTER TABLE ONLY public.fornecedor
 
 
 --
--- Name: fornecedores_grupo_analise fornecedores_grupo_analise_pk; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5630 (class 2606 OID 55754)
+-- Name: fornecedores_grupo_analise fornecedores_grupo_analise_pk; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.fornecedores_grupo_analise
@@ -36976,7 +40094,8 @@ ALTER TABLE ONLY public.fornecedores_grupo_analise
 
 
 --
--- Name: fornecedores fornecedores_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5628 (class 2606 OID 55756)
+-- Name: fornecedores fornecedores_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.fornecedores
@@ -36984,7 +40103,8 @@ ALTER TABLE ONLY public.fornecedores
 
 
 --
--- Name: funcoes funcoes_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5632 (class 2606 OID 55758)
+-- Name: funcoes funcoes_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.funcoes
@@ -36992,7 +40112,8 @@ ALTER TABLE ONLY public.funcoes
 
 
 --
--- Name: grupo_compras grupo_compras_pk; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5634 (class 2606 OID 55760)
+-- Name: grupo_compras grupo_compras_pk; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.grupo_compras
@@ -37000,7 +40121,8 @@ ALTER TABLE ONLY public.grupo_compras
 
 
 --
--- Name: grupo_distribuicao_filial grupo_dist_filial_pk; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5638 (class 2606 OID 55762)
+-- Name: grupo_distribuicao_filial grupo_dist_filial_pk; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.grupo_distribuicao_filial
@@ -37008,7 +40130,8 @@ ALTER TABLE ONLY public.grupo_distribuicao_filial
 
 
 --
--- Name: grupo_distribuicao grupo_distribuicao_pk; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5636 (class 2606 OID 55764)
+-- Name: grupo_distribuicao grupo_distribuicao_pk; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.grupo_distribuicao
@@ -37016,7 +40139,8 @@ ALTER TABLE ONLY public.grupo_distribuicao
 
 
 --
--- Name: grupo_filial grupo_filial_pk; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5467 (class 2606 OID 55766)
+-- Name: grupo_filial grupo_filial_pk; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.grupo_filial
@@ -37024,7 +40148,8 @@ ALTER TABLE ONLY public.grupo_filial
 
 
 --
--- Name: drp_grupo_separacao_filial grupo_sep_filial_pk; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5601 (class 2606 OID 55768)
+-- Name: drp_grupo_separacao_filial grupo_sep_filial_pk; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.drp_grupo_separacao_filial
@@ -37032,7 +40157,8 @@ ALTER TABLE ONLY public.drp_grupo_separacao_filial
 
 
 --
--- Name: drp_grupo_separacao grupo_sep_pk; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5599 (class 2606 OID 55770)
+-- Name: drp_grupo_separacao grupo_sep_pk; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.drp_grupo_separacao
@@ -37040,7 +40166,8 @@ ALTER TABLE ONLY public.drp_grupo_separacao
 
 
 --
--- Name: grupos_analise_fornecedor grupos_analise_fornecedor_pk; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5640 (class 2606 OID 55772)
+-- Name: grupos_analise_fornecedor grupos_analise_fornecedor_pk; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.grupos_analise_fornecedor
@@ -37048,7 +40175,8 @@ ALTER TABLE ONLY public.grupos_analise_fornecedor
 
 
 --
--- Name: herancas heranca_pk; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5642 (class 2606 OID 55774)
+-- Name: herancas heranca_pk; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.herancas
@@ -37056,7 +40184,8 @@ ALTER TABLE ONLY public.herancas
 
 
 --
--- Name: hist_sazonalidades hist_sazonalidade_id_pk; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5663 (class 2606 OID 55776)
+-- Name: hist_sazonalidades hist_sazonalidade_id_pk; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.hist_sazonalidades
@@ -37064,7 +40193,8 @@ ALTER TABLE ONLY public.hist_sazonalidades
 
 
 --
--- Name: motivos_para_produto_silenciado id_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5698 (class 2606 OID 55778)
+-- Name: motivos_para_produto_silenciado id_pkey; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.motivos_para_produto_silenciado
@@ -37072,7 +40202,8 @@ ALTER TABLE ONLY public.motivos_para_produto_silenciado
 
 
 --
--- Name: imagens_produtos imagens_produtos_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5666 (class 2606 OID 55780)
+-- Name: imagens_produtos imagens_produtos_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.imagens_produtos
@@ -37080,7 +40211,8 @@ ALTER TABLE ONLY public.imagens_produtos
 
 
 --
--- Name: integracao_sistemas integracao_sistemas_pk; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5668 (class 2606 OID 55782)
+-- Name: integracao_sistemas integracao_sistemas_pk; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.integracao_sistemas
@@ -37088,7 +40220,8 @@ ALTER TABLE ONLY public.integracao_sistemas
 
 
 --
--- Name: jobs jobs_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5673 (class 2606 OID 55784)
+-- Name: jobs jobs_pkey; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.jobs
@@ -37096,7 +40229,8 @@ ALTER TABLE ONLY public.jobs
 
 
 --
--- Name: linha_produtos linhaprod_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5676 (class 2606 OID 55786)
+-- Name: linha_produtos linhaprod_pkey; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.linha_produtos
@@ -37104,7 +40238,8 @@ ALTER TABLE ONLY public.linha_produtos
 
 
 --
--- Name: log_pedidos_compras_itens log_pedidos_compras_itens_pk; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5678 (class 2606 OID 55788)
+-- Name: log_pedidos_compras_itens log_pedidos_compras_itens_pk; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.log_pedidos_compras_itens
@@ -37112,7 +40247,8 @@ ALTER TABLE ONLY public.log_pedidos_compras_itens
 
 
 --
--- Name: lote_produtos lote_produtos_pk; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5680 (class 2606 OID 55790)
+-- Name: lote_produtos lote_produtos_pk; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.lote_produtos
@@ -37120,7 +40256,8 @@ ALTER TABLE ONLY public.lote_produtos
 
 
 --
--- Name: mapa_compra mapa_compra_pk; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5682 (class 2606 OID 55792)
+-- Name: mapa_compra mapa_compra_pk; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.mapa_compra
@@ -37128,7 +40265,8 @@ ALTER TABLE ONLY public.mapa_compra
 
 
 --
--- Name: marcas marcas_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5684 (class 2606 OID 55794)
+-- Name: marcas marcas_pkey; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.marcas
@@ -37136,7 +40274,8 @@ ALTER TABLE ONLY public.marcas
 
 
 --
--- Name: matriz_priorizacao matriz_priorizacao_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5686 (class 2606 OID 55796)
+-- Name: matriz_priorizacao matriz_priorizacao_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.matriz_priorizacao
@@ -37144,7 +40283,8 @@ ALTER TABLE ONLY public.matriz_priorizacao
 
 
 --
--- Name: migrations migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5688 (class 2606 OID 55798)
+-- Name: migrations migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.migrations
@@ -37152,7 +40292,8 @@ ALTER TABLE ONLY public.migrations
 
 
 --
--- Name: modulos modulos_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5690 (class 2606 OID 55800)
+-- Name: modulos modulos_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.modulos
@@ -37160,7 +40301,8 @@ ALTER TABLE ONLY public.modulos
 
 
 --
--- Name: motivo_blacklist_produto motivo_blacklist_prod; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5692 (class 2606 OID 55802)
+-- Name: motivo_blacklist_produto motivo_blacklist_prod; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.motivo_blacklist_produto
@@ -37168,7 +40310,8 @@ ALTER TABLE ONLY public.motivo_blacklist_produto
 
 
 --
--- Name: motivos_para_categorias_mp_pa_silenciada motivos_para_categorias_mp_pa_silenciado_pk; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5696 (class 2606 OID 55804)
+-- Name: motivos_para_categorias_mp_pa_silenciada motivos_para_categorias_mp_pa_silenciado_pk; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.motivos_para_categorias_mp_pa_silenciada
@@ -37176,7 +40319,8 @@ ALTER TABLE ONLY public.motivos_para_categorias_mp_pa_silenciada
 
 
 --
--- Name: movimentacoes movimentacoes_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5702 (class 2606 OID 55806)
+-- Name: movimentacoes movimentacoes_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.movimentacoes
@@ -37184,7 +40328,8 @@ ALTER TABLE ONLY public.movimentacoes
 
 
 --
--- Name: movimentacoes_produtos movimentacoes_produtos_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5706 (class 2606 OID 55808)
+-- Name: movimentacoes_produtos movimentacoes_produtos_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.movimentacoes_produtos
@@ -37192,7 +40337,8 @@ ALTER TABLE ONLY public.movimentacoes_produtos
 
 
 --
--- Name: nivel_servico nivel_servico_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5469 (class 2606 OID 55810)
+-- Name: nivel_servico nivel_servico_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.nivel_servico
@@ -37200,7 +40346,8 @@ ALTER TABLE ONLY public.nivel_servico
 
 
 --
--- Name: notificacao_produtos_blacklist notif_prod_blacklist; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5712 (class 2606 OID 55812)
+-- Name: notificacao_produtos_blacklist notif_prod_blacklist; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.notificacao_produtos_blacklist
@@ -37208,7 +40355,8 @@ ALTER TABLE ONLY public.notificacao_produtos_blacklist
 
 
 --
--- Name: notificacao notificacao_pk; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5708 (class 2606 OID 55814)
+-- Name: notificacao notificacao_pk; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.notificacao
@@ -37216,7 +40364,8 @@ ALTER TABLE ONLY public.notificacao
 
 
 --
--- Name: parametros_avaliacao parametros_avaliacao_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5716 (class 2606 OID 55816)
+-- Name: parametros_avaliacao parametros_avaliacao_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.parametros_avaliacao
@@ -37224,7 +40373,8 @@ ALTER TABLE ONLY public.parametros_avaliacao
 
 
 --
--- Name: parametros_compra parametros_compra_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5719 (class 2606 OID 55818)
+-- Name: parametros_compra parametros_compra_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.parametros_compra
@@ -37232,7 +40382,8 @@ ALTER TABLE ONLY public.parametros_compra
 
 
 --
--- Name: parametros_criticidade parametros_criticidade_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5722 (class 2606 OID 55820)
+-- Name: parametros_criticidade parametros_criticidade_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.parametros_criticidade
@@ -37240,7 +40391,8 @@ ALTER TABLE ONLY public.parametros_criticidade
 
 
 --
--- Name: parametros_financeiro parametros_financeiro_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5725 (class 2606 OID 55822)
+-- Name: parametros_financeiro parametros_financeiro_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.parametros_financeiro
@@ -37248,7 +40400,8 @@ ALTER TABLE ONLY public.parametros_financeiro
 
 
 --
--- Name: parametros_popularidade parametros_popularidade_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5727 (class 2606 OID 55824)
+-- Name: parametros_popularidade parametros_popularidade_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.parametros_popularidade
@@ -37256,7 +40409,8 @@ ALTER TABLE ONLY public.parametros_popularidade
 
 
 --
--- Name: parceiros parceiros_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5730 (class 2606 OID 55826)
+-- Name: parceiros parceiros_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.parceiros
@@ -37264,7 +40418,8 @@ ALTER TABLE ONLY public.parceiros
 
 
 --
--- Name: pedidos_compras_produto_fracionado pc_fracionada_pk; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5740 (class 2606 OID 55828)
+-- Name: pedidos_compras_produto_fracionado pc_fracionada_pk; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.pedidos_compras_produto_fracionado
@@ -37272,7 +40427,8 @@ ALTER TABLE ONLY public.pedidos_compras_produto_fracionado
 
 
 --
--- Name: pedidos_compras_itens pedido_itens_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5743 (class 2606 OID 55830)
+-- Name: pedidos_compras_itens pedido_itens_pkey; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.pedidos_compras_itens
@@ -37280,7 +40436,8 @@ ALTER TABLE ONLY public.pedidos_compras_itens
 
 
 --
--- Name: pedidos_compras pedido_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5736 (class 2606 OID 55832)
+-- Name: pedidos_compras pedido_pkey; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.pedidos_compras
@@ -37288,7 +40445,8 @@ ALTER TABLE ONLY public.pedidos_compras
 
 
 --
--- Name: perfil perfil_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5748 (class 2606 OID 55834)
+-- Name: perfil perfil_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.perfil
@@ -37296,7 +40454,8 @@ ALTER TABLE ONLY public.perfil
 
 
 --
--- Name: analise_status_mensal pk_analise_status_mensal; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5525 (class 2606 OID 55836)
+-- Name: analise_status_mensal pk_analise_status_mensal; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.analise_status_mensal
@@ -37304,7 +40463,8 @@ ALTER TABLE ONLY public.analise_status_mensal
 
 
 --
--- Name: analise_status_mensal_filial pk_analise_status_mensal_filial; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5527 (class 2606 OID 55838)
+-- Name: analise_status_mensal_filial pk_analise_status_mensal_filial; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.analise_status_mensal_filial
@@ -37312,7 +40472,8 @@ ALTER TABLE ONLY public.analise_status_mensal_filial
 
 
 --
--- Name: capa_listas_preco pk_capa_listas_preco; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5548 (class 2606 OID 55840)
+-- Name: capa_listas_preco pk_capa_listas_preco; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.capa_listas_preco
@@ -37320,7 +40481,8 @@ ALTER TABLE ONLY public.capa_listas_preco
 
 
 --
--- Name: consumos pk_consumo; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5455 (class 2606 OID 55842)
+-- Name: consumos pk_consumo; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.consumos
@@ -37328,7 +40490,8 @@ ALTER TABLE ONLY public.consumos
 
 
 --
--- Name: cortes pk_cortes; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5574 (class 2606 OID 55844)
+-- Name: cortes pk_cortes; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.cortes
@@ -37336,7 +40499,8 @@ ALTER TABLE ONLY public.cortes
 
 
 --
--- Name: cotacoes_compra pk_cotacoes_compra; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5576 (class 2606 OID 55846)
+-- Name: cotacoes_compra pk_cotacoes_compra; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.cotacoes_compra
@@ -37344,7 +40508,8 @@ ALTER TABLE ONLY public.cotacoes_compra
 
 
 --
--- Name: distribuicao_drp_exportacao_erp pk_distribuicao_drp_exportacao_erp; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5587 (class 2606 OID 55848)
+-- Name: distribuicao_drp_exportacao_erp pk_distribuicao_drp_exportacao_erp; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.distribuicao_drp_exportacao_erp
@@ -37352,7 +40517,8 @@ ALTER TABLE ONLY public.distribuicao_drp_exportacao_erp
 
 
 --
--- Name: exportacao_pedidos_compras pk_exportacao_pedidos_compras; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5616 (class 2606 OID 55850)
+-- Name: exportacao_pedidos_compras pk_exportacao_pedidos_compras; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.exportacao_pedidos_compras
@@ -37360,7 +40526,8 @@ ALTER TABLE ONLY public.exportacao_pedidos_compras
 
 
 --
--- Name: hist_analise_compras pk_hist_analise_comp; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5646 (class 2606 OID 55852)
+-- Name: hist_analise_compras pk_hist_analise_comp; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.hist_analise_compras
@@ -37368,7 +40535,8 @@ ALTER TABLE ONLY public.hist_analise_compras
 
 
 --
--- Name: hist_analise_compras_filial pk_hist_analise_comp_fil; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5649 (class 2606 OID 55854)
+-- Name: hist_analise_compras_filial pk_hist_analise_comp_fil; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.hist_analise_compras_filial
@@ -37376,7 +40544,8 @@ ALTER TABLE ONLY public.hist_analise_compras_filial
 
 
 --
--- Name: hist_estoque pk_hist_estoque; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5653 (class 2606 OID 55856)
+-- Name: hist_estoque pk_hist_estoque; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.hist_estoque
@@ -37384,7 +40553,8 @@ ALTER TABLE ONLY public.hist_estoque
 
 
 --
--- Name: hist_fator_atuacao pk_hist_fator_atuacao; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5657 (class 2606 OID 55858)
+-- Name: hist_fator_atuacao pk_hist_fator_atuacao; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.hist_fator_atuacao
@@ -37392,7 +40562,8 @@ ALTER TABLE ONLY public.hist_fator_atuacao
 
 
 --
--- Name: inventario pk_inventario; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5671 (class 2606 OID 55860)
+-- Name: inventario pk_inventario; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.inventario
@@ -37400,7 +40571,8 @@ ALTER TABLE ONLY public.inventario
 
 
 --
--- Name: motivos_compras_oportunidade pk_motivos_compras_oportunidade; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5694 (class 2606 OID 55862)
+-- Name: motivos_compras_oportunidade pk_motivos_compras_oportunidade; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.motivos_compras_oportunidade
@@ -37408,7 +40580,8 @@ ALTER TABLE ONLY public.motivos_compras_oportunidade
 
 
 --
--- Name: notificacao_categorias_mp_pa_blacklist pk_notificacao_categorias_mp_pa_blacklist; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5710 (class 2606 OID 55864)
+-- Name: notificacao_categorias_mp_pa_blacklist pk_notificacao_categorias_mp_pa_blacklist; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.notificacao_categorias_mp_pa_blacklist
@@ -37416,7 +40589,8 @@ ALTER TABLE ONLY public.notificacao_categorias_mp_pa_blacklist
 
 
 --
--- Name: pedidos_compra_departamento pk_pedidos_compra_departamento; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5732 (class 2606 OID 55866)
+-- Name: pedidos_compra_departamento pk_pedidos_compra_departamento; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.pedidos_compra_departamento
@@ -37424,7 +40598,8 @@ ALTER TABLE ONLY public.pedidos_compra_departamento
 
 
 --
--- Name: pedidos_compra_tipo pk_pedidos_compra_tipo; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5734 (class 2606 OID 55868)
+-- Name: pedidos_compra_tipo pk_pedidos_compra_tipo; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.pedidos_compra_tipo
@@ -37432,7 +40607,8 @@ ALTER TABLE ONLY public.pedidos_compra_tipo
 
 
 --
--- Name: pedidos_compras_fornecedores_agrupados pk_pedidos_compras_fornecedores_agrupados; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5738 (class 2606 OID 55870)
+-- Name: pedidos_compras_fornecedores_agrupados pk_pedidos_compras_fornecedores_agrupados; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.pedidos_compras_fornecedores_agrupados
@@ -37440,7 +40616,8 @@ ALTER TABLE ONLY public.pedidos_compras_fornecedores_agrupados
 
 
 --
--- Name: pedidos_motivos_oportunidade pk_pedidos_motivos_oportunidade; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5746 (class 2606 OID 55872)
+-- Name: pedidos_motivos_oportunidade pk_pedidos_motivos_oportunidade; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.pedidos_motivos_oportunidade
@@ -37448,7 +40625,8 @@ ALTER TABLE ONLY public.pedidos_motivos_oportunidade
 
 
 --
--- Name: produtos_capa_listas_preco pk_produtos_capa_listas_preco; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5758 (class 2606 OID 55874)
+-- Name: produtos_capa_listas_preco pk_produtos_capa_listas_preco; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.produtos_capa_listas_preco
@@ -37456,7 +40634,8 @@ ALTER TABLE ONLY public.produtos_capa_listas_preco
 
 
 --
--- Name: produtos_mp pk_produtos_mp; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5798 (class 2606 OID 55876)
+-- Name: produtos_mp pk_produtos_mp; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.produtos_mp
@@ -37464,7 +40643,8 @@ ALTER TABLE ONLY public.produtos_mp
 
 
 --
--- Name: produtos_pa pk_produtos_pa; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5800 (class 2606 OID 55878)
+-- Name: produtos_pa pk_produtos_pa; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.produtos_pa
@@ -37472,7 +40652,8 @@ ALTER TABLE ONLY public.produtos_pa
 
 
 --
--- Name: produtos_pedidos_compra_tipo pk_produtos_pedidos_compra; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5802 (class 2606 OID 55880)
+-- Name: produtos_pedidos_compra_tipo pk_produtos_pedidos_compra; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.produtos_pedidos_compra_tipo
@@ -37480,7 +40661,8 @@ ALTER TABLE ONLY public.produtos_pedidos_compra_tipo
 
 
 --
--- Name: sys_produtos_combinados pk_sys_produtos_combinados; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5867 (class 2606 OID 55882)
+-- Name: sys_produtos_combinados pk_sys_produtos_combinados; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.sys_produtos_combinados
@@ -37488,7 +40670,8 @@ ALTER TABLE ONLY public.sys_produtos_combinados
 
 
 --
--- Name: sys_produtos_combinados_itens pk_sys_produtos_combinados_itens; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5869 (class 2606 OID 55884)
+-- Name: sys_produtos_combinados_itens pk_sys_produtos_combinados_itens; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.sys_produtos_combinados_itens
@@ -37496,7 +40679,8 @@ ALTER TABLE ONLY public.sys_produtos_combinados_itens
 
 
 --
--- Name: user_config_cart pk_user_config_cart; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5916 (class 2606 OID 55886)
+-- Name: user_config_cart pk_user_config_cart; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.user_config_cart
@@ -37504,7 +40688,8 @@ ALTER TABLE ONLY public.user_config_cart
 
 
 --
--- Name: users_api pk_users_api; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5920 (class 2606 OID 55888)
+-- Name: users_api pk_users_api; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.users_api
@@ -37512,7 +40697,8 @@ ALTER TABLE ONLY public.users_api
 
 
 --
--- Name: distribuicao_drp_exportacao_protheus pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5589 (class 2606 OID 55890)
+-- Name: distribuicao_drp_exportacao_protheus pkey; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.distribuicao_drp_exportacao_protheus
@@ -37520,7 +40706,8 @@ ALTER TABLE ONLY public.distribuicao_drp_exportacao_protheus
 
 
 --
--- Name: preferencias_tabelas_usuario preferencias_tabelas_usuario_pk; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5750 (class 2606 OID 55892)
+-- Name: preferencias_tabelas_usuario preferencias_tabelas_usuario_pk; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.preferencias_tabelas_usuario
@@ -37528,7 +40715,8 @@ ALTER TABLE ONLY public.preferencias_tabelas_usuario
 
 
 --
--- Name: prismas_filiais prismas_filiais_pk; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5752 (class 2606 OID 55894)
+-- Name: prismas_filiais prismas_filiais_pk; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.prismas_filiais
@@ -37536,7 +40724,8 @@ ALTER TABLE ONLY public.prismas_filiais
 
 
 --
--- Name: prismas_grupos prismas_grupos_pk; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5754 (class 2606 OID 55896)
+-- Name: prismas_grupos prismas_grupos_pk; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.prismas_grupos
@@ -37544,7 +40733,8 @@ ALTER TABLE ONLY public.prismas_grupos
 
 
 --
--- Name: produtos_filial prod_fil_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5475 (class 2606 OID 55898)
+-- Name: produtos_filial prod_fil_pkey; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.produtos_filial
@@ -37552,7 +40742,8 @@ ALTER TABLE ONLY public.produtos_filial
 
 
 --
--- Name: produtos_analise_mercado produtos_analise_mercado_pk; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5756 (class 2606 OID 55900)
+-- Name: produtos_analise_mercado produtos_analise_mercado_pk; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.produtos_analise_mercado
@@ -37560,7 +40751,8 @@ ALTER TABLE ONLY public.produtos_analise_mercado
 
 
 --
--- Name: produtos_combinados_compras_filial produtos_combinados_compras_filial_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5760 (class 2606 OID 55902)
+-- Name: produtos_combinados_compras_filial produtos_combinados_compras_filial_pkey; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.produtos_combinados_compras_filial
@@ -37568,7 +40760,8 @@ ALTER TABLE ONLY public.produtos_combinados_compras_filial
 
 
 --
--- Name: produtos_combinados_compras_grupo produtos_combinados_compras_grupo_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5762 (class 2606 OID 55904)
+-- Name: produtos_combinados_compras_grupo produtos_combinados_compras_grupo_pkey; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.produtos_combinados_compras_grupo
@@ -37576,7 +40769,8 @@ ALTER TABLE ONLY public.produtos_combinados_compras_grupo
 
 
 --
--- Name: produtos_combinados_forecast_filial produtos_combinados_forecast_filial_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5764 (class 2606 OID 55906)
+-- Name: produtos_combinados_forecast_filial produtos_combinados_forecast_filial_pkey; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.produtos_combinados_forecast_filial
@@ -37584,7 +40778,8 @@ ALTER TABLE ONLY public.produtos_combinados_forecast_filial
 
 
 --
--- Name: produtos_combinados_forecast_grupo produtos_combinados_forecast_grupo_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5766 (class 2606 OID 55908)
+-- Name: produtos_combinados_forecast_grupo produtos_combinados_forecast_grupo_pkey; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.produtos_combinados_forecast_grupo
@@ -37592,7 +40787,8 @@ ALTER TABLE ONLY public.produtos_combinados_forecast_grupo
 
 
 --
--- Name: produtos_combinados_transito_filial produtos_combinados_transito_filial_pk; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5768 (class 2606 OID 55910)
+-- Name: produtos_combinados_transito_filial produtos_combinados_transito_filial_pk; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.produtos_combinados_transito_filial
@@ -37600,7 +40796,8 @@ ALTER TABLE ONLY public.produtos_combinados_transito_filial
 
 
 --
--- Name: produtos_combinados_transito_grupo produtos_combinados_transito_grupo_pk; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5770 (class 2606 OID 55912)
+-- Name: produtos_combinados_transito_grupo produtos_combinados_transito_grupo_pk; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.produtos_combinados_transito_grupo
@@ -37608,7 +40805,8 @@ ALTER TABLE ONLY public.produtos_combinados_transito_grupo
 
 
 --
--- Name: produtos_compras_categorias produtos_compras_cat_pk; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5772 (class 2606 OID 55914)
+-- Name: produtos_compras_categorias produtos_compras_cat_pk; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.produtos_compras_categorias
@@ -37616,7 +40814,8 @@ ALTER TABLE ONLY public.produtos_compras_categorias
 
 
 --
--- Name: produtos_compras_filial produtos_compras_filial_pk; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5776 (class 2606 OID 55916)
+-- Name: produtos_compras_filial produtos_compras_filial_pk; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.produtos_compras_filial
@@ -37624,7 +40823,8 @@ ALTER TABLE ONLY public.produtos_compras_filial
 
 
 --
--- Name: produtos_compras_grupo produtos_compras_pk; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5508 (class 2606 OID 55918)
+-- Name: produtos_compras_grupo produtos_compras_pk; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.produtos_compras_grupo
@@ -37632,7 +40832,8 @@ ALTER TABLE ONLY public.produtos_compras_grupo
 
 
 --
--- Name: produtos_desconsiderados_analise_diagnostico_estoque produtos_desconsiderados_analise_diagnostico_estoque_pk; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5778 (class 2606 OID 55920)
+-- Name: produtos_desconsiderados_analise_diagnostico_estoque produtos_desconsiderados_analise_diagnostico_estoque_pk; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.produtos_desconsiderados_analise_diagnostico_estoque
@@ -37640,7 +40841,8 @@ ALTER TABLE ONLY public.produtos_desconsiderados_analise_diagnostico_estoque
 
 
 --
--- Name: produtos_estatistica produtos_estatistica_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5780 (class 2606 OID 55922)
+-- Name: produtos_estatistica produtos_estatistica_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.produtos_estatistica
@@ -37648,7 +40850,8 @@ ALTER TABLE ONLY public.produtos_estatistica
 
 
 --
--- Name: produtos_forecast_categorias produtos_forecast_categorias_pk; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5786 (class 2606 OID 55924)
+-- Name: produtos_forecast_categorias produtos_forecast_categorias_pk; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.produtos_forecast_categorias
@@ -37656,7 +40859,8 @@ ALTER TABLE ONLY public.produtos_forecast_categorias
 
 
 --
--- Name: produtos_forecast_filial produtos_forecast_filial_pk; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5790 (class 2606 OID 55926)
+-- Name: produtos_forecast_filial produtos_forecast_filial_pk; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.produtos_forecast_filial
@@ -37664,7 +40868,8 @@ ALTER TABLE ONLY public.produtos_forecast_filial
 
 
 --
--- Name: produtos_forecast_itens produtos_forecast_itens_pk; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5792 (class 2606 OID 55928)
+-- Name: produtos_forecast_itens produtos_forecast_itens_pk; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.produtos_forecast_itens
@@ -37672,7 +40877,8 @@ ALTER TABLE ONLY public.produtos_forecast_itens
 
 
 --
--- Name: produtos_forecast produtos_forecast_pk; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5784 (class 2606 OID 55930)
+-- Name: produtos_forecast produtos_forecast_pk; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.produtos_forecast
@@ -37680,7 +40886,8 @@ ALTER TABLE ONLY public.produtos_forecast
 
 
 --
--- Name: produtos_impostos produtos_impostos_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5794 (class 2606 OID 55932)
+-- Name: produtos_impostos produtos_impostos_pkey; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.produtos_impostos
@@ -37688,7 +40895,8 @@ ALTER TABLE ONLY public.produtos_impostos
 
 
 --
--- Name: produtos_margem produtos_margem_pk; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5796 (class 2606 OID 55934)
+-- Name: produtos_margem produtos_margem_pk; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.produtos_margem
@@ -37696,7 +40904,8 @@ ALTER TABLE ONLY public.produtos_margem
 
 
 --
--- Name: produtos_separacao_tmp produtos_sep_tmp_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5805 (class 2606 OID 55936)
+-- Name: produtos_separacao_tmp produtos_sep_tmp_pkey; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.produtos_separacao_tmp
@@ -37704,7 +40913,8 @@ ALTER TABLE ONLY public.produtos_separacao_tmp
 
 
 --
--- Name: produtos_transito_filial produtos_transito_filial_pk; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5815 (class 2606 OID 55938)
+-- Name: produtos_transito_filial produtos_transito_filial_pk; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.produtos_transito_filial
@@ -37712,7 +40922,8 @@ ALTER TABLE ONLY public.produtos_transito_filial
 
 
 --
--- Name: produtos_transito produtos_transito_pk; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5811 (class 2606 OID 55940)
+-- Name: produtos_transito produtos_transito_pk; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.produtos_transito
@@ -37720,7 +40931,8 @@ ALTER TABLE ONLY public.produtos_transito
 
 
 --
--- Name: questionario_criticidade questionario_criticidade_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5817 (class 2606 OID 55942)
+-- Name: questionario_criticidade questionario_criticidade_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.questionario_criticidade
@@ -37728,7 +40940,8 @@ ALTER TABLE ONLY public.questionario_criticidade
 
 
 --
--- Name: release_notes release_notes_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5819 (class 2606 OID 55944)
+-- Name: release_notes release_notes_pkey; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.release_notes
@@ -37736,7 +40949,8 @@ ALTER TABLE ONLY public.release_notes
 
 
 --
--- Name: rentabilidade rentabilidade_pk; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5824 (class 2606 OID 55946)
+-- Name: rentabilidade rentabilidade_pk; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.rentabilidade
@@ -37744,7 +40958,8 @@ ALTER TABLE ONLY public.rentabilidade
 
 
 --
--- Name: requisicoes_desconsideradas requisicoes_desconsideradas_pk; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5827 (class 2606 OID 55948)
+-- Name: requisicoes_desconsideradas requisicoes_desconsideradas_pk; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.requisicoes_desconsideradas
@@ -37752,7 +40967,8 @@ ALTER TABLE ONLY public.requisicoes_desconsideradas
 
 
 --
--- Name: requisicoes requisicoes_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5489 (class 2606 OID 55950)
+-- Name: requisicoes requisicoes_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.requisicoes
@@ -37760,7 +40976,8 @@ ALTER TABLE ONLY public.requisicoes
 
 
 --
--- Name: requisicoes_tmp requisicoes_tmp_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5829 (class 2606 OID 55952)
+-- Name: requisicoes_tmp requisicoes_tmp_pkey; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.requisicoes_tmp
@@ -37768,7 +40985,8 @@ ALTER TABLE ONLY public.requisicoes_tmp
 
 
 --
--- Name: resposta_criticidade resposta_criticidade_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5832 (class 2606 OID 55954)
+-- Name: resposta_criticidade resposta_criticidade_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.resposta_criticidade
@@ -37776,7 +40994,8 @@ ALTER TABLE ONLY public.resposta_criticidade
 
 
 --
--- Name: ressuprimentos ressuprimentos_pk_; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5834 (class 2606 OID 55956)
+-- Name: ressuprimentos ressuprimentos_pk_; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.ressuprimentos
@@ -37784,7 +41003,8 @@ ALTER TABLE ONLY public.ressuprimentos
 
 
 --
--- Name: saldo_filiais saldo_filiais_pk; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5484 (class 2606 OID 55958)
+-- Name: saldo_filiais saldo_filiais_pk; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.saldo_filiais
@@ -37792,7 +41012,8 @@ ALTER TABLE ONLY public.saldo_filiais
 
 
 --
--- Name: sazonalidade_produtos sazonalidade_produtos_pk; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5838 (class 2606 OID 55960)
+-- Name: sazonalidade_produtos sazonalidade_produtos_pk; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.sazonalidade_produtos
@@ -37800,7 +41021,8 @@ ALTER TABLE ONLY public.sazonalidade_produtos
 
 
 --
--- Name: sazonalidades_produtos sazonalidades_produtos_id_pk; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5840 (class 2606 OID 55962)
+-- Name: sazonalidades_produtos sazonalidades_produtos_id_pk; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.sazonalidades_produtos
@@ -37808,7 +41030,8 @@ ALTER TABLE ONLY public.sazonalidades_produtos
 
 
 --
--- Name: secao secao_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5842 (class 2606 OID 55964)
+-- Name: secao secao_pkey; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.secao
@@ -37816,7 +41039,8 @@ ALTER TABLE ONLY public.secao
 
 
 --
--- Name: sequencias sequencias_pk_ressuprimentos; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5844 (class 2606 OID 55966)
+-- Name: sequencias sequencias_pk_ressuprimentos; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.sequencias
@@ -37824,7 +41048,8 @@ ALTER TABLE ONLY public.sequencias
 
 
 --
--- Name: similares similares_pk; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5847 (class 2606 OID 55968)
+-- Name: similares similares_pk; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.similares
@@ -37832,7 +41057,8 @@ ALTER TABLE ONLY public.similares
 
 
 --
--- Name: solicitacoes_compras solicitacoes_compras_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5851 (class 2606 OID 55970)
+-- Name: solicitacoes_compras solicitacoes_compras_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.solicitacoes_compras
@@ -37840,7 +41066,8 @@ ALTER TABLE ONLY public.solicitacoes_compras
 
 
 --
--- Name: status_produto status_produto_pk; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5857 (class 2606 OID 55972)
+-- Name: status_produto status_produto_pk; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.status_produto
@@ -37848,7 +41075,8 @@ ALTER TABLE ONLY public.status_produto
 
 
 --
--- Name: sys_analise_diagnostico_drp_estoque_filial_historico sys_analise_diagnostico_drp_estoque_filial_historico_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5859 (class 2606 OID 55974)
+-- Name: sys_analise_diagnostico_drp_estoque_filial_historico sys_analise_diagnostico_drp_estoque_filial_historico_pkey; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.sys_analise_diagnostico_drp_estoque_filial_historico
@@ -37856,7 +41084,8 @@ ALTER TABLE ONLY public.sys_analise_diagnostico_drp_estoque_filial_historico
 
 
 --
--- Name: sys_exportacoes_pedidos_compras_api sys_exportacoes_pedidos_compras_api_idpedido_key; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5943 (class 2606 OID 84253)
+-- Name: sys_exportacoes_pedidos_compras_api sys_exportacoes_pedidos_compras_api_idpedido_key; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.sys_exportacoes_pedidos_compras_api
@@ -37864,7 +41093,8 @@ ALTER TABLE ONLY public.sys_exportacoes_pedidos_compras_api
 
 
 --
--- Name: sys_exportacoes_pedidos_compras_api_itens sys_exportacoes_pedidos_compras_api_itens_pk; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5949 (class 2606 OID 84291)
+-- Name: sys_exportacoes_pedidos_compras_api_itens sys_exportacoes_pedidos_compras_api_itens_pk; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.sys_exportacoes_pedidos_compras_api_itens
@@ -37872,7 +41102,8 @@ ALTER TABLE ONLY public.sys_exportacoes_pedidos_compras_api_itens
 
 
 --
--- Name: sys_exportacoes_pedidos_compras_api sys_exportacoes_pedidos_compras_api_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5946 (class 2606 OID 84251)
+-- Name: sys_exportacoes_pedidos_compras_api sys_exportacoes_pedidos_compras_api_pkey; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.sys_exportacoes_pedidos_compras_api
@@ -37880,7 +41111,8 @@ ALTER TABLE ONLY public.sys_exportacoes_pedidos_compras_api
 
 
 --
--- Name: sys_herancas_produtos_combinados sys_herancas_produtos_combinados_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5941 (class 2606 OID 84240)
+-- Name: sys_herancas_produtos_combinados sys_herancas_produtos_combinados_pkey; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.sys_herancas_produtos_combinados
@@ -37888,7 +41120,8 @@ ALTER TABLE ONLY public.sys_herancas_produtos_combinados
 
 
 --
--- Name: sys_historico_de_atualizacao_em_massa_por_filial sys_historico_de_atualizacao_em_massa_por_filial_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5861 (class 2606 OID 55976)
+-- Name: sys_historico_de_atualizacao_em_massa_por_filial sys_historico_de_atualizacao_em_massa_por_filial_pkey; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.sys_historico_de_atualizacao_em_massa_por_filial
@@ -37896,7 +41129,8 @@ ALTER TABLE ONLY public.sys_historico_de_atualizacao_em_massa_por_filial
 
 
 --
--- Name: sys_justificativas_distribuicao_drp sys_justificativas_distribuicao_drp_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6008 (class 2606 OID 84642)
+-- Name: sys_justificativas_distribuicao_drp sys_justificativas_distribuicao_drp_pkey; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.sys_justificativas_distribuicao_drp
@@ -37904,7 +41138,8 @@ ALTER TABLE ONLY public.sys_justificativas_distribuicao_drp
 
 
 --
--- Name: sys_justificativas_mix_filiais sys_justificativas_mix_filiais_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5951 (class 2606 OID 84303)
+-- Name: sys_justificativas_mix_filiais sys_justificativas_mix_filiais_pkey; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.sys_justificativas_mix_filiais
@@ -37912,7 +41147,8 @@ ALTER TABLE ONLY public.sys_justificativas_mix_filiais
 
 
 --
--- Name: sys_listas_separacao_drp sys_listas_separacao_drp_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5863 (class 2606 OID 55978)
+-- Name: sys_listas_separacao_drp sys_listas_separacao_drp_pkey; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.sys_listas_separacao_drp
@@ -37920,7 +41156,8 @@ ALTER TABLE ONLY public.sys_listas_separacao_drp
 
 
 --
--- Name: sys_produtos_analise_por_lotes sys_produtos_analise_por_lotes_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5865 (class 2606 OID 55980)
+-- Name: sys_produtos_analise_por_lotes sys_produtos_analise_por_lotes_pkey; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.sys_produtos_analise_por_lotes
@@ -37928,7 +41165,8 @@ ALTER TABLE ONLY public.sys_produtos_analise_por_lotes
 
 
 --
--- Name: sys_produtos_importados_em_massa_por_filial sys_produtos_importados_em_massa_por_filial_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5871 (class 2606 OID 55982)
+-- Name: sys_produtos_importados_em_massa_por_filial sys_produtos_importados_em_massa_por_filial_pkey; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.sys_produtos_importados_em_massa_por_filial
@@ -37936,7 +41174,8 @@ ALTER TABLE ONLY public.sys_produtos_importados_em_massa_por_filial
 
 
 --
--- Name: sys_produtos_mix_filial sys_produtos_mix_filial_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5953 (class 2606 OID 84313)
+-- Name: sys_produtos_mix_filial sys_produtos_mix_filial_pkey; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.sys_produtos_mix_filial
@@ -37944,7 +41183,8 @@ ALTER TABLE ONLY public.sys_produtos_mix_filial
 
 
 --
--- Name: sys_rodadas_compra_sazonal_itens sys_rodadas_compra_sazonal_itens_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6019 (class 2606 OID 84709)
+-- Name: sys_rodadas_compra_sazonal_itens sys_rodadas_compra_sazonal_itens_pkey; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.sys_rodadas_compra_sazonal_itens
@@ -37952,7 +41192,8 @@ ALTER TABLE ONLY public.sys_rodadas_compra_sazonal_itens
 
 
 --
--- Name: sys_rodadas_compra_sazonal sys_rodadas_compra_sazonal_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6017 (class 2606 OID 84692)
+-- Name: sys_rodadas_compra_sazonal sys_rodadas_compra_sazonal_pkey; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.sys_rodadas_compra_sazonal
@@ -37960,7 +41201,8 @@ ALTER TABLE ONLY public.sys_rodadas_compra_sazonal
 
 
 --
--- Name: sys_tipo_projecao_media_sazonal_produtos_filial sys_tipo_projecao_media_sazonal_produtos_filial_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5873 (class 2606 OID 84590)
+-- Name: sys_tipo_projecao_media_sazonal_produtos_filial sys_tipo_projecao_media_sazonal_produtos_filial_pkey; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.sys_tipo_projecao_media_sazonal_produtos_filial
@@ -37968,7 +41210,8 @@ ALTER TABLE ONLY public.sys_tipo_projecao_media_sazonal_produtos_filial
 
 
 --
--- Name: sys_tipos_justificativas_distribuicao_drp sys_tipos_justificativas_distribuicao_drp_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6013 (class 2606 OID 84668)
+-- Name: sys_tipos_justificativas_distribuicao_drp sys_tipos_justificativas_distribuicao_drp_pkey; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.sys_tipos_justificativas_distribuicao_drp
@@ -37976,7 +41219,8 @@ ALTER TABLE ONLY public.sys_tipos_justificativas_distribuicao_drp
 
 
 --
--- Name: sys_tipos_projecao_vendas_produtos_filial sys_tipos_projecao_vendas_produtos_filial_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5875 (class 2606 OID 55986)
+-- Name: sys_tipos_projecao_vendas_produtos_filial sys_tipos_projecao_vendas_produtos_filial_pkey; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.sys_tipos_projecao_vendas_produtos_filial
@@ -37984,7 +41228,8 @@ ALTER TABLE ONLY public.sys_tipos_projecao_vendas_produtos_filial
 
 
 --
--- Name: tempo_cobertura_compras_fornecedor tempo_cobertura_compras_fornecedor_pk; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5883 (class 2606 OID 55988)
+-- Name: tempo_cobertura_compras_fornecedor tempo_cobertura_compras_fornecedor_pk; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.tempo_cobertura_compras_fornecedor
@@ -37992,7 +41237,8 @@ ALTER TABLE ONLY public.tempo_cobertura_compras_fornecedor
 
 
 --
--- Name: tempo_cobertura_compras_geral tempo_cobertura_compras_geral_pk; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5885 (class 2606 OID 55990)
+-- Name: tempo_cobertura_compras_geral tempo_cobertura_compras_geral_pk; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.tempo_cobertura_compras_geral
@@ -38000,7 +41246,8 @@ ALTER TABLE ONLY public.tempo_cobertura_compras_geral
 
 
 --
--- Name: tempo_cobertura_compras tempo_cobertura_compras_pk; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5880 (class 2606 OID 55992)
+-- Name: tempo_cobertura_compras tempo_cobertura_compras_pk; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.tempo_cobertura_compras
@@ -38008,7 +41255,8 @@ ALTER TABLE ONLY public.tempo_cobertura_compras
 
 
 --
--- Name: tempo_cobertura_compras_produtos tempo_cobertura_compras_produtos_pk; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5888 (class 2606 OID 55994)
+-- Name: tempo_cobertura_compras_produtos tempo_cobertura_compras_produtos_pk; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.tempo_cobertura_compras_produtos
@@ -38016,7 +41264,8 @@ ALTER TABLE ONLY public.tempo_cobertura_compras_produtos
 
 
 --
--- Name: tempo_cobertura_compras_segmentos tempo_cobertura_compras_segmentos_pk; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5891 (class 2606 OID 55996)
+-- Name: tempo_cobertura_compras_segmentos tempo_cobertura_compras_segmentos_pk; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.tempo_cobertura_compras_segmentos
@@ -38024,7 +41273,8 @@ ALTER TABLE ONLY public.tempo_cobertura_compras_segmentos
 
 
 --
--- Name: tempo_cobertura_por_curva_popularidade tempo_cobertura_por_curva_popularidade_pk; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5893 (class 2606 OID 55998)
+-- Name: tempo_cobertura_por_curva_popularidade tempo_cobertura_por_curva_popularidade_pk; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.tempo_cobertura_por_curva_popularidade
@@ -38032,7 +41282,8 @@ ALTER TABLE ONLY public.tempo_cobertura_por_curva_popularidade
 
 
 --
--- Name: tempo tempo_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5877 (class 2606 OID 56000)
+-- Name: tempo tempo_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.tempo
@@ -38040,7 +41291,8 @@ ALTER TABLE ONLY public.tempo
 
 
 --
--- Name: tipo_solicitacoes tipo_solicitacoes_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5895 (class 2606 OID 56002)
+-- Name: tipo_solicitacoes tipo_solicitacoes_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.tipo_solicitacoes
@@ -38048,7 +41300,8 @@ ALTER TABLE ONLY public.tipo_solicitacoes
 
 
 --
--- Name: tipos_pedidos_compras tipos_pedidos_compras_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5897 (class 2606 OID 56004)
+-- Name: tipos_pedidos_compras tipos_pedidos_compras_pkey; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.tipos_pedidos_compras
@@ -38056,7 +41309,8 @@ ALTER TABLE ONLY public.tipos_pedidos_compras
 
 
 --
--- Name: totais_produtos_compradores totais_produtos_compradores_pk; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5905 (class 2606 OID 56006)
+-- Name: totais_produtos_compradores totais_produtos_compradores_pk; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.totais_produtos_compradores
@@ -38064,7 +41318,8 @@ ALTER TABLE ONLY public.totais_produtos_compradores
 
 
 --
--- Name: totais_produtos_fonecedores totais_produtos_fonecedores_pk; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5908 (class 2606 OID 56008)
+-- Name: totais_produtos_fonecedores totais_produtos_fonecedores_pk; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.totais_produtos_fonecedores
@@ -38072,7 +41327,8 @@ ALTER TABLE ONLY public.totais_produtos_fonecedores
 
 
 --
--- Name: totais_produtos_segmentos totais_produtos_segmentos_pk; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5911 (class 2606 OID 56010)
+-- Name: totais_produtos_segmentos totais_produtos_segmentos_pk; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.totais_produtos_segmentos
@@ -38080,7 +41336,8 @@ ALTER TABLE ONLY public.totais_produtos_segmentos
 
 
 --
--- Name: drp_transportes transportes_pk; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5611 (class 2606 OID 56012)
+-- Name: drp_transportes transportes_pk; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.drp_transportes
@@ -38088,7 +41345,8 @@ ALTER TABLE ONLY public.drp_transportes
 
 
 --
--- Name: unidades_medida unidades_medida_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5914 (class 2606 OID 56014)
+-- Name: unidades_medida unidades_medida_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.unidades_medida
@@ -38096,7 +41354,8 @@ ALTER TABLE ONLY public.unidades_medida
 
 
 --
--- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5918 (class 2606 OID 56016)
+-- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.users
@@ -38104,7 +41363,8 @@ ALTER TABLE ONLY public.users
 
 
 --
--- Name: usuarios_comprador usuarios_comprador_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6006 (class 2606 OID 84624)
+-- Name: usuarios_comprador usuarios_comprador_pkey; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.usuarios_comprador
@@ -38112,7 +41372,8 @@ ALTER TABLE ONLY public.usuarios_comprador
 
 
 --
--- Name: usuarios usuarios_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5926 (class 2606 OID 56018)
+-- Name: usuarios usuarios_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.usuarios
@@ -38120,7 +41381,8 @@ ALTER TABLE ONLY public.usuarios
 
 
 --
--- Name: release_notes versao_unique; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5821 (class 2606 OID 56020)
+-- Name: release_notes versao_unique; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.release_notes
@@ -38128,7 +41390,8 @@ ALTER TABLE ONLY public.release_notes
 
 
 --
--- Name: wkf_compras_autorizacoes wkf_compras_auto_pk; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5933 (class 2606 OID 56022)
+-- Name: wkf_compras_autorizacoes wkf_compras_auto_pk; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.wkf_compras_autorizacoes
@@ -38136,7 +41399,8 @@ ALTER TABLE ONLY public.wkf_compras_autorizacoes
 
 
 --
--- Name: wkf_compras_controle_grupos wkf_compras_controle_grupos_pk; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5935 (class 2606 OID 56024)
+-- Name: wkf_compras_controle_grupos wkf_compras_controle_grupos_pk; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.wkf_compras_controle_grupos
@@ -38144,7 +41408,8 @@ ALTER TABLE ONLY public.wkf_compras_controle_grupos
 
 
 --
--- Name: wkf_compras_itens wkf_compras_itens_pk; Type: CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 5937 (class 2606 OID 56026)
+-- Name: wkf_compras_itens wkf_compras_itens_pk; Type: CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.wkf_compras_itens
@@ -38152,1085 +41417,1240 @@ ALTER TABLE ONLY public.wkf_compras_itens
 
 
 --
--- Name: activity_log_log_name_index; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5430 (class 1259 OID 56027)
+-- Name: activity_log_log_name_index; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX activity_log_log_name_index ON public.activity_log USING btree (log_name);
 
 
 --
--- Name: analise_diagnostico_estoque_grupo_diario_histograma_data_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5442 (class 1259 OID 56028)
+-- Name: analise_diagnostico_estoque_grupo_diario_histograma_data_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX analise_diagnostico_estoque_grupo_diario_histograma_data_idx ON public.analise_diagnostico_estoque_grupo_diario USING btree (histograma, data);
 
 
 --
--- Name: analise_diagnostico_estoque_grupo_diario_idade_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5443 (class 1259 OID 84610)
+-- Name: analise_diagnostico_estoque_grupo_diario_idade_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX analise_diagnostico_estoque_grupo_diario_idade_idx ON public.analise_diagnostico_estoque_grupo_diario USING btree (btrim(idade));
 
 
 --
--- Name: analise_diagnostico_estoque_grupo_diario_idgrupo_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5444 (class 1259 OID 56029)
+-- Name: analise_diagnostico_estoque_grupo_diario_idgrupo_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX analise_diagnostico_estoque_grupo_diario_idgrupo_idx ON public.analise_diagnostico_estoque_grupo_diario USING btree (idgrupo, idproduto);
 
 
 --
--- Name: analise_diagnostico_estoque_grupo_histograma_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5438 (class 1259 OID 56030)
+-- Name: analise_diagnostico_estoque_grupo_histograma_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX analise_diagnostico_estoque_grupo_histograma_idx ON public.analise_diagnostico_estoque_grupo USING btree (histograma);
 
 
 --
--- Name: analise_diagnostico_estoque_grupo_nivel_servico_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5439 (class 1259 OID 56031)
+-- Name: analise_diagnostico_estoque_grupo_nivel_servico_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX analise_diagnostico_estoque_grupo_nivel_servico_idx ON public.analise_diagnostico_estoque_grupo USING btree (nivel_servico);
 
 
 --
--- Name: analise_mercadorias_forecast_grupo_fil_id_grupo_forn; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5494 (class 1259 OID 56032)
+-- Name: analise_mercadorias_forecast_grupo_fil_id_grupo_forn; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX analise_mercadorias_forecast_grupo_fil_id_grupo_forn ON public.analise_mercadorias_forecast_grupo_filial USING btree (id_grupo, filial, idfornecedor);
 
 
 --
--- Name: analise_mercadorias_forecast_grupo_fil_id_grupo_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5495 (class 1259 OID 56033)
+-- Name: analise_mercadorias_forecast_grupo_fil_id_grupo_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE UNIQUE INDEX analise_mercadorias_forecast_grupo_fil_id_grupo_idx ON public.analise_mercadorias_forecast_grupo_filial USING btree (id_grupo, filial, idproduto);
 
 
 --
--- Name: analise_mercadorias_forecast_grupo_id_grupo_forn; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5492 (class 1259 OID 56034)
+-- Name: analise_mercadorias_forecast_grupo_id_grupo_forn; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX analise_mercadorias_forecast_grupo_id_grupo_forn ON public.analise_mercadorias_forecast_grupo USING btree (id_grupo, idfornecedor);
 
 
 --
--- Name: analise_mercadorias_forecast_grupo_id_grupo_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5493 (class 1259 OID 56035)
+-- Name: analise_mercadorias_forecast_grupo_id_grupo_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE UNIQUE INDEX analise_mercadorias_forecast_grupo_id_grupo_idx ON public.analise_mercadorias_forecast_grupo USING btree (id_grupo, idproduto);
 
 
 --
--- Name: analise_mercadorias_transito_grupo_fil_id_grupo_forn; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5498 (class 1259 OID 56036)
+-- Name: analise_mercadorias_transito_grupo_fil_id_grupo_forn; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX analise_mercadorias_transito_grupo_fil_id_grupo_forn ON public.analise_mercadorias_transito_grupo_filial USING btree (id_grupo, filial, idfornecedor);
 
 
 --
--- Name: analise_mercadorias_transito_grupo_fil_id_grupo_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5499 (class 1259 OID 56037)
+-- Name: analise_mercadorias_transito_grupo_fil_id_grupo_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE UNIQUE INDEX analise_mercadorias_transito_grupo_fil_id_grupo_idx ON public.analise_mercadorias_transito_grupo_filial USING btree (id_grupo, filial, idproduto);
 
 
 --
--- Name: analise_mercadorias_transito_grupo_id_grupo_forn; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5496 (class 1259 OID 56038)
+-- Name: analise_mercadorias_transito_grupo_id_grupo_forn; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX analise_mercadorias_transito_grupo_id_grupo_forn ON public.analise_mercadorias_transito_grupo USING btree (id_grupo, idfornecedor);
 
 
 --
--- Name: analise_mercadorias_transito_grupo_id_grupo_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5497 (class 1259 OID 56039)
+-- Name: analise_mercadorias_transito_grupo_id_grupo_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE UNIQUE INDEX analise_mercadorias_transito_grupo_id_grupo_idx ON public.analise_mercadorias_transito_grupo USING btree (id_grupo, idproduto);
 
 
 --
--- Name: analise_movimentacoes_departamentos_grupos_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5509 (class 1259 OID 56040)
+-- Name: analise_movimentacoes_departamentos_grupos_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE UNIQUE INDEX analise_movimentacoes_departamentos_grupos_idx ON public.analise_movimentacoes_departamentos_grupos USING btree (tipo, ano, mes, idcategoria);
 
 
 --
--- Name: analise_movimentacoes_grupos_filial_tipo_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5511 (class 1259 OID 56041)
+-- Name: analise_movimentacoes_grupos_filial_tipo_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE UNIQUE INDEX analise_movimentacoes_grupos_filial_tipo_idx ON public.analise_movimentacoes_grupos_filial USING btree (tipo, mes, ano, id_grupo, idfornecedor, filial);
 
 
 --
--- Name: analise_movimentacoes_grupos_fornecedor_comprador_uq; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5947 (class 1259 OID 84282)
+-- Name: analise_movimentacoes_grupos_fornecedor_comprador_uq; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE UNIQUE INDEX analise_movimentacoes_grupos_fornecedor_comprador_uq ON public.analise_movimentacoes_grupos_fornecedor_comprador USING btree (tipo, mes, ano, id_grupo, idfornecedor, idcomprador);
 
 
 --
--- Name: analise_movimentacoes_grupos_tipo_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5510 (class 1259 OID 56042)
+-- Name: analise_movimentacoes_grupos_tipo_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE UNIQUE INDEX analise_movimentacoes_grupos_tipo_idx ON public.analise_movimentacoes_grupos USING btree (tipo, mes, ano, id_grupo, idfornecedor);
 
 
 --
--- Name: analise_movimentacoes_produtos_filial_filial_idproduto; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5512 (class 1259 OID 56043)
+-- Name: analise_movimentacoes_produtos_filial_filial_idproduto; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX analise_movimentacoes_produtos_filial_filial_idproduto ON public.analise_movimentacoes_produtos_filial USING btree (filial, idproduto);
 
 
 --
--- Name: analise_requisicoes_idproduto_index01; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5519 (class 1259 OID 56044)
+-- Name: analise_requisicoes_idproduto_index01; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX analise_requisicoes_idproduto_index01 ON public.analise_requisicoes USING btree (idproduto, data_solicitacao);
 
 
 --
--- Name: analise_requisicoes_index00; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5520 (class 1259 OID 56045)
+-- Name: analise_requisicoes_index00; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX analise_requisicoes_index00 ON public.analise_requisicoes USING btree (idproduto);
 
 
 --
--- Name: analise_requisicoes_pk; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5521 (class 1259 OID 56046)
+-- Name: analise_requisicoes_pk; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE UNIQUE INDEX analise_requisicoes_pk ON public.analise_requisicoes USING btree (id_solicitacao, filial, idproduto, item);
 
 
 --
--- Name: causer; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5433 (class 1259 OID 56047)
+-- Name: causer; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX causer ON public.activity_log USING btree (causer_type, causer_id);
 
 
 --
--- Name: classificacao_UNIQUE; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5723 (class 1259 OID 56048)
+-- Name: classificacao_UNIQUE; Type: INDEX; Schema: public; Owner: postgres
 --
 
 CREATE UNIQUE INDEX "classificacao_UNIQUE" ON public.parametros_financeiro USING btree (classificacao);
 
 
 --
--- Name: combinacao_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5545 (class 1259 OID 56049)
+-- Name: combinacao_idx; Type: INDEX; Schema: public; Owner: postgres
 --
 
 CREATE INDEX combinacao_idx ON public.arvore_decisao USING btree (combinacao);
 
 
 --
--- Name: complexibilidade_compra_UNIQUE; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5717 (class 1259 OID 56050)
+-- Name: complexibilidade_compra_UNIQUE; Type: INDEX; Schema: public; Owner: postgres
 --
 
 CREATE UNIQUE INDEX "complexibilidade_compra_UNIQUE" ON public.parametros_compra USING btree (complexibilidade_compra);
 
 
 --
--- Name: consumos_index01; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5449 (class 1259 OID 56051)
+-- Name: consumos_index01; Type: INDEX; Schema: public; Owner: postgres
 --
 
 CREATE INDEX consumos_index01 ON public.consumos USING btree (idproduto);
 
 
 --
--- Name: consumos_index02; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5450 (class 1259 OID 56052)
+-- Name: consumos_index02; Type: INDEX; Schema: public; Owner: postgres
 --
 
 CREATE INDEX consumos_index02 ON public.consumos USING btree (idproduto, emissao);
 
 
 --
--- Name: consumos_index03; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5451 (class 1259 OID 56053)
+-- Name: consumos_index03; Type: INDEX; Schema: public; Owner: postgres
 --
 
 CREATE INDEX consumos_index03 ON public.consumos USING btree (filial, idproduto, emissao);
 
 
 --
--- Name: consumos_index04; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5452 (class 1259 OID 56054)
+-- Name: consumos_index04; Type: INDEX; Schema: public; Owner: postgres
 --
 
 CREATE INDEX consumos_index04 ON public.consumos USING btree (filial, idproduto);
 
 
 --
--- Name: cotacao_fornecedores_participantes_identificador_geral_cotacao_; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 6009 (class 1259 OID 84651)
+-- Name: cotacao_fornecedores_participantes_identificador_geral_cotacao_; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX cotacao_fornecedores_participantes_identificador_geral_cotacao_ ON public.cotacao_fornecedores_participantes USING btree (identificador_geral, cotacao_produtos_id);
 
 
 --
--- Name: cotacao_local_recebimento_dias_unique; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5983 (class 1259 OID 84511)
+-- Name: cotacao_local_recebimento_dias_unique; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE UNIQUE INDEX cotacao_local_recebimento_dias_unique ON public.cotacao_local_recebimento_dias USING btree (cotacao_local_recebimento_id, dia_semana_id);
 
 
 --
--- Name: cotacao_seguidores_responsavel_unique_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5968 (class 1259 OID 84512)
+-- Name: cotacao_seguidores_responsavel_unique_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE UNIQUE INDEX cotacao_seguidores_responsavel_unique_idx ON public.cotacao_seguidores USING btree (cotacao_transacao_id, responsavel_id) WHERE (user_id IS NULL);
 
 
 --
--- Name: descricao_area_UNIQUE; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5541 (class 1259 OID 56055)
+-- Name: descricao_area_UNIQUE; Type: INDEX; Schema: public; Owner: postgres
 --
 
 CREATE UNIQUE INDEX "descricao_area_UNIQUE" ON public.area_responsavel USING btree (descricao_area);
 
 
 --
--- Name: descricao_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5460 (class 1259 OID 56056)
+-- Name: descricao_idx; Type: INDEX; Schema: public; Owner: postgres
 --
 
 CREATE INDEX descricao_idx ON public.familia_produtos USING btree (descricao_familia_produto);
 
 
 --
--- Name: dist_drp_blacklist_filial_produto_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5583 (class 1259 OID 56057)
+-- Name: dist_drp_blacklist_filial_produto_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE UNIQUE INDEX dist_drp_blacklist_filial_produto_idx ON public.distribuicao_drp_blacklist USING btree (filial, idproduto);
 
 
 --
--- Name: distrib_drp_iduser_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5580 (class 1259 OID 56058)
+-- Name: distrib_drp_iduser_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX distrib_drp_iduser_idx ON public.distribuicao_drp USING btree (iduser, status);
 
 
 --
--- Name: email_UNIQUE; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5922 (class 1259 OID 56059)
+-- Name: email_UNIQUE; Type: INDEX; Schema: public; Owner: postgres
 --
 
 CREATE UNIQUE INDEX "email_UNIQUE" ON public.usuarios USING btree (email);
 
 
 --
--- Name: entrada_mercadorias_index01; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5456 (class 1259 OID 56060)
+-- Name: entrada_mercadorias_index01; Type: INDEX; Schema: public; Owner: postgres
 --
 
 CREATE INDEX entrada_mercadorias_index01 ON public.entrada_mercadorias USING btree (ordem_compra, idproduto);
 
 
 --
--- Name: entrada_mercadorias_index02; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5457 (class 1259 OID 56061)
+-- Name: entrada_mercadorias_index02; Type: INDEX; Schema: public; Owner: postgres
 --
 
 CREATE INDEX entrada_mercadorias_index02 ON public.entrada_mercadorias USING btree (idproduto, data_entrada);
 
 
 --
--- Name: fk_aplicativos_has_perfil_aplicativos1_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5535 (class 1259 OID 56062)
+-- Name: fk_aplicativos_has_perfil_aplicativos1_idx; Type: INDEX; Schema: public; Owner: postgres
 --
 
 CREATE INDEX fk_aplicativos_has_perfil_aplicativos1_idx ON public.aplicativos_perfil USING btree (idaplicativo);
 
 
 --
--- Name: fk_aplicativos_has_perfil_perfil1_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5536 (class 1259 OID 56063)
+-- Name: fk_aplicativos_has_perfil_perfil1_idx; Type: INDEX; Schema: public; Owner: postgres
 --
 
 CREATE INDEX fk_aplicativos_has_perfil_perfil1_idx ON public.aplicativos_perfil USING btree (idperfil);
 
 
 --
--- Name: fk_aplicativos_modulos1_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5532 (class 1259 OID 56064)
+-- Name: fk_aplicativos_modulos1_idx; Type: INDEX; Schema: public; Owner: postgres
 --
 
 CREATE INDEX fk_aplicativos_modulos1_idx ON public.aplicativos USING btree (idmodulo);
 
 
 --
--- Name: fk_area_responsavel_colaboradores1_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5542 (class 1259 OID 56065)
+-- Name: fk_area_responsavel_colaboradores1_idx; Type: INDEX; Schema: public; Owner: postgres
 --
 
 CREATE INDEX fk_area_responsavel_colaboradores1_idx ON public.area_responsavel USING btree (idcolaborador_responsavel);
 
 
 --
--- Name: fk_arvore_decisao_nivel_servico1_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5546 (class 1259 OID 56066)
+-- Name: fk_arvore_decisao_nivel_servico1_idx; Type: INDEX; Schema: public; Owner: postgres
 --
 
 CREATE INDEX fk_arvore_decisao_nivel_servico1_idx ON public.arvore_decisao USING btree (idnivel_servico);
 
 
 --
--- Name: fk_colaboradores_departamentos1_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5565 (class 1259 OID 56067)
+-- Name: fk_colaboradores_departamentos1_idx; Type: INDEX; Schema: public; Owner: postgres
 --
 
 CREATE INDEX fk_colaboradores_departamentos1_idx ON public.colaboradores USING btree (iddepartamento);
 
 
 --
--- Name: fk_colaboradores_funcoes_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5566 (class 1259 OID 56068)
+-- Name: fk_colaboradores_funcoes_idx; Type: INDEX; Schema: public; Owner: postgres
 --
 
 CREATE INDEX fk_colaboradores_funcoes_idx ON public.colaboradores USING btree (idfuncao);
 
 
 --
--- Name: fk_depositos_filial1_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5579 (class 1259 OID 56069)
+-- Name: fk_depositos_filial1_idx; Type: INDEX; Schema: public; Owner: postgres
 --
 
 CREATE INDEX fk_depositos_filial1_idx ON public.depositos USING btree (idfilial);
 
 
 --
--- Name: fk_familia_produtos_has_parceiros_familia_produtos1_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5619 (class 1259 OID 56070)
+-- Name: fk_familia_produtos_has_parceiros_familia_produtos1_idx; Type: INDEX; Schema: public; Owner: postgres
 --
 
 CREATE INDEX fk_familia_produtos_has_parceiros_familia_produtos1_idx ON public.familia_produtos_parceiros USING btree (idfamilia_produto);
 
 
 --
--- Name: fk_familia_produtos_has_parceiros_parceiros1_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5620 (class 1259 OID 56071)
+-- Name: fk_familia_produtos_has_parceiros_parceiros1_idx; Type: INDEX; Schema: public; Owner: postgres
 --
 
 CREATE INDEX fk_familia_produtos_has_parceiros_parceiros1_idx ON public.familia_produtos_parceiros USING btree (idparceiro);
 
 
 --
--- Name: fk_imagens_produtos_produtos1_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5664 (class 1259 OID 56072)
+-- Name: fk_imagens_produtos_produtos1_idx; Type: INDEX; Schema: public; Owner: postgres
 --
 
 CREATE INDEX fk_imagens_produtos_produtos1_idx ON public.imagens_produtos USING btree (idproduto);
 
 
 --
--- Name: fk_movimentacoes_centro_custos1_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5699 (class 1259 OID 56073)
+-- Name: fk_movimentacoes_centro_custos1_idx; Type: INDEX; Schema: public; Owner: postgres
 --
 
 CREATE INDEX fk_movimentacoes_centro_custos1_idx ON public.movimentacoes USING btree (idcentro_custo_consumo);
 
 
 --
--- Name: fk_movimentacoes_has_produtos_movimentacoes1_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5703 (class 1259 OID 56074)
+-- Name: fk_movimentacoes_has_produtos_movimentacoes1_idx; Type: INDEX; Schema: public; Owner: postgres
 --
 
 CREATE INDEX fk_movimentacoes_has_produtos_movimentacoes1_idx ON public.movimentacoes_produtos USING btree (movimentacao_idorcamentos);
 
 
 --
--- Name: fk_movimentacoes_has_produtos_produtos1_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5704 (class 1259 OID 56075)
+-- Name: fk_movimentacoes_has_produtos_produtos1_idx; Type: INDEX; Schema: public; Owner: postgres
 --
 
 CREATE INDEX fk_movimentacoes_has_produtos_produtos1_idx ON public.movimentacoes_produtos USING btree (produtos_idproduto);
 
 
 --
--- Name: fk_orcamentos_colaboradores1_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5700 (class 1259 OID 56076)
+-- Name: fk_orcamentos_colaboradores1_idx; Type: INDEX; Schema: public; Owner: postgres
 --
 
 CREATE INDEX fk_orcamentos_colaboradores1_idx ON public.movimentacoes USING btree (solicitante);
 
 
 --
--- Name: fk_parametros_criticidade_parametros_avaliacao1_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5720 (class 1259 OID 56077)
+-- Name: fk_parametros_criticidade_parametros_avaliacao1_idx; Type: INDEX; Schema: public; Owner: postgres
 --
 
 CREATE INDEX fk_parametros_criticidade_parametros_avaliacao1_idx ON public.parametros_criticidade USING btree (classificacao);
 
 
 --
--- Name: fk_prod_fil_familia_produtos_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5470 (class 1259 OID 56078)
+-- Name: fk_prod_fil_familia_produtos_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX fk_prod_fil_familia_produtos_idx ON public.produtos_filial USING btree (idfamilia_produto);
 
 
 --
--- Name: fk_resposta_criticidade_questionario_criticidade1_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5830 (class 1259 OID 56079)
+-- Name: fk_resposta_criticidade_questionario_criticidade1_idx; Type: INDEX; Schema: public; Owner: postgres
 --
 
 CREATE INDEX fk_resposta_criticidade_questionario_criticidade1_idx ON public.resposta_criticidade USING btree (idquestionario);
 
 
 --
--- Name: fk_solicitacoes_compras_colaboradores1_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5848 (class 1259 OID 56080)
+-- Name: fk_solicitacoes_compras_colaboradores1_idx; Type: INDEX; Schema: public; Owner: postgres
 --
 
 CREATE INDEX fk_solicitacoes_compras_colaboradores1_idx ON public.solicitacoes_compras USING btree (id_solicitante);
 
 
 --
--- Name: fk_solicitacoes_compras_tipo_solicitacoes1_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5849 (class 1259 OID 56081)
+-- Name: fk_solicitacoes_compras_tipo_solicitacoes1_idx; Type: INDEX; Schema: public; Owner: postgres
 --
 
 CREATE INDEX fk_solicitacoes_compras_tipo_solicitacoes1_idx ON public.solicitacoes_compras USING btree (idtipo_solicitacao);
 
 
 --
--- Name: fk_usuarios_perfil1_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5923 (class 1259 OID 56082)
+-- Name: fk_usuarios_perfil1_idx; Type: INDEX; Schema: public; Owner: postgres
 --
 
 CREATE INDEX fk_usuarios_perfil1_idx ON public.usuarios USING btree (idperfil);
 
 
 --
--- Name: flag_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5924 (class 1259 OID 56083)
+-- Name: flag_idx; Type: INDEX; Schema: public; Owner: postgres
 --
 
 CREATE INDEX flag_idx ON public.usuarios USING btree (reg_status);
 
 
 --
--- Name: grupo_filial_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5465 (class 1259 OID 56084)
+-- Name: grupo_filial_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX grupo_filial_idx ON public.grupo_filial USING btree (filial);
 
 
 --
--- Name: herancas_id_item_pai_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5643 (class 1259 OID 56085)
+-- Name: herancas_id_item_pai_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE UNIQUE INDEX herancas_id_item_pai_idx ON public.herancas USING btree (id_item_pai, id_item_filho);
 
 
 --
--- Name: hist_analise_comp_index00; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5644 (class 1259 OID 56086)
+-- Name: hist_analise_comp_index00; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX hist_analise_comp_index00 ON public.hist_analise_compras USING btree (idproduto, data_solicitacao);
 
 
 --
--- Name: hist_analise_compras_filial_data_solicitacao_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5647 (class 1259 OID 56087)
+-- Name: hist_analise_compras_filial_data_solicitacao_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX hist_analise_compras_filial_data_solicitacao_idx ON public.hist_analise_compras_filial USING btree (data_solicitacao);
 
 
 --
--- Name: hist_analise_compras_grupo_id_grupo_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5650 (class 1259 OID 56088)
+-- Name: hist_analise_compras_grupo_id_grupo_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE UNIQUE INDEX hist_analise_compras_grupo_id_grupo_idx ON public.hist_analise_compras_grupo USING btree (id_grupo, idproduto, data_solicitacao);
 
 
 --
--- Name: hist_estoque_index00; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5651 (class 1259 OID 56089)
+-- Name: hist_estoque_index00; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX hist_estoque_index00 ON public.hist_estoque USING btree (idproduto, data);
 
 
 --
--- Name: hist_fator_atuacao_id_grupo_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5654 (class 1259 OID 56090)
+-- Name: hist_fator_atuacao_id_grupo_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX hist_fator_atuacao_id_grupo_idx ON public.hist_fator_atuacao USING btree (id_grupo, id_fornecedor);
 
 
 --
--- Name: hist_fator_atuacao_id_grupo_prod_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5655 (class 1259 OID 56091)
+-- Name: hist_fator_atuacao_id_grupo_prod_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX hist_fator_atuacao_id_grupo_prod_idx ON public.hist_fator_atuacao USING btree (id_grupo, id_fornecedor, idproduto);
 
 
 --
--- Name: hist_gatilho_compras_grupo_index00; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5660 (class 1259 OID 56092)
+-- Name: hist_gatilho_compras_grupo_index00; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX hist_gatilho_compras_grupo_index00 ON public.hist_gatilho_compras_grupo USING btree (grupo, idproduto, data, tipo, status);
 
 
 --
--- Name: hist_gatilho_compras_grupo_index01; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5661 (class 1259 OID 56093)
+-- Name: hist_gatilho_compras_grupo_index01; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX hist_gatilho_compras_grupo_index01 ON public.hist_gatilho_compras_grupo USING btree (grupo, idproduto, tipo, status);
 
 
 --
--- Name: hist_gatilho_compras_index00; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5658 (class 1259 OID 56094)
+-- Name: hist_gatilho_compras_index00; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX hist_gatilho_compras_index00 ON public.hist_gatilho_compras USING btree (idproduto, filial, data, status);
 
 
 --
--- Name: hist_gatilho_compras_index01; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5659 (class 1259 OID 56095)
+-- Name: hist_gatilho_compras_index01; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX hist_gatilho_compras_index01 ON public.hist_gatilho_compras USING btree (idproduto, status);
 
 
 --
--- Name: idx_activity_log_filial_idproduto_created_at_desc; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5434 (class 1259 OID 84283)
+-- Name: idx_activity_log_filial_idproduto_created_at_desc; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX idx_activity_log_filial_idproduto_created_at_desc ON public.activity_log USING btree ((((((properties -> 'attributes'::text) -> 'novo'::text) ->> 'filial'::text))::integer), ((((properties -> 'attributes'::text) -> 'novo'::text) ->> 'idproduto'::text)), created_at DESC);
 
 
 --
--- Name: idx_consumos_cte_vendas_min; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5453 (class 1259 OID 84719)
+-- Name: idx_consumos_cte_vendas_min; Type: INDEX; Schema: public; Owner: postgres
 --
 
 CREATE INDEX idx_consumos_cte_vendas_min ON public.consumos USING btree (emissao, filial, idproduto, cod_cliente) WHERE ((cod_cliente IS NOT NULL) AND (qtde > (0)::double precision));
 
 
 --
--- Name: idx_cotacao_notificacoes_cotacao_representante_fornecedor_id; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5977 (class 1259 OID 84491)
+-- Name: idx_cotacao_notificacoes_cotacao_representante_fornecedor_id; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX idx_cotacao_notificacoes_cotacao_representante_fornecedor_id ON public.cotacao_notificacoes USING btree (cotacao_representante_fornecedor_id);
 
 
 --
--- Name: idx_cotacao_notificacoes_cotacao_transacao_id; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5978 (class 1259 OID 84488)
+-- Name: idx_cotacao_notificacoes_cotacao_transacao_id; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX idx_cotacao_notificacoes_cotacao_transacao_id ON public.cotacao_notificacoes USING btree (cotacao_transacao_id);
 
 
 --
--- Name: idx_cotacao_notificacoes_status; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5979 (class 1259 OID 84489)
+-- Name: idx_cotacao_notificacoes_status; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX idx_cotacao_notificacoes_status ON public.cotacao_notificacoes USING btree (status);
 
 
 --
--- Name: idx_cotacao_notificacoes_tipo_notificacao; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5980 (class 1259 OID 84490)
+-- Name: idx_cotacao_notificacoes_tipo_notificacao; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX idx_cotacao_notificacoes_tipo_notificacao ON public.cotacao_notificacoes USING btree (tipo_notificacao);
 
 
 --
--- Name: idx_cotacao_representante_participacao_cotacao_representante_fo; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5986 (class 1259 OID 84539)
+-- Name: idx_cotacao_representante_participacao_cotacao_representante_fo; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX idx_cotacao_representante_participacao_cotacao_representante_fo ON public.cotacao_representante_participacao USING btree (cotacao_representante_fornecedor_id);
 
 
 --
--- Name: idx_cotacao_representante_participacao_cotacao_transacao_id; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5987 (class 1259 OID 84537)
+-- Name: idx_cotacao_representante_participacao_cotacao_transacao_id; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX idx_cotacao_representante_participacao_cotacao_transacao_id ON public.cotacao_representante_participacao USING btree (cotacao_transacao_id);
 
 
 --
--- Name: idx_cotacao_representante_participacao_fornecedor_id; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5988 (class 1259 OID 84538)
+-- Name: idx_cotacao_representante_participacao_fornecedor_id; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX idx_cotacao_representante_participacao_fornecedor_id ON public.cotacao_representante_participacao USING btree (fornecedor_id);
 
 
 --
--- Name: idx_cotacao_representante_participacao_unique; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5989 (class 1259 OID 84536)
+-- Name: idx_cotacao_representante_participacao_unique; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE UNIQUE INDEX idx_cotacao_representante_participacao_unique ON public.cotacao_representante_participacao USING btree (cotacao_transacao_id, cotacao_representante_fornecedor_id);
 
 
 --
--- Name: idx_cotacao_seguidores_favoritos_user_id; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5992 (class 1259 OID 84552)
+-- Name: idx_cotacao_seguidores_favoritos_user_id; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX idx_cotacao_seguidores_favoritos_user_id ON public.cotacao_seguidores_favoritos USING btree (user_id);
 
 
 --
--- Name: integracao_sistemas_sigla_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5669 (class 1259 OID 56096)
+-- Name: integracao_sistemas_sigla_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE UNIQUE INDEX integracao_sistemas_sigla_idx ON public.integracao_sistemas USING btree (sigla);
 
 
 --
--- Name: jobs_queue_index; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5674 (class 1259 OID 56097)
+-- Name: jobs_queue_index; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX jobs_queue_index ON public.jobs USING btree (queue);
 
 
 --
--- Name: notif_prod_blacklist_forn_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5713 (class 1259 OID 56098)
+-- Name: notif_prod_blacklist_forn_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX notif_prod_blacklist_forn_idx ON public.notificacao_produtos_blacklist USING btree (idfornecedor);
 
 
 --
--- Name: notif_prod_blacklist_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5714 (class 1259 OID 56099)
+-- Name: notif_prod_blacklist_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE UNIQUE INDEX notif_prod_blacklist_idx ON public.notificacao_produtos_blacklist USING btree (id, grupo, filial, idproduto, data_limite, deleted_at);
 
 
 --
--- Name: pedidos_compras_fracionada_idpedido_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5741 (class 1259 OID 56100)
+-- Name: pedidos_compras_fracionada_idpedido_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX pedidos_compras_fracionada_idpedido_idx ON public.pedidos_compras_produto_fracionado USING btree (idpedido, idproduto);
 
 
 --
--- Name: pedidos_compras_itens_idproduto_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5744 (class 1259 OID 56101)
+-- Name: pedidos_compras_itens_idproduto_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX pedidos_compras_itens_idproduto_idx ON public.pedidos_compras_itens USING btree (idproduto);
 
 
 --
--- Name: prod_fil_filial_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5471 (class 1259 OID 56102)
+-- Name: prod_fil_filial_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX prod_fil_filial_idx ON public.produtos_filial USING btree (filial);
 
 
 --
--- Name: prod_fil_idcomprador_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5472 (class 1259 OID 56103)
+-- Name: prod_fil_idcomprador_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX prod_fil_idcomprador_idx ON public.produtos_filial USING btree (idcomprador);
 
 
 --
--- Name: prod_fil_idfornecedor_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5473 (class 1259 OID 56104)
+-- Name: prod_fil_idfornecedor_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX prod_fil_idfornecedor_idx ON public.produtos_filial USING btree (idfornecedor);
 
 
 --
--- Name: produtos_compras_filial_idproduto_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5773 (class 1259 OID 56105)
+-- Name: produtos_compras_filial_idproduto_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX produtos_compras_filial_idproduto_idx ON public.produtos_compras_filial USING btree (idproduto);
 
 
 --
--- Name: produtos_compras_filial_lote_compras_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5774 (class 1259 OID 56106)
+-- Name: produtos_compras_filial_lote_compras_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX produtos_compras_filial_lote_compras_idx ON public.produtos_compras_filial USING btree (lote_compras, sob_encomenda, revenda, status);
 
 
 --
--- Name: produtos_compras_id_grupo_comp_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5502 (class 1259 OID 56107)
+-- Name: produtos_compras_id_grupo_comp_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX produtos_compras_id_grupo_comp_idx ON public.produtos_compras_grupo USING btree (id_grupo, idcomprador);
 
 
 --
--- Name: produtos_compras_id_grupo_dep_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5503 (class 1259 OID 56108)
+-- Name: produtos_compras_id_grupo_dep_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX produtos_compras_id_grupo_dep_idx ON public.produtos_compras_grupo USING btree (id_grupo, idfamilia_produto);
 
 
 --
--- Name: produtos_compras_id_grupo_forn_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5504 (class 1259 OID 56109)
+-- Name: produtos_compras_id_grupo_forn_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX produtos_compras_id_grupo_forn_idx ON public.produtos_compras_grupo USING btree (id_grupo, idfornecedor);
 
 
 --
--- Name: produtos_compras_lote_compras_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5505 (class 1259 OID 56110)
+-- Name: produtos_compras_lote_compras_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX produtos_compras_lote_compras_idx ON public.produtos_compras_grupo USING btree (lote_compras, sob_encomenda, revenda, status);
 
 
 --
--- Name: produtos_compras_lote_compras_tr_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5506 (class 1259 OID 56111)
+-- Name: produtos_compras_lote_compras_tr_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX produtos_compras_lote_compras_tr_idx ON public.produtos_compras_grupo USING btree (lote_compras, compra_transito, revenda, status);
 
 
 --
--- Name: produtos_filial_cod_produto_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5476 (class 1259 OID 84186)
+-- Name: produtos_filial_cod_produto_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX produtos_filial_cod_produto_idx ON public.produtos_filial USING btree (cod_produto);
 
 
 --
--- Name: produtos_filial_codigo_barras_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5477 (class 1259 OID 84187)
+-- Name: produtos_filial_codigo_barras_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX produtos_filial_codigo_barras_idx ON public.produtos_filial USING btree (codigo_barras);
 
 
 --
--- Name: produtos_filial_forn_filial_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5478 (class 1259 OID 56112)
+-- Name: produtos_filial_forn_filial_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX produtos_filial_forn_filial_idx ON public.produtos_filial USING btree (idfornecedor, filial);
 
 
 --
--- Name: produtos_filial_heranca_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5479 (class 1259 OID 56113)
+-- Name: produtos_filial_heranca_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX produtos_filial_heranca_idx ON public.produtos_filial USING btree (filial, heranca);
 
 
 --
--- Name: produtos_filial_idproduto_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5480 (class 1259 OID 56114)
+-- Name: produtos_filial_idproduto_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX produtos_filial_idproduto_idx ON public.produtos_filial USING btree (idproduto);
 
 
 --
--- Name: produtos_forecast_filial_flag_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5787 (class 1259 OID 56115)
+-- Name: produtos_forecast_filial_flag_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX produtos_forecast_filial_flag_idx ON public.produtos_forecast_filial USING btree (flag);
 
 
 --
--- Name: produtos_forecast_filial_id_grupo_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5788 (class 1259 OID 56116)
+-- Name: produtos_forecast_filial_id_grupo_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX produtos_forecast_filial_id_grupo_idx ON public.produtos_forecast_filial USING btree (id_grupo, filial, fornecedor);
 
 
 --
--- Name: produtos_forecast_flag_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5781 (class 1259 OID 56117)
+-- Name: produtos_forecast_flag_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX produtos_forecast_flag_idx ON public.produtos_forecast USING btree (flag);
 
 
 --
--- Name: produtos_forecast_id_grupo_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5782 (class 1259 OID 56118)
+-- Name: produtos_forecast_id_grupo_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX produtos_forecast_id_grupo_idx ON public.produtos_forecast USING btree (id_grupo, idfornecedor);
 
 
 --
--- Name: produtos_pedidos_compra_tipo_index; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5803 (class 1259 OID 56119)
+-- Name: produtos_pedidos_compra_tipo_index; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX produtos_pedidos_compra_tipo_index ON public.produtos_pedidos_compra_tipo USING btree (id_pedido, idproduto);
 
 
 --
--- Name: produtos_separacao_filial_destino_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5806 (class 1259 OID 56120)
+-- Name: produtos_separacao_filial_destino_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX produtos_separacao_filial_destino_idx ON public.produtos_separacao USING btree (filial_destino, idproduto);
 
 
 --
--- Name: produtos_separacao_filial_origem_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5807 (class 1259 OID 56121)
+-- Name: produtos_separacao_filial_origem_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE UNIQUE INDEX produtos_separacao_filial_origem_idx ON public.produtos_separacao USING btree (filial_origem, filial_destino, pedido, emissao, item, idproduto);
 
 
 --
--- Name: produtos_transito_filial_flag_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5812 (class 1259 OID 56122)
+-- Name: produtos_transito_filial_flag_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX produtos_transito_filial_flag_idx ON public.produtos_transito_filial USING btree (flag);
 
 
 --
--- Name: produtos_transito_filial_id_grupo_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5813 (class 1259 OID 56123)
+-- Name: produtos_transito_filial_id_grupo_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX produtos_transito_filial_id_grupo_idx ON public.produtos_transito_filial USING btree (id_grupo, filial, idfornecedor);
 
 
 --
--- Name: produtos_transito_flag_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5808 (class 1259 OID 56124)
+-- Name: produtos_transito_flag_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX produtos_transito_flag_idx ON public.produtos_transito USING btree (flag);
 
 
 --
--- Name: produtos_transito_id_grupo_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5809 (class 1259 OID 56125)
+-- Name: produtos_transito_id_grupo_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX produtos_transito_id_grupo_idx ON public.produtos_transito USING btree (id_grupo, fornecedor);
 
 
 --
--- Name: rentabilidade_idfornecedor_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5822 (class 1259 OID 56126)
+-- Name: rentabilidade_idfornecedor_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX rentabilidade_idfornecedor_idx ON public.rentabilidade USING btree (idfornecedor);
 
 
 --
--- Name: rentabilidade_status_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5825 (class 1259 OID 56127)
+-- Name: rentabilidade_status_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX rentabilidade_status_idx ON public.rentabilidade USING btree (status);
 
 
 --
--- Name: requisicoes_index01; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5485 (class 1259 OID 56128)
+-- Name: requisicoes_index01; Type: INDEX; Schema: public; Owner: postgres
 --
 
 CREATE INDEX requisicoes_index01 ON public.requisicoes USING btree (ordem_compra, idproduto);
 
 
 --
--- Name: requisicoes_index02; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5486 (class 1259 OID 56129)
+-- Name: requisicoes_index02; Type: INDEX; Schema: public; Owner: postgres
 --
 
 CREATE INDEX requisicoes_index02 ON public.requisicoes USING btree (idproduto, data_solicitacao);
 
 
 --
--- Name: requisicoes_index03; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5487 (class 1259 OID 56130)
+-- Name: requisicoes_index03; Type: INDEX; Schema: public; Owner: postgres
 --
 
 CREATE INDEX requisicoes_index03 ON public.requisicoes USING btree (idproduto, data_solicitacao, data_entrega);
 
 
 --
--- Name: saldo_filiais_data_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5481 (class 1259 OID 56131)
+-- Name: saldo_filiais_data_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX saldo_filiais_data_idx ON public.saldo_filiais USING btree (data);
 
 
 --
--- Name: saldo_filiais_idproduto_ano_mes_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5482 (class 1259 OID 56132)
+-- Name: saldo_filiais_idproduto_ano_mes_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX saldo_filiais_idproduto_ano_mes_idx ON public.saldo_filiais USING btree (idproduto, ano, mes);
 
 
 --
--- Name: saldo_grupos_data_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5835 (class 1259 OID 56133)
+-- Name: saldo_grupos_data_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX saldo_grupos_data_idx ON public.saldo_grupos USING btree (data, idproduto);
 
 
 --
--- Name: saldo_grupos_id_grupo_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5836 (class 1259 OID 56134)
+-- Name: saldo_grupos_id_grupo_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE UNIQUE INDEX saldo_grupos_id_grupo_idx ON public.saldo_grupos USING btree (id_grupo, idproduto, data);
 
 
 --
--- Name: similares_id_item_pai_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5845 (class 1259 OID 56135)
+-- Name: similares_id_item_pai_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE UNIQUE INDEX similares_id_item_pai_idx ON public.similares USING btree (id_item_pai, id_item_filho);
 
 
 --
--- Name: status_produto_ano_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5852 (class 1259 OID 56136)
+-- Name: status_produto_ano_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX status_produto_ano_idx ON public.status_produto USING btree (ano, mes, flag);
 
 
 --
--- Name: status_produto_data_referencia_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5853 (class 1259 OID 56137)
+-- Name: status_produto_data_referencia_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX status_produto_data_referencia_idx ON public.status_produto USING btree (data_referencia);
 
 
 --
--- Name: status_produto_grupo_forn_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5854 (class 1259 OID 56138)
+-- Name: status_produto_grupo_forn_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX status_produto_grupo_forn_idx ON public.status_produto USING btree (id_grupo, id, data_referencia);
 
 
 --
--- Name: status_produto_grupo_status_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5855 (class 1259 OID 56139)
+-- Name: status_produto_grupo_status_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX status_produto_grupo_status_idx ON public.status_produto USING btree (id_grupo, status_produto);
 
 
 --
--- Name: subject; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5435 (class 1259 OID 56140)
+-- Name: subject; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX subject ON public.activity_log USING btree (subject_type, subject_id);
 
 
 --
--- Name: sys_exportacoes_pedidos_compras_api_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5944 (class 1259 OID 84254)
+-- Name: sys_exportacoes_pedidos_compras_api_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE UNIQUE INDEX sys_exportacoes_pedidos_compras_api_idx ON public.sys_exportacoes_pedidos_compras_api USING btree (idpedido);
 
 
 --
--- Name: tempo_cobertura_compras_fornecedor_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5881 (class 1259 OID 56141)
+-- Name: tempo_cobertura_compras_fornecedor_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX tempo_cobertura_compras_fornecedor_idx ON public.tempo_cobertura_compras_fornecedor USING btree (idfornecedor);
 
 
 --
--- Name: tempo_cobertura_compras_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5878 (class 1259 OID 56142)
+-- Name: tempo_cobertura_compras_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX tempo_cobertura_compras_idx ON public.tempo_cobertura_compras USING btree (id_grupo, filial, pqr, xyz);
 
 
 --
--- Name: tempo_cobertura_compras_produtos_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5886 (class 1259 OID 56143)
+-- Name: tempo_cobertura_compras_produtos_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX tempo_cobertura_compras_produtos_idx ON public.tempo_cobertura_compras_produtos USING btree (idproduto);
 
 
 --
--- Name: tempo_cobertura_compras_segmentos_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5889 (class 1259 OID 56144)
+-- Name: tempo_cobertura_compras_segmentos_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX tempo_cobertura_compras_segmentos_idx ON public.tempo_cobertura_compras_segmentos USING btree (idfamilia_produto);
 
 
 --
--- Name: tempo_medio_apanhe_UNIQUE; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5728 (class 1259 OID 56145)
+-- Name: tempo_medio_apanhe_UNIQUE; Type: INDEX; Schema: public; Owner: postgres
 --
 
 CREATE UNIQUE INDEX "tempo_medio_apanhe_UNIQUE" ON public.parametros_popularidade USING btree (tempo_medio_apanhe);
 
 
 --
--- Name: tmp_total_saldo_estoque_semestral_filial_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5898 (class 1259 OID 56146)
+-- Name: tmp_total_saldo_estoque_semestral_filial_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX tmp_total_saldo_estoque_semestral_filial_idx ON public.tmp_total_saldo_estoque_semestral USING btree (filial, idproduto);
 
 
 --
--- Name: tmp_total_saldo_estoque_semestral_filial_pk; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5899 (class 1259 OID 56147)
+-- Name: tmp_total_saldo_estoque_semestral_filial_pk; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE UNIQUE INDEX tmp_total_saldo_estoque_semestral_filial_pk ON public.tmp_total_saldo_estoque_semestral USING btree (id_grupo, filial, ano, mes, idproduto);
 
 
 --
--- Name: tmp_total_saldo_estoque_semestral_grupo_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5900 (class 1259 OID 56148)
+-- Name: tmp_total_saldo_estoque_semestral_grupo_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX tmp_total_saldo_estoque_semestral_grupo_idx ON public.tmp_total_saldo_estoque_semestral USING btree (id_grupo, idproduto);
 
 
 --
--- Name: tmp_total_vendas_semestral_filial_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5901 (class 1259 OID 56149)
+-- Name: tmp_total_vendas_semestral_filial_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX tmp_total_vendas_semestral_filial_idx ON public.tmp_total_vendas_semestral USING btree (filial, idproduto);
 
 
 --
--- Name: tmp_total_vendas_semestral_filial_pk; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5902 (class 1259 OID 56150)
+-- Name: tmp_total_vendas_semestral_filial_pk; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE UNIQUE INDEX tmp_total_vendas_semestral_filial_pk ON public.tmp_total_vendas_semestral USING btree (id_grupo, filial, ano, mes, idproduto);
 
 
 --
--- Name: tmp_total_vendas_semestral_grupo_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5903 (class 1259 OID 56151)
+-- Name: tmp_total_vendas_semestral_grupo_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX tmp_total_vendas_semestral_grupo_idx ON public.tmp_total_vendas_semestral USING btree (id_grupo, idproduto);
 
 
 --
--- Name: totais_produtos_compradores_status_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5906 (class 1259 OID 56152)
+-- Name: totais_produtos_compradores_status_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX totais_produtos_compradores_status_idx ON public.totais_produtos_compradores USING btree (status);
 
 
 --
--- Name: totais_produtos_fonecedores_status_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5909 (class 1259 OID 56153)
+-- Name: totais_produtos_fonecedores_status_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX totais_produtos_fonecedores_status_idx ON public.totais_produtos_fonecedores USING btree (status);
 
 
 --
--- Name: totais_produtos_segmentos_status_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5912 (class 1259 OID 56154)
+-- Name: totais_produtos_segmentos_status_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX totais_produtos_segmentos_status_idx ON public.totais_produtos_segmentos USING btree (status);
 
 
 --
--- Name: transportes_placa_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5612 (class 1259 OID 56155)
+-- Name: transportes_placa_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE UNIQUE INDEX transportes_placa_idx ON public.drp_transportes USING btree (placa, deleted_at);
 
 
 --
--- Name: users_api_token_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5921 (class 1259 OID 56156)
+-- Name: users_api_token_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE UNIQUE INDEX users_api_token_idx ON public.users_api USING btree (token);
 
 
 --
--- Name: vw_grupo_compras_produtos_mt_categoria_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5927 (class 1259 OID 56157)
+-- Name: vw_grupo_compras_produtos_mt_categoria_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX vw_grupo_compras_produtos_mt_categoria_idx ON public.vw_grupo_compras_produtos_mt USING btree (id_grupo, idfamilia_produto);
 
 
 --
--- Name: vw_grupo_compras_produtos_mt_comprador_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5928 (class 1259 OID 56158)
+-- Name: vw_grupo_compras_produtos_mt_comprador_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX vw_grupo_compras_produtos_mt_comprador_idx ON public.vw_grupo_compras_produtos_mt USING btree (id_grupo, idcomprador);
 
 
 --
--- Name: vw_grupo_compras_produtos_mt_fornecedor_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5929 (class 1259 OID 56159)
+-- Name: vw_grupo_compras_produtos_mt_fornecedor_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE INDEX vw_grupo_compras_produtos_mt_fornecedor_idx ON public.vw_grupo_compras_produtos_mt USING btree (id_grupo, idfornecedor);
 
 
 --
--- Name: vw_grupo_compras_produtos_mt_id_grupo_pk; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5930 (class 1259 OID 56160)
+-- Name: vw_grupo_compras_produtos_mt_id_grupo_pk; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE UNIQUE INDEX vw_grupo_compras_produtos_mt_id_grupo_pk ON public.vw_grupo_compras_produtos_mt USING btree (id_grupo, idproduto);
 
 
 --
--- Name: vw_lista_compras_dinamica_grupo_mt_id_grupo_idx; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 5931 (class 1259 OID 56161)
+-- Name: vw_lista_compras_dinamica_grupo_mt_id_grupo_idx; Type: INDEX; Schema: public; Owner: systock
 --
 
 CREATE UNIQUE INDEX vw_lista_compras_dinamica_grupo_mt_id_grupo_idx ON public.vw_lista_compras_dinamica_grupo_mt USING btree (id_grupo, idfornecedor, idproduto, tipo);
 
 
 --
--- Name: saldo_grupos_categorias_mp_pa _RETURN; Type: RULE; Schema: public; Owner: -
+-- TOC entry 6275 (class 2618 OID 55272)
+-- Name: saldo_grupos_categorias_mp_pa _RETURN; Type: RULE; Schema: public; Owner: systock
 --
 
 CREATE OR REPLACE VIEW public.saldo_grupos_categorias_mp_pa AS
@@ -39319,70 +42739,80 @@ CREATE OR REPLACE VIEW public.saldo_grupos_categorias_mp_pa AS
 
 
 --
--- Name: consumos before_insert_or_update_zerar_quantidade; Type: TRIGGER; Schema: public; Owner: -
+-- TOC entry 6099 (class 2620 OID 84268)
+-- Name: consumos before_insert_or_update_zerar_quantidade; Type: TRIGGER; Schema: public; Owner: postgres
 --
 
 CREATE TRIGGER before_insert_or_update_zerar_quantidade BEFORE INSERT OR UPDATE ON public.consumos FOR EACH ROW EXECUTE FUNCTION public.trg_zerar_quantidade_consumos();
 
 
 --
--- Name: pedidos_compras_itens pedidos_compras_itens_trg; Type: TRIGGER; Schema: public; Owner: -
+-- TOC entry 6103 (class 2620 OID 56163)
+-- Name: pedidos_compras_itens pedidos_compras_itens_trg; Type: TRIGGER; Schema: public; Owner: systock
 --
 
 CREATE TRIGGER pedidos_compras_itens_trg BEFORE INSERT ON public.pedidos_compras_itens FOR EACH ROW EXECUTE FUNCTION public.trigger_seq_itens_pedido_compra();
 
 
 --
--- Name: produtos_filial produtos_filial_trg; Type: TRIGGER; Schema: public; Owner: -
+-- TOC entry 6100 (class 2620 OID 56164)
+-- Name: produtos_filial produtos_filial_trg; Type: TRIGGER; Schema: public; Owner: systock
 --
 
 CREATE TRIGGER produtos_filial_trg BEFORE UPDATE ON public.produtos_filial FOR EACH ROW EXECUTE FUNCTION public.trigger_produtos_filial();
 
 
 --
--- Name: requisicoes requisicoes_trg; Type: TRIGGER; Schema: public; Owner: -
+-- TOC entry 6102 (class 2620 OID 56165)
+-- Name: requisicoes requisicoes_trg; Type: TRIGGER; Schema: public; Owner: postgres
 --
 
 CREATE TRIGGER requisicoes_trg BEFORE INSERT OR UPDATE ON public.requisicoes FOR EACH ROW EXECUTE FUNCTION public.trigger_requisicao_pendentes();
 
 
 --
--- Name: saldo_filiais saldo_filiais_trg; Type: TRIGGER; Schema: public; Owner: -
+-- TOC entry 6101 (class 2620 OID 56166)
+-- Name: saldo_filiais saldo_filiais_trg; Type: TRIGGER; Schema: public; Owner: systock
 --
 
 CREATE TRIGGER saldo_filiais_trg BEFORE INSERT OR UPDATE ON public.saldo_filiais FOR EACH ROW EXECUTE FUNCTION public.trigger_media_vendas();
 
 
 --
--- Name: similares similares_estoque_filial_trg; Type: TRIGGER; Schema: public; Owner: -
+-- TOC entry 6105 (class 2620 OID 56167)
+-- Name: similares similares_estoque_filial_trg; Type: TRIGGER; Schema: public; Owner: systock
 --
 
 CREATE TRIGGER similares_estoque_filial_trg AFTER INSERT OR DELETE OR UPDATE ON public.similares FOR EACH ROW EXECUTE FUNCTION public.gatilho_similares_filial();
 
 
 --
--- Name: status_produto status_produto_trg; Type: TRIGGER; Schema: public; Owner: -
+-- TOC entry 6106 (class 2620 OID 56168)
+-- Name: status_produto status_produto_trg; Type: TRIGGER; Schema: public; Owner: systock
 --
 
 CREATE TRIGGER status_produto_trg BEFORE INSERT OR UPDATE ON public.status_produto FOR EACH ROW EXECUTE FUNCTION public.trigger_preco_medio_venda();
 
 
 --
--- Name: pedidos_compras_itens trigger_log_pedidos_compras_itens; Type: TRIGGER; Schema: public; Owner: -
+-- TOC entry 6104 (class 2620 OID 56169)
+-- Name: pedidos_compras_itens trigger_log_pedidos_compras_itens; Type: TRIGGER; Schema: public; Owner: systock
 --
 
 CREATE TRIGGER trigger_log_pedidos_compras_itens AFTER INSERT OR DELETE OR UPDATE ON public.pedidos_compras_itens FOR EACH ROW EXECUTE FUNCTION public.trigger_log_pedidos_compras_itens();
 
 
 --
--- Name: cotacao_transacao update_cotacao_transacao_updated_at; Type: TRIGGER; Schema: public; Owner: -
+-- TOC entry 6107 (class 2620 OID 84609)
+-- Name: cotacao_transacao update_cotacao_transacao_updated_at; Type: TRIGGER; Schema: public; Owner: systock
 --
 
 CREATE TRIGGER update_cotacao_transacao_updated_at BEFORE UPDATE ON public.cotacao_transacao FOR EACH ROW EXECUTE FUNCTION public.update_cotacao_transacao_updated_at();
 
 
 --
--- Name: cfgsystem cfgsystem_sistemas_fk; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6028 (class 2606 OID 56170)
+-- Name: cfgsystem cfgsystem_sistemas_fk; Type: FK CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.cfgsystem
@@ -39390,7 +42820,8 @@ ALTER TABLE ONLY public.cfgsystem
 
 
 --
--- Name: cotacao_config cotacao_config_cotacao_transacao_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6080 (class 2606 OID 84354)
+-- Name: cotacao_config cotacao_config_cotacao_transacao_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.cotacao_config
@@ -39398,7 +42829,8 @@ ALTER TABLE ONLY public.cotacao_config
 
 
 --
--- Name: cotacao_fornecedores cotacao_fornecedores_cotacao_transacao_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6085 (class 2606 OID 84421)
+-- Name: cotacao_fornecedores cotacao_fornecedores_cotacao_transacao_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.cotacao_fornecedores
@@ -39406,7 +42838,8 @@ ALTER TABLE ONLY public.cotacao_fornecedores
 
 
 --
--- Name: cotacao_fornecedores cotacao_fornecedores_fornecedor_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6086 (class 2606 OID 84426)
+-- Name: cotacao_fornecedores cotacao_fornecedores_fornecedor_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.cotacao_fornecedores
@@ -39414,7 +42847,8 @@ ALTER TABLE ONLY public.cotacao_fornecedores
 
 
 --
--- Name: cotacao_fornecedores_participantes cotacao_fornecedores_participantes_cotacao_participacao_fornece; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6096 (class 2606 OID 84652)
+-- Name: cotacao_fornecedores_participantes cotacao_fornecedores_participantes_cotacao_participacao_fornece; Type: FK CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.cotacao_fornecedores_participantes
@@ -39422,7 +42856,8 @@ ALTER TABLE ONLY public.cotacao_fornecedores_participantes
 
 
 --
--- Name: cotacao_local_recebimento cotacao_local_recebimento_cotacao_transacao_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6081 (class 2606 OID 84366)
+-- Name: cotacao_local_recebimento cotacao_local_recebimento_cotacao_transacao_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.cotacao_local_recebimento
@@ -39430,7 +42865,8 @@ ALTER TABLE ONLY public.cotacao_local_recebimento
 
 
 --
--- Name: cotacao_local_recebimento_dias cotacao_local_recebimento_dias_cotacao_local_recebimento_id_for; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6090 (class 2606 OID 84501)
+-- Name: cotacao_local_recebimento_dias cotacao_local_recebimento_dias_cotacao_local_recebimento_id_for; Type: FK CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.cotacao_local_recebimento_dias
@@ -39438,7 +42874,8 @@ ALTER TABLE ONLY public.cotacao_local_recebimento_dias
 
 
 --
--- Name: cotacao_local_recebimento_dias cotacao_local_recebimento_dias_dia_semana_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6091 (class 2606 OID 84506)
+-- Name: cotacao_local_recebimento_dias cotacao_local_recebimento_dias_dia_semana_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.cotacao_local_recebimento_dias
@@ -39446,7 +42883,8 @@ ALTER TABLE ONLY public.cotacao_local_recebimento_dias
 
 
 --
--- Name: cotacao_notificacoes cotacao_notificacoes_cotacao_representante_fornecedor_id_foreig; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6088 (class 2606 OID 84483)
+-- Name: cotacao_notificacoes cotacao_notificacoes_cotacao_representante_fornecedor_id_foreig; Type: FK CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.cotacao_notificacoes
@@ -39454,7 +42892,8 @@ ALTER TABLE ONLY public.cotacao_notificacoes
 
 
 --
--- Name: cotacao_notificacoes cotacao_notificacoes_cotacao_transacao_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6089 (class 2606 OID 84478)
+-- Name: cotacao_notificacoes cotacao_notificacoes_cotacao_transacao_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.cotacao_notificacoes
@@ -39462,7 +42901,8 @@ ALTER TABLE ONLY public.cotacao_notificacoes
 
 
 --
--- Name: cotacao_pedidos cotacao_pedidos_cotacao_transacao_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6079 (class 2606 OID 84342)
+-- Name: cotacao_pedidos cotacao_pedidos_cotacao_transacao_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.cotacao_pedidos
@@ -39470,7 +42910,8 @@ ALTER TABLE ONLY public.cotacao_pedidos
 
 
 --
--- Name: cotacao_produtos cotacao_produtos_cotacao_transacao_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6082 (class 2606 OID 84383)
+-- Name: cotacao_produtos cotacao_produtos_cotacao_transacao_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.cotacao_produtos
@@ -39478,7 +42919,8 @@ ALTER TABLE ONLY public.cotacao_produtos
 
 
 --
--- Name: cotacao_representante_fornecedor cotacao_representante_fornecedor_fornecedor_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6087 (class 2606 OID 84440)
+-- Name: cotacao_representante_fornecedor cotacao_representante_fornecedor_fornecedor_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.cotacao_representante_fornecedor
@@ -39486,7 +42928,8 @@ ALTER TABLE ONLY public.cotacao_representante_fornecedor
 
 
 --
--- Name: cotacao_representante_participacao cotacao_representante_participacao_cotacao_representante_fornec; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6092 (class 2606 OID 84521)
+-- Name: cotacao_representante_participacao cotacao_representante_participacao_cotacao_representante_fornec; Type: FK CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.cotacao_representante_participacao
@@ -39494,7 +42937,8 @@ ALTER TABLE ONLY public.cotacao_representante_participacao
 
 
 --
--- Name: cotacao_representante_participacao cotacao_representante_participacao_cotacao_transacao_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6093 (class 2606 OID 84526)
+-- Name: cotacao_representante_participacao cotacao_representante_participacao_cotacao_transacao_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.cotacao_representante_participacao
@@ -39502,7 +42946,8 @@ ALTER TABLE ONLY public.cotacao_representante_participacao
 
 
 --
--- Name: cotacao_representante_participacao cotacao_representante_participacao_fornecedor_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6094 (class 2606 OID 84531)
+-- Name: cotacao_representante_participacao cotacao_representante_participacao_fornecedor_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.cotacao_representante_participacao
@@ -39510,7 +42955,8 @@ ALTER TABLE ONLY public.cotacao_representante_participacao
 
 
 --
--- Name: cotacao_responsavel cotacao_responsavel_cotacao_transacao_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6084 (class 2606 OID 84404)
+-- Name: cotacao_responsavel cotacao_responsavel_cotacao_transacao_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.cotacao_responsavel
@@ -39518,7 +42964,8 @@ ALTER TABLE ONLY public.cotacao_responsavel
 
 
 --
--- Name: cotacao_seguidores cotacao_seguidores_cotacao_transacao_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6083 (class 2606 OID 84445)
+-- Name: cotacao_seguidores cotacao_seguidores_cotacao_transacao_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.cotacao_seguidores
@@ -39526,7 +42973,8 @@ ALTER TABLE ONLY public.cotacao_seguidores
 
 
 --
--- Name: cotacao_seguidores_favoritos cotacao_seguidores_favoritos_user_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6095 (class 2606 OID 84547)
+-- Name: cotacao_seguidores_favoritos cotacao_seguidores_favoritos_user_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.cotacao_seguidores_favoritos
@@ -39534,7 +42982,8 @@ ALTER TABLE ONLY public.cotacao_seguidores_favoritos
 
 
 --
--- Name: cotacao_transacao cotacao_transacao_cliente_empresa_systock_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6075 (class 2606 OID 84330)
+-- Name: cotacao_transacao cotacao_transacao_cliente_empresa_systock_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.cotacao_transacao
@@ -39542,7 +42991,8 @@ ALTER TABLE ONLY public.cotacao_transacao
 
 
 --
--- Name: cotacao_transacao cotacao_transacao_cotacao_decisao_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6076 (class 2606 OID 84572)
+-- Name: cotacao_transacao cotacao_transacao_cotacao_decisao_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.cotacao_transacao
@@ -39550,7 +43000,8 @@ ALTER TABLE ONLY public.cotacao_transacao
 
 
 --
--- Name: cotacao_transacao cotacao_transacao_cotacao_situacao_pedidos_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6077 (class 2606 OID 84584)
+-- Name: cotacao_transacao cotacao_transacao_cotacao_situacao_pedidos_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.cotacao_transacao
@@ -39558,7 +43009,8 @@ ALTER TABLE ONLY public.cotacao_transacao
 
 
 --
--- Name: cotacao_transacao cotacao_transacao_cotacao_status_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6078 (class 2606 OID 84560)
+-- Name: cotacao_transacao cotacao_transacao_cotacao_status_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.cotacao_transacao
@@ -39566,7 +43018,8 @@ ALTER TABLE ONLY public.cotacao_transacao
 
 
 --
--- Name: aplicativos_perfil fk_aplicativos_has_perfil_aplicativos1; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6022 (class 2606 OID 56175)
+-- Name: aplicativos_perfil fk_aplicativos_has_perfil_aplicativos1; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.aplicativos_perfil
@@ -39574,7 +43027,8 @@ ALTER TABLE ONLY public.aplicativos_perfil
 
 
 --
--- Name: aplicativos_perfil fk_aplicativos_has_perfil_perfil1; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6023 (class 2606 OID 56180)
+-- Name: aplicativos_perfil fk_aplicativos_has_perfil_perfil1; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.aplicativos_perfil
@@ -39582,7 +43036,8 @@ ALTER TABLE ONLY public.aplicativos_perfil
 
 
 --
--- Name: aplicativos fk_aplicativos_modulos1; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6021 (class 2606 OID 56185)
+-- Name: aplicativos fk_aplicativos_modulos1; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.aplicativos
@@ -39590,7 +43045,8 @@ ALTER TABLE ONLY public.aplicativos
 
 
 --
--- Name: area_responsavel fk_area_responsavel_colaboradores1; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6026 (class 2606 OID 56190)
+-- Name: area_responsavel fk_area_responsavel_colaboradores1; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.area_responsavel
@@ -39598,7 +43054,8 @@ ALTER TABLE ONLY public.area_responsavel
 
 
 --
--- Name: arvore_decisao fk_arvore_decisao_nivel_servico1; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6027 (class 2606 OID 56195)
+-- Name: arvore_decisao fk_arvore_decisao_nivel_servico1; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.arvore_decisao
@@ -39606,7 +43063,8 @@ ALTER TABLE ONLY public.arvore_decisao
 
 
 --
--- Name: colaboradores fk_colaboradores_departamentos1; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6029 (class 2606 OID 56200)
+-- Name: colaboradores fk_colaboradores_departamentos1; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.colaboradores
@@ -39614,7 +43072,8 @@ ALTER TABLE ONLY public.colaboradores
 
 
 --
--- Name: colaboradores fk_colaboradores_funcoes; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6030 (class 2606 OID 56205)
+-- Name: colaboradores fk_colaboradores_funcoes; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.colaboradores
@@ -39622,7 +43081,8 @@ ALTER TABLE ONLY public.colaboradores
 
 
 --
--- Name: cotacoes_compra fk_cotacoes_compra; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6032 (class 2606 OID 56210)
+-- Name: cotacoes_compra fk_cotacoes_compra; Type: FK CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.cotacoes_compra
@@ -39630,7 +43090,8 @@ ALTER TABLE ONLY public.cotacoes_compra
 
 
 --
--- Name: depositos fk_depositos_filial1; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6033 (class 2606 OID 56215)
+-- Name: depositos fk_depositos_filial1; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.depositos
@@ -39638,7 +43099,8 @@ ALTER TABLE ONLY public.depositos
 
 
 --
--- Name: distribuicao_drp_itens fk_dist_drp_itens; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6036 (class 2606 OID 56220)
+-- Name: distribuicao_drp_itens fk_dist_drp_itens; Type: FK CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.distribuicao_drp_itens
@@ -39646,7 +43108,8 @@ ALTER TABLE ONLY public.distribuicao_drp_itens
 
 
 --
--- Name: distribuicao_drp fk_distrib_drp_usuario; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6034 (class 2606 OID 56225)
+-- Name: distribuicao_drp fk_distrib_drp_usuario; Type: FK CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.distribuicao_drp
@@ -39654,7 +43117,8 @@ ALTER TABLE ONLY public.distribuicao_drp
 
 
 --
--- Name: familia_produtos_parceiros fk_familia_produtos_has_parceiros_familia_produtos1; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6038 (class 2606 OID 56230)
+-- Name: familia_produtos_parceiros fk_familia_produtos_has_parceiros_familia_produtos1; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.familia_produtos_parceiros
@@ -39662,7 +43126,8 @@ ALTER TABLE ONLY public.familia_produtos_parceiros
 
 
 --
--- Name: familia_produtos_parceiros fk_familia_produtos_has_parceiros_parceiros1; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6039 (class 2606 OID 56235)
+-- Name: familia_produtos_parceiros fk_familia_produtos_has_parceiros_parceiros1; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.familia_produtos_parceiros
@@ -39670,7 +43135,8 @@ ALTER TABLE ONLY public.familia_produtos_parceiros
 
 
 --
--- Name: pedidos_compras_fornecedores_agrupados fk_fornecedor; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6053 (class 2606 OID 56240)
+-- Name: pedidos_compras_fornecedores_agrupados fk_fornecedor; Type: FK CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.pedidos_compras_fornecedores_agrupados
@@ -39678,7 +43144,8 @@ ALTER TABLE ONLY public.pedidos_compras_fornecedores_agrupados
 
 
 --
--- Name: produtos_mp fk_fornecedor; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6060 (class 2606 OID 56245)
+-- Name: produtos_mp fk_fornecedor; Type: FK CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.produtos_mp
@@ -39686,7 +43153,8 @@ ALTER TABLE ONLY public.produtos_mp
 
 
 --
--- Name: aplicativos_sistemas fk_id_aplicativo; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6024 (class 2606 OID 56250)
+-- Name: aplicativos_sistemas fk_id_aplicativo; Type: FK CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.aplicativos_sistemas
@@ -39694,7 +43162,8 @@ ALTER TABLE ONLY public.aplicativos_sistemas
 
 
 --
--- Name: drp_horarios_grupo_separacao fk_id_drp_grupo_separacao; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6037 (class 2606 OID 56255)
+-- Name: drp_horarios_grupo_separacao fk_id_drp_grupo_separacao; Type: FK CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.drp_horarios_grupo_separacao
@@ -39702,7 +43171,8 @@ ALTER TABLE ONLY public.drp_horarios_grupo_separacao
 
 
 --
--- Name: fornecedores_grupo_analise fk_id_fornecedor; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6040 (class 2606 OID 56260)
+-- Name: fornecedores_grupo_analise fk_id_fornecedor; Type: FK CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.fornecedores_grupo_analise
@@ -39710,7 +43180,8 @@ ALTER TABLE ONLY public.fornecedores_grupo_analise
 
 
 --
--- Name: fornecedores_grupo_analise fk_id_grupo_analise; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6041 (class 2606 OID 56265)
+-- Name: fornecedores_grupo_analise fk_id_grupo_analise; Type: FK CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.fornecedores_grupo_analise
@@ -39718,7 +43189,8 @@ ALTER TABLE ONLY public.fornecedores_grupo_analise
 
 
 --
--- Name: distribuicao_drp_exportacao_protheus fk_id_pedido; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6035 (class 2606 OID 56270)
+-- Name: distribuicao_drp_exportacao_protheus fk_id_pedido; Type: FK CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.distribuicao_drp_exportacao_protheus
@@ -39726,7 +43198,8 @@ ALTER TABLE ONLY public.distribuicao_drp_exportacao_protheus
 
 
 --
--- Name: aplicativos_sistemas fk_id_sistema; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6025 (class 2606 OID 56275)
+-- Name: aplicativos_sistemas fk_id_sistema; Type: FK CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.aplicativos_sistemas
@@ -39734,7 +43207,8 @@ ALTER TABLE ONLY public.aplicativos_sistemas
 
 
 --
--- Name: requisicoes_desconsideradas fk_id_usuario; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6063 (class 2606 OID 56280)
+-- Name: requisicoes_desconsideradas fk_id_usuario; Type: FK CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.requisicoes_desconsideradas
@@ -39742,7 +43216,8 @@ ALTER TABLE ONLY public.requisicoes_desconsideradas
 
 
 --
--- Name: consumos_desconsiderados fk_id_usuario_consumos_desconsideradas; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6031 (class 2606 OID 56285)
+-- Name: consumos_desconsiderados fk_id_usuario_consumos_desconsideradas; Type: FK CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.consumos_desconsiderados
@@ -39750,7 +43225,8 @@ ALTER TABLE ONLY public.consumos_desconsiderados
 
 
 --
--- Name: users_api fk_id_usuario_users_api; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6072 (class 2606 OID 56290)
+-- Name: users_api fk_id_usuario_users_api; Type: FK CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.users_api
@@ -39758,7 +43234,8 @@ ALTER TABLE ONLY public.users_api
 
 
 --
--- Name: pedidos_motivos_oportunidade fk_idmotivo; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6056 (class 2606 OID 56295)
+-- Name: pedidos_motivos_oportunidade fk_idmotivo; Type: FK CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.pedidos_motivos_oportunidade
@@ -39766,7 +43243,8 @@ ALTER TABLE ONLY public.pedidos_motivos_oportunidade
 
 
 --
--- Name: pedidos_motivos_oportunidade fk_idpedido; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6057 (class 2606 OID 56300)
+-- Name: pedidos_motivos_oportunidade fk_idpedido; Type: FK CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.pedidos_motivos_oportunidade
@@ -39774,7 +43252,8 @@ ALTER TABLE ONLY public.pedidos_motivos_oportunidade
 
 
 --
--- Name: motivos_para_categorias_mp_pa_silenciada fk_motivo_blacklist_produto; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6042 (class 2606 OID 56310)
+-- Name: motivos_para_categorias_mp_pa_silenciada fk_motivo_blacklist_produto; Type: FK CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.motivos_para_categorias_mp_pa_silenciada
@@ -39782,7 +43261,8 @@ ALTER TABLE ONLY public.motivos_para_categorias_mp_pa_silenciada
 
 
 --
--- Name: motivos_para_produto_silenciado fk_motivo_blacklist_produto; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6044 (class 2606 OID 56305)
+-- Name: motivos_para_produto_silenciado fk_motivo_blacklist_produto; Type: FK CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.motivos_para_produto_silenciado
@@ -39790,7 +43270,8 @@ ALTER TABLE ONLY public.motivos_para_produto_silenciado
 
 
 --
--- Name: movimentacoes fk_movimentacoes_centro_custos1; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6046 (class 2606 OID 56315)
+-- Name: movimentacoes fk_movimentacoes_centro_custos1; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.movimentacoes
@@ -39798,7 +43279,8 @@ ALTER TABLE ONLY public.movimentacoes
 
 
 --
--- Name: movimentacoes_produtos fk_movimentacoes_has_produtos_movimentacoes1; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6048 (class 2606 OID 56320)
+-- Name: movimentacoes_produtos fk_movimentacoes_has_produtos_movimentacoes1; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.movimentacoes_produtos
@@ -39806,7 +43288,8 @@ ALTER TABLE ONLY public.movimentacoes_produtos
 
 
 --
--- Name: motivos_para_categorias_mp_pa_silenciada fk_notificacao_categorias_mp_pa_blacklist; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6043 (class 2606 OID 56325)
+-- Name: motivos_para_categorias_mp_pa_silenciada fk_notificacao_categorias_mp_pa_blacklist; Type: FK CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.motivos_para_categorias_mp_pa_silenciada
@@ -39814,7 +43297,8 @@ ALTER TABLE ONLY public.motivos_para_categorias_mp_pa_silenciada
 
 
 --
--- Name: motivos_para_produto_silenciado fk_notificacao_produtos_blacklist; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6045 (class 2606 OID 56330)
+-- Name: motivos_para_produto_silenciado fk_notificacao_produtos_blacklist; Type: FK CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.motivos_para_produto_silenciado
@@ -39822,7 +43306,8 @@ ALTER TABLE ONLY public.motivos_para_produto_silenciado
 
 
 --
--- Name: movimentacoes fk_orcamentos_colaboradores1; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6047 (class 2606 OID 56335)
+-- Name: movimentacoes fk_orcamentos_colaboradores1; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.movimentacoes
@@ -39830,7 +43315,8 @@ ALTER TABLE ONLY public.movimentacoes
 
 
 --
--- Name: parametros_criticidade fk_parametros_criticidade_parametros_avaliacao1; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6049 (class 2606 OID 56340)
+-- Name: parametros_criticidade fk_parametros_criticidade_parametros_avaliacao1; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.parametros_criticidade
@@ -39838,7 +43324,8 @@ ALTER TABLE ONLY public.parametros_criticidade
 
 
 --
--- Name: pedidos_compras_itens fk_pedidos; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6055 (class 2606 OID 56345)
+-- Name: pedidos_compras_itens fk_pedidos; Type: FK CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.pedidos_compras_itens
@@ -39846,7 +43333,8 @@ ALTER TABLE ONLY public.pedidos_compras_itens
 
 
 --
--- Name: pedidos_compras_fornecedores_agrupados fk_pedidos_compra; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6054 (class 2606 OID 56350)
+-- Name: pedidos_compras_fornecedores_agrupados fk_pedidos_compra; Type: FK CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.pedidos_compras_fornecedores_agrupados
@@ -39854,7 +43342,8 @@ ALTER TABLE ONLY public.pedidos_compras_fornecedores_agrupados
 
 
 --
--- Name: pedidos_compra_departamento fk_pedidos_compra_tipo; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6050 (class 2606 OID 56355)
+-- Name: pedidos_compra_departamento fk_pedidos_compra_tipo; Type: FK CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.pedidos_compra_departamento
@@ -39862,7 +43351,8 @@ ALTER TABLE ONLY public.pedidos_compra_departamento
 
 
 --
--- Name: produtos_pedidos_compra_tipo fk_pedidos_compra_tipo; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6062 (class 2606 OID 56360)
+-- Name: produtos_pedidos_compra_tipo fk_pedidos_compra_tipo; Type: FK CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.produtos_pedidos_compra_tipo
@@ -39870,7 +43360,8 @@ ALTER TABLE ONLY public.produtos_pedidos_compra_tipo
 
 
 --
--- Name: pedidos_compras fk_pedidos_usuario; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6052 (class 2606 OID 56365)
+-- Name: pedidos_compras fk_pedidos_usuario; Type: FK CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.pedidos_compras
@@ -39878,7 +43369,8 @@ ALTER TABLE ONLY public.pedidos_compras
 
 
 --
--- Name: produtos_capa_listas_preco fk_produtos_capa_listas_preco; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6059 (class 2606 OID 56370)
+-- Name: produtos_capa_listas_preco fk_produtos_capa_listas_preco; Type: FK CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.produtos_capa_listas_preco
@@ -39886,7 +43378,8 @@ ALTER TABLE ONLY public.produtos_capa_listas_preco
 
 
 --
--- Name: resposta_criticidade fk_resposta_criticidade_questionario_criticidade1; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6064 (class 2606 OID 56375)
+-- Name: resposta_criticidade fk_resposta_criticidade_questionario_criticidade1; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.resposta_criticidade
@@ -39894,7 +43387,8 @@ ALTER TABLE ONLY public.resposta_criticidade
 
 
 --
--- Name: solicitacoes_compras fk_solicitacoes_compras_colaboradores1; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6065 (class 2606 OID 56380)
+-- Name: solicitacoes_compras fk_solicitacoes_compras_colaboradores1; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.solicitacoes_compras
@@ -39902,7 +43396,8 @@ ALTER TABLE ONLY public.solicitacoes_compras
 
 
 --
--- Name: solicitacoes_compras fk_solicitacoes_compras_tipo_solicitacoes1; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6066 (class 2606 OID 56385)
+-- Name: solicitacoes_compras fk_solicitacoes_compras_tipo_solicitacoes1; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.solicitacoes_compras
@@ -39910,7 +43405,8 @@ ALTER TABLE ONLY public.solicitacoes_compras
 
 
 --
--- Name: sys_produtos_combinados_itens fk_sys_produtos_combinados_itens; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6068 (class 2606 OID 56390)
+-- Name: sys_produtos_combinados_itens fk_sys_produtos_combinados_itens; Type: FK CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.sys_produtos_combinados_itens
@@ -39918,7 +43414,8 @@ ALTER TABLE ONLY public.sys_produtos_combinados_itens
 
 
 --
--- Name: pedidos_compra_tipo fk_tipos_pedidos_compras; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6051 (class 2606 OID 56395)
+-- Name: pedidos_compra_tipo fk_tipos_pedidos_compras; Type: FK CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.pedidos_compra_tipo
@@ -39926,7 +43423,8 @@ ALTER TABLE ONLY public.pedidos_compra_tipo
 
 
 --
--- Name: users fk_user_perfil; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6071 (class 2606 OID 56400)
+-- Name: users fk_user_perfil; Type: FK CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.users
@@ -39934,7 +43432,8 @@ ALTER TABLE ONLY public.users
 
 
 --
--- Name: produtos_pa fk_usuario; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6061 (class 2606 OID 56405)
+-- Name: produtos_pa fk_usuario; Type: FK CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.produtos_pa
@@ -39942,7 +43441,8 @@ ALTER TABLE ONLY public.produtos_pa
 
 
 --
--- Name: usuarios fk_usuarios_perfil1; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6073 (class 2606 OID 56410)
+-- Name: usuarios fk_usuarios_perfil1; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.usuarios
@@ -39950,7 +43450,8 @@ ALTER TABLE ONLY public.usuarios
 
 
 --
--- Name: produtos_filial produtos_filial_idmarca_foreign; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6020 (class 2606 OID 56415)
+-- Name: produtos_filial produtos_filial_idmarca_foreign; Type: FK CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.produtos_filial
@@ -39958,7 +43459,8 @@ ALTER TABLE ONLY public.produtos_filial
 
 
 --
--- Name: sys_historico_de_atualizacao_em_massa_por_filial sys_historico_de_atualizacao_em_massa_por_filial_user_id_foreig; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6067 (class 2606 OID 56420)
+-- Name: sys_historico_de_atualizacao_em_massa_por_filial sys_historico_de_atualizacao_em_massa_por_filial_user_id_foreig; Type: FK CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.sys_historico_de_atualizacao_em_massa_por_filial
@@ -39966,7 +43468,8 @@ ALTER TABLE ONLY public.sys_historico_de_atualizacao_em_massa_por_filial
 
 
 --
--- Name: sys_produtos_importados_em_massa_por_filial sys_produtos_importados_em_massa_por_filial_historico_id_foreig; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6069 (class 2606 OID 56425)
+-- Name: sys_produtos_importados_em_massa_por_filial sys_produtos_importados_em_massa_por_filial_historico_id_foreig; Type: FK CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.sys_produtos_importados_em_massa_por_filial
@@ -39974,7 +43477,8 @@ ALTER TABLE ONLY public.sys_produtos_importados_em_massa_por_filial
 
 
 --
--- Name: sys_rodadas_compra_sazonal_itens sys_rodadas_compra_sazonal_itens_rodadas_compra_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6098 (class 2606 OID 84710)
+-- Name: sys_rodadas_compra_sazonal_itens sys_rodadas_compra_sazonal_itens_rodadas_compra_fkey; Type: FK CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.sys_rodadas_compra_sazonal_itens
@@ -39982,7 +43486,8 @@ ALTER TABLE ONLY public.sys_rodadas_compra_sazonal_itens
 
 
 --
--- Name: sys_rodadas_compra_sazonal sys_rodadas_compra_sazonal_usuario_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6097 (class 2606 OID 84693)
+-- Name: sys_rodadas_compra_sazonal sys_rodadas_compra_sazonal_usuario_fkey; Type: FK CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.sys_rodadas_compra_sazonal
@@ -39990,7 +43495,8 @@ ALTER TABLE ONLY public.sys_rodadas_compra_sazonal
 
 
 --
--- Name: sys_tipos_projecao_vendas_produtos_filial sys_tipos_projecao_vendas_produtos_filial_usuario_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6070 (class 2606 OID 56430)
+-- Name: sys_tipos_projecao_vendas_produtos_filial sys_tipos_projecao_vendas_produtos_filial_usuario_fkey; Type: FK CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.sys_tipos_projecao_vendas_produtos_filial
@@ -39998,7 +43504,8 @@ ALTER TABLE ONLY public.sys_tipos_projecao_vendas_produtos_filial
 
 
 --
--- Name: preferencias_tabelas_usuario user_preferencias_tabelas_usuario_fk; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6058 (class 2606 OID 56435)
+-- Name: preferencias_tabelas_usuario user_preferencias_tabelas_usuario_fk; Type: FK CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.preferencias_tabelas_usuario
@@ -40006,16 +43513,19 @@ ALTER TABLE ONLY public.preferencias_tabelas_usuario
 
 
 --
--- Name: wkf_compras_controle_grupos wkf_compras_itens_wkf_compras_controle_grupos_fk; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- TOC entry 6074 (class 2606 OID 56440)
+-- Name: wkf_compras_controle_grupos wkf_compras_itens_wkf_compras_controle_grupos_fk; Type: FK CONSTRAINT; Schema: public; Owner: systock
 --
 
 ALTER TABLE ONLY public.wkf_compras_controle_grupos
     ADD CONSTRAINT wkf_compras_itens_wkf_compras_controle_grupos_fk FOREIGN KEY (id_wkf_item) REFERENCES public.wkf_compras_itens(id);
 
 
+-- Completed on 2026-05-28 15:44:24 -04
+
 --
 -- PostgreSQL database dump complete
 --
 
-\unrestrict 2y76Envf5c5dbKovIOqIoUhShYxwNywF13IIH59yywbNRPUb2n5wtnauWcBo3Ul
+\unrestrict liJo1g5hQ7jke6nLrCQHruwlk4IPN1bQaJdXtvExsVk4W4nFw0rxXYI98FqNIc0
 
