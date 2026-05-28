@@ -432,6 +432,7 @@ BEGIN
         NEW.status = 'FL';
     END IF;
     RETURN NEW;
+    RAISE notice'Produto: %', NEW.idproduto;
 EXCEPTION
     WHEN OTHERS THEN
         GET STACKED DIAGNOSTICS v_ctx_erro = PG_EXCEPTION_CONTEXT;
