@@ -2,12 +2,12 @@
 -- PostgreSQL database dump
 --
 
-\restrict ECgR8Ldd4z0aZv4CTGmgJ7irHO2cW3QvtW64iDxgAlc4Ue7hGhJI0Z2BOS1I0rn
+\restrict kcvC81caZyWlejYoDv4HuiCUmsQmUgFaLpd1iCjahNXgoxmmK1U7Z8Bv59NIEho
 
 -- Dumped from database version 16.13 (Ubuntu 16.13-1.pgdg24.04+1)
 -- Dumped by pg_dump version 16.13 (Ubuntu 16.13-1.pgdg24.04+1)
 
--- Started on 2026-05-29 11:21:20 -04
+-- Started on 2026-05-29 11:24:28 -04
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -179,7 +179,6 @@ CREATE TABLE public.produtos_filial (
     data_ultima_saida date,
     cmm_filial_retira numeric(12,4),
     desvio_padrao_cons_ret numeric(12,4),
-    teste character varying(1),
     CONSTRAINT revenda_s_ou_n CHECK (((revenda)::text = ANY (ARRAY[('S'::character varying)::text, ('N'::character varying)::text]))),
     CONSTRAINT status_a_ou_fl CHECK (((status)::text = ANY (ARRAY[('A'::character varying)::text, ('FL'::character varying)::text]))),
     CONSTRAINT tempo_medio_ressuprimento_maior_que_zero CHECK ((tempo_medio_ressuprimento > (0)::numeric)),
@@ -657,11 +656,11 @@ ALTER TABLE ONLY public.produtos_filial
     ADD CONSTRAINT produtos_filial_idmarca_foreign FOREIGN KEY (idmarca) REFERENCES public.marcas(id) ON DELETE CASCADE;
 
 
--- Completed on 2026-05-29 11:21:20 -04
+-- Completed on 2026-05-29 11:24:28 -04
 
 --
 -- PostgreSQL database dump complete
 --
 
-\unrestrict ECgR8Ldd4z0aZv4CTGmgJ7irHO2cW3QvtW64iDxgAlc4Ue7hGhJI0Z2BOS1I0rn
+\unrestrict kcvC81caZyWlejYoDv4HuiCUmsQmUgFaLpd1iCjahNXgoxmmK1U7Z8Bv59NIEho
 
